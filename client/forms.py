@@ -3,7 +3,7 @@ from .models import Client, Note, Address
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, HTML, Button, Div, Field
 from crispy_forms.bootstrap import TabHolder, Tab, FormActions, InlineField
-from common.forms import validate_form_fields, validate_required_field
+from common.forms import validate_required_field
 #
 # class NoFormTagCrispyFormMixin(object):
 #     @property
@@ -66,10 +66,6 @@ class ClientForm(forms.ModelForm):
     def clean_dob(self):
         return validate_required_field(self, 'dob', 'date of birth')
 
-    # display error at page level for errors generated during required field validation
-    def clean(self):
-        return validate_form_fields(self)
-
     class Meta:
         model = Client
         fields = ('title', 'first_name', 'middle_name', 'last_name', 'known_as', 'dob', 'sex',
@@ -97,9 +93,6 @@ class AddressForm(forms.ModelForm):
     def clean_line_1(self):
         return validate_required_field(self, 'line_1', 'line 1')
 
-    # display error at page level for errors generated during required field validation
-    def clean(self):
-        return validate_form_fields(self)
 
 class NoteForm(forms.ModelForm):
     helper = FormHelper()

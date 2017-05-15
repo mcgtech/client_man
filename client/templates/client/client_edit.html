@@ -5,8 +5,17 @@
     <script type="text/javascript" src="{% static 'js/manage_client.js' %}"></script>
 {% endblock %}
 {% block content %}
-    {% load crispy_forms_tags %}
+    {% if form_errors %}
+        <div class="alert alert-block alert-danger">
+          <ul>
+            {% for value in form_errors %}
+              <li>{{ value }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+    {% endif %}
     <form action="{{ the_action }}" method="POST">
+        {% load crispy_forms_tags %}
         {% crispy form %}
         <div id="address" class="tab-pane">
             {% crispy address_form %}

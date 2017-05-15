@@ -5,6 +5,7 @@ from django.forms import modelformset_factory, inlineformset_factory, formset_fa
 from .forms import ClientForm, NoteForm, ExampleForm, ExampleFormSetHelper, NoteFormSetHelper, AddressForm
 from django import forms
 from django.contrib import messages
+from common.views import form_errors_as_array
 # from django.contrib.auth.decorators import login_required
 
 def home_page(request):
@@ -73,11 +74,14 @@ def manage_client(request, client_id=None):
     # crispy form helper for formsets
     note_helper = NoteFormSetHelper()
 
+    # TODO: get this to merger with form erros from the other forms
+    # TODO: get it to work!
+    form_errors = form_errors_as_array(client_form)
     return render(request, 'client/client_edit.html', {'form': client_form, 'notes_form_set': notes_form_set,
                                                        'the_action_text' : the_action_text,
                                                        'edit_form' : is_edit_form, 'note_helper': note_helper,
-                                                       'the_action' : action, 'address_form' : address_form})
-
+                                                       'the_action' : action, 'address_form' : address_form,
+                                                        'form_errors' : form_errors})
 
 def client_new(request):
     return manage_client(request, None)
