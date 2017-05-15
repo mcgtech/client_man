@@ -1,0 +1,18 @@
+{% extends 'client/base.html' %}
+{% load staticfiles %}
+
+{% block js %}
+    <script type="text/javascript" src="{% static 'js/manage_client.js' %}"></script>
+{% endblock %}
+{% block content %}
+    {% load crispy_forms_tags %}
+    <form action="{{ the_action }}" method="POST">
+        {% crispy form %}
+        <div id="address" class="tab-pane">
+            {% crispy address_form %}
+        </div>
+        <div id="notes" class="tab-pane">
+            {% crispy notes_form_set note_helper %}
+        </div>
+    </form>
+{% endblock %}

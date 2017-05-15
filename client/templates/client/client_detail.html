@@ -1,0 +1,15 @@
+{% extends 'client/base.html' %}
+
+{% block content %}
+    <div class="client">
+        <a class="btn btn-default" href="{% url 'client_edit' pk=client.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        <h1>{{ client.first_name }} {{ client.last_name }} {{ client.modified_date }}</h1>
+        <div>Dob: {{ client.dob }}</div>
+
+        <ul>
+        {% for note in client.note_set.all %}
+           <li>{{ note.note }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
