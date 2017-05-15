@@ -1,8 +1,9 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.utils import timezone
-from .models import Client, Note
+from .models import Client, Note, Address
 from django.forms import modelformset_factory, inlineformset_factory, formset_factory
 from .forms import ClientForm, NoteForm, ExampleForm, ExampleFormSetHelper, NoteFormSetHelper, AddressForm
+from django import forms
 from django.contrib import messages
 # from django.contrib.auth.decorators import login_required
 
@@ -23,6 +24,7 @@ def client_detail(request, pk):
 def manage_client(request, client_id=None):
     if client_id is None:
         client = Client()
+        address = Address()
         the_action_text = 'Create'
         is_edit_form = False
         NoteInlineFormSet = inlineformset_factory(Client, Note, form=NoteForm, extra=2, can_delete=False)
@@ -31,8 +33,13 @@ def manage_client(request, client_id=None):
         the_action_text = 'Edit'
         is_edit_form = True
         client = get_object_or_404(Client, pk=client_id)
-        NoteInlineFormSet = inlineformset_factory(Client, Note, form=NoteForm, extra=2, can_delete=True)
-        action = '/client/' + str(client_id) + '/edit' + '/'
+        addresses = Address.objects.filter(person_id=client_id)
+        if len(addresses) == 1:
+            address = addresses[0]
+            NoteInlineFormSet = inlineformset_factory(Client, Note, form=NoteForm, extra=2, can_delete=True)
+            action = '/client/' + str(client_id) + '/edit' + '/'
+        else:
+            raise forms.ValidationError('Expected a single address and found ' + str(len(addresses)) + ' instead')
 
     if request.method == "POST":
         if request.POST.get("delete-client"):
@@ -40,13 +47,19 @@ def manage_client(request, client_id=None):
             client.delete()
             return redirect('/client_list')
         client_form = ClientForm(request.POST, request.FILES, instance=client, prefix="main")
-        address_form = AddressForm(request.POST, instance=request.user)
+        address_form = AddressForm(request.POST, request.FILES, instance=address, prefix="address")
         notes_form_set = NoteInlineFormSet(request.POST, request.FILES, instance=client, prefix="nested")
 
-        if client_form.is_valid() and notes_form_set.is_valid():
+        if client_form.is_valid() and notes_form_set.is_valid() and address_form.is_valid():
+            # client save
             created_client = client_form.save(commit=False)
-            created_client.modified_by = request.user
+            #created_client.modified_by = request.user
             created_client.save()
+            # save address
+            address = address_form.save(commit=False)
+            address.person = created_client
+            address.save()
+            # save notes
             instances = notes_form_set.save(commit=False)
             for instance in instances:
                 instance.modified_by = request.user
@@ -54,7 +67,7 @@ def manage_client(request, client_id=None):
             action = '/client/' + str(created_client.id) + '/edit' + '/'
             return redirect(action)
     else:
-        address_form = AddressForm()
+        address_form = AddressForm(instance=address, prefix="address")
         client_form = ClientForm(instance=client, prefix="main")
         notes_form_set = NoteInlineFormSet(instance=client, prefix="nested")
     # crispy form helper for formsets
