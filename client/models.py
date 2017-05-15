@@ -43,6 +43,23 @@ class Person(models.Model):
     last_name = models.CharField(max_length=100, blank=True)
     known_as = models.CharField(max_length=100, blank=True)
     dob = models.DateField(null=True, blank=True)
+    DIVORCED = 0
+    MARRIED = 1
+    SEPARATED = 2
+    SINGLE = 3
+    TBC = 4
+    TO_BE_ASS = 5
+    WIDOWED = 6
+    MARITAL_STATUS = (
+        (DIVORCED, 'Divorced'),
+        (MARRIED, 'Married'),
+        (SEPARATED, 'Separated'),
+        (SINGLE, 'Single'),
+        (TBC, 'TBC'),
+        (TO_BE_ASS, 'To Be Assigned'),
+        (WIDOWED, 'Widowed'),
+    )
+    marital_status = models.IntegerField(choices=MARITAL_STATUS, default=SINGLE)
     ASIAN_B = 0
     ASIAN_C = 1
     ASIAN_I = 2
@@ -154,8 +171,11 @@ class Address(models.Model):
     evidence = models.FileField(upload_to='client/address_evidence/', blank=True)
     person = models.OneToOneField(Person, on_delete=models.CASCADE, null=True, related_name="Address")
 
-    def get_area_for_display(self):
-        return self.AREA[self.area]
-
     def __str__(self):
-       return self.line_1 + ' (' + self.get_area_for_display(self) + ')'
+       return self.line_1
+
+    # def get_area_for_display(self):
+    #     return self.AREA[self.area]
+    #
+    # def __str__(self):
+    #    return self.line_1 + ' (' + self.get_area_for_display(self) + ')'

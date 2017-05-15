@@ -24,15 +24,20 @@ class ClientForm(forms.ModelForm):
             Tab(
                 'Main',
                 'title',
+                'sex',
                 'first_name',
                 'middle_name',
                 'last_name',
-                'known_as'
+                'known_as',
+                'dob',
+                'birth_certificate',
+                'marital_status',
+                'ethnicity'
             ),
             Tab(
-                'Contact',
-                'dob',
-                'sex'
+                'Project',
+                'type',
+                'social_work_involved'
             )
         )
     )
@@ -67,7 +72,8 @@ class ClientForm(forms.ModelForm):
 
     class Meta:
         model = Client
-        fields = ('title', 'first_name', 'middle_name', 'last_name', 'known_as', 'dob', 'sex')
+        fields = ('title', 'first_name', 'middle_name', 'last_name', 'known_as', 'dob', 'sex',
+                  'birth_certificate', 'ethnicity', 'type', 'social_work_involved', 'marital_status')
         widgets = {
             'dob': forms.DateInput(attrs={'class':'datepicker'}),}
 
