@@ -4,7 +4,7 @@ def form_errors_as_array(form):
     errors = []
     if (form.errors and len(form.errors) > 0):
         for error in form.errors.items():
-            print(remove_html_tags(str(error[1])))
+            errors.append(remove_html_tags(str(error[1])))
 
     return errors
 

@@ -76,7 +76,10 @@ def manage_client(request, client_id=None):
 
     # TODO: get this to merger with form erros from the other forms
     # TODO: get it to work!
-    form_errors = form_errors_as_array(client_form)
+    client_form_errors = form_errors_as_array(client_form)
+    address_form_errors = form_errors_as_array(address_form)
+    form_errors = client_form_errors + address_form_errors
+    
     return render(request, 'client/client_edit.html', {'form': client_form, 'notes_form_set': notes_form_set,
                                                        'the_action_text' : the_action_text,
                                                        'edit_form' : is_edit_form, 'note_helper': note_helper,
