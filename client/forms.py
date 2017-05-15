@@ -23,16 +23,16 @@ class ClientForm(forms.ModelForm):
         TabHolder(
             Tab(
                 'Main',
-                'title',
+                Div('title',
                 'sex',
                 'first_name',
                 'middle_name',
                 'last_name',
-                'known_as',
-                'dob',
+                'known_as', css_class="col-sm-6"),
+                Div('dob',
                 'birth_certificate',
                 'marital_status',
-                'ethnicity'
+                'ethnicity', css_class="col-sm-6")
             ),
             Tab(
                 'Project',
