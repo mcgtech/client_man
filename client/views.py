@@ -5,6 +5,8 @@ from .forms import ClientForm, NoteForm, NoteFormSetHelper, AddressForm
 from django import forms
 from common.views import form_errors_as_array, super_user_or_job_coach
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.db import transaction
+from django.contrib.auth.models import User
 
 def home_page(request):
     return render(request, 'client/home_page.html', {})
@@ -38,10 +40,13 @@ def client_edit(request, pk):
 
 # http://stackoverflow.com/questions/29758558/inlineformset-factory-create-new-objects-and-edit-objects-after-created
 # https://gist.github.com/ibarovic/3092910
+@transaction.atomic
 def manage_client(request, client_id=None):
+    # TODO: use a listener to keep first and last name in sync - if user exists
     if client_id is None:
         client = Client()
         address = Address()
+        #client_user = User()
         the_action_text = 'Create'
         is_edit_form = False
         NoteInlineFormSet = inlineformset_factory(Client, Note, form=NoteForm, extra=2, can_delete=False)
@@ -67,10 +72,11 @@ def manage_client(request, client_id=None):
         address_form = AddressForm(request.POST, request.FILES, instance=address, prefix="address")
         notes_form_set = NoteInlineFormSet(request.POST, request.FILES, instance=client, prefix="nested")
 
-        if client_form.is_valid() and notes_form_set.is_valid() and address_form.is_valid():
+        if client_form.is_valid() and address_form.is_valid() and notes_form_set.is_valid():
             # client save
+            # TODO: as I dont set any fields I can simply do a save with true
             created_client = client_form.save(commit=False)
-            # created_client.modified_by = request.user
+            # created_client.changed_by = request.user
             created_client.save()
             # save address
             address = address_form.save(commit=False)
@@ -79,8 +85,16 @@ def manage_client(request, client_id=None):
             # save notes
             instances = notes_form_set.save(commit=False)
             for instance in instances:
-                instance.modified_by = request.user
+                #instance.changed_by = request.user
                 instance.save()
+            if request.POST.get("main-username"):
+                if request.POST.get("main-email_address"):
+                    if request.POST.get("main-password"):
+                        print('either update or created user account and set password')
+                    else:
+                        print('either update or created user account')
+                else:
+                    print('show error as we need email address')
             action = '/client/' + str(created_client.id) + '/edit' + '/'
             return redirect(action)
     else:
@@ -90,8 +104,6 @@ def manage_client(request, client_id=None):
     # crispy form helper for formsets
     note_helper = NoteFormSetHelper()
 
-    # TODO: get this to merger with form erros from the other forms
-    # TODO: get it to work!
     client_form_errors = form_errors_as_array(client_form)
     address_form_errors = form_errors_as_array(address_form)
     form_errors = client_form_errors + address_form_errors

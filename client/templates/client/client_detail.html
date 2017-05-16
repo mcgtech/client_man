@@ -3,7 +3,7 @@
 {% block content %}
     <div class="client">
         <a class="btn btn-default" href="{% url 'client_edit' pk=client.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
-        <h1>{{ client.first_name }} {{ client.last_name }} {{ client.modified_date }}</h1>
+        <h1>{{ client.title }} {{ client.ethnicity }} {{ client.changed_date }}</h1>
         <div>Dob: {{ client.dob }}</div>
 
         <ul>

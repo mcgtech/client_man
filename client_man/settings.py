@@ -157,3 +157,5 @@ SETTINGS_EXPORT = [
     'CLIENT_GROUP',
     'JOB_COACH',
 ]
+
+#AUTH_USER_MODEL = 'client.Person'
