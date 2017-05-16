@@ -6,15 +6,17 @@ from .forms import ClientForm, NoteForm, ExampleForm, ExampleFormSetHelper, Note
 from django import forms
 from django.contrib import messages
 from common.views import form_errors_as_array
-# from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required
 
 def home_page(request):
     return render(request, 'client/home_page.html', {})
 
+@login_required
 def client_list(request):
     clients = Client.objects.all()
     return render(request, 'client/client_list.html', {'clients': clients})
 
+@login_required
 def client_detail(request, pk):
     client = get_object_or_404(Client, pk=pk)
     return render(request, 'client/client_detail.html', {'client': client})
@@ -86,12 +88,15 @@ def manage_client(request, client_id=None):
                                                        'the_action' : action, 'address_form' : address_form,
                                                         'form_errors' : form_errors})
 
+@login_required
 def client_new(request):
     return manage_client(request, None)
 
 
+@login_required
 def client_edit(request, pk):
     return manage_client(request, pk)
+
 
 
 def cf_example(request):

@@ -15,13 +15,19 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.contrib.auth.views import login
+from django.contrib.auth.views import logout
+from django.core.urlresolvers import reverse_lazy
 
-from django.contrib.auth import views
+#from django.contrib.auth import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     # https://github.com/DjangoGirls/tutorial-extensions/blob/master/authentication_authorization/README.md
-    url(r'^login/$', views.login, name='login'),
-    url(r'^logout/$', views.logout, name='logout', kwargs={'next_page': '/'}),
+    #url(r'^login/$', views.login, name='login'),
+    #url(r'^logout/$', views.logout, name='logout', kwargs={'next_page': '/'}),
+    # http://django-marcador.keimlink.de/en/frontend_login.html
+    url(r'^login/$', login, {'template_name': 'login.html'}, name='client_man_login'),
+    url(r'^logout/$', logout, {'next_page': reverse_lazy('client_list')}, name='client_man_logout'),
     url(r'', include('client.urls')),
 ]

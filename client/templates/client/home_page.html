@@ -1,7 +1,14 @@
-{% extends 'client/base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
     <div class="intro">
-        Client Management for The Shirlie Project
+        {% if user.is_authenticated == True %}
+            <h1>Client Management</h1>
+        {% endif %}
+        <p>Welcome to the Client Management system.</p>
+        <p>You can manage clients and partners and run reports.</p>
+    </div>
+    <div id="footer">
+        &copy;The Shirlie Project 2017
     </div>
 {% endblock %}
