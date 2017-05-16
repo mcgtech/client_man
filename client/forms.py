@@ -69,7 +69,9 @@ class ClientForm(forms.ModelForm):
     def clean_email_address(self):
         email = self.cleaned_data['email_address']
         if email:
-            validate_email(self.cleaned_data['email_address'])
+            return validate_email(self.cleaned_data['email_address'])
+        else:
+            return email
 
     class Meta:
         model = Client
