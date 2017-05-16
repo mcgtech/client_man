@@ -4,22 +4,34 @@ from .models import Client, Note, Address
 from django.forms import modelformset_factory, inlineformset_factory, formset_factory
 from .forms import ClientForm, NoteForm, ExampleForm, ExampleFormSetHelper, NoteFormSetHelper, AddressForm
 from django import forms
-from django.contrib import messages
-from common.views import form_errors_as_array
-from django.contrib.auth.decorators import login_required
+from common.views import form_errors_as_array, super_user_or_job_coach
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 def home_page(request):
     return render(request, 'client/home_page.html', {})
 
+
 @login_required
+@user_passes_test(super_user_or_job_coach, 'client_man_login')
 def client_list(request):
     clients = Client.objects.all()
     return render(request, 'client/client_list.html', {'clients': clients})
+
 
 @login_required
 def client_detail(request, pk):
     client = get_object_or_404(Client, pk=pk)
     return render(request, 'client/client_detail.html', {'client': client})
+
+
+@login_required
+def client_new(request):
+    return manage_client(request, None)
+
+
+@login_required
+def client_edit(request, pk):
+    return manage_client(request, pk)
 
 
 # http://stackoverflow.com/questions/29758558/inlineformset-factory-create-new-objects-and-edit-objects-after-created
@@ -56,7 +68,7 @@ def manage_client(request, client_id=None):
         if client_form.is_valid() and notes_form_set.is_valid() and address_form.is_valid():
             # client save
             created_client = client_form.save(commit=False)
-            #created_client.modified_by = request.user
+            # created_client.modified_by = request.user
             created_client.save()
             # save address
             address = address_form.save(commit=False)
@@ -81,21 +93,12 @@ def manage_client(request, client_id=None):
     client_form_errors = form_errors_as_array(client_form)
     address_form_errors = form_errors_as_array(address_form)
     form_errors = client_form_errors + address_form_errors
-    
+
     return render(request, 'client/client_edit.html', {'form': client_form, 'notes_form_set': notes_form_set,
-                                                       'the_action_text' : the_action_text,
-                                                       'edit_form' : is_edit_form, 'note_helper': note_helper,
-                                                       'the_action' : action, 'address_form' : address_form,
-                                                        'form_errors' : form_errors})
-
-@login_required
-def client_new(request):
-    return manage_client(request, None)
-
-
-@login_required
-def client_edit(request, pk):
-    return manage_client(request, pk)
+                                                       'the_action_text': the_action_text,
+                                                       'edit_form': is_edit_form, 'note_helper': note_helper,
+                                                       'the_action': action, 'address_form': address_form,
+                                                       'form_errors': form_errors})
 
 
 

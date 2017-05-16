@@ -14,3 +14,6 @@ def remove_html_tags(text):
     import re
     clean = re.compile('<.*?>')
     return re.sub(clean, '', text)
+
+def super_user_or_job_coach(user):
+    return user.is_superuser  or user.groups.filter(name='admin').exists() or user.groups.filter(name='job coach').exists()
