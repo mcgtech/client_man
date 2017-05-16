@@ -65,6 +65,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django_settings_export.settings_export',
             ],
         },
     },
@@ -122,18 +123,13 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.11/howto/static-files/
+# http://stackoverflow.com/questions/25593038/django-static-folder-not-in-the-base-project
+STATIC_PATH = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', 'static'))
 
-STATIC_URL = '/static/'
-#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_URL = '/static/' # You may find this is already defined as such.
+
 STATICFILES_DIRS = (
-    # Put strings here, like "/home/html/static" or "C:/www/django/static".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    os.path.join(
-        os.path.dirname(__file__),
-        'static',
-    ),
+STATIC_PATH,
 )
 LOGIN_URL = 'client_man_login'
 LOGOUT_URL = 'client_man_logout'
@@ -147,3 +143,17 @@ DATE_INPUT_FORMATS = ('%d-%m-%Y','%Y-%m-%d')
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 CRISPY_FAIL_SILENTLY = not DEBUG
+
+# Global constants
+# groups
+ADMIN_GROUP = 'admin'
+CLIENT_GROUP = 'client'
+JOB_COACH = 'job coach'
+
+# https://github.com/jakubroztocil/django-settings-export
+# allows us to access constants inside templates
+SETTINGS_EXPORT = [
+    'ADMIN_GROUP',
+    'CLIENT_GROUP',
+    'JOB_COACH',
+]

@@ -13,10 +13,10 @@
     <div class="collapse navbar-collapse" id="main-navbar">
       <ul class="nav navbar-nav">
         <li class="active"><a href="/">Profile</a></li>
-        {% if request.user|has_group:"admin" %}
+        {% if request.user|has_group:settings.ADMIN_GROUP %}
           <li><a href="/admin">Admin</a></li>
         {% endif %}
-        {% if request.user|has_group:"job coach" %}
+        {% if request.user|has_group:settings.JOB_COACH %}
           <li><a href="/client_list">Client List</a></li>
           <li><a href="{% url 'client_new' %}">Add Client</a></li>
         {% endif %}

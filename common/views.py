@@ -1,4 +1,4 @@
-
+from django.conf import settings
 # http://stackoverflow.com/questions/753052/strip-html-from-strings-in-python
 def form_errors_as_array(form):
     errors = []
@@ -16,4 +16,4 @@ def remove_html_tags(text):
     return re.sub(clean, '', text)
 
 def super_user_or_job_coach(user):
-    return user.is_superuser  or user.groups.filter(name='admin').exists() or user.groups.filter(name='job coach').exists()
+    return user.is_superuser  or user.groups.filter(name=settings.ADMIN_GROUP).exists() or user.groups.filter(name=settings.JOB_COACH).exists()
