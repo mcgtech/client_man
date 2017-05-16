@@ -3,9 +3,8 @@ from .models import Client, Note, Address
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, HTML, Button, Div, Field
 from crispy_forms.bootstrap import TabHolder, Tab, FormActions, InlineField
-from common.forms import validate_required_field
+from common.forms import validate_required_field, is_email_valid
 from django.core.validators import validate_email
-
 # had to use helper as shown in https://blog.bixly.com/awesome-forms-django-crispy-forms
 # otherwise tabs doesn't work
 class ClientForm(forms.ModelForm):
@@ -68,10 +67,11 @@ class ClientForm(forms.ModelForm):
 
     def clean_email_address(self):
         email = self.cleaned_data['email_address']
-        if email:
-            return validate_email(self.cleaned_data['email_address'])
-        else:
-            return email
+        if email and not is_email_valid(email):
+            error_msg = 'email address is not valid'
+            self.form_errors.append(error_msg)
+            raise forms.ValidationError(error_msg)
+        return email
 
     class Meta:
         model = Client
