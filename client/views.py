@@ -68,6 +68,9 @@ def manage_client(request, client_id=None):
             notes = Note.objects.filter(person_id=client_id)
             if len(notes) == 0:
                 extra_notes = 1
+            else:
+                # need to suss this better
+                note = notes[0]
             NoteInlineFormSet = inlineformset_factory(Client, Note, form=NoteForm, extra=extra_notes, can_delete=True)
             action = '/client/' + str(client_id) + '/edit' + '/'
         else:
@@ -105,7 +108,6 @@ def manage_client(request, client_id=None):
                                                        'the_action_text': the_action_text,
                                                        'edit_form': is_edit_form, 'note_helper': note_helper,
                                                        'the_action': action, 'address_form': address_form,
-
                                                        'form_errors': form_errors})
 
 def save_client_details(client_form, user, request):
@@ -134,6 +136,20 @@ def save_client_notes(notes_form_set, request):
                     instance.modified_date = timezone.now()
                     instance.modified_by = request.user
                     instance.save()
+
+def save_client_note_comments(note_comment_form_set, request):
+    for comment_form in note_comment_form_set.forms:
+        if comment_form.has_changed():
+            if comment_form in note_comment_form_set.deleted_forms:
+                comment_form.instance.delete()
+            else:
+                # for some reason modeified_by and modified_date always come back as changed
+                if 'comment' in comment_form.changed_data:
+                    x = 0
+                    # instance = note_form.save(commit=False)
+                    # instance.modified_date = timezone.now()
+                    # instance.modified_by = request.user
+                    # instance.save()
 
 
 def handle_client_user(request, client, form):
