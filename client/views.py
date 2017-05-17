@@ -80,7 +80,7 @@ def manage_client(request, client_id=None):
             # TODO link changes to user made via admin into Person forename, surname...
             # TODO: as I dont set any fields I can simply do a save with true
             created_client = client_form.save(commit=False)
-            # created_client.changed_by = request.user
+            created_client.modified_by = request.user
             created_client.user = user
             created_client.save()
             # save address
@@ -90,7 +90,7 @@ def manage_client(request, client_id=None):
             # save notes
             instances = notes_form_set.save(commit=False)
             for instance in instances:
-                #instance.changed_by = request.user
+                instance.changed_by = request.user
                 instance.save()
             action = '/client/' + str(created_client.id) + '/edit' + '/'
             return redirect(action)

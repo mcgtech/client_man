@@ -22,11 +22,15 @@ class ClientForm(forms.ModelForm):
                 'forename',
                 'middle_name',
                 'surname',
-                'known_as', css_class="col-sm-6"),
+                'known_as',
+                css_class="col-sm-6"),
                 Div('dob',
                 'birth_certificate',
                 'marital_status',
-                'ethnicity', css_class="col-sm-6")
+                'ethnicity',
+                'modified_by',
+                'modified_date',
+                css_class="col-sm-6")
             ),
             Tab(
                 'Project',
@@ -52,6 +56,9 @@ class ClientForm(forms.ModelForm):
         self.fields['forename'].label = "First Name*"
         self.fields['surname'].label = "Last Name*"
         self.fields['dob'].label = "Date of Birth*"
+        self.fields['modified_by'].widget.attrs['disabled'] = True
+        self.fields['modified_date'].widget.attrs['disabled'] = True
+
 
     # if I make the following field required in the model, then as I am using tabs, the default form validation for
     # required fields in crispy forms for bootstrap shows a popover against the offending field when save is clicked
@@ -76,8 +83,8 @@ class ClientForm(forms.ModelForm):
 
     class Meta:
         model = Client
-        fields = ('title', 'forename', 'middle_name', 'surname', 'known_as', 'dob', 'sex', 'email_address',
-                  'birth_certificate', 'ethnicity', 'type', 'social_work_involved', 'marital_status')
+        fields = ('title', 'forename', 'middle_name', 'surname', 'known_as', 'dob', 'sex', 'email_address', 'modified_by',
+                  'modified_date', 'birth_certificate', 'ethnicity', 'type', 'social_work_involved', 'marital_status')
         widgets = {
             'dob': forms.DateInput(attrs={'class':'datepicker'}),}
 
@@ -107,19 +114,19 @@ class NoteForm(forms.ModelForm):
     helper.form_tag = False
     helper.layout = Layout(
             'note',
-            #InlineField('changed_by', readonly=True),
-            InlineField('changed_date', readonly=True)
+            InlineField('modified_by', readonly=True),
+            InlineField('modified_date', readonly=True)
         )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        #self.fields['changed_by'].widget.attrs['disabled'] = True
-        self.fields['changed_date'].widget.attrs['disabled'] = True
+        self.fields['modified_by'].widget.attrs['disabled'] = True
+        self.fields['modified_date'].widget.attrs['disabled'] = True
 
         self.helper.form_tag = True
     class Meta:
         model = Note
-        fields = ('note', 'changed_by', 'changed_date', )
+        fields = ('note', 'modified_by', 'modified_date', )
 
 
 class NoteFormSetHelper(FormHelper):

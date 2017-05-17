@@ -36,11 +36,13 @@ class Person(models.Model):
     forename = models.CharField(max_length=100, blank=True)
     surname = models.CharField(max_length=100, blank=True)
     email_address = models.CharField(max_length=100, blank=True) # I use the validator in the form
+    modified_date = models.DateTimeField(null=True, blank=True)
+    modified_by = models.ForeignKey(User, blank=True, null=True)
     # https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#onetoone
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name='Person')
 
     def save(self, *args, **kwargs):
-        self.changed_date = timezone.now()
+        self.modified_date = timezone.now()
         super(Person, self).save(*args, **kwargs)
 
     def __str__(self):
@@ -119,12 +121,12 @@ class Client(Person):
 
 class Note(models.Model):
     note = models.TextField()
-    changed_date = models.DateTimeField(null=True, blank=True)
-    changed_by = models.ForeignKey(User, blank=True, null=True)
+    modified_date = models.DateTimeField(null=True, blank=True)
+    modified_by = models.ForeignKey(User, blank=True, null=True)
     person = models.ForeignKey(Person, on_delete=models.CASCADE, null=True, related_name="note")
 
     def save(self, *args, **kwargs):
-        self.changed_date = timezone.now()
+        self.modified_date = timezone.now()
         super(Note, self).save(*args, **kwargs)
 
     def __str__(self):
