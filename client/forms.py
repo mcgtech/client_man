@@ -114,18 +114,12 @@ class AddressForm(forms.ModelForm):
 class NoteForm(forms.ModelForm):
     helper = FormHelper()
     helper.form_tag = False
-    helper.layout = Layout(
-            'note',
-            InlineField('modified_by', readonly=True),
-            InlineField('modified_date', readonly=True)
-        )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['modified_by'].widget.attrs['disabled'] = True
         self.fields['modified_date'].widget.attrs['disabled'] = True
-
-        self.helper.form_tag = True
+        # self.helper.form_tag = True
     class Meta:
         model = Note
         fields = ('note', 'modified_by', 'modified_date', )
@@ -133,10 +127,10 @@ class NoteForm(forms.ModelForm):
             'modified_date': forms.DateInput(format=(settings.DISPLAY_DATE_TIME)),}
 
 
-
 class NoteFormSetHelper(FormHelper):
     def __init__(self, *args, **kwargs):
         super(NoteFormSetHelper, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = False
-        self.template = 'bootstrap/table_inline_formset.html'
+        #self.template = 'bootstrap/table_inline_formset.html'
+        self.template = 'crispy_override/table_inline_formset.html'

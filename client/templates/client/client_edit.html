@@ -3,6 +3,7 @@
 
 {% block js %}
     <script type="text/javascript" src="{% static 'js/manage_client.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/form_helper/formset_manage.js' %}"></script>
 {% endblock %}
 {% block content %}
     {% if form_errors %}
@@ -24,4 +25,5 @@
             {% crispy notes_form_set note_helper %}
         </div>
     </form>
+
 {% endblock %}

@@ -46,12 +46,13 @@ def client_edit(request, pk):
 @transaction.atomic
 def manage_client(request, client_id=None):
     # TODO: use a listener to keep first and last name in sync - if user exists
+    extra_notes = 1
     if client_id is None:
         client = Client()
         address = Address()
         the_action_text = 'Create'
         is_edit_form = False
-        NoteInlineFormSet = inlineformset_factory(Client, Note, form=NoteForm, extra=2, can_delete=False)
+        NoteInlineFormSet = inlineformset_factory(Client, Note, form=NoteForm, extra=extra_notes, can_delete=False)
         action = '/client/new/'
     else:
         the_action_text = 'Edit'
@@ -60,7 +61,7 @@ def manage_client(request, client_id=None):
         addresses = Address.objects.filter(person_id=client_id)
         if len(addresses) == 1:
             address = addresses[0]
-            NoteInlineFormSet = inlineformset_factory(Client, Note, form=NoteForm, extra=2, can_delete=True)
+            NoteInlineFormSet = inlineformset_factory(Client, Note, form=NoteForm, extra=extra_notes, can_delete=True)
             action = '/client/' + str(client_id) + '/edit' + '/'
         else:
             raise forms.ValidationError('Expected a single address and found ' + str(len(addresses)) + ' instead')
@@ -91,6 +92,10 @@ def manage_client(request, client_id=None):
             for instance in instances:
                 instance.modified_by = request.user
                 instance.save()
+            # handle deleted notes
+            marked_for_delete = notes_form_set.deleted_objects
+            for inst_to_delete in marked_for_delete:
+                inst_to_delete.delete()
             action = '/client/' + str(created_client.id) + '/edit' + '/'
             return redirect(action)
     else:

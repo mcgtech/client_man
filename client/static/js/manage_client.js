@@ -2,15 +2,16 @@ $(function(){
     setup_client_address();
     setup_client_notes();
     setup_dob_datepicker();
-    //setup_inline_client_notes();
 });
 
 function setup_client_notes()
 {
     // crispy-forms handle one to one, so I handle the one to many elems here - ie move into a separate tab
     // see #notes in client_edit.html
-    $('.nav-tabs').append('<li class="tab-pane"><a href="#notes" data-toggle="tab">Notes</a></li>');
+    $('.nav-tabs').append('<li id="client_notes" class="tab-pane"><a href="#notes" data-toggle="tab">Notes</a></li>');
     $('#notes').appendTo('.tab-content');
+    // attach formset handler
+    setup_inline_client_notes();
 }
 
 function setup_client_address()
@@ -33,12 +34,12 @@ function setup_dob_datepicker()
       dateFormat: 'dd/mm/yy'
     });
 }
-/*
+
 function setup_inline_client_notes()
 {
-    $('#notes tr').formset({
-        addText: 'add link',
-        deleteText: 'remove',
-        prefix: '{{ notes_form_set.nested }}'
-    });
-}*/
+    $('#client_notes').click(function(){
+        setTimeout(function(){
+            $('#notes tbody tr').formset({prefix: 'nested'});
+        }, 10);
+        });
+}
