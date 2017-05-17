@@ -132,5 +132,4 @@ class NoteFormSetHelper(FormHelper):
         super(NoteFormSetHelper, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = False
-        #self.template = 'bootstrap/table_inline_formset.html'
-        self.template = 'crispy_override/table_inline_formset.html'
+        self.template = 'bootstrap/table_inline_formset.html'
