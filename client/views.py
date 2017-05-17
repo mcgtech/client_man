@@ -46,8 +46,10 @@ def client_edit(request, pk):
 @transaction.atomic
 def manage_client(request, client_id=None):
     # TODO: use a listener to keep first and last name in sync - if user exists
-    extra_notes = 1
+    # TODO: suss if I should be using https://simpleisbetterthancomplex.com/tips/2016/05/16/django-tip-3-optimize-database-queries.html in this fn
+    extra_notes = 0
     if client_id is None:
+        extra_notes = 1
         client = Client()
         address = Address()
         the_action_text = 'Create'
@@ -61,6 +63,10 @@ def manage_client(request, client_id=None):
         addresses = Address.objects.filter(person_id=client_id)
         if len(addresses) == 1:
             address = addresses[0]
+            # if client has not notes then we need to have one blank one for the formset js code to work
+            notes = Note.objects.filter(person_id=client_id)
+            if len(notes) == 0:
+                extra_notes = 1
             NoteInlineFormSet = inlineformset_factory(Client, Note, form=NoteForm, extra=extra_notes, can_delete=True)
             action = '/client/' + str(client_id) + '/edit' + '/'
         else:
@@ -89,6 +95,7 @@ def manage_client(request, client_id=None):
             address.save()
             # save notes
             instances = notes_form_set.save(commit=False)
+            # TODO: dont save notes if they hanvet changed as otherwise mod and mod time changes every time
             for instance in instances:
                 instance.modified_by = request.user
                 instance.save()

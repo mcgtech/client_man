@@ -2,69 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="053a4aa4-3808-4504-ab0a-5f7dd90a79bc" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/.gitattributes" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/.gitignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/.travis.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/Gruntfile.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/INSTALL.rst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/README.rst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/example/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/example/fixtures/initial_data.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/example/forms.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/example/models.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/example/urls.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/example/views.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/manage.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/requirements.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/settings.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/static/css/default.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/static/css/jquery.autocomplete.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/static/images/add.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/static/images/bg01.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/static/images/bg02.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/static/images/bg03.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/static/images/bg04.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/static/images/comments.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/static/images/delete.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/static/images/doc.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/static/images/edit.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/static/images/img02.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/static/images/img05.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/static/images/img06.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/static/images/loading.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/static/images/spacer.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/static/js/autocomplete-init.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/static/js/jquery-1.3.2.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/static/js/jquery.autocomplete.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/static/js/jquery.formset.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/templates/base.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/templates/example/empty-form.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/templates/example/form-template.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/templates/example/formset-admin-widget.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/templates/example/formset-multiple-formsets.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/templates/example/formset-stacked.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/templates/example/formset-table.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/templates/example/inline-formset-autocomplete.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/templates/example/inline-formset-django-ajax-select.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/templates/example/inline-formset.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/templates/example/max-forms.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/templates/example/min-forms.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/templates/example/posted-data.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/templates/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/demo/urls.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/docs/usage.rst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/src/jquery.formset.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/tests/basic.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/tests/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/tests/lib/jquery-1.11.0.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/tests/lib/qmock.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/tests/lib/qunit/qunit-1.15.0.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/static/js/dynamic_formset/tests/lib/qunit/qunit-1.15.0.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/templates/crispy_override/table_inline_formset.html" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/forms.py" afterPath="$PROJECT_DIR$/client/forms.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views.py" afterPath="$PROJECT_DIR$/client/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -75,7 +13,42 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1387">
+              <caret line="34" column="26" lean-forward="false" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="26" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/client/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="571">
+              <caret line="90" column="33" lean-forward="true" selection-start-line="90" selection-start-column="33" selection-end-line="90" selection-end-column="33" />
+              <folding>
+                <element signature="e#0#64#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="manage_client.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/static/js/manage_client.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="615">
+              <caret line="41" column="40" lean-forward="false" selection-start-line="41" selection-start-column="33" selection-end-line="41" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -160,11 +133,11 @@
         <option value="$PROJECT_DIR$/cmenv/lib/python3.5/site-packages/crispy_forms/templates/bootstrap/table_inline_formset.html" />
         <option value="$PROJECT_DIR$/client/templates/crispy_override/table_inline_formset.html" />
         <option value="$PROJECT_DIR$/client/templates/client/client_edit.html" />
-        <option value="$PROJECT_DIR$/client/views.py" />
         <option value="$PROJECT_DIR$/client/static/js/manage_client.js" />
         <option value="$PROJECT_DIR$/static/js/form_helper/formset_manage.js" />
         <option value="$PROJECT_DIR$/client/templates/base.html" />
         <option value="$PROJECT_DIR$/client/forms.py" />
+        <option value="$PROJECT_DIR$/client/views.py" />
       </list>
     </option>
   </component>
@@ -425,8 +398,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="24" y="33" width="1896" height="966" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18934599" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18934599" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32988358" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -652,16 +626,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-706">
-          <caret line="34" column="26" lean-forward="false" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cmenv/lib/python3.5/site-packages/crispy_forms/templates/bootstrap/table_inline_formset.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -710,24 +674,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="103" column="74" lean-forward="false" selection-start-line="103" selection-start-column="68" selection-end-line="103" selection-end-column="74" />
-          <folding>
-            <element signature="e#0#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/static/js/manage_client.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="42" column="13" lean-forward="false" selection-start-line="42" selection-start-column="13" selection-end-line="42" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/js/form_helper/formset_manage.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="257">
@@ -750,6 +696,34 @@
           <caret line="134" column="61" lean-forward="false" selection-start-line="134" selection-start-column="61" selection-end-line="134" selection-end-column="61" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1387">
+          <caret line="34" column="26" lean-forward="false" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/static/js/manage_client.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="41" column="40" lean-forward="false" selection-start-line="41" selection-start-column="33" selection-end-line="41" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="571">
+          <caret line="90" column="33" lean-forward="true" selection-start-line="90" selection-start-column="33" selection-end-line="90" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#64#0" expanded="true" />
           </folding>
         </state>
       </provider>
