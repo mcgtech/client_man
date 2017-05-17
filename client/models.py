@@ -125,9 +125,9 @@ class Note(models.Model):
     modified_by = models.ForeignKey(User, blank=True, null=True)
     person = models.ForeignKey(Person, on_delete=models.CASCADE, null=True, related_name="note")
 
-    def save(self, *args, **kwargs):
-        self.modified_date = timezone.now()
-        super(Note, self).save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     self.modified_date = timezone.now()
+    #     super(Note, self).save(*args, **kwargs)
 
     def __str__(self):
        return self.note

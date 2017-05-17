@@ -9,6 +9,7 @@ from django.db import transaction
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
 from django.conf import settings
+from django.utils import timezone
 
 def home_page(request):
     return render(request, 'client/home_page.html', {})
@@ -83,26 +84,10 @@ def manage_client(request, client_id=None):
 
         user = handle_client_user(request, client, client_form)
         if client_form.is_valid() and address_form.is_valid() and notes_form_set.is_valid():
-            # client save
-            # TODO link changes to user made via admin into Person forename, surname...
-            created_client = client_form.save(commit=False)
-            created_client.modified_by = request.user
-            created_client.user = user
-            created_client.save()
-            # save address
-            address = address_form.save(commit=False)
-            address.person = created_client
-            address.save()
-            # save notes
-            instances = notes_form_set.save(commit=False)
-            # TODO: dont save notes if they hanvet changed as otherwise mod and mod time changes every time
-            for instance in instances:
-                instance.modified_by = request.user
-                instance.save()
-            # handle deleted notes
-            marked_for_delete = notes_form_set.deleted_objects
-            for inst_to_delete in marked_for_delete:
-                inst_to_delete.delete()
+            # TODO link changes to user made via admin into Person forename, surname... via listener
+            created_client = save_client_details(client_form, user, request)
+            save_client_address(address_form, created_client)
+            save_client_notes(notes_form_set, request)
             action = '/client/' + str(created_client.id) + '/edit' + '/'
             return redirect(action)
     else:
@@ -120,7 +105,35 @@ def manage_client(request, client_id=None):
                                                        'the_action_text': the_action_text,
                                                        'edit_form': is_edit_form, 'note_helper': note_helper,
                                                        'the_action': action, 'address_form': address_form,
+
                                                        'form_errors': form_errors})
+
+def save_client_details(client_form, user, request):
+    created_client = client_form.save(commit=False)
+    created_client.modified_by = request.user
+    created_client.user = user
+    created_client.save()
+
+    return created_client
+
+def save_client_address(address_form, client):
+    address = address_form.save(commit=False)
+    address.person = client
+    address.save()
+
+
+def save_client_notes(notes_form_set, request):
+    for note_form in notes_form_set.forms:
+        if note_form.has_changed():
+            if note_form in notes_form_set.deleted_forms:
+                note_form.instance.delete()
+            else:
+                # for some reason modeified_by and modified_date always come back as changed
+                if 'note' in note_form.changed_data:
+                    instance = note_form.save(commit=False)
+                    instance.modified_date = timezone.now()
+                    instance.modified_by = request.user
+                    instance.save()
 
 
 def handle_client_user(request, client, form):
