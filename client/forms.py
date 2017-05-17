@@ -4,6 +4,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, HTML, Button, Div, Field
 from crispy_forms.bootstrap import TabHolder, Tab, FormActions, InlineField
 from common.forms import validate_required_field, is_email_valid
+from django.contrib.auth.forms import PasswordResetForm
 from django.core.validators import validate_email
 # had to use helper as shown in https://blog.bixly.com/awesome-forms-django-crispy-forms
 # otherwise tabs doesn't work

@@ -17,7 +17,8 @@ def home_page(request):
 @login_required
 @user_passes_test(super_user_or_job_coach, 'client_man_login')
 def client_list(request):
-    clients = Client.objects.all()
+    # https://simpleisbetterthancomplex.com/tips/2016/05/16/django-tip-3-optimize-database-queries.html
+    clients = Client.objects.select_related('user').all()
     return render(request, 'client/client_list.html', {'clients': clients})
 
 
@@ -112,6 +113,7 @@ def manage_client(request, client_id=None):
 
 
 def handle_client_user(request, client, form):
+    # todo send out email asking them to reset password
     user = None
     user_exists = False
     if client.user:
@@ -153,7 +155,7 @@ def handle_client_user_storage(request, client, form, user_exists):
             client_group.user_set.add(user)
     if user_valid:
         if request.POST.get("main-password"):
-            user.password = request.POST.get("main-password")
+            user.set_password(request.POST.get("main-password"))
         user.first_name = request.POST.get("forename")
         user.last_name = request.POST.get("surname")
         # need to ensure that we are not changing email and/or user name to one that someone else is using

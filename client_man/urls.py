@@ -19,6 +19,7 @@ from django.contrib.auth.views import login
 from django.contrib.auth.views import logout
 from django.core.urlresolvers import reverse_lazy
 
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login/$', login, {'template_name': 'login.html'}, name='client_man_login'),
