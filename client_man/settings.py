@@ -111,7 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-GB'
 
 TIME_ZONE = 'Europe/London'
 
@@ -139,7 +139,10 @@ LOGIN_REDIRECT_URL = '/client_list'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-DATE_INPUT_FORMATS = ('%d-%m-%Y','%Y-%m-%d')
+DATE_INPUT_FORMATS = ('%d/%m/%Y')
+#DATE_INPUT_FORMATS = ('%d/%m/%Y','%Y-%m-%d')
+
+DISPLAY_DATE_TIME = '%d/%m/%Y %H:%M:%S'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 CRISPY_FAIL_SILENTLY = not DEBUG

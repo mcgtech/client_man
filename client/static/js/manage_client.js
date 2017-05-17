@@ -30,7 +30,7 @@ function setup_dob_datepicker()
       changeYear: true,
       yearRange: start_year + ':' + new Date().getFullYear(),
       defaultDate: start_date,
-      //dateFormat: 'dd-mm-yy'
+      dateFormat: 'dd/mm/yy'
     });
 }
 /*

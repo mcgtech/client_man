@@ -4,8 +4,9 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, HTML, Button, Div, Field
 from crispy_forms.bootstrap import TabHolder, Tab, FormActions, InlineField
 from common.forms import validate_required_field, is_email_valid
-from django.contrib.auth.forms import PasswordResetForm
-from django.core.validators import validate_email
+from django.conf import settings
+
+
 # had to use helper as shown in https://blog.bixly.com/awesome-forms-django-crispy-forms
 # otherwise tabs doesn't work
 class ClientForm(forms.ModelForm):
@@ -86,7 +87,8 @@ class ClientForm(forms.ModelForm):
         fields = ('title', 'forename', 'middle_name', 'surname', 'known_as', 'dob', 'sex', 'email_address', 'modified_by',
                   'modified_date', 'birth_certificate', 'ethnicity', 'type', 'social_work_involved', 'marital_status')
         widgets = {
-            'dob': forms.DateInput(attrs={'class':'datepicker'}),}
+            'dob': forms.DateInput(attrs={'class':'datepicker'}),
+            'modified_date': forms.DateInput(format=(settings.DISPLAY_DATE_TIME)),}
 
 
 class AddressForm(forms.ModelForm):
@@ -127,6 +129,9 @@ class NoteForm(forms.ModelForm):
     class Meta:
         model = Note
         fields = ('note', 'modified_by', 'modified_date', )
+        widgets = {
+            'modified_date': forms.DateInput(format=(settings.DISPLAY_DATE_TIME)),}
+
 
 
 class NoteFormSetHelper(FormHelper):
