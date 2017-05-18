@@ -67,6 +67,10 @@ class Client(Person):
     birth_certificate = models.FileField(upload_to='client/birth_certs/', blank=True, null=True)
     social_work_involved = models.BooleanField(default=False)
 
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('client_edit', args=[str(self.id)])
+
 
 class Note(models.Model):
     note = models.TextField()

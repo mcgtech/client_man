@@ -46,21 +46,24 @@
             insertDeleteLink = function(row) {
                 var delCssSelector = options.deleteCssClass.trim().replace(/\s+/g, '.'),
                     addCssSelector = options.addCssClass.trim().replace(/\s+/g, '.');
+                // SmcG changed 'last' to 'td:last' and changed link to a button
+                var del_link = '<button type="button" class="' + options.deleteCssClass +' btn btn-danger" ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>';
                 if (row.is('TR')) {
                     // If the forms are laid out in table rows, insert
                     // the remove button into the last table cell:
-                    // SmcG changed 'last' to 'td:last' and changed lik to a button
+                    // SmcG changed 'last' to 'td:last' and changed link to a button
                     //var del_link = '<a class="' + options.deleteCssClass +'" href="javascript:void(0)">' + options.deleteText + '</a>';
-                    var del_link = '<button type="button" class="' + options.deleteCssClass +' btn btn-danger" ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>';
                     row.children('td:last').append(del_link);
                 } else if (row.is('UL') || row.is('OL')) {
                     // If they're laid out as an ordered/unordered list,
                     // insert an <li> after the last list item:
-                    row.append('<li><a class="' + options.deleteCssClass + '" href="javascript:void(0)">' + options.deleteText +'</a></li>');
+                    row.append('<li>' + del_link + '</li>');
+//                    row.append('<li><a class="' + options.deleteCssClass + '" href="javascript:void(0)">' + options.deleteText +'</a></li>');
                 } else {
                     // Otherwise, just insert the remove button as the
                     // last child element of the form's container:
-                    row.append('<a class="' + options.deleteCssClass + '" href="javascript:void(0)">' + options.deleteText +'</a>');
+                    row.append(del_link);
+//                    row.append('<a class="' + options.deleteCssClass + '" href="javascript:void(0)">' + options.deleteText +'</a>');
                 }
                 // SMcG changed to using button
                 row.find('button.' + delCssSelector).click(function() {
@@ -152,9 +155,16 @@
                     var elem = $(this);
                     // If this is a checkbox or radiobutton, uncheck it.
                     // This fixes Issue 1, reported by Wilson.Andrew.J:
-                    if (elem.is('input:checkbox') || elem.is('input:radio')) {
+                    if (elem.is('input:checkbox') || elem.is('input:radio'))
+                    {
                         elem.attr('checked', false);
-                    } else {
+                    }
+                    else if (elem.is('select'))
+                    {
+                        $('option:selected', elem).removeAttr("selected");
+                    }
+                    else
+                    {
                         elem.val('');
                     }
                 });
@@ -162,10 +172,11 @@
             // FIXME: Perhaps using $.data would be a better idea?
             options.formTemplate = template;
 
+            // SMcG changed to use button
+            var add_link = '<button type="button" class="' + options.addCssClass +' btn btn-success" ><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>';
             if ($$.is('TR')) {
                 // If forms are laid out as table rows, insert the
                 // "add" button in a new table row:
-                var add_link = '<button type="button" class="' + options.addCssClass +' btn btn-success" ><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>';
                 var numCols = $$.eq(0).children().length,   // This is a bit of an assumption :|
                     // SMcG changed to use button
                     //var add_link = '<a class="' + options.addCssClass + '" href="javascript:void(0)">' + options.addText + '</a>';
