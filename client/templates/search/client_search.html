@@ -1,13 +1,58 @@
 {% extends 'base.html' %}
 
+<!--https://simpleisbetterthancomplex.com/2015/12/04/package-of-the-week-django-widget-tweaks.html-->
+{% load widget_tweaks %}
+
 {% block content %}
   <form method="get">
-    {{ filter.form.as_p }}
-    <button type="submit">Search</button>
+    <div class="well">
+      <h4 style="margin-top: 0">Filter</h4>
+      <div class="row">
+        <div class="form-group col-sm-4 col-md-3">
+          {{ filter.form.forename.label_tag }}
+          {% render_field filter.form.forename class="form-control" %}
+        </div>
+        <div class="form-group col-sm-4 col-md-3">
+          {{ filter.form.middle_name.label_tag }}
+          {% render_field filter.form.middle_name class="form-control" %}
+        </div>
+        <div class="form-group col-sm-4 col-md-3">
+          {{ filter.form.surname.label_tag }}
+          {% render_field filter.form.surname class="form-control" %}
+        </div>
+        <div class="form-group col-sm-4 col-md-3">
+          {{ filter.form.year_of_birth.label_tag }}
+          {% render_field filter.form.year_of_birth class="form-control" %}
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">
+        <span class="glyphicon glyphicon-search"></span> Search
+      </button>
+    </div>
   </form>
-    <ul class="client_list">
-        {% for client in filter.qs %}
-          <li><a href="{{ client.get_absolute_url }}">{{ client.get_full_name }}</a></li>
-        {% endfor %}
-    </ul>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>First name</th>
+        <th>Middle name</th>
+        <th>Last name</th>
+        <th>Year of birth</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in filter.qs %}
+        <tr>
+          <td>{{ user.forename }}</td>
+          <td>{{ user.middle_name }}</td>
+          <td>{{ user.surname }}</td>
+          <td>{{ user.year_of_birth }}</td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="5">No data</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 {% endblock %}
