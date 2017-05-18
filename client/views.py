@@ -16,6 +16,15 @@ from django.contrib import messages
 def home_page(request):
     return render(request, 'client/home_page.html', {})
 
+from django.contrib.auth.models import User
+from django.shortcuts import render
+from .filters import UserFilter
+
+def search(request):
+    user_list = User.objects.all()
+    user_filter = UserFilter(request.GET, queryset=user_list)
+    return render(request, 'search/user_list.html', {'filter': user_filter})
+
 
 @login_required
 @user_passes_test(super_user_or_job_coach, 'client_man_login')
