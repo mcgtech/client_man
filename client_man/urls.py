@@ -23,6 +23,6 @@ from django.core.urlresolvers import reverse_lazy
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login/$', login, {'template_name': 'login.html'}, name='client_man_login'),
-    url(r'^logout/$', logout, {'next_page': reverse_lazy('client_list')}, name='client_man_logout'),
+    url(r'^logout/$', logout, {'next_page': reverse_lazy('client_search')}, name='client_man_logout'),
     url(r'', include('client.urls')),
 ]

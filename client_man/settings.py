@@ -133,7 +133,7 @@ STATIC_PATH,
 )
 LOGIN_URL = 'client_man_login'
 LOGOUT_URL = 'client_man_logout'
-LOGIN_REDIRECT_URL = '/client_list'
+LOGIN_REDIRECT_URL = '/client_search'
 
 # https://simpleisbetterthancomplex.com/tutorial/2016/08/01/how-to-upload-files-with-django.html
 MEDIA_URL = '/media/'

@@ -1,5 +1,4 @@
 from django.shortcuts import redirect, render, get_object_or_404
-from common.models import Person
 from .models import Client, Note, Address
 from django.forms import inlineformset_factory
 from .forms import ClientForm, NoteForm, NoteFormSetHelper, AddressForm
@@ -12,26 +11,21 @@ from django.contrib.auth.models import Group
 from django.conf import settings
 from django.utils import timezone
 from django.contrib import messages
+from django.shortcuts import render
+# from .filters import UserFilter
+from .filters import ClientFilter
 
 def home_page(request):
     return render(request, 'client/home_page.html', {})
 
-from django.contrib.auth.models import User
-from django.shortcuts import render
-from .filters import UserFilter
-
-def search(request):
-    user_list = User.objects.all()
-    user_filter = UserFilter(request.GET, queryset=user_list)
-    return render(request, 'search/user_list.html', {'filter': user_filter})
-
 
 @login_required
 @user_passes_test(super_user_or_job_coach, 'client_man_login')
-def client_list(request):
+def client_search(request):
     # https://simpleisbetterthancomplex.com/tips/2016/05/16/django-tip-3-optimize-database-queries.html
-    clients = Client.objects.select_related('user').all()
-    return render(request, 'client/client_list.html', {'clients': clients})
+	clients = Client.objects.select_related('user').all()
+	filter = ClientFilter(request.GET, queryset = clients)
+	return render(request, 'search/client_search.html', {'filter' : filter})
 
 
 @login_required
@@ -91,7 +85,7 @@ def manage_client(request, client_id=None):
             client = get_object_or_404(Client, pk=client_id)
             # client.delete()
             messages.add_message(request, messages.INFO, 'You have successfully delete client ' + client.get_full_name())
-            return redirect('/client_list')
+            return redirect('/client_search')
         client_form = ClientForm(request.POST, request.FILES, instance=client, prefix="main")
         address_form = AddressForm(request.POST, request.FILES, instance=address, prefix="address")
         notes_form_set = NoteInlineFormSet(request.POST, request.FILES, instance=client, prefix="nested")

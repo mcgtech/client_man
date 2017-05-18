@@ -17,7 +17,7 @@
           <li><a href="/admin">Admin</a></li>
         {% endif %}
         {% if request.user|has_group:settings.JOB_COACH %}
-          <li><a href="/client_list">Client List</a></li>
+          <li><a href="{% url 'client_search' %}">Client Search</a></li>
           <li><a href="{% url 'client_new' %}">Add Client</a></li>
         {% endif %}
       </ul>

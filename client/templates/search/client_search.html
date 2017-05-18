@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit">Search</button>
+  </form>
+    <ul class="client_list">
+        {% for client in filter.qs %}
+          <li><a href="{{ client.get_absolute_url }}">{{ client.get_full_name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
