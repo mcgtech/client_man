@@ -41,12 +41,12 @@
       </tr>
     </thead>
     <tbody>
-      {% for user in filter.qs %}
+      {% for client in filter.qs %}
         <tr>
-          <td>{{ user.forename }}</td>
-          <td>{{ user.middle_name }}</td>
-          <td>{{ user.surname }}</td>
-          <td>{{ user.year_of_birth }}</td>
+          <td><a href="{{ client.get_absolute_url }}">{{ client.forename }}</a></td>
+          <td>{{ client.middle_name }}</td>
+          <td>{{ client.surname }}</td>
+          <td>{{ client.year_of_birth }}</td>
         </tr>
       {% empty %}
         <tr>

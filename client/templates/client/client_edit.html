@@ -17,6 +17,7 @@
           </ul>
         </div>
     {% endif %}
+    <a href="{% url 'client_search' %}">Client Search</a>
     <form action="{{ the_action }}" method="POST" id="client_edit_form">
         {% load crispy_forms_tags %}
         {% crispy form %}
