@@ -1,11 +1,30 @@
 from django.db import models
-from django.utils import timezone
 from django.contrib.auth.models import User
+from django.conf import settings
+from django.utils import timezone
+
+class Auditable(models.Model):
+    created_on = models.DateTimeField(null=True, blank=True)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='created_by', blank=True, null=True)
+    modified_on = models.DateTimeField(null=True, blank=True)
+    modified_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='modified_by', blank=True, null=True)
+
+    # def save(self, *args, **kwargs):
+    #     if self.pk is None:
+    #         self.created_on = timezone.now()
+    #     else:
+    #         self.created_on = self.created_on
+    #     self.modified_on = timezone.now()
+    #     super(Auditable, self).save(*args, **kwargs)
+
+    class Meta:
+        abstract = True
 
 # drop downs: http://stackoverflow.com/questions/31130706/dropdown-in-django-model
 #             http://stackoverflow.com/questions/1117564/set-django-integerfield-by-choices-name
 # https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#abstractuser
-class Person(models.Model):
+# class Person(Auditable):
+class Person(Auditable):
     CLIENT = 0
     JOB_COACH = 1
     MANAGER = 2
@@ -34,14 +53,12 @@ class Person(models.Model):
     forename = models.CharField(max_length=100, blank=True)
     surname = models.CharField(max_length=100, blank=True)
     email_address = models.CharField(max_length=100, blank=True) # I use the validator in the form
-    modified_date = models.DateTimeField(null=True, blank=True)
-    modified_by = models.ForeignKey(User, blank=True, null=True)
     # https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#onetoone
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name='Person')
 
-    def save(self, *args, **kwargs):
-        self.modified_date = timezone.now()
-        super(Person, self).save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     self.modified_date = timezone.now()
+    #     super(Person, self).save(*args, **kwargs)
 
     def __str__(self):
        return self.TITLES[self.title] + ' ' + self.forename + ' ' + self.surname

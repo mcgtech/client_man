@@ -29,8 +29,10 @@ class ClientForm(forms.ModelForm):
                 'birth_certificate',
                 'marital_status',
                 'ethnicity',
+                'created_by',
+                'created_on',
                 'modified_by',
-                'modified_date',
+                'modified_on',
                 css_class="col-sm-6")
             ),
             Tab(
@@ -57,8 +59,12 @@ class ClientForm(forms.ModelForm):
         self.fields['forename'].label = "First Name*"
         self.fields['surname'].label = "Last Name*"
         self.fields['dob'].label = "Date of Birth*"
-        self.fields['modified_by'].widget.attrs['disabled'] = True
-        self.fields['modified_date'].widget.attrs['disabled'] = True
+        # Note: if I use 'disabled' then the post returns nothing for the fields
+        self.fields['modified_on'].widget.attrs['readonly'] = True
+        self.fields['modified_by'].widget.attrs['readonly'] = True
+        self.fields['created_on'].widget.attrs['readonly'] = True
+        self.fields['created_by'].widget.attrs['readonly'] = True
+        # self.fields['created_by'].widget.attrs['disabled'] = True
 
 
     # if I make the following field required in the model, then as I am using tabs, the default form validation for
@@ -84,11 +90,17 @@ class ClientForm(forms.ModelForm):
 
     class Meta:
         model = Client
-        fields = ('title', 'forename', 'middle_name', 'surname', 'known_as', 'dob', 'sex', 'email_address', 'modified_by',
-                  'modified_date', 'birth_certificate', 'ethnicity', 'type', 'social_work_involved', 'marital_status')
+        fields = ('title', 'forename', 'middle_name', 'surname', 'known_as', 'dob', 'sex', 'email_address',
+                  'birth_certificate', 'ethnicity', 'type', 'social_work_involved', 'marital_status'
+                  ,'modified_by', 'modified_on'
+                  ,'created_on', 'created_by'
+                  )
+        # fields = ('title', 'forename', 'middle_name', 'surname', 'known_as', 'dob', 'sex', 'email_address', 'modified_by',
+        #           'modified_date', 'birth_certificate', 'ethnicity', 'type', 'social_work_involved', 'marital_status')
         widgets = {
             'dob': forms.DateInput(attrs={'class':'datepicker'}),
-            'modified_date': forms.DateInput(format=(settings.DISPLAY_DATE_TIME)),}
+            'created_on': forms.DateInput(format=(settings.DISPLAY_DATE_TIME)),
+            'modified_on': forms.DateInput(format=(settings.DISPLAY_DATE_TIME)),}
 
 
 class AddressForm(forms.ModelForm):
