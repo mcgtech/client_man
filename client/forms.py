@@ -6,7 +6,6 @@ from crispy_forms.bootstrap import TabHolder, Tab, FormActions, InlineField
 from common.forms import validate_required_field, is_email_valid
 from django.conf import settings
 
-
 # had to use helper as shown in https://blog.bixly.com/awesome-forms-django-crispy-forms
 # otherwise tabs doesn't work
 class ClientForm(forms.ModelForm):
@@ -61,10 +60,11 @@ class ClientForm(forms.ModelForm):
         self.fields['dob'].label = "Date of Birth*"
         # Note: if I use 'disabled' then the post returns nothing for the fields
         self.fields['modified_on'].widget.attrs['readonly'] = True
-        self.fields['modified_by'].widget.attrs['readonly'] = True
         self.fields['created_on'].widget.attrs['readonly'] = True
-        self.fields['created_by'].widget.attrs['readonly'] = True
-        # self.fields['created_by'].widget.attrs['disabled'] = True
+        # the form will not post values for these, so I need to remove
+        # the disabled setting before saving - see setup_client_form()
+        self.fields['modified_by'].widget.attrs['disabled'] = True
+        self.fields['created_by'].widget.attrs['disabled'] = True
 
 
     # if I make the following field required in the model, then as I am using tabs, the default form validation for
@@ -95,12 +95,10 @@ class ClientForm(forms.ModelForm):
                   ,'modified_by', 'modified_on'
                   ,'created_on', 'created_by'
                   )
-        # fields = ('title', 'forename', 'middle_name', 'surname', 'known_as', 'dob', 'sex', 'email_address', 'modified_by',
-        #           'modified_date', 'birth_certificate', 'ethnicity', 'type', 'social_work_involved', 'marital_status')
         widgets = {
             'dob': forms.DateInput(attrs={'class':'datepicker'}),
             'created_on': forms.DateInput(format=(settings.DISPLAY_DATE_TIME)),
-            'modified_on': forms.DateInput(format=(settings.DISPLAY_DATE_TIME)),}
+            'modified_on': forms.DateInput(format=(settings.DISPLAY_DATE_TIME))}
 
 
 class AddressForm(forms.ModelForm):

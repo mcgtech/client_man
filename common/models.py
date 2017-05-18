@@ -9,14 +9,6 @@ class Auditable(models.Model):
     modified_on = models.DateTimeField(null=True, blank=True)
     modified_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='modified_by', blank=True, null=True)
 
-    # def save(self, *args, **kwargs):
-    #     if self.pk is None:
-    #         self.created_on = timezone.now()
-    #     else:
-    #         self.created_on = self.created_on
-    #     self.modified_on = timezone.now()
-    #     super(Auditable, self).save(*args, **kwargs)
-
     class Meta:
         abstract = True
 
@@ -56,12 +48,13 @@ class Person(Auditable):
     # https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#onetoone
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name='Person')
 
-    # def save(self, *args, **kwargs):
-    #     self.modified_date = timezone.now()
-    #     super(Person, self).save(*args, **kwargs)
+    def get_full_name(self):
+        # return self.forename + ' ' + self.surname
+        return self.get_title_display() + ' ' + self.forename + ' ' + self.surname
+
 
     def __str__(self):
-       return self.TITLES[self.title] + ' ' + self.forename + ' ' + self.surname
+       return self.get_full_name(self)
     # @property
     # def age(self):
     #     today = date.today()

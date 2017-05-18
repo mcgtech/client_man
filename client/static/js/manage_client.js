@@ -1,8 +1,16 @@
 $(function(){
+    setup_client_form();
     setup_client_address();
     setup_client_notes();
     setup_dob_datepicker();
 });
+
+function setup_client_form()
+{
+    manage_disabled_selects_in_a_form($('#client_edit_form'));
+    apply_confirm_to_submit_button('#submit-id-delete-client', 'btn-danger', 'del_butt', 'Delete', 'Deletion',
+                                    'Are you sure that you want to delete this client?');
+}
 
 function setup_client_notes()
 {
@@ -38,8 +46,10 @@ function setup_dob_datepicker()
 function setup_inline_client_notes()
 {
     $('#client_notes').click(function(){
-        setTimeout(function(){
+//        setTimeout(function(){
+//            $('#notes tbody tr').formset({prefix: 'nested'});
+//        }, 10);
+
             $('#notes tbody tr').formset({prefix: 'nested'});
-        }, 10);
         });
 }

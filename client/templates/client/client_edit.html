@@ -2,8 +2,10 @@
 {% load staticfiles %}
 
 {% block js %}
-    <script type="text/javascript" src="{% static 'js/manage_client.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/form_helper/formset_manage.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/form_helper/form_handlers.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/form_helper/confirm_bootstrap.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/manage_client.js' %}"></script>
 {% endblock %}
 {% block content %}
     {% if form_errors %}
@@ -15,7 +17,7 @@
           </ul>
         </div>
     {% endif %}
-    <form action="{{ the_action }}" method="POST">
+    <form action="{{ the_action }}" method="POST" id="client_edit_form">
         {% load crispy_forms_tags %}
         {% crispy form %}
         <div id="address" class="tab-pane">
