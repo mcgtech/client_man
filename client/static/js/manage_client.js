@@ -18,7 +18,7 @@ function setup_client_address()
 {
     // crispy-forms handle one to one, so I handle the one to many elems here - ie move into a separate tab
     // see #notes in client_edit.html
-    $('.nav-tabs').append('<li class="tab-pane"><a href="#address" data-toggle="tab">Address</a></li>');
+    $('.tab-pane:first').after('<li class="tab-pane"><a href="#address" data-toggle="tab">Address</a></li>');
     $('#address').appendTo('.tab-content');
 }
 

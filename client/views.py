@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render, get_object_or_404
+from common.models import Person
 from .models import Client, Note, Address
 from django.forms import inlineformset_factory
 from .forms import ClientForm, NoteForm, NoteFormSetHelper, AddressForm
@@ -46,7 +47,6 @@ def client_edit(request, pk):
 # https://gist.github.com/ibarovic/3092910
 @transaction.atomic
 def manage_client(request, client_id=None):
-    # TODO: use a listener to keep first and last name in sync - if user exists
     # TODO: suss if I should be using https://simpleisbetterthancomplex.com/tips/2016/05/16/django-tip-3-optimize-database-queries.html in this fn
     extra_notes = 0
     if client_id is None:
@@ -64,7 +64,7 @@ def manage_client(request, client_id=None):
         addresses = Address.objects.filter(person_id=client_id)
         if len(addresses) == 1:
             address = addresses[0]
-            # if client has not notes then we need to have one blank one for the formset js code to work
+            # if client has no notes then we need to have one blank one for the formset js code to work
             notes = Note.objects.filter(person_id=client_id)
             if len(notes) == 0:
                 extra_notes = 1
@@ -110,6 +110,7 @@ def manage_client(request, client_id=None):
                                                        'the_action': action, 'address_form': address_form,
                                                        'form_errors': form_errors})
 
+
 def save_client_details(client_form, user, request):
     created_client = client_form.save(commit=False)
     created_client.modified_by = request.user
@@ -117,6 +118,7 @@ def save_client_details(client_form, user, request):
     created_client.save()
 
     return created_client
+
 
 def save_client_address(address_form, client):
     address = address_form.save(commit=False)
@@ -130,26 +132,12 @@ def save_client_notes(notes_form_set, request):
             if note_form in notes_form_set.deleted_forms:
                 note_form.instance.delete()
             else:
-                # for some reason modeified_by and modified_date always come back as changed
+                # for some reason modified_by and modified_date always come back as changed
                 if 'note' in note_form.changed_data:
                     instance = note_form.save(commit=False)
                     instance.modified_date = timezone.now()
                     instance.modified_by = request.user
                     instance.save()
-
-def save_client_note_comments(note_comment_form_set, request):
-    for comment_form in note_comment_form_set.forms:
-        if comment_form.has_changed():
-            if comment_form in note_comment_form_set.deleted_forms:
-                comment_form.instance.delete()
-            else:
-                # for some reason modeified_by and modified_date always come back as changed
-                if 'comment' in comment_form.changed_data:
-                    x = 0
-                    # instance = note_form.save(commit=False)
-                    # instance.modified_date = timezone.now()
-                    # instance.modified_by = request.user
-                    # instance.save()
 
 
 def handle_client_user(request, client, form):
@@ -172,6 +160,8 @@ def handle_client_user(request, client, form):
             form.add_error('email_address', 'You must set the email address if you have set username') # causes form to be invalid
 
     return user
+
+
 def handle_client_user_storage(request, client, form, user_exists):
     user = None
     email_address = request.POST.get("main-email_address")
