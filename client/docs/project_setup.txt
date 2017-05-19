@@ -1,0 +1,144 @@
+Client Man django Project
+time so far 8 days
+Steve @ ckd 01786 435049
+Laura Mills 01786 435048
+
+job coaches
+scott_fraser/ez6bvJBeE7Hw
+neil_macleod/s5tnqTeV52uKvhvc
+
+useful addons
+optimising db queries: https://simpleisbetterthancomplex.com/tips/2016/05/16/django-tip-3-optimize-database-queries.html
+autocomplete lite for searching - http://django-autocomplete-light.readthedocs.io/en/master/tutorial.html
+waffle - better way to manage roles & permissions
+form helpers & pure css
+https://docs.djangoproject.com/en/1.11/ref/forms/widgets/#built-in-widgets
+1->m form https://medium.com/@adandan01/django-inline-formsets-example-mybook-420cc4b6225d
+http://whoisnicoleharris.com/2015/01/06/implementing-django-formsets.html
+https://github.com/elo80ka/django-dynamic-formset/blob/master/docs/usage.rst
+https://simpleisbetterthancomplex.com/tutorial/2016/11/28/how-to-filter-querysets-dynamically.html
+https://django-filter.readthedocs.io/en/develop/
+https://simpleisbetterthancomplex.com/2015/12/04/package-of-the-week-django-widget-tweaks.html
+https://django-tables2.readthedocs.io/en/latest/
+
+searching
+if the searching I use is too basic then consider:
+https://simpleisbetterthancomplex.com/tutorial/2016/11/28/how-to-filter-querysets-dynamically.html
+
+forms
+http://django-crispy-forms.readthedocs.io/en/d-0/install.html
+https://blog.bixly.com/awesome-forms-django-crispy-forms
+
+how to get django to communicate with mysql:
+	http://stackoverflow.com/questions/21792569/mac-os-x-python-django-mysql
+	sudo easy_install pymysql
+	add this before execute_from_command_line in manage.py
+	try:
+    		import pymysql
+    		pymysql.install_as_MySQLdb()
+	except ImportError:
+    		pass
+
+/Users/stephenmcgonigal/django/client_man
+source client_man/bin/activate
+
+git
+git repo: mcgtech/PsE2XGg3csTkI8n7
+git add --all .
+git commit -m ""
+git push -u origin master
+
+start webserver
+cd /Users/stephenmcgonigal/django_projs
+source cmenv/bin/activate
+python manage.py runserver
+# test
+http://127.0.0.1:8000/
+
+perf
+if searching has perf probs then look at using : https://github.com/shymonk/django-datatable/blob/master/README.rst
+
+
+setting up the project
+cd /Users/stephenmcgonigal
+mkdir django_projs
+cd django_projs
+# if checking out previous proj:
+	git clone https://github.com/mcgtech/client_man.git
+# create env
+python3 -m venv cmenv
+source cmenv/bin/activate
+# install django
+pip install --upgrade pip
+# in following replace with latest version: https://www.djangoproject.com
+pip install django~=1.11.1
+# gitignore
+vi .gitignore file: https://tutorial.djangogirls.org/en/deploy/
+# how to get django to communicate with mysql:
+http://stackoverflow.com/questions/21792569/mac-os-x-python-django-mysql
+sudo easy_install pymysql
+# install crispy-forms
+pip install --upgrade django-crispy-forms
+# install: django-settings-export https://github.com/jakubroztocil/django-settings-export
+pip install django-settings-export
+if not checking out previous project:
+	# create project
+	cd /Users/stephenmcgonigal/django_projs
+	django-admin startproject client_man .
+	# create application
+	python manage.py startapp client
+	# create common application
+	python manage.py startapp common
+	# how to get django to communicate with mysql:	add this before execute_from_command_line in manage.py
+	try:
+			import pymysql
+			pymysql.install_as_MySQLdb()
+	except ImportError:
+			pass
+	change settings file: https://tutorial.djangogirls.org/en/django_start_project/
+# create project db files
+create database client_management
+python manage.py migrate
+# create super user
+python manage.py createsuperuser
+	admin/n-l
+# start webserver
+python manage.py runserver
+# test
+http://127.0.0.1:8000/
+# update client db model
+python manage.py makemigrations client
+python manage.py migrate client
+
+db model
+add drop down: http://stackoverflow.com/questions/31130706/dropdown-in-django-model
+make db tables from model in client app
+python manage.py makemigrations client
+python manage.py migrate client
+
+flush db: https://simpleisbetterthancomplex.com/tutorial/2016/07/26/how-to-reset-migrations.html
+Go through each of your projects apps migration folder and remove everything inside, except the __init__.py file
+Drop the current database
+Create the initial migrations and generate the database schema
+	python manage.py migrate
+	python manage.py makemigrations
+	python manage.py migrate
+	# create super user
+	python manage.py createsuperuser
+		admin/n-l
+
+
+laura
+http://git.ckd.local/hub/cedar/blob/jobs/cedar/jobs/views.py
+the create_job view uses a formset
+the sporting app also uses formsets for create&update
+line 750 in sporting/views.py
+and 449 in sporting/forms.py for the form
+http://whoisnicoleharris.com/2015/01/06/implementing-django-formsets.html
+http://git.ckd.local/hub/cedar/blob/jobs/cedar/jobs/views.py
+http://git.ckd.local/hub/cedar/blob/master/cedar/static/js/jquery.formset.js
+http://git.ckd.local/hub/cedar/blob/master/cedar/templates/jobs/job_form.html
+http://git.ckd.local/hub/cedar/blob/master/cedar/templates/jobs/job_form.html
+https://django-reversion.readthedocs.io/en/stable/
+
+I have made some changes last night to the query.formset.js, these are shown http://git.ckd.local/hub/cedar/commit/451ae010182236f005faa66ef6d5694a316e785d .  I also had to change how the formsets are rendered slightly in the html which is               shown further down that page, lines 176-183 in cedar/templates/sporting/estate_form.html.
