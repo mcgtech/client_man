@@ -17,6 +17,10 @@
         <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="{% static 'css/client.css' %}">
         <link rel="stylesheet" href="{% static 'css/client_inline_form.css' %}">
+        {% if user.is_authenticated %}
+            <link rel="stylesheet" href="{% static 'js/bootstrap_dropdown_hover/css/bootstrap-dropdownhover.css' %}">
+            <script type="text/javascript" src="{% static 'js/bootstrap_dropdown_hover/js/bootstrap-dropdownhover.min.js' %}"></script>
+        {% endif %}
         {% block js %}
         {% endblock %}
         {% block css %}
@@ -39,7 +43,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-12">
                     {% include 'partials/messages.html' %}
                     {% block content %}
                     {% endblock %}
