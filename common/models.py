@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.utils import timezone
+from datetime import date
 
 class Auditable(models.Model):
     created_on = models.DateTimeField(null=True, blank=True)
@@ -49,14 +50,15 @@ class Person(Auditable):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name='Person')
 
     # suss why get error in client search if I dont have second arg
-    def get_full_name(self, a):
+    def get_full_name(self):
         # return self.forename + ' ' + self.surname
         return self.get_title_display() + ' ' + self.forename + ' ' + self.surname
 
 
     def __str__(self):
        return self.get_full_name(self)
-    # @property
-    # def age(self):
-    #     today = date.today()
-    #     return today.year - self.birthday.year - ((today.month, today.day) < (self.birthday.month, self.birthday.day))
+
+    @property
+    def age(self):
+        today = date.today()
+        return today.year - self.dob.year - ((today.month, today.day) < (self.dob.month, self.dob.day))

@@ -20,6 +20,8 @@ https://simpleisbetterthancomplex.com/tutorial/2016/11/28/how-to-filter-queryset
 https://django-filter.readthedocs.io/en/develop/
 https://simpleisbetterthancomplex.com/2015/12/04/package-of-the-week-django-widget-tweaks.html
 https://django-tables2.readthedocs.io/en/latest/
+https://simpleisbetterthancomplex.com/tips/2016/09/06/django-tip-14-messages-framework.html
+https://scotch.io/tutorials/working-with-django-templates-static-files
 
 searching
 if the searching I use is too basic then consider:

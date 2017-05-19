@@ -12,8 +12,6 @@ from django.conf import settings
 from django.utils import timezone
 from django.contrib import messages
 from django.shortcuts import render
-# from .filters import UserFilter
-from .filters import ClientFilter
 
 def home_page(request):
     return render(request, 'client/home_page.html', {})
@@ -22,10 +20,13 @@ def home_page(request):
 @login_required
 @user_passes_test(super_user_or_job_coach, 'client_man_login')
 def client_search(request):
+    # this is simply getting all clients and then filtering client side using the js helper: https://www.datatables.net/
+    # if this becomes a perf problem then read: https://simpleisbetterthancomplex.com/tutorial/2016/11/28/how-to-filter-querysets-dynamically.html
+    # note however that https://www.datatables.net/ can use ajax to reduce no of client returned, if I go down this pass then consider
+    # using https://github.com/shymonk/django-datatable
+    #
     # https://simpleisbetterthancomplex.com/tips/2016/05/16/django-tip-3-optimize-database-queries.html
 	clients = Client.objects.select_related('user').all()
-	# filter = ClientFilter(request.GET, queryset = clients)
-	# return render(request, 'search/client_search.html', {'filter' : filter})
 	return render(request, 'search/client_search.html', {'clients' : clients})
 
 

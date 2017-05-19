@@ -1,35 +1,21 @@
-<!-- this is simply getting all clients and then filtering client side using the js helper: https://www.datatables.net/
-if this becomes a perf problem then read: https://simpleisbetterthancomplex.com/tutorial/2016/11/28/how-to-filter-querysets-dynamically.html
-note however that https://www.datatables.net/ can use ajax to reduce no of client returned, if I go down this pass then consider
-using https://github.com/shymonk/django-datatable -->
-{% extends 'base.html' %}
-{% load staticfiles %}
-
-{% block css %}
-    <link href='//cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css' rel='stylesheet' type='text/css'>
-{% endblock %}
-{% block js %}
-    <script type="text/javascript" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="//cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
-    <script type="text/javascript" src="{% static 'js/client_search.js' %}"></script>
-{% endblock %}
+{% extends "common/datatable_base.html" %}
 {% block content %}
   <table class="table table-bordered" id="client_results">
     <thead>
       <tr>
-        <th>First name</th>
-        <th>Middle name</th>
-        <th>Last name</th>
-        <th>Year of birth</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Email</th>
+        <th>Phone</th>
       </tr>
     </thead>
     <tbody>
       {% for client in clients %}
         <tr>
-          <td><a href="{{ client.get_absolute_url }}">{{ client.forename }}</a></td>
-          <td>{{ client.middle_name }}</td>
-          <td>{{ client.surname }}</td>
-          <td>{{ client.year_of_birth }}</td>
+          <td><a href="{{ client.get_absolute_url }}">{{ client.get_full_name }}</a></td>
+          <td>{{ client.age }}</td>
+          <td>{{ client.email_address|urlize }}</td>
+          <td>Still to be built</td>
         </tr>
       {% empty %}
         <tr>
