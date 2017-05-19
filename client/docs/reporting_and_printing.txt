@@ -1,0 +1,11 @@
+Reports
+
+I found: https://github.com/evanbrumley/django-report-tools
+
+laura sent:
+	http://django-nvd3.readthedocs.io/en/latest/classes-doc/cumulative-line-chart.html
+
+	to export to pdf: https://simpleisbetterthancomplex.com/tutorial/2016/08/08/how-to-export-to-pdf.html
+	d3:
+		https://www.dreisbach.us/blog/building-dashboards-with-django-and-d3/
+		http://nvd3.org
