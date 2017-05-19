@@ -47,18 +47,7 @@ h1, h2, h3, h4 {
 {
     margin-top:5px;
 }
-
-@media only screen and (max-width:768px) {
-
-.dropdown:hover {
-display: none !important;
-}
-.dropdown-menu {
-    display: none !important;
-}
-
-.open .dropdown-menu {
-    display: block !important;
-}
-
+#ui-id-1
+{
+    z-index:1000;
 }

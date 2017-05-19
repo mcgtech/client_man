@@ -22,6 +22,8 @@ https://simpleisbetterthancomplex.com/2015/12/04/package-of-the-week-django-widg
 https://django-tables2.readthedocs.io/en/latest/
 https://simpleisbetterthancomplex.com/tips/2016/09/06/django-tip-14-messages-framework.html
 https://scotch.io/tutorials/working-with-django-templates-static-files
+# auto comp lite: http://django-autocomplete-light.readthedocs.io/en/master/tutorial.html
+http://www.lalicode.com/post/5/
 
 searching
 if the searching I use is too basic then consider:

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from django.utils import timezone
 from datetime import date
+from django.db.models import Q
 
 class Auditable(models.Model):
     created_on = models.DateTimeField(null=True, blank=True)
@@ -62,3 +63,10 @@ class Person(Auditable):
     def age(self):
         today = date.today()
         return today.year - self.dob.year - ((today.month, today.day) < (self.dob.month, self.dob.day))
+
+    def find_person_by_full_name(query_name):
+       qs = Person.objects.select_related('user').all()
+       for term in query_name.split():
+         qs = qs.filter( Q(forename__icontains = term) | Q(middle_name__icontains = term) | Q(surname__icontains = term))
+
+       return qs

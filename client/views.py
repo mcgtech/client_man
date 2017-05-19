@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render, get_object_or_404
-from .models import Client, Note, Address
+from .models import Person, Client, Note, Address
 from django.forms import inlineformset_factory
 from .forms import ClientForm, NoteForm, NoteFormSetHelper, AddressForm
 from django import forms
@@ -12,9 +12,41 @@ from django.conf import settings
 from django.utils import timezone
 from django.contrib import messages
 from django.shortcuts import render
+import json
+from django.http import HttpResponse
 
 def home_page(request):
     return render(request, 'client/home_page.html', {})
+
+# code in view which returns json data
+# http://www.lalicode.com/post/5/
+@login_required
+@user_passes_test(super_user_or_job_coach, 'client_man_login')
+def quick_client_search(request):
+  if request.is_ajax():
+    term = request.GET.get('term', '')
+    if term:
+        if term.isdigit():
+            # TODO: hunt down Client.objects.select_related('user') and put into a function
+            clients = Client.objects.select_related('user').filter(pk = term)
+        else:
+            clients = Person.find_person_by_full_name(term)
+    else:
+        clients = Client.objects.all()
+    results = []
+    # TODO: add name of coach at end od full name (do this inside the Client model class)
+    for client in clients:
+        client_json = {}
+        client_json['id'] = client.id
+        client_json['label'] = client.get_full_name()
+        client_json['value'] = client.get_full_name()
+        results.append(client_json)
+    data = json.dumps(results)
+  else:
+    data = 'fail'
+  mimetype = 'application/json'
+
+  return HttpResponse(data, mimetype)
 
 
 @login_required

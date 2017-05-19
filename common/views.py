@@ -16,4 +16,5 @@ def remove_html_tags(text):
     return re.sub(clean, '', text)
 
 def super_user_or_job_coach(user):
-    return user.is_superuser  or user.groups.filter(name=settings.ADMIN_GROUP).exists() or user.groups.filter(name=settings.JOB_COACH).exists()
+    return user.is_superuser or user.groups.filter(name=settings.ADMIN_GROUP).exists() or user.groups.filter(name=settings.JOB_COACH).exists()
+
