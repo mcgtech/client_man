@@ -5,7 +5,7 @@ from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, HTML, Bu
 from crispy_forms.bootstrap import TabHolder, Tab, FormActions, InlineField
 from common.forms import validate_required_field, is_email_valid
 from django.conf import settings
-
+# forms for editting
 # had to use helper as shown in https://blog.bixly.com/awesome-forms-django-crispy-forms
 # otherwise tabs doesn't work
 class ClientForm(forms.ModelForm):

@@ -19,6 +19,8 @@
         <link rel="stylesheet" href="{% static 'css/client_inline_form.css' %}">
         {% block js %}
         {% endblock %}
+        {% block css %}
+        {% endblock %}
     </head>
     <body>
         {% if user.is_authenticated == False %}

@@ -24,8 +24,9 @@ def home_page(request):
 def client_search(request):
     # https://simpleisbetterthancomplex.com/tips/2016/05/16/django-tip-3-optimize-database-queries.html
 	clients = Client.objects.select_related('user').all()
-	filter = ClientFilter(request.GET, queryset = clients)
-	return render(request, 'search/client_search.html', {'filter' : filter})
+	# filter = ClientFilter(request.GET, queryset = clients)
+	# return render(request, 'search/client_search.html', {'filter' : filter})
+	return render(request, 'search/client_search.html', {'clients' : clients})
 
 
 @login_required
