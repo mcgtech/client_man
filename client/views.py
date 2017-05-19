@@ -86,7 +86,8 @@ def manage_client(request, client_id=None):
         if request.POST.get("delete-client"):
             client = get_object_or_404(Client, pk=client_id)
             # client.delete()
-            messages.add_message(request, messages.INFO, 'You have successfully delete client ' + client.get_full_name())
+            # https://simpleisbetterthancomplex.com/tips/2016/09/06/django-tip-14-messages-framework.html
+            messages.success(request, 'You have successfully deleted the client ' + client.get_full_name())
             return redirect('/client_search')
         client_form = ClientForm(request.POST, request.FILES, instance=client, prefix="main")
         address_form = AddressForm(request.POST, request.FILES, instance=address, prefix="address")
