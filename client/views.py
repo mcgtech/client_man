@@ -3,7 +3,7 @@ from .models import Person, Client, Note, Address
 from django.forms import inlineformset_factory
 from .forms import ClientForm, NoteForm, NoteFormSetHelper, AddressForm
 from django import forms
-from common.views import form_errors_as_array, super_user_or_job_coach, super_user_or_admin
+from common.views import form_errors_as_array, super_user_or_job_coach, super_user_or_admin, show_form_error
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.db import transaction
 from django.contrib.auth.models import User
@@ -24,22 +24,48 @@ def load_clients(request):
     # need to eset created and last modified date
     json_clients = json.load(json_data)
 
+    # TODO: chekc if client already exisits
     # TODO: trim strings
     # TODO: how to handle 'null'
     # TODO: I can pass the json obj directly into client contructor: http://stackoverflow.com/questions/21858465/json-file-reading-by-django
-    # TODO: hwo will I handle addresses..
+    # TODO: how will I handle addresses..
     # Create model instances for each item
     items = []
-    for client in json_clients:
+
+    Client.objects.all().delete()
+    
+    for json_client in json_clients:
         # create model instances...
-        item = Client(*client)
-        items.append(item)
+        created_by = User.objects.get(id=json_client['created_by'])
+        modified_by = User.objects.get(id=json_client['modified_by'])
+        client = Client()
+        client.type = Person.CLIENT
+
+        client.title = get_clean_json_data(json_client['title'])
+        client.middle_name = get_clean_json_data(json_client['middle_name'])
+        client.known_as = get_clean_json_data(json_client['known_as'])
+        client.dob = get_clean_json_data(json_client['dob'])
+        client.forename = get_clean_json_data(json_client['forename'])
+        client.surname = get_clean_json_data(json_client['surname'])
+        client.email_address = get_clean_json_data(json_client['email_address'])
+        client.created_by = created_by
+        client.modified_by = modified_by
+        client.sex = get_clean_json_data(json_client['sex'])
+        client.known_as = get_clean_json_data(json_client['known_as'])
+        client.marital_status = get_clean_json_data(json_client['marital_status'])
+        client.ethnicity = get_clean_json_data(json_client['ethnicity'])
+        client.save()
+        items.append(client)
 
     # Create all in one query
-    Client.objects.bulk_create(items)
+    # Client.objects.bulk_create(items)
 
     return render(request, 'client/load_clients.html', {'json_clients': json_clients, 'items' : items})
 
+def get_clean_json_data(json_data):
+    if json_data is None:
+        json_data = ''
+    return json_data.strip()
 
 def home_page(request):
     return render(request, 'client/home_page.html', {})
@@ -128,17 +154,18 @@ def manage_client(request, client_id=None):
         addresses = Address.objects.filter(person_id=client_id)
         if len(addresses) == 1:
             address = addresses[0]
-            # if client has no notes then we need to have one blank one for the formset js code to work
-            notes = Note.objects.filter(person_id=client_id)
-            if len(notes) == 0:
-                extra_notes = 1
-            else:
-                # need to suss this better
-                note = notes[0]
-            NoteInlineFormSet = inlineformset_factory(Client, Note, form=NoteForm, extra=extra_notes, can_delete=True)
-            action = '/client/' + str(client_id) + '/edit' + '/'
         else:
-            raise forms.ValidationError('Expected a single address and found ' + str(len(addresses)) + ' instead')
+            address = None
+            show_form_error(request, messages, 'Expected a single address and found ' + str(len(addresses)) + ' instead', True)
+        action = '/client/' + str(client_id) + '/edit' + '/'
+        # if client has no notes then we need to have one blank one for the formset js code to work
+        notes = Note.objects.filter(person_id=client_id)
+        if len(notes) == 0:
+            extra_notes = 1
+        else:
+            # need to suss this better
+            note = notes[0]
+        NoteInlineFormSet = inlineformset_factory(Client, Note, form=NoteForm, extra=extra_notes, can_delete=True)
 
     if request.method == "POST":
         if request.POST.get("delete-client"):

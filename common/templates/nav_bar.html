@@ -14,7 +14,14 @@
       <ul class="nav navbar-nav">
         <li><a href="/">Profile</a></li>
         {% if request.user|has_group:settings.ADMIN_GROUP %}
-          <li><a href="/admin">Admin</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin<span class="caret"></span></a>
+            <ul class="dropdown-menu dropdownhover-top">
+          <li><a href="/admin">Admin Screens</a></li>
+            <li><a href="{% url 'load_clients' %}">Create clients from json file</a></li>
+            <li><a href="https://backoffice.shirlie.co.uk/interface/get/client/all">Generate clients json file</a></li>
+            </ul>
+          </li>
         {% endif %}
         {% if request.user|has_group:settings.JOB_COACH %}
           <li class="dropdown">

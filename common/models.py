@@ -50,14 +50,11 @@ class Person(Auditable):
     # https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#onetoone
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name='Person')
 
-    # suss why get error in client search if I dont have second arg
     def get_full_name(self):
-        # return self.forename + ' ' + self.surname
         return self.get_title_display() + ' ' + self.forename + ' ' + self.surname
 
-
     def __str__(self):
-       return self.get_full_name(self)
+       return self.get_full_name()
 
     @property
     def age(self):
