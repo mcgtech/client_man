@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^client/(?P<pk>\d+)/$', views.client_detail, name='client_detail'),
     url(r'^client_search/$', views.client_search, name='client_search'),
     url(r'^auto/quick_client_search/$', views.quick_client_search, name='quick_client_search'),
+    url(r'^load_clients/$', views.load_clients, name='load_clients'),
 ]

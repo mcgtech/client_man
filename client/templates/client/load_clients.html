@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="json_client">
+      {% for client in clients %}
+        <li>{{ client }}</li>
+      {% endfor %}
+      </ul>
+    </div>
+    <div class="client">
+      {% for item in items %}
+        <li>{{ item }}</li>
+      {% endfor %}
+      </ul>
+    </div>
+{% endblock %}

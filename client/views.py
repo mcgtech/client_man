@@ -3,7 +3,7 @@ from .models import Person, Client, Note, Address
 from django.forms import inlineformset_factory
 from .forms import ClientForm, NoteForm, NoteFormSetHelper, AddressForm
 from django import forms
-from common.views import form_errors_as_array, super_user_or_job_coach
+from common.views import form_errors_as_array, super_user_or_job_coach, super_user_or_admin
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.db import transaction
 from django.contrib.auth.models import User
@@ -14,6 +14,32 @@ from django.contrib import messages
 from django.shortcuts import render
 import json
 from django.http import HttpResponse
+import json
+
+@login_required
+@user_passes_test(super_user_or_admin, 'client_man_login')
+def load_clients(request):
+    json_data = open('static/json/clients.json')
+    # deserialises it
+    # need to eset created and last modified date
+    json_clients = json.load(json_data)
+
+    # TODO: trim strings
+    # TODO: how to handle 'null'
+    # TODO: I can pass the json obj directly into client contructor: http://stackoverflow.com/questions/21858465/json-file-reading-by-django
+    # TODO: hwo will I handle addresses..
+    # Create model instances for each item
+    items = []
+    for client in json_clients:
+        # create model instances...
+        item = Client(*client)
+        items.append(item)
+
+    # Create all in one query
+    Client.objects.bulk_create(items)
+
+    return render(request, 'client/load_clients.html', {'json_clients': json_clients, 'items' : items})
+
 
 def home_page(request):
     return render(request, 'client/home_page.html', {})

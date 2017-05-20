@@ -40,8 +40,8 @@ class Client(Person):
     WHITE_E = 12
     WHITE_I = 13
     WHITE_O = 14
-    WHITE_S = 13
-    WHITE_W = 14
+    WHITE_S = 15
+    WHITE_W = 16
     ETHNICITY = (
         (ASIAN_B, 'Asian (Bangladesh)'),
         (ASIAN_C, 'Asian (Chinese)'),
@@ -66,6 +66,8 @@ class Client(Person):
     ethnicity = models.IntegerField(choices=ETHNICITY, default=WHITE_S)
     birth_certificate = models.FileField(upload_to='client/birth_certs/', blank=True, null=True)
     social_work_involved = models.BooleanField(default=False)
+    # id on old system - set during migration - can be deleted once migration is complete
+    original_client_id = models.IntegerField(default=0)
 
     def get_absolute_url(self):
         from django.urls import reverse
