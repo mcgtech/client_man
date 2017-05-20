@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="errors">
-      {% for error in errors %}
-        <li>{{ error }}</li>
-      {% endfor %}
-      </ul>
-    </div>
+    {% for error in errors %}
+      <div class="alert  alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        {{ error }}
+      </div>
+    {% endfor %}
     <div class="json_client">
       {% for client in json_clients %}
         <li>{{ client }}</li>

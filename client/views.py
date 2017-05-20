@@ -74,6 +74,7 @@ def load_clients(request):
             address.save()
             items.append(client)
         except Exception as e:
+            print(e)
             errors.append(e)
 
     # Create all in one query
