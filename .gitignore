@@ -4,4 +4,4 @@ __pycache__
 cmenv
 db.sqlite3
 .DS_Store
-
+*.json
