@@ -20,11 +20,11 @@ class ClientForm(forms.ModelForm):
             Tab(
                 'Main',
                 Div('title',
-                'sex',
                 'forename',
                 'middle_name',
                 'surname',
                 'known_as',
+                'sex',
                 css_class="col-sm-6"),
                 Div('dob',
                 'birth_certificate',

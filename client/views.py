@@ -15,6 +15,7 @@ from django.shortcuts import render
 import json
 from django.http import HttpResponse
 import json
+from datetime import datetime
 
 @login_required
 @user_passes_test(super_user_or_admin, 'client_man_login')
@@ -33,34 +34,52 @@ def load_clients(request):
     items = []
 
     Client.objects.all().delete()
-    
+
     for json_client in json_clients:
         # create model instances...
-        created_by = User.objects.get(id=json_client['created_by'])
-        modified_by = User.objects.get(id=json_client['modified_by'])
-        client = Client()
-        client.type = Person.CLIENT
+        errors = []
+        try:
+            created_by = User.objects.get(id=json_client['created_by'])
+            modified_by = User.objects.get(id=json_client['modified_by'])
+            created_on = get_clean_json_data(json_client['created_on'])
+            modified_on = get_clean_json_data(json_client['modified_on'])
+            client = Client()
+            client.type = Person.CLIENT
 
-        client.title = get_clean_json_data(json_client['title'])
-        client.middle_name = get_clean_json_data(json_client['middle_name'])
-        client.known_as = get_clean_json_data(json_client['known_as'])
-        client.dob = get_clean_json_data(json_client['dob'])
-        client.forename = get_clean_json_data(json_client['forename'])
-        client.surname = get_clean_json_data(json_client['surname'])
-        client.email_address = get_clean_json_data(json_client['email_address'])
-        client.created_by = created_by
-        client.modified_by = modified_by
-        client.sex = get_clean_json_data(json_client['sex'])
-        client.known_as = get_clean_json_data(json_client['known_as'])
-        client.marital_status = get_clean_json_data(json_client['marital_status'])
-        client.ethnicity = get_clean_json_data(json_client['ethnicity'])
-        client.save()
-        items.append(client)
+            client.title = get_clean_json_data(json_client['title'])
+            client.middle_name = get_clean_json_data(json_client['middle_name'])
+            client.known_as = get_clean_json_data(json_client['known_as'])
+            client.dob = get_clean_json_data(json_client['dob'])
+            client.forename = get_clean_json_data(json_client['forename'])
+            client.surname = get_clean_json_data(json_client['surname'])
+            client.email_address = get_clean_json_data(json_client['email_address'])
+            client.created_by = created_by
+            client.modified_by = modified_by
+            client.created_on = created_on
+            client.modified_on = modified_on
+            client.sex = get_clean_json_data(json_client['sex'])
+            client.known_as = get_clean_json_data(json_client['known_as'])
+            client.marital_status = get_clean_json_data(json_client['marital_status'])
+            client.ethnicity = get_clean_json_data(json_client['ethnicity'])
+            client.save()
+
+            # add address
+            address = Address()
+            address.line_1 = get_clean_json_data(json_client['line_1'])
+            address.line_2 = get_clean_json_data(json_client['line_2'])
+            address.line_3 = get_clean_json_data(json_client['line_3'])
+            address.post_code = get_clean_json_data(json_client['post_code'])
+            address.area = get_clean_json_data(json_client['area'])
+            address.person = client
+            address.save()
+            items.append(client)
+        except Exception as e:
+            errors.append(e)
 
     # Create all in one query
     # Client.objects.bulk_create(items)
 
-    return render(request, 'client/load_clients.html', {'json_clients': json_clients, 'items' : items})
+    return render(request, 'client/load_clients.html', {'json_clients': json_clients, 'items' : items, 'errors' :  errors})
 
 def get_clean_json_data(json_data):
     if json_data is None:

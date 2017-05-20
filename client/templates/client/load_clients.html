@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <div class="errors">
+      {% for error in errors %}
+        <li>{{ error }}</li>
+      {% endfor %}
+      </ul>
+    </div>
     <div class="json_client">
       {% for client in json_clients %}
         <li>{{ client }}</li>
