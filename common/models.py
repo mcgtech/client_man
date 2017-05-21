@@ -14,6 +14,18 @@ class Auditable(models.Model):
     class Meta:
         abstract = True
 
+class Telephone(models.Model):
+    HOME = 0
+    MOBILE = 1
+    WORK = 2
+    TYPES = (
+        (HOME, 'Home'),
+        (MOBILE, 'Mobile'),
+        (WORK, 'Work'),
+    )
+    type = models.IntegerField(choices=TYPES, default=MOBILE)
+    number = models.CharField(max_length=22)
+
 # drop downs: http://stackoverflow.com/questions/31130706/dropdown-in-django-model
 #             http://stackoverflow.com/questions/1117564/set-django-integerfield-by-choices-name
 # https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#abstractuser

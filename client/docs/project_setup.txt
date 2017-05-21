@@ -85,6 +85,8 @@ sudo easy_install pymysql
 pip install --upgrade django-crispy-forms
 # install: django-settings-export https://github.com/jakubroztocil/django-settings-export
 pip install django-settings-export
+# for migration: http://stackoverflow.com/questions/969285/how-do-i-translate-a-iso-8601-datetime-string-into-a-python-datetime-object
+pip install python-dateutil
 if not checking out previous project:
 	# create project
 	cd /Users/stephenmcgonigal/django_projs
