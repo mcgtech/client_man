@@ -25,6 +25,24 @@ https://scotch.io/tutorials/working-with-django-templates-static-files
 # auto comp lite: http://django-autocomplete-light.readthedocs.io/en/master/tutorial.html
 http://www.lalicode.com/post/5/
 
+shell:
+    python manage.py shell
+    from django.contrib.auth.models import User
+    from django.contrib.auth.models import Group
+    admin_group = Group(name="admin")
+    admin_group.save()
+    client_group = Group(name="client")
+    all_perm = Permission.objects.all
+    client_group.permissions.add(all_perm)
+    client_group.save()
+    job_coach_group = Group(name="job coach")
+    job_coach_group.save()
+    neil = User.objects.create_user(username='neil', email="n.macleod@shirlie.co.uk",  password="neil_1234")
+    admin_group.user_set.add(neil)
+    job_coach = User.objects.create_user(username='job_coach', email="job_coach@shirlie.co.uk",  password="job_coach_1234")
+    job_coach_group.user_set.add(job_coach)
+
+
 searching
 if the searching I use is too basic then consider:
 https://simpleisbetterthancomplex.com/tutorial/2016/11/28/how-to-filter-querysets-dynamically.html

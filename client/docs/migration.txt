@@ -1,2 +1,3 @@
 . clear out data and reset all model auto incs
+. migrate staff
 . neils team to test data and functionality is correct
