@@ -1,5 +1,6 @@
 from django import forms
-from .models import Client, Note, Address
+from .models import Client
+from common.models import Note, Address, Telephone
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, HTML, Button, Div, Field
 from crispy_forms.bootstrap import TabHolder, Tab, FormActions, InlineField
@@ -38,7 +39,7 @@ class ClientForm(forms.ModelForm):
             ),
             Tab(
                 'Project',
-                'type',
+                'nat_ins_number',
                 'social_work_involved'
             ),
             Tab(
@@ -95,7 +96,7 @@ class ClientForm(forms.ModelForm):
         fields = ('title', 'forename', 'middle_name', 'surname', 'known_as', 'dob', 'sex', 'email_address',
                   'birth_certificate', 'ethnicity', 'type', 'social_work_involved', 'marital_status'
                   ,'modified_by', 'modified_on'
-                  ,'created_on', 'created_by'
+                  ,'created_on', 'created_by', 'nat_ins_number'
                   )
         widgets = {
             'dob': forms.DateInput(attrs={'class':'datepicker'}),
@@ -121,6 +122,24 @@ class AddressForm(forms.ModelForm):
     # validate required fields and display error at field level
     def clean_line_1(self):
         return validate_required_field(self, 'line_1', 'line 1')
+
+# one to many forms
+
+class PhoneForm(forms.ModelForm):
+    helper = FormHelper()
+    helper.form_tag = False
+
+    class Meta:
+        model = Telephone
+        fields = ('type', 'number', )
+
+
+class PhoneFormSetHelper(FormHelper):
+    def __init__(self, *args, **kwargs):
+        super(PhoneFormSetHelper, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+        self.template = 'bootstrap/table_inline_formset.html'
 
 
 class NoteForm(forms.ModelForm):

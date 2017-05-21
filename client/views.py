@@ -1,7 +1,8 @@
 from django.shortcuts import redirect, render, get_object_or_404
-from .models import Person, Client, Note, Address
+from .models import Client
+from common.models import Person, Note, Address, Telephone
 from django.forms import inlineformset_factory
-from .forms import ClientForm, NoteForm, NoteFormSetHelper, AddressForm
+from .forms import ClientForm, NoteForm, NoteFormSetHelper, AddressForm, PhoneForm, PhoneFormSetHelper
 from django import forms
 from common.views import form_errors_as_array, super_user_or_job_coach, super_user_or_admin, show_form_error
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -36,50 +37,63 @@ def load_clients(request):
     errors = []
 
     Client.objects.all().delete()
+    gen_client = True
 
-    date_format = '%Y-%m-%d %H:%M:%S';
-    for json_client in json_clients:
-        # create model instances...
-        try:
-            #yourdate = dateutil.parser.parse(datestring)
-            created_by = User.objects.get(id=json_client['created_by'])
-            modified_by = User.objects.get(id=json_client['modified_by'])
-            # I set USE_TZ = False in settings to get this to work
-            created_on = dateutil.parser.parse(get_clean_json_data(json_client['created_on']));
-            modified_on = dateutil.parser.parse(get_clean_json_data(json_client['modified_on']));
-            client = Client()
-            client.type = Person.CLIENT
+    if gen_client:
+        for json_client in json_clients:
+            # create model instances...
+            try:
+                #yourdate = dateutil.parser.parse(datestring)
+                created_by = User.objects.get(id=json_client['created_by'])
+                modified_by = User.objects.get(id=json_client['modified_by'])
+                # I set USE_TZ = False in settings to get this to work
+                created_on = dateutil.parser.parse(get_clean_json_data(json_client['created_on']));
+                modified_on = dateutil.parser.parse(get_clean_json_data(json_client['modified_on']));
+                home_phone = get_clean_json_data(json_client['home_phone'])
+                mobile_phone = get_clean_json_data(json_client['mobile'])
+                client = Client()
+                client.type = Person.CLIENT
 
-            client.title = get_clean_json_data(json_client['title'])
-            client.middle_name = get_clean_json_data(json_client['middle_name'])
-            client.known_as = get_clean_json_data(json_client['known_as'])
-            client.dob = get_clean_json_data(json_client['dob'])
-            client.forename = get_clean_json_data(json_client['forename'])
-            client.surname = get_clean_json_data(json_client['surname'])
-            client.email_address = get_clean_json_data(json_client['email_address'])
-            client.sex = get_clean_json_data(json_client['sex'])
-            client.known_as = get_clean_json_data(json_client['known_as'])
-            client.marital_status = get_clean_json_data(json_client['marital_status'])
-            client.ethnicity = get_clean_json_data(json_client['ethnicity'])
-            client.created_by = created_by
-            client.modified_by = modified_by
-            client.created_on = created_on
-            client.modified_on = modified_on
-            client.save()
+                client.title = get_clean_json_data(json_client['title'])
+                client.middle_name = get_clean_json_data(json_client['middle_name'])
+                client.known_as = get_clean_json_data(json_client['known_as'])
+                client.dob = get_clean_json_data(json_client['dob'])
+                client.forename = get_clean_json_data(json_client['forename'])
+                client.surname = get_clean_json_data(json_client['surname'])
+                client.email_address = get_clean_json_data(json_client['email_address'])
+                client.sex = get_clean_json_data(json_client['sex'])
+                client.known_as = get_clean_json_data(json_client['known_as'])
+                client.marital_status = get_clean_json_data(json_client['marital_status'])
+                client.ethnicity = get_clean_json_data(json_client['ethnicity'])
+                client.nat_ins_number = get_clean_json_data(json_client['nat_ins_number'])
+                client.created_by = created_by
+                client.modified_by = modified_by
+                client.created_on = created_on
+                client.modified_on = modified_on
+                client.save()
 
-            # add address
-            address = Address()
-            address.line_1 = get_clean_json_data(json_client['line_1'])
-            address.line_2 = get_clean_json_data(json_client['line_2'])
-            address.line_3 = get_clean_json_data(json_client['line_3'])
-            address.post_code = get_clean_json_data(json_client['post_code'])
-            address.area = get_clean_json_data(json_client['area'])
-            address.person = client
-            address.save()
-            items.append(client)
-        except Exception as e:
-            es = client.forename + ' ' + client.surname + ' ' + str(e)
-            errors.append(es)
+                # add address
+                address = Address()
+                address.line_1 = get_clean_json_data(json_client['line_1'])
+                address.line_2 = get_clean_json_data(json_client['line_2'])
+                address.line_3 = get_clean_json_data(json_client['line_3'])
+                address.post_code = get_clean_json_data(json_client['post_code'])
+                address.area = get_clean_json_data(json_client['area'])
+                address.person = client
+                address.save()
+
+                # phones
+                if len(home_phone) > 0:
+                    home_tele = Telephone(type=Telephone.HOME, number=home_phone, person=client)
+                    home_tele.save()
+                if len(home_phone) > 0:
+                    mobile_tele = Telephone(type=Telephone.MOBILE, number=mobile_phone, person=client)
+                    mobile_tele.save()
+
+                items.append(client)
+            except Exception as e:
+                es = client.forename + ' ' + client.surname + ' ' + str(e)
+                errors.append(es)
 
     return render(request, 'client/load_clients.html', {'json_clients': json_clients, 'items' : items, 'errors' :  errors})
 
@@ -160,13 +174,16 @@ def client_edit(request, pk):
 def manage_client(request, client_id=None):
     # TODO: suss if I should be using https://simpleisbetterthancomplex.com/tips/2016/05/16/django-tip-3-optimize-database-queries.html in this fn
     extra_notes = 0
+    extra_phones = 0
     if client_id is None:
         extra_notes = 1
+        extra_phones = 1
         client = Client()
         address = Address()
         the_action_text = 'Create'
         is_edit_form = False
         NoteInlineFormSet = inlineformset_factory(Client, Note, form=NoteForm, extra=extra_notes, can_delete=False)
+        PhoneInlineFormSet = inlineformset_factory(Client, Telephone, form=PhoneForm, extra=extra_phones, can_delete=False)
         action = '/client/new/'
     else:
         the_action_text = 'Edit'
@@ -179,40 +196,46 @@ def manage_client(request, client_id=None):
             address = None
             show_form_error(request, messages, 'Expected a single address and found ' + str(len(addresses)) + ' instead', True)
         action = '/client/' + str(client_id) + '/edit' + '/'
-        # if client has no notes then we need to have one blank one for the formset js code to work
+        # if client has no notes/phones then we need to have one blank one for the formset js code to work
         notes = Note.objects.filter(person_id=client_id)
+        phones = Telephone.objects.filter(person_id=client_id)
         if len(notes) == 0:
             extra_notes = 1
         else:
             # need to suss this better
             note = notes[0]
         NoteInlineFormSet = inlineformset_factory(Client, Note, form=NoteForm, extra=extra_notes, can_delete=True)
+        PhoneInlineFormSet = inlineformset_factory(Client, Telephone, form=PhoneForm, extra=extra_phones, can_delete=True)
 
     if request.method == "POST":
         if request.POST.get("delete-client"):
             client = get_object_or_404(Client, pk=client_id)
-            # client.delete()
+            client.delete()
             # https://simpleisbetterthancomplex.com/tips/2016/09/06/django-tip-14-messages-framework.html
             messages.success(request, 'You have successfully deleted the client ' + client.get_full_name())
             return redirect('/client_search')
         client_form = ClientForm(request.POST, request.FILES, instance=client, prefix="main")
         address_form = AddressForm(request.POST, request.FILES, instance=address, prefix="address")
         notes_form_set = NoteInlineFormSet(request.POST, request.FILES, instance=client, prefix="nested")
+        phone_form_set = PhoneInlineFormSet(request.POST, request.FILES, instance=client, prefix="phones")
 
         user = handle_client_user(request, client, client_form)
-        if client_form.is_valid() and address_form.is_valid() and notes_form_set.is_valid():
+        if client_form.is_valid() and address_form.is_valid() and notes_form_set.is_valid() and phone_form_set.is_valid():
             # TODO link changes to user made via admin into Person forename, surname... via listener
             created_client = save_client_details(client_form, user, request)
             save_client_address(address_form, created_client)
             save_client_notes(notes_form_set, request)
+            save_client_phones(phone_form_set, request)
             action = '/client/' + str(created_client.id) + '/edit' + '/'
             return redirect(action)
     else:
         address_form = AddressForm(instance=address, prefix="address")
         client_form = ClientForm(instance=client, prefix="main")
         notes_form_set = NoteInlineFormSet(instance=client, prefix="nested")
+        phone_form_set = PhoneInlineFormSet(instance=client, prefix="phones")
     # crispy form helper for formsets
     note_helper = NoteFormSetHelper()
+    phone_helper = PhoneFormSetHelper()
 
     client_form_errors = form_errors_as_array(client_form)
     address_form_errors = form_errors_as_array(address_form)
@@ -222,6 +245,7 @@ def manage_client(request, client_id=None):
                                                        'the_action_text': the_action_text,
                                                        'edit_form': is_edit_form, 'note_helper': note_helper,
                                                        'the_action': action, 'address_form': address_form,
+                                                       'phone_form_set': phone_form_set, 'phone_helper': phone_helper,
                                                        'form_errors': form_errors})
 
 
@@ -250,6 +274,14 @@ def save_client_address(address_form, client):
     address.person = client
     address.save()
 
+
+def save_client_phones(phones_form_set, request):
+    for note_form in phones_form_set.forms:
+        if note_form.has_changed():
+            if note_form in phones_form_set.deleted_forms:
+                note_form.instance.delete()
+            else:
+                note_form.save()
 
 def save_client_notes(notes_form_set, request):
     for note_form in notes_form_set.forms:

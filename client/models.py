@@ -68,77 +68,8 @@ class Client(Person):
     social_work_involved = models.BooleanField(default=False)
     # id on old system - set during migration - can be deleted once migration is complete
     original_client_id = models.IntegerField(default=0)
+    nat_ins_number = models.CharField(max_length=100, blank=True)
 
     def get_absolute_url(self):
         from django.urls import reverse
         return reverse('client_edit', args=[str(self.id)])
-
-
-class Note(models.Model):
-    note = models.TextField()
-    modified_date = models.DateTimeField(null=True, blank=True)
-    modified_by = models.ForeignKey(User, blank=True, null=True)
-    person = models.ForeignKey(Person, on_delete=models.CASCADE, null=True, related_name="note")
-
-    # def save(self, *args, **kwargs):
-    #     self.modified_date = timezone.now()
-    #     super(Note, self).save(*args, **kwargs)
-
-    def __str__(self):
-       return self.note
-
-
-class Telephone(models.Model):
-    HOME = 0
-    WORK = 1
-    MOBILE = 2
-    PHONE_TYPES = (
-        (HOME, 'Home'),
-        (WORK, 'Work'),
-        (MOBILE, 'Mobile'),
-    )
-    type = models.IntegerField(choices=PHONE_TYPES, default=MOBILE)
-    number = models.CharField(max_length=100)
-    person = models.ForeignKey(Person, on_delete=models.CASCADE, null=True, related_name="Telephone")
-
-    def get_type_for_display(self):
-        return self.PHONE_TYPES[self.type]
-
-    def __str__(self):
-       return self.number + ' (' + self.get_type_for_display(self) + ')'
-
-# see https://simpleisbetterthancomplex.com/tutorial/2016/07/28/how-to-create-django-signals.html
-# to see how I attach associate person with address
-class Address(models.Model):
-    line_1 = models.CharField(max_length=100, blank=True)
-    line_2 = models.CharField(max_length=100, blank=True)
-    line_3 = models.CharField(max_length=100, blank=True)
-    post_code = models.CharField(max_length=100, blank=True)
-    BAST = 0
-    CAIT = 1
-    INNA = 2
-    LARB = 3
-    ROSS = 4
-    SKYE = 5
-    SUTH = 6
-    AREA = (
-        (BAST, 'Badenoch and Strathspey'),
-        (CAIT, 'Caithness'),
-        (INNA, 'Inverness and Nairn'),
-        (LARB, 'Lochaber'),
-        (ROSS, 'Ross-shire'),
-        (SKYE, 'Skye'),
-        (SUTH, 'Sutherland'),
-    )
-    area = models.IntegerField(choices=AREA, default=BAST)
-    evidence = models.FileField(upload_to='client/address_evidence/', blank=True)
-    person = models.OneToOneField(Person, on_delete=models.CASCADE, null=True, related_name="Address")
-
-    def __str__(self):
-       return self.line_1
-
-    # def get_area_for_display(self):
-    #     return self.AREA[self.area]
-    #
-    # def __str__(self):
-    #    return self.line_1 + ' (' + self.get_area_for_display(self) + ')'
