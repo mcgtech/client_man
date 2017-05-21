@@ -159,11 +159,16 @@
                     {
                         elem.attr('checked', false);
                     }
+                    // added by SmcG
                     else if (elem.is('select'))
                     {
                         $('option:selected', elem).removeAttr("selected");
                     }
-                    else
+                    else if (elem.is('textarea'))
+                    {
+                        elem.val('').html('');
+                    }
+                    else if (elem.is('input'))
                     {
                         elem.val('');
                     }

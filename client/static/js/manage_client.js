@@ -46,10 +46,10 @@ function setup_dob_datepicker()
 function setup_inline_client_notes()
 {
     $('#client_notes').click(function(){
-//        setTimeout(function(){
-//            $('#notes tbody tr').formset({prefix: 'nested'});
-//        }, 10);
-
+        setTimeout(function(){
             $('#notes tbody tr').formset({prefix: 'nested'});
+        }, 10);
+
+//            $('#notes tbody tr').formset({prefix: 'nested'});
         });
 }

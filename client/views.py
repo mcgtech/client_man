@@ -183,7 +183,7 @@ def manage_client(request, client_id=None):
         the_action_text = 'Create'
         is_edit_form = False
         NoteInlineFormSet = inlineformset_factory(Client, Note, form=NoteForm, extra=extra_notes, can_delete=False)
-        PhoneInlineFormSet = inlineformset_factory(Client, Telephone, form=PhoneForm, extra=extra_phones, can_delete=False)
+        # PhoneInlineFormSet = inlineformset_factory(Client, Telephone, form=PhoneForm, extra=extra_phones, can_delete=False)
         action = '/client/new/'
     else:
         the_action_text = 'Edit'
@@ -198,14 +198,16 @@ def manage_client(request, client_id=None):
         action = '/client/' + str(client_id) + '/edit' + '/'
         # if client has no notes/phones then we need to have one blank one for the formset js code to work
         notes = Note.objects.filter(person_id=client_id)
-        phones = Telephone.objects.filter(person_id=client_id)
         if len(notes) == 0:
             extra_notes = 1
-        else:
-            # need to suss this better
-            note = notes[0]
+        # else:
+        #     # need to suss this better
+        #     note = notes[0]
+        phones = Telephone.objects.filter(person_id=client_id)
+        if len(notes) == 0:
+            extra_phones = 1
         NoteInlineFormSet = inlineformset_factory(Client, Note, form=NoteForm, extra=extra_notes, can_delete=True)
-        PhoneInlineFormSet = inlineformset_factory(Client, Telephone, form=PhoneForm, extra=extra_phones, can_delete=True)
+        # PhoneInlineFormSet = inlineformset_factory(Client, Telephone, form=PhoneForm, extra=extra_phones, can_delete=True)
 
     if request.method == "POST":
         if request.POST.get("delete-client"):
@@ -217,25 +219,26 @@ def manage_client(request, client_id=None):
         client_form = ClientForm(request.POST, request.FILES, instance=client, prefix="main")
         address_form = AddressForm(request.POST, request.FILES, instance=address, prefix="address")
         notes_form_set = NoteInlineFormSet(request.POST, request.FILES, instance=client, prefix="nested")
-        phone_form_set = PhoneInlineFormSet(request.POST, request.FILES, instance=client, prefix="phones")
+        # phone_form_set = PhoneInlineFormSet(request.POST, request.FILES, instance=client, prefix="phones")
 
         user = handle_client_user(request, client, client_form)
-        if client_form.is_valid() and address_form.is_valid() and notes_form_set.is_valid() and phone_form_set.is_valid():
+        # if client_form.is_valid() and address_form.is_valid() and notes_form_set.is_valid() and phone_form_set.is_valid():
+        if client_form.is_valid() and address_form.is_valid() and notes_form_set.is_valid():
             # TODO link changes to user made via admin into Person forename, surname... via listener
             created_client = save_client_details(client_form, user, request)
             save_client_address(address_form, created_client)
             save_client_notes(notes_form_set, request)
-            save_client_phones(phone_form_set, request)
+            # save_client_phones(phone_form_set, request)
             action = '/client/' + str(created_client.id) + '/edit' + '/'
             return redirect(action)
     else:
         address_form = AddressForm(instance=address, prefix="address")
         client_form = ClientForm(instance=client, prefix="main")
         notes_form_set = NoteInlineFormSet(instance=client, prefix="nested")
-        phone_form_set = PhoneInlineFormSet(instance=client, prefix="phones")
+        # phone_form_set = PhoneInlineFormSet(instance=client, prefix="phones")
     # crispy form helper for formsets
     note_helper = NoteFormSetHelper()
-    phone_helper = PhoneFormSetHelper()
+    # phone_helper = PhoneFormSetHelper()
 
     client_form_errors = form_errors_as_array(client_form)
     address_form_errors = form_errors_as_array(address_form)
@@ -245,7 +248,7 @@ def manage_client(request, client_id=None):
                                                        'the_action_text': the_action_text,
                                                        'edit_form': is_edit_form, 'note_helper': note_helper,
                                                        'the_action': action, 'address_form': address_form,
-                                                       'phone_form_set': phone_form_set, 'phone_helper': phone_helper,
+                                                       # 'phone_form_set': phone_form_set, 'phone_helper': phone_helper,
                                                        'form_errors': form_errors})
 
 
