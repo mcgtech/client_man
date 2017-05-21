@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="053a4aa4-3808-4504-ab0a-5f7dd90a79bc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/docs/migration.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/docs/project_setup.txt" afterPath="$PROJECT_DIR$/client/docs/project_setup.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/forms.py" afterPath="$PROJECT_DIR$/client/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/models.py" afterPath="$PROJECT_DIR$/client/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/static/js/client_edit.js" afterPath="$PROJECT_DIR$/client/static/js/client_edit.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/client/client_edit.html" afterPath="$PROJECT_DIR$/client/templates/client/client_edit.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views.py" afterPath="$PROJECT_DIR$/client/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/json/clients.json" afterPath="$PROJECT_DIR$/static/json/clients.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/docs/migration.txt" afterPath="$PROJECT_DIR$/client/docs/migration.txt" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,43 +14,21 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="project_setup.txt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="project_setup.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/docs/project_setup.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="246">
-              <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="51" selection-end-column="16" />
+            <state relative-caret-position="452">
+              <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="25" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/forms.py">
+      <file leaf-file-name="migration.txt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/client/docs/migration.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
-              <caret line="52" column="5" lean-forward="false" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
-              <folding>
-                <element signature="e#0#24#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="614">
-              <caret line="84" column="35" lean-forward="false" selection-start-line="84" selection-start-column="23" selection-end-line="84" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="346">
-              <caret line="70" column="46" lean-forward="false" selection-start-line="70" selection-start-column="46" selection-end-line="70" selection-end-column="46" />
+            <state relative-caret-position="15">
+              <caret line="1" column="54" lean-forward="false" selection-start-line="1" selection-start-column="54" selection-end-line="1" selection-end-column="54" />
               <folding />
             </state>
           </provider>
@@ -157,7 +127,6 @@
         <option value="$PROJECT_DIR$/client/static/js/manage_client.js" />
         <option value="$PROJECT_DIR$/common/models.py" />
         <option value="$PROJECT_DIR$/client/static/css/client_edit.css" />
-        <option value="$PROJECT_DIR$/client/docs/migration.txt" />
         <option value="$PROJECT_DIR$/static/js/are_you_sure/jquery.are-you-sure.js" />
         <option value="$PROJECT_DIR$/common/templates/base.html" />
         <option value="$PROJECT_DIR$/client/templates/client/client_edit.html" />
@@ -166,12 +135,13 @@
         <option value="$PROJECT_DIR$/client/models.py" />
         <option value="$PROJECT_DIR$/client/views.py" />
         <option value="$PROJECT_DIR$/client/forms.py" />
+        <option value="$PROJECT_DIR$/client/docs/migration.txt" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="167" />
-    <option name="y" value="34" />
+    <option name="x" value="165" />
+    <option name="y" value="36" />
     <option name="width" value="1672" />
     <option name="height" value="903" />
   </component>
@@ -571,7 +541,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="167" y="34" width="1672" height="903" extended-state="0" />
+    <frame x="165" y="36" width="1672" height="903" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27452153" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -832,14 +802,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/docs/migration.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="46" lean-forward="false" selection-start-line="0" selection-start-column="46" selection-end-line="0" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/js/are_you_sure/jquery.are-you-sure.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="251">
@@ -916,8 +878,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/docs/project_setup.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="51" selection-end-column="16" />
+        <state relative-caret-position="452">
+          <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/docs/migration.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="54" lean-forward="false" selection-start-line="1" selection-start-column="54" selection-end-line="1" selection-end-column="54" />
           <folding />
         </state>
       </provider>
