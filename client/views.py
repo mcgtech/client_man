@@ -66,6 +66,10 @@ def load_clients(request):
                 client.marital_status = get_clean_json_data(json_client['marital_status'])
                 client.ethnicity = get_clean_json_data(json_client['ethnicity'])
                 client.nat_ins_number = get_clean_json_data(json_client['nat_ins_number'])
+                education = get_clean_json_data(json_client['education'])
+                if len(education) == 0:
+                    education = Client.NO_QUAL # default
+                client.education = education
                 client.created_by = created_by
                 client.modified_by = modified_by
                 client.created_on = created_on
@@ -83,10 +87,10 @@ def load_clients(request):
                 address.save()
 
                 # phones
-                if len(home_phone) > 0:
+                if len(home_phone) > 1:
                     home_tele = Telephone(type=Telephone.HOME, number=home_phone, person=client)
                     home_tele.save()
-                if len(home_phone) > 0:
+                if len(home_phone) > 1:
                     mobile_tele = Telephone(type=Telephone.MOBILE, number=mobile_phone, person=client)
                     mobile_tele.save()
 

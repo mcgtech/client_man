@@ -40,7 +40,8 @@ class ClientForm(forms.ModelForm):
             Tab(
                 'Project',
                 'nat_ins_number',
-                'social_work_involved'
+                'social_work_involved',
+                'education'
             ),
             Tab(
                 'User',
@@ -68,6 +69,7 @@ class ClientForm(forms.ModelForm):
         # the disabled setting before saving - see setup_client_form()
         self.fields['modified_by'].widget.attrs['disabled'] = True
         self.fields['created_by'].widget.attrs['disabled'] = True
+        self.fields['education'].error_messages = {'required': 'Education is required'}
 
 
     # if I make the following field required in the model, then as I am using tabs, the default form validation for
@@ -96,7 +98,7 @@ class ClientForm(forms.ModelForm):
         fields = ('title', 'forename', 'middle_name', 'surname', 'known_as', 'dob', 'sex', 'email_address',
                   'birth_certificate', 'ethnicity', 'social_work_involved', 'marital_status'
                   ,'modified_by', 'modified_on'
-                  ,'created_on', 'created_by', 'nat_ins_number'
+                  ,'created_on', 'created_by', 'nat_ins_number', 'education'
                   )
         widgets = {
             'dob': forms.DateInput(attrs={'class':'datepicker'}),

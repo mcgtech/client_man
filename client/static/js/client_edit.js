@@ -4,7 +4,14 @@ $(function(){
     setup_client_address();
     setup_client_notes();
     setup_dob_datepicker();
+    setup_leave_form_check();
 });
+
+function setup_leave_form_check()
+{
+    // does not work on safari at moment
+    $('form').dirtyForms();
+}
 
 function setup_client_form()
 {
@@ -58,10 +65,7 @@ function setup_inline_client_notes()
     $('#client_notes').click(function(){
         setTimeout(function(){
             $('#notes tbody tr').formset({prefix: 'nested'});
-        }, 10);
-
-//            $('#notes tbody tr').formset({prefix: 'nested'});
-        });
+        }, 10); });
 }
 
 function setup_inline_client_phones()

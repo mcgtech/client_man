@@ -61,6 +61,28 @@ class Client(Person):
         (WHITE_S, 'White (Scottish)'),
         (WHITE_W, 'White (Welsh)'),
     )
+    NO_QUAL = 0
+    ACCESS_1_2 = 1
+    ACCESS_3 = 2
+    GENERAL = 3
+    CREDIT = 4
+    STANDARD = 5
+    HIGHER = 6
+    HNC = 7
+    HND = 8
+    EDUCATION = (
+        (None, 'Please select'),
+        (NO_QUAL, 'No qualifications'),
+        (ACCESS_1_2, 'Access 1 or 2'),
+        (ACCESS_3, 'Access 3 or foundation standard grade'),
+        (GENERAL, 'General standard grade or intermediate 1'),
+        (CREDIT, 'Credit'),
+        (STANDARD, 'Standard grade or intermediate 2'),
+        (HIGHER, 'Higher'),
+        (HNC, 'HNC or advanced Higher'),
+        (HND, 'HND or Degree'),
+    )
+    education = models.IntegerField(choices=EDUCATION, default=None)
     sex = models.IntegerField(choices=SEX, default=MALE)
     marital_status = models.IntegerField(choices=MARITAL_STATUS, default=SINGLE)
     ethnicity = models.IntegerField(choices=ETHNICITY, default=WHITE_S)

@@ -1,0 +1,1 @@
+. clear out data and reset all model auto incs

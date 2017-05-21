@@ -105,7 +105,6 @@ if not checking out previous project:
 # create project db files
 create database client_management
 python manage.py migrate
-# create super user
 python manage.py createsuperuser
 	admin/n-l
 # start webserver
