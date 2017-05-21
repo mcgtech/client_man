@@ -49,7 +49,7 @@ class Person(Auditable):
     surname = models.CharField(max_length=100, blank=True)
     email_address = models.CharField(max_length=100, blank=True) # I use the validator in the form
     # https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#onetoone
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name='Person')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name='person')
 
     def get_full_name(self):
         return self.get_title_display() + ' ' + self.forename + ' ' + self.surname
@@ -97,7 +97,7 @@ class Telephone(models.Model):
     )
     type = models.IntegerField(choices=PHONE_TYPES, default=MOBILE)
     number = models.CharField(max_length=100, blank=True)
-    person = models.ForeignKey(Person, on_delete=models.CASCADE, null=True, related_name="Telephone")
+    person = models.ForeignKey(Person, on_delete=models.CASCADE, null=True, related_name="telephone")
 
     def get_type_for_display(self):
         return self.PHONE_TYPES[self.type]
@@ -131,13 +131,7 @@ class Address(models.Model):
     )
     area = models.IntegerField(choices=AREA, default=BAST)
     evidence = models.FileField(upload_to='client/address_evidence/', blank=True)
-    person = models.OneToOneField(Person, on_delete=models.CASCADE, null=True, related_name="Address")
+    person = models.OneToOneField(Person, on_delete=models.CASCADE, null=True, related_name="address")
 
     def __str__(self):
-       return self.line_1
-
-    # def get_area_for_display(self):
-    #     return self.AREA[self.area]
-    #
-    # def __str__(self):
-    #    return self.line_1 + ' (' + self.get_area_for_display(self) + ')'
+       return self.line_1 + ', ' + self.line2 + ', ' + self.get_area_display()

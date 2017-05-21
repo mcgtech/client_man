@@ -4,6 +4,7 @@
     <thead>
       <tr>
         <th>Name</th>
+        <th>Area</th>
         <th>Age</th>
         <th>Email</th>
         <th>Phone</th>
@@ -13,9 +14,17 @@
       {% for client in clients %}
         <tr>
           <td><a href="{{ client.get_absolute_url }}">{{ client.get_full_name }}</a></td>
+          <td>
+            {% with client.address_set.all|first as address %}
+              {{ address.line_1 }}
+            {% endwith %} </td>
           <td>{{ client.age }}</td>
           <td>{{ client.email_address|urlize }}</td>
-          <td>Still to be built</td>
+          <td>
+            {% for telephone in client.telephone.all %}
+              {{ telephone.number }} ({{ telephone.get_type_display }})
+            {% endfor %}
+          </td>
         </tr>
       {% empty %}
         <tr>
