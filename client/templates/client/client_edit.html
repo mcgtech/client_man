@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/client_edit.css' %}">
+{% endblock %}
+
 {% block js %}
     <script type="text/javascript" src="{% static 'js/form_helper/formset_manage.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/form_helper/form_handlers.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/form_helper/confirm_bootstrap.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/manage_client.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/client_edit.js' %}"></script>
 {% endblock %}
 {% block content %}
     {% load crispy_forms_tags %}
@@ -23,6 +27,9 @@
         {% crispy form %}
         <div id="address" class="tab-pane">
             {% crispy address_form %}
+        </div>
+        <div id="phones" class="tab-pane">
+            {% crispy phone_form_set phone_helper %}
         </div>
         <div id="notes" class="tab-pane">
             {% crispy notes_form_set note_helper %}

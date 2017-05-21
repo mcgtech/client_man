@@ -1,5 +1,6 @@
 $(function(){
     setup_client_form();
+    setup_client_phones();
     setup_client_address();
     setup_client_notes();
     setup_dob_datepicker();
@@ -20,6 +21,15 @@ function setup_client_notes()
     $('#notes').appendTo('.tab-content');
     // attach formset handler
     setup_inline_client_notes();
+}
+
+function setup_client_phones()
+{
+    var phones_elem = $('#phones');
+    phones_elem.prepend('<label for="id_main-middle_name" class="control-label ">Phones</label>');
+    phones_elem.appendTo('#main > div:first');
+    // attach formset handler
+    setup_inline_client_phones();
 }
 
 function setup_client_address()
@@ -52,4 +62,11 @@ function setup_inline_client_notes()
 
 //            $('#notes tbody tr').formset({prefix: 'nested'});
         });
+}
+
+function setup_inline_client_phones()
+{
+    setTimeout(function(){
+            $('#phones tbody tr').formset({prefix: 'phones'});
+        }, 10);
 }

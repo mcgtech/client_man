@@ -94,14 +94,15 @@ class ClientForm(forms.ModelForm):
     class Meta:
         model = Client
         fields = ('title', 'forename', 'middle_name', 'surname', 'known_as', 'dob', 'sex', 'email_address',
-                  'birth_certificate', 'ethnicity', 'type', 'social_work_involved', 'marital_status'
+                  'birth_certificate', 'ethnicity', 'social_work_involved', 'marital_status'
                   ,'modified_by', 'modified_on'
                   ,'created_on', 'created_by', 'nat_ins_number'
                   )
         widgets = {
             'dob': forms.DateInput(attrs={'class':'datepicker'}),
             'created_on': forms.DateInput(format=(settings.DISPLAY_DATE_TIME)),
-            'modified_on': forms.DateInput(format=(settings.DISPLAY_DATE_TIME))}
+            'modified_on': forms.DateInput(format=(settings.DISPLAY_DATE_TIME)),}
+
 
 
 class AddressForm(forms.ModelForm):
@@ -138,8 +139,9 @@ class PhoneFormSetHelper(FormHelper):
     def __init__(self, *args, **kwargs):
         super(PhoneFormSetHelper, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
-        self.helper.form_tag = False
-        self.template = 'bootstrap/table_inline_formset.html'
+        # self.helper.form_tag = False
+        self.form_tag = False
+        self.template = 'bootstrap3/table_inline_formset.html'
 
 
 class NoteForm(forms.ModelForm):
@@ -155,12 +157,14 @@ class NoteForm(forms.ModelForm):
         model = Note
         fields = ('note', 'modified_by', 'modified_date', )
         widgets = {
-            'modified_date': forms.DateInput(format=(settings.DISPLAY_DATE_TIME)),}
+            'modified_date': forms.DateInput(format=(settings.DISPLAY_DATE_TIME)),
+            'note': forms.Textarea(attrs={'rows': 3}),}
 
 
 class NoteFormSetHelper(FormHelper):
     def __init__(self, *args, **kwargs):
         super(NoteFormSetHelper, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
-        self.helper.form_tag = False
-        self.template = 'bootstrap/table_inline_formset.html'
+        # self.helper.form_tag = False
+        self.form_tag = False
+        self.template = 'bootstrap3/table_inline_formset.html'

@@ -96,7 +96,7 @@ class Telephone(models.Model):
         (WORK, 'Work'),
     )
     type = models.IntegerField(choices=PHONE_TYPES, default=MOBILE)
-    number = models.CharField(max_length=100)
+    number = models.CharField(max_length=100, blank=True)
     person = models.ForeignKey(Person, on_delete=models.CASCADE, null=True, related_name="Telephone")
 
     def get_type_for_display(self):
