@@ -42,6 +42,7 @@ def load_clients(request):
     if gen_client:
         for json_client in json_clients:
             # create model instances...
+            client = None
             try:
                 #yourdate = dateutil.parser.parse(datestring)
                 created_by = User.objects.get(id=json_client['created_by'])
@@ -90,13 +91,16 @@ def load_clients(request):
                 if len(home_phone) > 1:
                     home_tele = Telephone(type=Telephone.HOME, number=home_phone, person=client)
                     home_tele.save()
-                if len(home_phone) > 1:
+                if len(mobile_tele) > 1:
                     mobile_tele = Telephone(type=Telephone.MOBILE, number=mobile_phone, person=client)
                     mobile_tele.save()
 
                 items.append(client)
             except Exception as e:
-                es = client.forename + ' ' + client.surname + ' ' + str(e)
+                if client != None:
+                    es = client.forename + ' ' + client.surname + ' ' + str(e)
+                else:
+                    es = 'Client not created yet ' + str(e)
                 errors.append(es)
 
     return render(request, 'client/load_clients.html', {'json_clients': json_clients, 'items' : items, 'errors' :  errors})

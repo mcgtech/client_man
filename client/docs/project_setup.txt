@@ -25,22 +25,35 @@ https://scotch.io/tutorials/working-with-django-templates-static-files
 # auto comp lite: http://django-autocomplete-light.readthedocs.io/en/master/tutorial.html
 http://www.lalicode.com/post/5/
 
+to rebuild:
+delete database client_management
+create database client_management
+from env:
+    python manage.py migrate
+    python manage.py makemigrations client
+    python manage.py migrate client
 shell:
-    python manage.py shell
-    from django.contrib.auth.models import User
-    from django.contrib.auth.models import Group
-    admin_group = Group(name="admin")
-    admin_group.save()
-    client_group = Group(name="client")
-    all_perm = Permission.objects.all
-    client_group.permissions.add(all_perm)
-    client_group.save()
-    job_coach_group = Group(name="job coach")
-    job_coach_group.save()
-    neil = User.objects.create_user(username='neil', email="n.macleod@shirlie.co.uk",  password="neil_1234")
-    admin_group.user_set.add(neil)
-    job_coach = User.objects.create_user(username='job_coach', email="job_coach@shirlie.co.uk",  password="job_coach_1234")
-    job_coach_group.user_set.add(job_coach)
+python manage.py shell
+from django.contrib.auth.models import User
+from django.contrib.auth.models import Group
+from django.contrib.auth.models import Permission
+User.objects.create_superuser('admin', 'a@a.com', 'new3lifeok')
+admin_group = Group(name="admin")
+all_perm = Permission.objects.all
+for p in all_perm:
+    admin_group.permissions.add(p)
+admin_group.save()
+client_group = Group(name="client")
+client_group.save()
+job_coach_group = Group(name="job coach")
+job_coach_group.save()
+neil = User.objects.create_user(username='neil', email="n.macleod@shirlie.co.uk",  password="neil_1234")
+admin_group.user_set.add(neil)
+admin_group.save()
+job_coach = User.objects.create_user(username='job_coach', email="job_coach@shirlie.co.uk",  password="job_coach_1234")
+job_coach_group.user_set.add(job_coach)
+job_coach_group.save()
+exit()
 
 
 searching
