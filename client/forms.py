@@ -41,7 +41,10 @@ class ClientForm(forms.ModelForm):
                 'Project',
                 'nat_ins_number',
                 'social_work_involved',
-                'education'
+                'jsa',
+                'education',
+                'recommended_by',
+                'employment_status'
             ),
             Tab(
                 'User',
@@ -62,6 +65,10 @@ class ClientForm(forms.ModelForm):
         self.fields['forename'].label = "First Name*"
         self.fields['surname'].label = "Last Name*"
         self.fields['dob'].label = "Date of Birth*"
+        self.fields['recommended_by'].label = "Recommended by*"
+        self.fields['jsa'].label = "JSA*"
+        self.fields['education'].label = "Education*"
+        self.fields['employment_status'].label = "Employment status*"
         # Note: if I use 'disabled' then the post returns nothing for the fields
         self.fields['modified_on'].widget.attrs['readonly'] = True
         self.fields['created_on'].widget.attrs['readonly'] = True
@@ -70,6 +77,11 @@ class ClientForm(forms.ModelForm):
         self.fields['modified_by'].widget.attrs['disabled'] = True
         self.fields['created_by'].widget.attrs['disabled'] = True
         self.fields['education'].error_messages = {'required': 'Education is required'}
+        # drop downs
+        self.fields['recommended_by'].required = False
+        self.fields['jsa'].required = False
+        self.fields['education'].required = False
+        self.fields['employment_status'].required = False
 
 
     # if I make the following field required in the model, then as I am using tabs, the default form validation for
@@ -85,6 +97,18 @@ class ClientForm(forms.ModelForm):
     def clean_dob(self):
         return validate_required_field(self, 'dob', 'date of birth')
 
+    def clean_recommended_by(self):
+        return validate_required_field(self, 'recommended_by', 'recommended by')
+
+    def clean_jsa(self):
+        return validate_required_field(self, 'jsa', 'JSA')
+
+    def clean_education(self):
+        return validate_required_field(self, 'education', 'education')
+
+    def clean_employment_status(self):
+        return validate_required_field(self, 'employment_status', 'employment status')
+
     def clean_email_address(self):
         email = self.cleaned_data['email_address']
         if email and not is_email_valid(email):
@@ -98,7 +122,7 @@ class ClientForm(forms.ModelForm):
         fields = ('title', 'forename', 'middle_name', 'surname', 'known_as', 'dob', 'sex', 'email_address',
                   'birth_certificate', 'ethnicity', 'social_work_involved', 'marital_status'
                   ,'modified_by', 'modified_on'
-                  ,'created_on', 'created_by', 'nat_ins_number', 'education'
+                  ,'created_on', 'created_by', 'nat_ins_number', 'education', 'recommended_by', 'jsa', 'employment_status'
                   )
         widgets = {
             'dob': forms.DateInput(attrs={'class':'datepicker'}),

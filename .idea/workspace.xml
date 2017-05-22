@@ -2,7 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="053a4aa4-3808-4504-ab0a-5f7dd90a79bc" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/client/migrations/0001_initial.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/common/migrations/0001_initial.py" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/docs/project_setup.txt" afterPath="$PROJECT_DIR$/client/docs/project_setup.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/forms.py" afterPath="$PROJECT_DIR$/client/forms.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/models.py" afterPath="$PROJECT_DIR$/client/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views.py" afterPath="$PROJECT_DIR$/client/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/forms.py" afterPath="$PROJECT_DIR$/common/forms.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/json/clients.json" afterPath="$PROJECT_DIR$/static/json/clients.json" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,60 +25,8 @@
       <file leaf-file-name="project_setup.txt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/docs/project_setup.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="123">
-              <caret line="42" column="30" lean-forward="false" selection-start-line="42" selection-start-column="30" selection-end-line="42" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/common/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-167">
-              <caret line="51" column="90" lean-forward="false" selection-start-line="51" selection-start-column="90" selection-end-line="51" selection-end-column="90" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="migration.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/docs/migration.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="15" lean-forward="false" selection-start-line="1" selection-start-column="15" selection-end-line="1" selection-end-column="15" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/forms.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-695">
-              <caret line="52" column="5" lean-forward="false" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
-              <folding>
-                <element signature="e#0#24#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="567">
-              <caret line="93" column="34" lean-forward="false" selection-start-line="93" selection-start-column="34" selection-end-line="93" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="client_search.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/templates/search/client_search.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" column="38" lean-forward="false" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
+            <state relative-caret-position="728">
+              <caret line="80" column="0" lean-forward="false" selection-start-line="80" selection-start-column="0" selection-end-line="81" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -79,8 +35,38 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-573">
-              <caret line="12" column="7" lean-forward="false" selection-start-line="12" selection-start-column="7" selection-end-line="12" selection-end-column="7" />
+            <state relative-caret-position="567">
+              <caret line="127" column="17" lean-forward="false" selection-start-line="127" selection-start-column="9" selection-end-line="127" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/forms.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="305">
+              <caret line="46" column="34" lean-forward="false" selection-start-line="46" selection-start-column="34" selection-end-line="46" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/common/forms.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="5" column="27" lean-forward="false" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="677">
+              <caret line="82" column="40" lean-forward="false" selection-start-line="82" selection-start-column="23" selection-end-line="82" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -90,40 +76,39 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>form_errors_as_array</find>
-      <find>get_full_name</find>
-      <find>datetime</find>
-      <find>2015-04-30</find>
-      <find>14 Grant Road</find>
-      <find>TIME_ZONE</find>
-      <find>notes</find>
-      <find>options.formTemplate</find>
-      <find>options</find>
+      <find>commn</find>
+      <find>comm</find>
+      <find>comme</find>
+      <find>commen</find>
+      <find>co</find>
+      <find>comment</find>
       <find>clone</find>
-      <find>phones_form_set</find>
-      <find>phone_form_set</find>
-      <find>setup_client_notes</find>
-      <find>note_helper</find>
-      <find>setup_inline_client_phones</find>
-      <find>setup_client_phones</find>
-      <find>type</find>
-      <find>note</find>
-      <find>client_notes</find>
-      <find>m</find>
-      <find>manage_cl</find>
-      <find>manage_clie</find>
-      <find>manage_clien</find>
-      <find>setDirtyStatus</find>
-      <find>message</find>
-      <find>manage_client</find>
-      <find>a</find>
-      <find>are-you</find>
-      <find>time</find>
-      <find>area</find>
+      <find>modified_date</find>
+      <find>datetime.datetime</find>
+      <find>da</find>
+      <find>datet</find>
+      <find>dateti</find>
+      <find>datetim</find>
+      <find>datetime</find>
+      <find>date</find>
+      <find>ForeignKey</find>
+      <find>created_on</find>
+      <find>timezone</find>
+      <find>widget</find>
+      <find>NaturalDateField</find>
+      <find>setup_client_form</find>
+      <find>manage_disabled_selects_in_a_form</find>
+      <find>client_list</find>
+      <find>social_work_involved</find>
+      <find>recommended_by</find>
+      <find>8161</find>
+      <find>alummacdonald1982@hotmail.com</find>
+      <find>employment_status</find>
+      <find>mobile_tele</find>
+      <find>emplo</find>
     </findStrings>
     <replaceStrings>
       <replace>client_notes</replace>
-      <replace>term</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/client/migrations</dir>
@@ -137,69 +122,67 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/client/static/js/client.js" />
+        <option value="$PROJECT_DIR$/client/cedar_forms.py" />
+        <option value="$PROJECT_DIR$/common/form/validation.py" />
+        <option value="$PROJECT_DIR$/client_man/current_user.py" />
+        <option value="$PROJECT_DIR$/client/current_user.py" />
+        <option value="$PROJECT_DIR$/common/middleware.py" />
+        <option value="$PROJECT_DIR$/client_man/middleware.py" />
+        <option value="$PROJECT_DIR$/client/signals.py" />
+        <option value="$PROJECT_DIR$/client/apps.py" />
+        <option value="$PROJECT_DIR$/client_man/login.html" />
+        <option value="$PROJECT_DIR$/client/templates/client/base.html" />
+        <option value="$PROJECT_DIR$/client_man/templates/login.html" />
+        <option value="$PROJECT_DIR$/client/templates/client/cf_example.html" />
+        <option value="$PROJECT_DIR$/client/templates/client/cf_example2.html" />
+        <option value="$PROJECT_DIR$/client/templates/client/client_edit_works.html" />
+        <option value="$PROJECT_DIR$/client/templates/client/home_page.html" />
+        <option value="$PROJECT_DIR$/client/templates/client/nav_bar.html" />
+        <option value="$PROJECT_DIR$/common/templatetags/common_extras.py" />
+        <option value="$PROJECT_DIR$/client/templates/client/client_detail.html" />
+        <option value="$PROJECT_DIR$/client/admin.py" />
+        <option value="$PROJECT_DIR$/client/static/css/client.css" />
+        <option value="$PROJECT_DIR$/client/templates/registration/login.html" />
+        <option value="$PROJECT_DIR$/client/templates/password_reset.html" />
+        <option value="$PROJECT_DIR$/client/templates/login.html" />
+        <option value="$PROJECT_DIR$/cmenv/lib/python3.5/site-packages/crispy_forms/templates/bootstrap/table_inline_formset.html" />
         <option value="$PROJECT_DIR$/client/templates/crispy_override/table_inline_formset.html" />
+        <option value="$PROJECT_DIR$/client/templates/base.html" />
+        <option value="$PROJECT_DIR$/static/js/form_helper/formset_manage.js" />
+        <option value="$PROJECT_DIR$/common/views.py" />
         <option value="$PROJECT_DIR$/static/js/form_helper/form_handlers.js" />
         <option value="$PROJECT_DIR$/static/js/form_helper/confirm-bootstrap.js" />
+        <option value="$PROJECT_DIR$/client/templates/client/client_edit.html" />
+        <option value="$PROJECT_DIR$/client/static/js/manage_client.js" />
         <option value="$PROJECT_DIR$/static/js/form_helper/confirm_bootstrap.js" />
         <option value="$PROJECT_DIR$/client/templates/client/client_list.html" />
+        <option value="$PROJECT_DIR$/common/models.py" />
         <option value="$PROJECT_DIR$/client/filter.py" />
         <option value="$PROJECT_DIR$/client/search/user_list.html" />
         <option value="$PROJECT_DIR$/client/templates/search/user_list.html" />
-        <option value="$PROJECT_DIR$/client/templates/nav_bar.html" />
-        <option value="$PROJECT_DIR$/client/filters.py" />
-        <option value="$PROJECT_DIR$/client/templates/base.html" />
-        <option value="$PROJECT_DIR$/client/static/js/client_search.js" />
-        <option value="$PROJECT_DIR$/common/templatetags/mail_to_tags.py" />
-        <option value="$PROJECT_DIR$/common/templatetags/common_extras.py" />
-        <option value="$PROJECT_DIR$/common/templates/common/datatable.html" />
-        <option value="$PROJECT_DIR$/common/templates/common/datatable_base.html" />
-        <option value="$PROJECT_DIR$/client/partials/messages.html" />
-        <option value="$PROJECT_DIR$/common/templates/hints.html" />
-        <option value="$PROJECT_DIR$/client_man/context_procesors.py" />
-        <option value="$PROJECT_DIR$/client_man/breadcrumbs.html" />
-        <option value="$PROJECT_DIR$/static/js/nav_bar_helper.js" />
-        <option value="$PROJECT_DIR$/static/js/bootstrap_dropdown_hover/js/bootstrap-dropdownhover.js" />
-        <option value="$PROJECT_DIR$/static/js/cleint_search_auto_comp.js" />
-        <option value="$PROJECT_DIR$/client_man/urls.py" />
-        <option value="$PROJECT_DIR$/client/static/js/client_search_auto_comp.js" />
-        <option value="$PROJECT_DIR$/client/static/css/client.css" />
-        <option value="$PROJECT_DIR$/client/docs/reporting_and_printing.txt" />
+        <option value="$PROJECT_DIR$/client/templates/search/client_search.html" />
         <option value="$PROJECT_DIR$/client/urls.py" />
-        <option value="$PROJECT_DIR$/common/forms.py" />
-        <option value="$PROJECT_DIR$/common/views.py" />
-        <option value="$PROJECT_DIR$/common/templates/nav_bar.html" />
-        <option value="$PROJECT_DIR$/static/json/clients.json" />
+        <option value="$PROJECT_DIR$/client/filters.py" />
+        <option value="$PROJECT_DIR$/client_man/urls.py" />
         <option value="$PROJECT_DIR$/client_man/settings.py" />
-        <option value="$PROJECT_DIR$/client/templates/client/load_clients.html" />
-        <option value="$PROJECT_DIR$/client/admin.py" />
-        <option value="$PROJECT_DIR$/static/js/form_helper/formset_manage.js" />
-        <option value="$PROJECT_DIR$/cmenv/lib/python3.5/site-packages/crispy_forms/templates/bootstrap/table_inline_formset.html" />
-        <option value="$PROJECT_DIR$/cmenv/lib/python3.5/site-packages/crispy_forms/templates/bootstrap3/table_inline_formset.html" />
-        <option value="$PROJECT_DIR$/client/static/js/manage_client.js" />
-        <option value="$PROJECT_DIR$/client/static/css/client_edit.css" />
-        <option value="$PROJECT_DIR$/static/js/are_you_sure/jquery.are-you-sure.js" />
-        <option value="$PROJECT_DIR$/common/templates/base.html" />
-        <option value="$PROJECT_DIR$/client/templates/client/client_edit.html" />
-        <option value="$PROJECT_DIR$/client/static/js/client_edit.js" />
+        <option value="$PROJECT_DIR$/client/templates/nav_bar.html" />
+        <option value="$PROJECT_DIR$/client/docs/project_setup.txt" />
+        <option value="$PROJECT_DIR$/static/json/clients.json" />
+        <option value="$PROJECT_DIR$/common/forms.py" />
         <option value="$PROJECT_DIR$/client/models.py" />
         <option value="$PROJECT_DIR$/client/forms.py" />
-        <option value="$PROJECT_DIR$/common/models.py" />
-        <option value="$PROJECT_DIR$/client/templates/search/client_search.html" />
-        <option value="$PROJECT_DIR$/client/docs/migration.txt" />
         <option value="$PROJECT_DIR$/client/views.py" />
-        <option value="$PROJECT_DIR$/client/docs/project_setup.txt" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="165" />
-    <option name="y" value="36" />
-    <option name="width" value="1672" />
-    <option name="height" value="903" />
+    <option name="x" value="485" />
+    <option name="y" value="23" />
+    <option name="width" value="1896" />
+    <option name="height" value="966" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="1" id="Add" />
-  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
@@ -215,7 +198,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -243,6 +225,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="json" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="django_projs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="django_projs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="static" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="form_helper" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -306,7 +310,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
+              <option name="myItemId" value="migrations" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -320,11 +324,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="common" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="migrations" />
+              <option name="myItemId" value="cmenv" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -439,10 +439,6 @@
               <option name="myItemId" value="static" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -483,22 +479,23 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/client/static/js" />
-      <recent name="$PROJECT_DIR$/client" />
-      <recent name="$PROJECT_DIR$/common/templates" />
-      <recent name="$PROJECT_DIR$/common" />
-      <recent name="$PROJECT_DIR$/common/templates/common" />
+      <recent name="$PROJECT_DIR$/client/templates" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/client_man/static/favicon" />
+      <recent name="$PROJECT_DIR$/client_man/static" />
+      <recent name="$PROJECT_DIR$/client_man" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/static/json" />
-      <recent name="$PROJECT_DIR$/static/js" />
-      <recent name="$PROJECT_DIR$/client/templates/client" />
-      <recent name="$PROJECT_DIR$/common" />
-      <recent name="$PROJECT_DIR$/common/templates" />
+      <recent name="$PROJECT_DIR$/client/templates/search" />
+      <recent name="$PROJECT_DIR$/client/templates/client/crispy_override" />
+      <recent name="$PROJECT_DIR$/client/migrations" />
+      <recent name="$PROJECT_DIR$/static" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -593,18 +590,18 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="165" y="36" width="1672" height="903" extended-state="0" />
+    <frame x="485" y="23" width="1896" height="966" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27452153" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24947257" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32733813" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32887402" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -631,185 +628,28 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/static/js/form_helper/confirm_bootstrap.js">
+    <entry file="file://$PROJECT_DIR$/client/templates/client/cf_example.html" />
+    <entry file="file://$PROJECT_DIR$/client/templates/client/client_edit_works.html" />
+    <entry file="file://$PROJECT_DIR$/client/templates/client/home_page.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="812">
-          <caret line="153" column="0" lean-forward="false" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="12" lean-forward="false" selection-start-line="0" selection-start-column="12" selection-end-line="0" selection-end-column="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/templates/client/client_list.html" />
-    <entry file="file://$PROJECT_DIR$/client/templates/search/client_filter.html" />
-    <entry file="file://$PROJECT_DIR$/client/templates/search/client_search_old.html">
+    <entry file="file://$USER_HOME$/django/client_man/client_man/lib/python3.5/site-packages/django/contrib/auth/decorators.py" />
+    <entry file="file://$PROJECT_DIR$/common/templatetags/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/filters.py" />
-    <entry file="file://$PROJECT_DIR$/common/templatetags/mail_to_tags.py" />
+    <entry file="file://$PROJECT_DIR$/client/templates/client/cf_example2.html" />
     <entry file="file://$PROJECT_DIR$/common/templatetags/common_extras.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="44" lean-forward="true" selection-start-line="1" selection-start-column="44" selection-end-line="1" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/templates/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="20" lean-forward="false" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/templates/datatable.html" />
-    <entry file="file://$PROJECT_DIR$/common/datatable.html" />
-    <entry file="file://$PROJECT_DIR$/common/templates/hints.html" />
-    <entry file="file://$PROJECT_DIR$/client/context_procesors.py" />
-    <entry file="file://$PROJECT_DIR$/common/templates/breadcrumbs.html" />
-    <entry file="file://$PROJECT_DIR$/static/js/bootstrap_dropdown_hover/src/jquery.bootstrap-dropdown-hover.js" />
-    <entry file="file://$PROJECT_DIR$/common/templates/common/datatable_base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/nav_bar_helper.js" />
-    <entry file="file://$PROJECT_DIR$/static/js/bootstrap_dropdown_hover/js/bootstrap-dropdownhover.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/bootstrap_dropdown_hover/js/bootstrap-dropdownhover.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-221">
-          <caret line="3" column="1" lean-forward="false" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client_man/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="26" column="37" lean-forward="false" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/static/css/client.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="51" column="16" lean-forward="false" selection-start-line="51" selection-start-column="16" selection-end-line="51" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/static/js/client_search_auto_comp.js">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
-          <caret line="11" column="20" lean-forward="false" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/docs/reporting_and_printing.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="23" lean-forward="false" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/templates/search/user_list.html" />
-    <entry file="file://$PROJECT_DIR$/client/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="66" lean-forward="false" selection-start-line="10" selection-start-column="54" selection-end-line="10" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="20" lean-forward="false" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/templates/nav_bar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="80" lean-forward="false" selection-start-line="20" selection-start-column="80" selection-end-line="20" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/templates/partials/messages.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="8" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/templates/client/load_clients.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="14" lean-forward="true" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client_man/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="122" column="0" lean-forward="false" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="2" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/form_helper/formset_manage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="547">
-          <caret line="170" column="29" lean-forward="false" selection-start-line="170" selection-start-column="29" selection-end-line="170" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cmenv/lib/python3.5/site-packages/crispy_forms/templates/bootstrap/table_inline_formset.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="20" lean-forward="false" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cmenv/lib/python3.5/site-packages/crispy_forms/templates/bootstrap3/table_inline_formset.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="17" lean-forward="false" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/static/js/client_search.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="8" lean-forward="true" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
-          <folding />
+          <caret line="11" column="76" lean-forward="false" selection-start-line="11" selection-start-column="76" selection-end-line="11" selection-end-column="76" />
         </state>
       </provider>
     </entry>
@@ -817,128 +657,223 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="50" lean-forward="false" selection-start-line="5" selection-start-column="50" selection-end-line="5" selection-end-column="50" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/static/css/client_edit.css">
+    <entry file="file://$USER_HOME$/django/client_man/client_man/lib/python3.5/site-packages/django/contrib/auth/models.py" />
+    <entry file="file://$PROJECT_DIR$/client/admin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="1" lean-forward="true" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
-          <folding />
+        <state relative-caret-position="75">
+          <caret line="6" column="28" lean-forward="true" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/are_you_sure/demo/are-you-sure-demo.html">
+    <entry file="file://$USER_HOME$/django/client_man/client_man/lib/python3.5/site-packages/django/core/validators.py" />
+    <entry file="file://$PROJECT_DIR$/client/static/css/client.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="705">
+          <caret line="47" column="16" lean-forward="false" selection-start-line="47" selection-start-column="16" selection-end-line="47" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/templates/registration/login.html" />
+    <entry file="file://$PROJECT_DIR$/client_man/penreview" />
+    <entry file="file://$PROJECT_DIR$/client/templates/password_reset.html" />
+    <entry file="file://$PROJECT_DIR$/cmenv/lib/python3.5/site-packages/password_reset/templates/password_reset/reset_sent.html" />
+    <entry file="file://$PROJECT_DIR$/client/templates/login.html" />
+    <entry file="file://$PROJECT_DIR$/client/migrations/0002_auto_20170517_1109.py" />
+    <entry file="file://$PROJECT_DIR$/cmenv/lib/python3.5/site-packages/crispy_forms/templates/bootstrap/table_inline_formset.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmenv/lib/python3.5/site-packages/crispy_forms/templates/bootstrap3/table_inline_formset.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
-          <caret line="16" column="53" lean-forward="true" selection-start-line="15" selection-start-column="70" selection-end-line="16" selection-end-column="53" />
-          <folding />
+          <caret line="16" column="100" lean-forward="false" selection-start-line="16" selection-start-column="100" selection-end-line="16" selection-end-column="100" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/are_you_sure/jquery.are-you-sure.js">
+    <entry file="file://$PROJECT_DIR$/cmenv/lib/python3.5/site-packages/crispy_forms/templates/bootstrap3/field.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="18" column="16" lean-forward="false" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="16" />
-          <folding />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/common/templates/base.html">
+    <entry file="file://$PROJECT_DIR$/cmenv/lib/python3.5/site-packages/crispy_forms/templates/bootstrap/field.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="18" column="80" lean-forward="false" selection-start-line="18" selection-start-column="80" selection-end-line="18" selection-end-column="80" />
-          <folding />
+        <state relative-caret-position="45">
+          <caret line="3" column="15" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="3" selection-end-column="15" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/templates/client/client_edit.html">
+    <entry file="file://$PROJECT_DIR$/client/templates/crispy_override/table_inline_formset.html" />
+    <entry file="file://$PROJECT_DIR$/client/templates/base.html" />
+    <entry file="file://$PROJECT_DIR$/static/js/form_helper/formset_manage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="51" lean-forward="false" selection-start-line="9" selection-start-column="51" selection-end-line="9" selection-end-column="51" />
-          <folding />
+        <state relative-caret-position="749">
+          <caret line="168" column="21" lean-forward="true" selection-start-line="156" selection-start-column="71" selection-end-line="168" selection-end-column="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/static/js/client_edit.js">
+    <entry file="file://$PROJECT_DIR$/client_man/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="4" lean-forward="false" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
-          <folding />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/migrations/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/migrations/0001_initial.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="659">
+          <caret line="59" column="44" lean-forward="false" selection-start-line="59" selection-start-column="34" selection-end-line="59" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/common/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="19" lean-forward="false" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="19" />
+        <state relative-caret-position="285">
+          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/form_helper/form_handlers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/templates/client/client_edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="83" lean-forward="false" selection-start-line="6" selection-start-column="83" selection-end-line="6" selection-end-column="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/form_helper/confirm_bootstrap.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="812">
+          <caret line="153" column="0" lean-forward="false" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/static/js/manage_client.js" />
+    <entry file="file://$PROJECT_DIR$/common/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="614">
+          <caret line="50" column="21" lean-forward="false" selection-start-line="50" selection-start-column="8" selection-end-line="50" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/templates/search/user_list.html" />
+    <entry file="file://$PROJECT_DIR$/client/templates/client/client_list.html" />
+    <entry file="file://$PROJECT_DIR$/client/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="4" column="50" lean-forward="false" selection-start-line="4" selection-start-column="50" selection-end-line="4" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/filters.py" />
+    <entry file="file://$PROJECT_DIR$/client_man/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/templates/search/client_search.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="15" lean-forward="false" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client_man/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="359">
+          <caret line="135" column="36" lean-forward="false" selection-start-line="135" selection-start-column="36" selection-end-line="135" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/templates/nav_bar.html" />
+    <entry file="file://$USER_HOME$/Library/Caches/PyCharmCE2017.1/python_stubs/-536523661/builtins.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="753">
+          <caret line="881" column="6" lean-forward="false" selection-start-line="881" selection-start-column="6" selection-end-line="881" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/json/clients.json">
+    <entry file="file://$PROJECT_DIR$/common/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="738">
-          <caret line="1060" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1060" selection-end-column="0" />
+        <state relative-caret-position="60">
+          <caret line="5" column="27" lean-forward="false" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-695">
-          <caret line="52" column="5" lean-forward="false" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-573">
-          <caret line="12" column="7" lean-forward="false" selection-start-line="12" selection-start-column="7" selection-end-line="12" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-167">
-          <caret line="51" column="90" lean-forward="false" selection-start-line="51" selection-start-column="90" selection-end-line="51" selection-end-column="90" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/templates/search/client_search.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="38" lean-forward="false" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/docs/migration.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="15" lean-forward="false" selection-start-line="1" selection-start-column="15" selection-end-line="1" selection-end-column="15" />
+        <state relative-caret-position="305">
+          <caret line="46" column="34" lean-forward="false" selection-start-line="46" selection-start-column="34" selection-end-line="46" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/views.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="677">
+          <caret line="82" column="40" lean-forward="false" selection-start-line="82" selection-start-column="23" selection-end-line="82" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/json/clients.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="99">
+          <caret line="411" column="61" lean-forward="false" selection-start-line="411" selection-start-column="61" selection-end-line="411" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/models.py">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="567">
-          <caret line="93" column="34" lean-forward="false" selection-start-line="93" selection-start-column="34" selection-end-line="93" selection-end-column="34" />
+          <caret line="127" column="17" lean-forward="false" selection-start-line="127" selection-start-column="9" selection-end-line="127" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/docs/project_setup.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="42" column="30" lean-forward="false" selection-start-line="42" selection-start-column="30" selection-end-line="42" selection-end-column="30" />
+        <state relative-caret-position="728">
+          <caret line="80" column="0" lean-forward="false" selection-start-line="80" selection-start-column="0" selection-end-line="81" selection-end-column="16" />
           <folding />
         </state>
       </provider>

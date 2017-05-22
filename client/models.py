@@ -82,6 +82,58 @@ class Client(Person):
         (HNC, 'HNC or advanced Higher'),
         (HND, 'HND or Degree'),
     )
+    BUS_GATE = 0
+    COLLEGE = 1
+    HI_COU = 2
+    JOB_CENT = 3
+    NESS = 4
+    NHS = 5
+    RAG_TAG = 6
+    RE_REG = 7
+    SCHOOL = 8
+    SHIRLIE = 9
+    SDS = 10
+    SOC_WORK = 11
+    WORD = 12
+    REC_BY = (
+        (None, 'Please select'),
+        (BUS_GATE, 'Business Gateway'),
+        (COLLEGE, 'College'),
+        (HI_COU, 'Highland Council Employability team'),
+        (JOB_CENT, 'Jobcentre Plus'),
+        (NESS, 'Ness Toiletries'),
+        (NHS, 'NHS'),
+        (RAG_TAG, 'Rag Tag N Textile'),
+        (RE_REG, 'Re-registration'),
+        (SCHOOL, 'School'),
+        (SHIRLIE, 'Shirlie Project'),
+        (SDS, 'Skills Development Scotland'),
+        (SOC_WORK, 'Social Work'),
+        (WORD, 'Word of mouth (friend/family)'),
+    )
+    NO = 0
+    YES = 1
+    MAND_BOOL = (
+        (None, 'Please select'),
+        (NO, 'No'),
+        (YES, 'Yes'),
+    )
+    INACTIVE = 0
+    EMPLOYED = 1
+    LONG_EMPLOYED = 2
+    NEET = 3
+    UNEMPLOYED = 4
+    EMPLOY_STATES = (
+        (None, 'Please select'),
+        (INACTIVE, 'Economically Inactive'),
+        (EMPLOYED, 'Employed (including self-employed)'),
+        (LONG_EMPLOYED, 'Long Term Employed'),
+        (NEET, 'NEET Inactive'),
+        (UNEMPLOYED, 'Unemployed'),
+    )
+    employment_status = models.IntegerField(choices=EMPLOY_STATES, default=None)
+    jsa = models.IntegerField(choices=MAND_BOOL, default=None)
+    recommended_by = models.IntegerField(choices=REC_BY, default=None)
     education = models.IntegerField(choices=EDUCATION, default=None)
     sex = models.IntegerField(choices=SEX, default=MALE)
     marital_status = models.IntegerField(choices=MARITAL_STATUS, default=SINGLE)
