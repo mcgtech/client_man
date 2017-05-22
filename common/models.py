@@ -57,6 +57,7 @@ class Person(Auditable):
     def __str__(self):
        return self.get_full_name()
 
+    # decorator to make it look like a normal attribute.
     @property
     def age(self):
         today = date.today()

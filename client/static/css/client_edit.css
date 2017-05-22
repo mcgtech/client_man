@@ -1,4 +1,5 @@
-#phones table thead tr
+#phones table thead tr,
+#non_model_data
 {
     display:none;
 }

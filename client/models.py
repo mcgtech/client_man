@@ -131,7 +131,62 @@ class Client(Person):
         (NEET, 'NEET Inactive'),
         (UNEMPLOYED, 'Unemployed'),
     )
+    STAGE_2 = 0
+    STAGE_3 = 1
+    LONG_EMPLOYED = 2
+    EIGHTEEN_PLUS = 3
+    STAGES = (
+        (None, 'Please select'),
+        (STAGE_2, 'Stage 2'),
+        (STAGE_3, 'Stage 3'),
+        (EIGHTEEN_PLUS, '18+'),
+    )
+    MON_6 = 0
+    MON_6_12 = 1
+    MON_12_24 = 2
+    MON_25_36 = 3
+    OVER_3 = 4
+    TBC = 5
+    ATT_SCHOOL = 6
+    TIME_UNEMP = (
+        (None, 'Please select'),
+        (MON_6, 'Up to 6 months'),
+        (MON_6_12, '6 - 12 months'),
+        (MON_12_24, '13 - 24 months'),
+        (MON_25_36, '25 - 36 months'),
+        (OVER_3, 'Over 3 years'),
+        (TBC, 'TBC'),
+        (ATT_SCHOOL, 'Attending School'),
+    )
+    AUTISM = 0
+    DYSPRAXIA = 1
+    HEAD_IN = 2
+    LEARN_DIFF = 3
+    LOW_SKILL = 4
+    MENT_HEALTH = 5
+    NO_EXP = 6
+    TBA = 7
+    UNEMP = 8
+    YP_NEET = 9
+    CLIENT_GROUPS = (
+        (None, 'Please select'),
+        (AUTISM, 'Autism'),
+        (DYSPRAXIA, 'Dyspraxia'),
+        (HEAD_IN, 'Head Injury'),
+        (LEARN_DIFF, 'Learning Difficulties'),
+        (LOW_SKILL, 'Low Skilled'),
+        (MENT_HEALTH, 'Mental Health'),
+        (NO_EXP, 'No Experience of Work'),
+        (TBA, 'To Be Assigned'),
+        (UNEMP, 'Unemployed (Under 3yrs no health issue)'),
+        (YP_NEET, 'Young People (NEET)'),
+    )
+    client_group = models.IntegerField(choices=CLIENT_GROUPS, default=None)
+    client_group_evidence = models.FileField(upload_to='client/group_evid/', blank=True, null=True)
+    time_unemployed = models.IntegerField(choices=TIME_UNEMP, default=None)
+    stage = models.IntegerField(choices=STAGES, default=None, null=True)
     employment_status = models.IntegerField(choices=EMPLOY_STATES, default=None)
+    employment_status_evidence = models.FileField(upload_to='client/emp_state_evid/', blank=True, null=True)
     jsa = models.IntegerField(choices=MAND_BOOL, default=None)
     recommended_by = models.IntegerField(choices=REC_BY, default=None)
     education = models.IntegerField(choices=EDUCATION, default=None)
@@ -140,9 +195,11 @@ class Client(Person):
     ethnicity = models.IntegerField(choices=ETHNICITY, default=WHITE_S)
     birth_certificate = models.FileField(upload_to='client/birth_certs/', blank=True, null=True)
     social_work_involved = models.BooleanField(default=False)
+    ref_received = models.BooleanField(default=False)
     # id on old system - set during migration - can be deleted once migration is complete
     original_client_id = models.IntegerField(default=0)
     nat_ins_number = models.CharField(max_length=100, blank=True)
+    job_coach = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name='job_coach', limit_choices_to={'groups__name': "job coach"})
 
     def get_absolute_url(self):
         from django.urls import reverse

@@ -69,6 +69,7 @@ def load_clients(request):
                 client.nat_ins_number = get_clean_json_data(json_client['nat_ins_number'])
                 client.recommended_by = get_clean_json_data(json_client['recommended_by'])
                 client.social_work_involved = get_clean_json_data(json_client['social_work_involved'])
+                client.ref_received = get_clean_json_data(json_client['ref_received'])
                 jsa = get_clean_json_data(json_client['jsa'])
                 if len(jsa) == 0:
                     jsa = Client.NO # default
@@ -81,6 +82,18 @@ def load_clients(request):
                 if len(employment_status) == 0:
                     employment_status = Client.INACTIVE # default
                 client.employment_status = employment_status
+                stage = get_clean_json_data(json_client['stage'])
+                if len(stage) == 0:
+                    stage = None # default
+                client.stage = stage
+                time_unemployed = get_clean_json_data(json_client['time_unemployed'])
+                if len(time_unemployed) == 0:
+                    time_unemployed = Client.TBC # default
+                client.time_unemployed = time_unemployed
+                client_group = get_clean_json_data(json_client['client_group'])
+                if len(client_group) == 0:
+                    client_group = Client.TBA # default
+                client.client_group = client_group
                 client.created_by = created_by
                 client.modified_by = modified_by
                 client.created_on = created_on
@@ -262,7 +275,7 @@ def manage_client(request, client_id=None):
     address_form_errors = form_errors_as_array(address_form)
     form_errors = client_form_errors + address_form_errors
 
-    return render(request, 'client/client_edit.html', {'form': client_form,
+    return render(request, 'client/client_edit.html', {'form': client_form, 'client' : client,
                                                        'notes_form_set': notes_form_set, 'note_helper': note_helper,
                                                        'the_action_text': the_action_text,
                                                        'edit_form': is_edit_form,

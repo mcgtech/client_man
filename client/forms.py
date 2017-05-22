@@ -27,8 +27,9 @@ class ClientForm(forms.ModelForm):
                 'known_as',
                 'sex',
                 css_class="col-sm-6"),
-                Div('dob',
-                'birth_certificate',
+                Div(
+                    # age is added directly in the template and manipulated via js
+                    Div(Div('dob', css_class="col-sm-4"), Div('birth_certificate', css_class="col-sm-4"), css_class='row dob'),
                 'marital_status',
                 'ethnicity',
                 'created_by',
@@ -39,12 +40,19 @@ class ClientForm(forms.ModelForm):
             ),
             Tab(
                 'Project',
-                'nat_ins_number',
-                'social_work_involved',
-                'jsa',
+                Div('job_coach',
+                    'nat_ins_number',
                 'education',
-                'recommended_by',
-                'employment_status'
+                'jsa',
+                'recommended_by', 'social_work_involved',
+                css_class="col-sm-6"),
+                Div(
+                    Div(Div('client_group', css_class="col-sm-6"), Div('client_group_evidence', css_class="col-sm-6"), css_class='row'),
+                    Div(Div('employment_status', css_class="col-sm-6"), Div('employment_status_evidence', css_class="col-sm-6"), css_class='row'),
+                'time_unemployed',
+                'stage',
+                'ref_received',
+                css_class="col-sm-6")
             ),
             Tab(
                 'User',
@@ -69,6 +77,11 @@ class ClientForm(forms.ModelForm):
         self.fields['jsa'].label = "JSA*"
         self.fields['education'].label = "Education*"
         self.fields['employment_status'].label = "Employment status*"
+        self.fields['client_group'].label = "Client group*"
+        self.fields['time_unemployed'].label = "Time unemployed*"
+        self.fields['client_group'].label = "Client group*"
+        self.fields['job_coach'].label = "Job coach*"
+
         # Note: if I use 'disabled' then the post returns nothing for the fields
         self.fields['modified_on'].widget.attrs['readonly'] = True
         self.fields['created_on'].widget.attrs['readonly'] = True
@@ -77,11 +90,16 @@ class ClientForm(forms.ModelForm):
         self.fields['modified_by'].widget.attrs['disabled'] = True
         self.fields['created_by'].widget.attrs['disabled'] = True
         self.fields['education'].error_messages = {'required': 'Education is required'}
-        # drop downs
+
         self.fields['recommended_by'].required = False
         self.fields['jsa'].required = False
         self.fields['education'].required = False
         self.fields['employment_status'].required = False
+        self.fields['stage'].required = False
+        self.fields['client_group'].required = False
+        self.fields['time_unemployed'].required = False
+        self.fields['client_group'].required = False
+        self.fields['job_coach'].required = False
 
 
     # if I make the following field required in the model, then as I am using tabs, the default form validation for
@@ -109,6 +127,15 @@ class ClientForm(forms.ModelForm):
     def clean_employment_status(self):
         return validate_required_field(self, 'employment_status', 'employment status')
 
+    def clean_time_unemployed(self):
+        return validate_required_field(self, 'time_unemployed', 'time unemployed')
+
+    def clean_client_group(self):
+        return validate_required_field(self, 'client_group', 'client group')
+
+    def clean_job_coach(self):
+        return validate_required_field(self, 'job_coach', 'job coach')
+
     def clean_email_address(self):
         email = self.cleaned_data['email_address']
         if email and not is_email_valid(email):
@@ -119,10 +146,11 @@ class ClientForm(forms.ModelForm):
 
     class Meta:
         model = Client
-        fields = ('title', 'forename', 'middle_name', 'surname', 'known_as', 'dob', 'sex', 'email_address',
-                  'birth_certificate', 'ethnicity', 'social_work_involved', 'marital_status'
+        fields = ('title', 'forename', 'middle_name', 'surname', 'known_as', 'dob', 'sex', 'email_address', 'job_coach',
+                  'birth_certificate', 'ethnicity', 'social_work_involved', 'marital_status', 'employment_status_evidence'
                   ,'modified_by', 'modified_on'
                   ,'created_on', 'created_by', 'nat_ins_number', 'education', 'recommended_by', 'jsa', 'employment_status'
+                  ,'time_unemployed', 'stage', 'client_group', 'ref_received', 'client_group_evidence'
                   )
         widgets = {
             'dob': forms.DateInput(attrs={'class':'datepicker'}),
