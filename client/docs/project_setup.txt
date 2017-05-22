@@ -44,15 +44,37 @@ all_perm = Permission.objects.all
 admin_group.permissions.add(all_perm)
 client_group = Group(name="client")
 client_group.save()
-job_coach_group = Group(name="job coach")
-job_coach_group.save()
 neil = User.objects.create_user(username='neil', email="n.macleod@shirlie.co.uk",  password="neil_1234")
 admin_group.user_set.add(neil)
 admin_group.save()
-job_coach = User.objects.create_user(username='job_coach', email="job_coach@shirlie.co.uk",  password="job_coach_1234")
-job_coach_group.user_set.add(job_coach)
-job_coach_group.save()
 exit()
+
+run following to get list of job coaches to create in shell:
+select concat(REPLACE(u.name, ' ', '_'), ' = ', "User.objects.create_user('", u.name, "', '", u.mail, "', '", REPLACE(u.name, ' ', '_'), "123');", REPLACE(u.name, ' ', '_'), ".is_staff=True;", REPLACE(u.name, ' ', '_'), ".save()")
+from users u, users_roles ur
+where u.uid = ur.uid
+and  ur.rid = 8
+union
+select "closed = User.objects.create_user('closed', 'closed@closed', 'closed123');"
+
+start shell and run it
+
+run following to get list of job coaches names to add into job coaches group in shell:
+select concat('job_coach_group.user_set.add(', REPLACE(u.name, ' ', '_'), ')')
+from users u, users_roles ur
+where u.uid = ur.uid
+and  ur.rid = 8
+union
+select "job_coach_group.user_set.add(closed)"
+
+
+
+insert the results after first save and run it
+(or use job_coach_group = models.Group.objects.get(name='job coach') )
+job_coach_group = Group(name="job coach")
+job_coach_group.save()
+
+job_coach_group.save()
 
 
 searching

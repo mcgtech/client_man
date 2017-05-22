@@ -52,6 +52,7 @@ class ClientForm(forms.ModelForm):
                 'time_unemployed',
                 'stage',
                 'ref_received',
+                'end_date',
                 css_class="col-sm-6")
             ),
             Tab(
@@ -148,28 +149,35 @@ class ClientForm(forms.ModelForm):
         model = Client
         fields = ('title', 'forename', 'middle_name', 'surname', 'known_as', 'dob', 'sex', 'email_address', 'job_coach',
                   'birth_certificate', 'ethnicity', 'social_work_involved', 'marital_status', 'employment_status_evidence'
-                  ,'modified_by', 'modified_on'
+                  ,'modified_by', 'modified_on', 'end_date'
                   ,'created_on', 'created_by', 'nat_ins_number', 'education', 'recommended_by', 'jsa', 'employment_status'
                   ,'time_unemployed', 'stage', 'client_group', 'ref_received', 'client_group_evidence'
                   )
         widgets = {
             'dob': forms.DateInput(attrs={'class':'datepicker'}),
             'created_on': forms.DateInput(format=(settings.DISPLAY_DATE_TIME)),
-            'modified_on': forms.DateInput(format=(settings.DISPLAY_DATE_TIME)),}
+            'modified_on': forms.DateInput(format=(settings.DISPLAY_DATE_TIME)),
+            'end_date': forms.DateInput(format=(settings.DISPLAY_DATE_TIME)),}
 
 
 
 class AddressForm(forms.ModelForm):
     helper = FormHelper()
     helper.form_tag = False
+    helper.layout = Layout('line_1', 'line_2', 'line_3', 'post_code',
+                    Div(Div('area', css_class="col-sm-6"), Div('evidence', css_class="col-sm-6"), css_class='row'),
+                  )
     class Meta:
         model = Address
-        fields = ('line_1', 'line_2', 'line_3', 'post_code', 'area', 'evidence')
+        fields = ('line_1', 'line_2', 'line_3', 'post_code',
+                 'area', 'evidence'
+                  )
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # the following is to allow control of field required validation at page and field level
         self.form_errors = []
         self.fields['line_1'].label = "Address line 1*"
+        self.fields['evidence'].label = "Area Evidence"
 
     # if I make the following field required in the model, then as I am using tabs, the default form validation for
     # required fields in crispy forms for bootstrap shows a popover against the offending field when save is clicked

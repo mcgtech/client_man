@@ -1,15 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
-from django.utils import timezone
 from datetime import date
 from django.db.models import Q
 
 class Auditable(models.Model):
     created_on = models.DateTimeField(null=True, blank=True)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='created_by', blank=True, null=True)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='%(class)s_created_by', blank=True, null=True)
     modified_on = models.DateTimeField(null=True, blank=True)
-    modified_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='modified_by', blank=True, null=True)
+    modified_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='%(class)s_modified_by', blank=True, null=True)
 
     class Meta:
         abstract = True
@@ -100,11 +99,12 @@ class Telephone(models.Model):
     number = models.CharField(max_length=100, blank=True)
     person = models.ForeignKey(Person, on_delete=models.CASCADE, null=True, related_name="telephone")
 
-    def get_type_for_display(self):
-        return self.PHONE_TYPES[self.type]
+    # def get_type_for_display(self):
+    #     return self.PHONE_TYPES[self.type]
 
     def __str__(self):
-       return self.number + ' (' + self.get_type_for_display(self) + ')'
+       return self.number
+       # return self.number + ' (' + self.get_type_display(self) + ')'
 
 
 # see https://simpleisbetterthancomplex.com/tutorial/2016/07/28/how-to-create-django-signals.html
@@ -135,4 +135,4 @@ class Address(models.Model):
     person = models.OneToOneField(Person, on_delete=models.CASCADE, null=True, related_name="address")
 
     def __str__(self):
-       return self.line_1 + ', ' + self.line2 + ', ' + self.get_area_display()
+       return self.line_1 + ', ' + self.line_2 + ', ' + self.get_area_display()

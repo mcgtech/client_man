@@ -3,7 +3,7 @@ $(function(){
     setup_client_phones();
     setup_client_address();
     setup_client_notes();
-    setup_dob_datepicker();
+    setup_datepickers();
     setup_leave_form_check();
 });
 
@@ -53,15 +53,34 @@ function setup_client_address()
 
 function setup_dob_datepicker()
 {
-    var start_year = '1990';
-    var start_date = new Date('January 1, ' + start_year);
-    $( ".datepicker" ).datepicker({
-      changeMonth: true,
-      changeYear: true,
-      yearRange: start_year + ':' + new Date().getFullYear(),
-      defaultDate: start_date,
-      dateFormat: 'dd/mm/yy'
-    });
+    setup_form_datepicker($("#id_main-dob"), new Date('January 1, 1990'), null);
+}
+
+function setup_end_date_datepicker()
+{
+    setup_form_datepicker($("#id_main-end_date"), new Date(), new Date());
+}
+
+function setup_datepickers()
+{
+    setup_dob_datepicker();
+    setup_end_date_datepicker();
+}
+
+function setup_form_datepicker(elem, start_date, minDate)
+{
+    var options = {
+          changeMonth: true,
+          changeYear: true,
+          yearRange: start_date.getFullYear() + ':' + new Date().getFullYear(),
+          defaultDate: start_date,
+          dateFormat: 'dd/mm/yy'
+        }
+    if (minDate != null)
+    {
+        options.minDate = minDate;
+    }
+    elem.datepicker(options);
 }
 
 function setup_inline_client_notes()

@@ -98,6 +98,11 @@ def load_clients(request):
                 client.modified_by = modified_by
                 client.created_on = created_on
                 client.modified_on = modified_on
+
+                 # associate with job coach - they need to be created before this runs
+                job_coach_user_name = get_clean_json_data(json_client['job_coach'])
+                job_coaches = User.objects.filter(username=job_coach_user_name)
+                client.job_coach = job_coaches.first()
                 client.save()
 
                 # add address
