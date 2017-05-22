@@ -1,8 +1,8 @@
 from django.shortcuts import redirect, render, get_object_or_404
-from .models import Client
+from client.models import Client
 from common.models import Person, Note, Address, Telephone
 from django.forms import inlineformset_factory
-from .forms import ClientForm, NoteForm, NoteFormSetHelper, AddressForm, PhoneForm, PhoneFormSetHelper
+from client.forms import ClientForm, NoteForm, NoteFormSetHelper, AddressForm, PhoneForm, PhoneFormSetHelper
 from django import forms
 from common.views import form_errors_as_array, super_user_or_job_coach, super_user_or_admin, show_form_error
 from django.contrib.auth.decorators import login_required, user_passes_test

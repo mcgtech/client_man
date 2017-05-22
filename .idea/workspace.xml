@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="053a4aa4-3808-4504-ab0a-5f7dd90a79bc" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/__init__.py" afterPath="$PROJECT_DIR$/client/views/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/views_client_details.py" afterPath="$PROJECT_DIR$/client/views/views_client_details.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/views_migration.py" afterPath="$PROJECT_DIR$/client/views/views_migration.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -58,13 +60,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/views/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="81" lean-forward="false" selection-start-line="1" selection-start-column="81" selection-end-line="1" selection-end-column="81" />
+            <state relative-caret-position="45">
+              <caret line="3" column="31" lean-forward="true" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
               <folding>
-                <element signature="e#167#285#0" expanded="true" />
+                <element signature="e#167#203#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -73,11 +75,19 @@
       <file leaf-file-name="views_client_details.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/views/views_client_details.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="737">
-              <caret line="87" column="17" lean-forward="false" selection-start-line="87" selection-start-column="4" selection-end-line="87" selection-end-column="17" />
-              <folding>
-                <element signature="e#0#64#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="60">
+              <caret line="4" column="108" lean-forward="false" selection-start-line="4" selection-start-column="108" selection-end-line="4" selection-end-column="108" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views_migration.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/client/views/views_migration.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="11" lean-forward="false" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -200,9 +210,9 @@
         <option value="$PROJECT_DIR$/client/forms.py" />
         <option value="$PROJECT_DIR$/common/models.py" />
         <option value="$PROJECT_DIR$/client/models.py" />
+        <option value="$PROJECT_DIR$/client/views/__init__.py" />
         <option value="$PROJECT_DIR$/client/views/views_client_details.py" />
         <option value="$PROJECT_DIR$/client/views/views_migration.py" />
-        <option value="$PROJECT_DIR$/client/views/__init__.py" />
       </list>
     </option>
   </component>
@@ -833,31 +843,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/views/views_migration.py">
+    <entry file="file://$PROJECT_DIR$/client/views/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="23" column="16" lean-forward="false" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="16" />
-          <folding />
+        <state relative-caret-position="45">
+          <caret line="3" column="31" lean-forward="true" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
+          <folding>
+            <element signature="e#167#203#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/views/views_client_details.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="737">
-          <caret line="87" column="17" lean-forward="false" selection-start-line="87" selection-start-column="4" selection-end-line="87" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#64#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="60">
+          <caret line="4" column="108" lean-forward="false" selection-start-line="4" selection-start-column="108" selection-end-line="4" selection-end-column="108" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/views/__init__.py">
+    <entry file="file://$PROJECT_DIR$/client/views/views_migration.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="81" lean-forward="false" selection-start-line="1" selection-start-column="81" selection-end-line="1" selection-end-column="81" />
-          <folding>
-            <element signature="e#167#285#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="60">
+          <caret line="4" column="11" lean-forward="false" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
+          <folding />
         </state>
       </provider>
     </entry>
