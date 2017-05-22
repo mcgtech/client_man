@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="053a4aa4-3808-4504-ab0a-5f7dd90a79bc" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/docs/migration.txt" afterPath="$PROJECT_DIR$/client/docs/migration.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/docs/project_setup.txt" afterPath="$PROJECT_DIR$/client/docs/project_setup.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/forms.py" afterPath="$PROJECT_DIR$/client/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/models.py" afterPath="$PROJECT_DIR$/client/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/static/js/client_edit.js" afterPath="$PROJECT_DIR$/client/static/js/client_edit.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views.py" afterPath="$PROJECT_DIR$/client/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/models.py" afterPath="$PROJECT_DIR$/common/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/json/clients.json" afterPath="$PROJECT_DIR$/static/json/clients.json" />
-    </list>
+    <list default="true" id="053a4aa4-3808-4504-ab0a-5f7dd90a79bc" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,8 +15,8 @@
       <file leaf-file-name="project_setup.txt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/docs/project_setup.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="627">
-              <caret line="102" column="0" lean-forward="false" selection-start-line="102" selection-start-column="0" selection-end-line="103" selection-end-column="16" />
+            <state relative-caret-position="657">
+              <caret line="104" column="25" lean-forward="false" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -951,8 +941,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/docs/project_setup.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="627">
-          <caret line="102" column="0" lean-forward="false" selection-start-line="102" selection-start-column="0" selection-end-line="103" selection-end-column="16" />
+        <state relative-caret-position="657">
+          <caret line="104" column="25" lean-forward="false" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="25" />
           <folding />
         </state>
       </provider>
