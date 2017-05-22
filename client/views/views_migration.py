@@ -1,22 +1,10 @@
-from django.shortcuts import redirect, render, get_object_or_404
 from client.models import Client
 from common.models import Person, Note, Address, Telephone
-from django.forms import inlineformset_factory
-from client.forms import ClientForm, NoteForm, NoteFormSetHelper, AddressForm, PhoneForm, PhoneFormSetHelper
-from django import forms
 from common.views import form_errors_as_array, super_user_or_job_coach, super_user_or_admin, show_form_error
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.db import transaction
 from django.contrib.auth.models import User
-from django.contrib.auth.models import Group
-from django.conf import settings
-from django.utils import timezone
-from django.contrib import messages
 from django.shortcuts import render
 import json
-from django.http import HttpResponse
-import json
-from datetime import datetime
 import dateutil.parser
 
 @login_required
@@ -27,6 +15,7 @@ def load_clients(request):
     # need to eset created and last modified date
     json_clients = json.load(json_data)
 
+    # TODO: get rid of imports that I dont need
     # TODO: chekc if client already exisits
     # TODO: trim strings
     # TODO: how to handle 'null'
