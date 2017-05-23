@@ -3,7 +3,6 @@ from client.models import Client
 from common.models import Note, Address, Telephone
 from django.forms import inlineformset_factory
 from client.forms import *
-# from client.forms import ClientForm, NoteForm, NoteFormSetHelper, AddressForm, PhoneForm, PhoneFormSetHelper
 from common.views import form_errors_as_array, super_user_or_job_coach, super_user_or_admin, show_form_error
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.db import transaction
@@ -14,8 +13,6 @@ from django.utils import timezone
 from django.contrib import messages
 from django.shortcuts import render
 
-def home_page(request):
-    return render(request, 'client/home_page.html', {})
 
 @login_required
 @user_passes_test(super_user_or_job_coach, 'client_man_login')

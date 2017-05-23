@@ -1,4 +1,6 @@
 from django.conf import settings
+from django.shortcuts import render
+
 # http://stackoverflow.com/questions/753052/strip-html-from-strings-in-python
 def form_errors_as_array(form):
     errors = []
@@ -8,6 +10,8 @@ def form_errors_as_array(form):
 
     return errors
 
+def home_page(request):
+    return render(request, 'home_page.html', {})
 
 # https://jorlugaqui.net/2016/02/20/how-to-strip-html-tags-from-a-string-in-python/
 def remove_html_tags(text):

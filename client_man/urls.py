@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.contrib.auth.views import login
 from django.contrib.auth.views import logout
 from django.core.urlresolvers import reverse_lazy
+from common import views
 
 
 urlpatterns = [
@@ -25,4 +26,5 @@ urlpatterns = [
     url(r'^login/$', login, {'template_name': 'login.html'}, name='client_man_login'),
     url(r'^logout/$', logout, {'next_page': reverse_lazy('client_search')}, name='client_man_logout'),
     url(r'', include('client.urls')),
+    url(r'^$', views.home_page, name='home_page'),
 ]
