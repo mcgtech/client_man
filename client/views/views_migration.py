@@ -34,8 +34,13 @@ def load_clients(request):
             client = None
             try:
                 #yourdate = dateutil.parser.parse(datestring)
-                created_by = User.objects.get(id=json_client['created_by'])
-                modified_by = User.objects.get(id=json_client['modified_by'])
+                created_by_user_name = get_clean_json_data(json_client['created_by'])
+                created_by_list = User.objects.filter(username=created_by_user_name)
+                created_by = created_by_list.first()
+                modified_by_user_name = get_clean_json_data(json_client['modified_by'])
+                modified_by_list = User.objects.filter(username=modified_by_user_name)
+                modified_by = modified_by_list.first()
+
                 # I set USE_TZ = False in settings to get this to work
                 created_on = dateutil.parser.parse(get_clean_json_data(json_client['created_on']));
                 modified_on = dateutil.parser.parse(get_clean_json_data(json_client['modified_on']));
@@ -44,6 +49,12 @@ def load_clients(request):
                 client = Client()
                 client.type = Person.CLIENT
 
+                start_date = get_clean_json_data(json_client['start_date'])
+                if len(start_date) > 0:
+                    client.start_date = start_date
+                end_date = get_clean_json_data(json_client['end_date'])
+                if len(end_date) >0:
+                    client.end_date = end_date
                 client.title = get_clean_json_data(json_client['title'])
                 client.middle_name = get_clean_json_data(json_client['middle_name'])
                 client.known_as = get_clean_json_data(json_client['known_as'])
@@ -68,11 +79,11 @@ def load_clients(request):
                     education = Client.NO_QUAL # default
                 client.education = education
                 employment_status = get_clean_json_data(json_client['employment_status'])
-                if len(employment_status) == 0:
-                    employment_status = Client.INACTIVE # default
+                if len(employment_status) == 0 or employment_status == '-1' or employment_status == -1:
+                    employment_status = None # default
                 client.employment_status = employment_status
                 stage = get_clean_json_data(json_client['stage'])
-                if len(stage) == 0:
+                if len(stage) == 0 or stage == '-1' or stage == -1:
                     stage = None # default
                 client.stage = stage
                 time_unemployed = get_clean_json_data(json_client['time_unemployed'])
@@ -91,7 +102,12 @@ def load_clients(request):
                  # associate with job coach - they need to be created before this runs
                 job_coach_user_name = get_clean_json_data(json_client['job_coach'])
                 job_coaches = User.objects.filter(username=job_coach_user_name)
-                client.job_coach = job_coaches.first()
+                if len(job_coaches) > 0:
+                    job_coach = job_coaches.first()
+                    client.job_coach = job_coach
+                else:
+                    errors.append('Failed to find matching coach ' + job_coach_user_name + ' for ' + client.forename + ' ' + client.surname)
+
                 client.save()
 
                 # add address

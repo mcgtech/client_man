@@ -41,6 +41,7 @@ class ClientForm(forms.ModelForm):
             Tab(
                 'Project',
                 Div('job_coach',
+                Div(Div('start_date', css_class="col-sm-6"), Div('end_date', css_class="col-sm-6"), css_class='row'),
                     'nat_ins_number',
                 'education',
                 'jsa',
@@ -52,7 +53,6 @@ class ClientForm(forms.ModelForm):
                 'time_unemployed',
                 'stage',
                 'ref_received',
-                'end_date',
                 css_class="col-sm-6")
             ),
             Tab(
@@ -71,27 +71,32 @@ class ClientForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         # the following is to allow control of field required validation at page and field level
         self.form_errors = []
+        self.fields['title'].label = "Title*"
         self.fields['forename'].label = "First Name*"
         self.fields['surname'].label = "Last Name*"
         self.fields['dob'].label = "Date of Birth*"
         self.fields['recommended_by'].label = "Recommended by*"
         self.fields['jsa'].label = "JSA*"
         self.fields['education'].label = "Education*"
-        self.fields['employment_status'].label = "Employment status*"
         self.fields['client_group'].label = "Client group*"
         self.fields['time_unemployed'].label = "Time unemployed*"
         self.fields['client_group'].label = "Client group*"
         self.fields['job_coach'].label = "Job coach*"
+        self.fields['sex'].label = "Sex*"
+        self.fields['marital_status'].label = "Marital status*"
+        self.fields['ethnicity'].label = "Ethnicity*"
 
         # Note: if I use 'disabled' then the post returns nothing for the fields
         self.fields['modified_on'].widget.attrs['readonly'] = True
         self.fields['created_on'].widget.attrs['readonly'] = True
+        self.fields['start_date'].widget.attrs['readonly'] = True
         # the form will not post values for these, so I need to remove
         # the disabled setting before saving - see setup_client_form()
         self.fields['modified_by'].widget.attrs['disabled'] = True
         self.fields['created_by'].widget.attrs['disabled'] = True
         self.fields['education'].error_messages = {'required': 'Education is required'}
 
+        self.fields['title'].required = False
         self.fields['recommended_by'].required = False
         self.fields['jsa'].required = False
         self.fields['education'].required = False
@@ -101,12 +106,28 @@ class ClientForm(forms.ModelForm):
         self.fields['time_unemployed'].required = False
         self.fields['client_group'].required = False
         self.fields['job_coach'].required = False
+        self.fields['sex'].required = False
+        self.fields['marital_status'].required = False
+        self.fields['ethnicity'].required = False
 
 
     # if I make the following field required in the model, then as I am using tabs, the default form validation for
     # required fields in crispy forms for bootstrap shows a popover against the offending field when save is clicked
     # and if that tab is not on display then the user will not see the error, hence I took the following approach:
     # validate required fields and display error at field level
+    def clean_title(self):
+        return validate_required_field(self, 'title', 'title')
+
+    def clean_ethnicity(self):
+        return validate_required_field(self, 'ethnicity', 'ethnicity')
+
+
+    def clean_marital_status(self):
+        return validate_required_field(self, 'marital_status', 'marital status')
+
+    def clean_sex(self):
+        return validate_required_field(self, 'sex', 'sex')
+
     def clean_forename(self):
         return validate_required_field(self, 'forename', 'first name')
 
@@ -124,9 +145,6 @@ class ClientForm(forms.ModelForm):
 
     def clean_education(self):
         return validate_required_field(self, 'education', 'education')
-
-    def clean_employment_status(self):
-        return validate_required_field(self, 'employment_status', 'employment status')
 
     def clean_time_unemployed(self):
         return validate_required_field(self, 'time_unemployed', 'time unemployed')
@@ -149,7 +167,7 @@ class ClientForm(forms.ModelForm):
         model = Client
         fields = ('title', 'forename', 'middle_name', 'surname', 'known_as', 'dob', 'sex', 'email_address', 'job_coach',
                   'birth_certificate', 'ethnicity', 'social_work_involved', 'marital_status', 'employment_status_evidence'
-                  ,'modified_by', 'modified_on', 'end_date'
+                  ,'modified_by', 'modified_on', 'start_date', 'end_date'
                   ,'created_on', 'created_by', 'nat_ins_number', 'education', 'recommended_by', 'jsa', 'employment_status'
                   ,'time_unemployed', 'stage', 'client_group', 'ref_received', 'client_group_evidence'
                   )
@@ -157,7 +175,8 @@ class ClientForm(forms.ModelForm):
             'dob': forms.DateInput(attrs={'class':'datepicker'}),
             'created_on': forms.DateInput(format=(settings.DISPLAY_DATE_TIME)),
             'modified_on': forms.DateInput(format=(settings.DISPLAY_DATE_TIME)),
-            'end_date': forms.DateInput(format=(settings.DISPLAY_DATE_TIME)),}
+            'start_date': forms.DateInput(format=(settings.DISPLAY_DATE)),
+            'end_date': forms.DateInput(format=(settings.DISPLAY_DATE)),}
 
 
 
@@ -177,7 +196,10 @@ class AddressForm(forms.ModelForm):
         # the following is to allow control of field required validation at page and field level
         self.form_errors = []
         self.fields['line_1'].label = "Address line 1*"
+        self.fields['area'].label = "Area*"
         self.fields['evidence'].label = "Area Evidence"
+
+        self.fields['area'].required = False
 
     # if I make the following field required in the model, then as I am using tabs, the default form validation for
     # required fields in crispy forms for bootstrap shows a popover against the offending field when save is clicked
@@ -185,6 +207,9 @@ class AddressForm(forms.ModelForm):
     # validate required fields and display error at field level
     def clean_line_1(self):
         return validate_required_field(self, 'line_1', 'line 1')
+
+    def clean_area(self):
+        return validate_required_field(self, 'area', 'area')
 
 # one to many forms
 

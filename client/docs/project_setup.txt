@@ -47,20 +47,17 @@ client_group.save()
 neil = User.objects.create_user(username='neil', email="n.macleod@shirlie.co.uk",  password="neil_1234")
 admin_group.user_set.add(neil)
 admin_group.save()
-exit()
 
 run following to get list of job coaches to create in shell:
-select concat(REPLACE(u.name, ' ', '_'), ' = ', "User.objects.create_user('", u.name, "', '", u.mail, "', '", REPLACE(u.name, ' ', '_'), "123');", REPLACE(u.name, ' ', '_'), ".is_staff=True;", REPLACE(u.name, ' ', '_'), ".save()")
+select concat(LOWER(REPLACE(u.name, ' ', '')), ' = ', "User.objects.create_user('", LOWER(REPLACE(u.name, ' ', '')), "', '", u.mail, "', '", LOWER(REPLACE(u.name, ' ', '')), "123');", LOWER(REPLACE(u.name, ' ', '')), ".is_staff=True;", LOWER(REPLACE(u.name, ' ', '')), ".save()")
 from users u, users_roles ur
 where u.uid = ur.uid
 and  ur.rid = 8
 union
 select "closed = User.objects.create_user('closed', 'closed@closed', 'closed123');"
 
-start shell and run it
-
 run following to get list of job coaches names to add into job coaches group in shell:
-select concat('job_coach_group.user_set.add(', REPLACE(u.name, ' ', '_'), ')')
+select concat('job_coach_group.user_set.add(', LOWER(REPLACE(u.name, ' ', '')), ')')
 from users u, users_roles ur
 where u.uid = ur.uid
 and  ur.rid = 8

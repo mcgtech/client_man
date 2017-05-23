@@ -24,6 +24,7 @@ class Person(Auditable):
     MANAGER = 2
     PARTNER = 3
     TYPES = (
+        (None, 'Please select'),
         (CLIENT, 'Client'),
         (JOB_COACH, 'Job Coach'),
         (MANAGER, 'Manager'),
@@ -34,13 +35,14 @@ class Person(Auditable):
     MISS = 2
     MS = 3
     TITLES = (
+        (None, 'Please select'),
         (MR, 'Mr'),
         (MRS, 'Mrs'),
         (MISS, 'Miss'),
         (MS, 'Ms'),
     )
-    type = models.IntegerField(choices=TYPES, default=CLIENT)
-    title = models.IntegerField(choices=TITLES, default=MR)
+    type = models.IntegerField(choices=TYPES, default=None)
+    title = models.IntegerField(choices=TITLES, default=None)
     middle_name = models.CharField(max_length=100, blank=True)
     known_as = models.CharField(max_length=100, blank=True)
     dob = models.DateField(null=True, blank=True)
@@ -90,12 +92,13 @@ class Telephone(models.Model):
     PARENTS = 2
     WORK = 3
     PHONE_TYPES = (
+        (None, 'Please select'),
         (HOME, 'Home'),
         (MOBILE, 'Mobile'),
         (PARENTS, 'Parents'),
         (WORK, 'Work'),
     )
-    type = models.IntegerField(choices=PHONE_TYPES, default=MOBILE)
+    type = models.IntegerField(choices=PHONE_TYPES, default=None)
     number = models.CharField(max_length=100, blank=True)
     person = models.ForeignKey(Person, on_delete=models.CASCADE, null=True, related_name="telephone")
 
@@ -122,6 +125,7 @@ class Address(models.Model):
     SKYE = 5
     SUTH = 6
     AREA = (
+        (None, 'Please select'),
         (BAST, 'Badenoch and Strathspey'),
         (CAIT, 'Caithness'),
         (INNA, 'Inverness and Nairn'),
@@ -130,7 +134,7 @@ class Address(models.Model):
         (SKYE, 'Skye'),
         (SUTH, 'Sutherland'),
     )
-    area = models.IntegerField(choices=AREA, default=BAST)
+    area = models.IntegerField(choices=AREA, default=None)
     evidence = models.FileField(upload_to='client/address_evidence/', blank=True)
     person = models.OneToOneField(Person, on_delete=models.CASCADE, null=True, related_name="address")
 

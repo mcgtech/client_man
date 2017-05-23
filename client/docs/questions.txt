@@ -1,0 +1,44 @@
+is employment status related to contracts and hence should be dirived from live contracts?
+
+... the questions I sent neil
+
+is sec client group etc to be stored in contracts?
+
+how does currently tie in to contracts ie can I derive from contracts or does it need to be part of client details
+
+what is end date for main details?
+
+how is employment hours in md screen worked out?
+
+I am just bringin across the current job coach associated with md, is there a need for historical?
+
+Do I use versions in md in reports currently and if so do we need in new system?
+
+DO WE NEED CHECK BOX FOR SEC CLIENT GROUP AS IF FILE IS UPLOAED THEN WE HAVE EVIDENCE?
+
+init int, vpplan, poa, do they need versions or can we use created/modified?
+
+in 1->m client to contract, do I need ersions as if I want to know age at paricular date on a contract I can simply work it out?
+
+is md start and end date the project start and end date ie during ths time they may have been on different contracts so it is higher level thatn contracts,
+in can we refer to project as grouping of contracts?
+
+does start date and end date get modified via code?
+
+reason for closure on md eg: https://backoffice.shirlie.co.uk/client/home/contactsandlifestyle/main_details?cid=5354
+
+logic when project closed and new one startde
+
+Employment Hrs in main details?
+
+reasons for django
+liteweight
+faster
+easy to upgrade
+community support
+easier to learn
+quicker to build
+easire to maintain/build upon
+old site is past what it should be doing
+
+need to accept that we will not catch all of exisiting functionality, and will introduce bugs, so he should test
