@@ -1,5 +1,5 @@
 from django import forms
-from .models import Client
+from client.models import *
 from common.models import Note, Address, Telephone
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, HTML, Button, Div, Field
