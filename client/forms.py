@@ -40,7 +40,8 @@ class ClientForm(forms.ModelForm):
             ),
             Tab(
                 'Project',
-                Div('job_coach',
+                Div(
+                    Div(Div('job_coach', css_class="col-sm-6"), Div('client_status', css_class="col-sm-6"), css_class='row'),
                 Div(Div('start_date', css_class="col-sm-6"), Div('end_date', css_class="col-sm-6"), css_class='row'),
                     'nat_ins_number',
                 'education',
@@ -72,6 +73,7 @@ class ClientForm(forms.ModelForm):
         # the following is to allow control of field required validation at page and field level
         self.form_errors = []
         self.fields['title'].label = "Title*"
+        self.fields['client_status'].label = "Client status*"
         self.fields['forename'].label = "First Name*"
         self.fields['surname'].label = "Last Name*"
         self.fields['dob'].label = "Date of Birth*"
@@ -109,6 +111,7 @@ class ClientForm(forms.ModelForm):
         self.fields['sex'].required = False
         self.fields['marital_status'].required = False
         self.fields['ethnicity'].required = False
+        self.fields['client_status'].required = False
 
 
     # if I make the following field required in the model, then as I am using tabs, the default form validation for
@@ -117,6 +120,9 @@ class ClientForm(forms.ModelForm):
     # validate required fields and display error at field level
     def clean_title(self):
         return validate_required_field(self, 'title', 'title')
+
+    def clean_client_status(self):
+        return validate_required_field(self, 'client_status', 'client status')
 
     def clean_ethnicity(self):
         return validate_required_field(self, 'ethnicity', 'ethnicity')
@@ -169,7 +175,7 @@ class ClientForm(forms.ModelForm):
                   'birth_certificate', 'ethnicity', 'social_work_involved', 'marital_status', 'employment_status_evidence'
                   ,'modified_by', 'modified_on', 'start_date', 'end_date'
                   ,'created_on', 'created_by', 'nat_ins_number', 'education', 'recommended_by', 'jsa', 'employment_status'
-                  ,'time_unemployed', 'stage', 'client_group', 'ref_received', 'client_group_evidence'
+                  ,'time_unemployed', 'stage', 'client_group', 'ref_received', 'client_group_evidence', 'client_status'
                   )
         widgets = {
             'dob': forms.DateInput(attrs={'class':'datepicker'}),

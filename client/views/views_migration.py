@@ -86,6 +86,10 @@ def load_clients(request):
                 if len(stage) == 0 or stage == '-1' or stage == -1:
                     stage = None # default
                 client.stage = stage
+                client_status = get_clean_json_data(json_client['client_status'])
+                if len(client_status) == 0 or client_status == '-1' or client_status == -1:
+                    client_status = None # default
+                client.client_status = client_status
                 time_unemployed = get_clean_json_data(json_client['time_unemployed'])
                 if len(time_unemployed) == 0:
                     time_unemployed = Client.TBC # default

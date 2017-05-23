@@ -24,12 +24,15 @@ is md start and end date the project start and end date ie during ths time they 
 in can we refer to project as grouping of contracts?
 
 does start date and end date get modified via code?
+start date  - does this get set programmatically?
 
 reason for closure on md eg: https://backoffice.shirlie.co.uk/client/home/contactsandlifestyle/main_details?cid=5354
 
 logic when project closed and new one startde
 
 Employment Hrs in main details?
+
+md currently I am showing as status - okay? I presume that this spans all contracts - does this get set programmatically?
 
 reasons for django
 liteweight

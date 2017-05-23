@@ -184,6 +184,24 @@ class Client(Person):
         (UNEMP, 'Unemployed (Under 3yrs no health issue)'),
         (YP_NEET, 'Young People (NEET)'),
     )
+    ON_CANVASS = 0
+    IS_CLOSED = 1
+    IN_EDUCATION = 2
+    IS_EMPLOYED = 3
+    ON_PROFILE = 4
+    ON_WAITING = 5
+    ON_WORK_EXP = 6
+    CLIENT_STATUS = (
+        (None, 'Please select'),
+        (ON_CANVASS, 'Canvass'),
+        (IS_CLOSED, 'Closed'),
+        (IN_EDUCATION, 'Education'),
+        (IS_EMPLOYED, 'Employed'),
+        (ON_PROFILE, 'Profile'),
+        (ON_WAITING, 'Waiting List'),
+        (ON_WORK_EXP, 'Work Experience'),
+    )
+    client_status = models.IntegerField(choices=CLIENT_STATUS, default=None, null=True)
     client_group = models.IntegerField(choices=CLIENT_GROUPS, default=None)
     client_group_evidence = models.FileField(upload_to='client/group_evid/', blank=True, null=True)
     time_unemployed = models.IntegerField(choices=TIME_UNEMP, default=None)

@@ -47,6 +47,8 @@ client_group.save()
 neil = User.objects.create_user(username='neil', email="n.macleod@shirlie.co.uk",  password="neil_1234")
 admin_group.user_set.add(neil)
 admin_group.save()
+job_coach_group = Group(name="job coach")
+job_coach_group.save()
 
 run following to get list of job coaches to create in shell:
 select concat(LOWER(REPLACE(u.name, ' ', '')), ' = ', "User.objects.create_user('", LOWER(REPLACE(u.name, ' ', '')), "', '", u.mail, "', '", LOWER(REPLACE(u.name, ' ', '')), "123');", LOWER(REPLACE(u.name, ' ', '')), ".is_staff=True;", LOWER(REPLACE(u.name, ' ', '')), ".save()")
@@ -66,10 +68,9 @@ select "job_coach_group.user_set.add(closed)"
 
 
 
-insert the results after first save and run it
+insert the results before save and run it
 (or use job_coach_group = models.Group.objects.get(name='job coach') )
-job_coach_group = Group(name="job coach")
-job_coach_group.save()
+
 
 job_coach_group.save()
 
