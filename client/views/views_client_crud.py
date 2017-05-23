@@ -65,9 +65,6 @@ def manage_client(request, client_id=None):
         notes = Note.objects.filter(person_id=client_id)
         if len(notes) == 0:
             extra_notes = 1
-        # else:
-        #     # need to suss this better
-        #     note = notes[0]
         phones = Telephone.objects.filter(person_id=client_id)
         if len(phones) == 0:
             extra_phones = 1
