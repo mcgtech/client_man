@@ -1,6 +1,7 @@
 from django.db import models
 from common.models import Auditable
 from .client import Client
+from django.conf import settings
 
 class Contract(Auditable):
     AA = 0
@@ -69,7 +70,10 @@ class Contract(Auditable):
     start_date = models.DateField()
     end_date = models.DateField(null=True, blank=True)
     referral_date = models.DateField(null=True, blank=True)
-    secondary_client_group = models.IntegerField(choices=SEC_CLIENT_GROUPS, default=None)
+    secondary_client_group = models.IntegerField(choices=SEC_CLIENT_GROUPS, default=None, null=True)
     secondary_client_group_evidence = models.FileField(upload_to='client/group_evid/', blank=True, null=True)
     application_form = models.FileField(upload_to='client/con_app_form/', blank=True, null=True)
     client = models.ForeignKey(Client, on_delete=models.CASCADE, null=True, related_name="contract")
+
+    def __str__(self):
+       return self.client.get_full_name() + ' - '+ self.get_type_display() + ' - ' + self.start_date.strftime(settings.DISPLAY_DATE)

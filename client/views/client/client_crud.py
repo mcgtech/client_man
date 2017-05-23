@@ -3,7 +3,7 @@ from client.models import Client
 from common.models import Note, Address, Telephone
 from django.forms import inlineformset_factory
 from client.forms import *
-from common.views import form_errors_as_array, super_user_or_job_coach, super_user_or_admin, show_form_error
+from common.views import form_errors_as_array, super_user_or_job_coach, super_user_or_admin, show_form_error, apply_auditable_info
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.db import transaction
 from django.contrib.auth.models import User
@@ -13,12 +13,11 @@ from django.utils import timezone
 from django.contrib import messages
 from django.shortcuts import render
 
-
 @login_required
 @user_passes_test(super_user_or_job_coach, 'client_man_login')
 def client_detail(request, pk):
     client = get_object_or_404(Client, pk=pk)
-    return render(request, 'client/client_detail.html', {'client': client})
+    return render(request, 'client/client/client_detail.html', {'client': client})
 
 
 @login_required
@@ -106,7 +105,7 @@ def manage_client(request, client_id=None):
     address_form_errors = form_errors_as_array(address_form)
     form_errors = client_form_errors + address_form_errors
 
-    return render(request, 'client/client_edit.html', {'form': client_form, 'client' : client,
+    return render(request, 'client/client/client_edit.html', {'form': client_form, 'client' : client,
                                                        'notes_form_set': notes_form_set, 'note_helper': note_helper,
                                                        'the_action_text': the_action_text,
                                                        'edit_form': is_edit_form,
@@ -123,16 +122,6 @@ def save_client_details(client_form, user, request):
     created_client.save()
 
     return created_client
-
-# the dates and user from the form will be blank so we need to also pass the stored entity
-# so we can retrieve the created date and user
-def apply_auditable_info(form_created_entity, request):
-    # only set when first created
-    if form_created_entity.pk is None:
-        form_created_entity.created_on = timezone.now()
-        form_created_entity.created_by = request.user
-    form_created_entity.modified_on = timezone.now()
-    form_created_entity.modified_by = request.user
 
 
 def save_client_address(address_form, client):

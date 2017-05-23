@@ -227,4 +227,3 @@ class Client(Person):
     def get_absolute_url(self):
         from django.urls import reverse
         return reverse('client_edit', args=[str(self.id)])
-

@@ -8,7 +8,8 @@ urlpatterns = [
     url(r'^client/(?P<pk>\d+)/$', views.client_detail, name='client_detail'),
     url(r'^client_search/$', views.client_search, name='client_search'),
     # contract crud
-    # url(r'^contract/new/$', views.client_new, name='contract_new'),
+    url(r'^contract/(?P<client_pk>\d+)/new/$', views.contract_new, name='contract_new'),
+    url(r'^contract/(?P<client_pk>\d+)/(?P<contract_id>\d+)/edit/$', views.contract_edit, name='contract_edit'),
     # searching
     url(r'^auto/quick_client_search/$', views.quick_client_search, name='quick_client_search'),
     # migration

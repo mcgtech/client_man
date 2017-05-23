@@ -4,14 +4,14 @@ from common.models import Note, Address, Telephone
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, HTML, Button, Div, Field
 from crispy_forms.bootstrap import TabHolder, Tab, FormActions, InlineField
-from common.forms import validate_required_field, is_email_valid
+from common.forms import validate_required_field, is_email_valid, AuditableForm
 from django.conf import settings
 
 # forms for editting
 
 # had to use helper as shown in https://blog.bixly.com/awesome-forms-django-crispy-forms
 # otherwise tabs doesn't work
-class ClientForm(forms.ModelForm):
+class ClientForm(AuditableForm):
     username = forms.CharField(required=False)
     password = forms.CharField(widget=forms.PasswordInput(), required=False)
     helper = FormHelper()
@@ -70,23 +70,20 @@ class ClientForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # the following is to allow control of field required validation at page and field level
-        self.form_errors = []
-        self.fields['title'].label = "Title*"
-        self.fields['client_status'].label = "Client status*"
-        self.fields['forename'].label = "First Name*"
-        self.fields['surname'].label = "Last Name*"
-        self.fields['dob'].label = "Date of Birth*"
-        self.fields['recommended_by'].label = "Recommended by*"
-        self.fields['jsa'].label = "JSA*"
-        self.fields['education'].label = "Education*"
-        self.fields['client_group'].label = "Client group*"
-        self.fields['time_unemployed'].label = "Time unemployed*"
-        self.fields['client_group'].label = "Client group*"
-        self.fields['job_coach'].label = "Job coach*"
-        self.fields['sex'].label = "Sex*"
-        self.fields['marital_status'].label = "Marital status*"
-        self.fields['ethnicity'].label = "Ethnicity*"
+        self.prepare_required_field('title', 'Title')
+        self.prepare_required_field('client_status', 'Client status')
+        self.prepare_required_field('forename', 'First Name')
+        self.prepare_required_field('surname', 'Last Name')
+        self.prepare_required_field('dob', 'Date of birth')
+        self.prepare_required_field('recommended_by', 'Recommended by')
+        self.prepare_required_field('jsa', 'JSA')
+        self.prepare_required_field('education', 'Education')
+        self.prepare_required_field('client_group', 'Client group')
+        self.prepare_required_field('time_unemployed', 'Time unemployed')
+        self.prepare_required_field('job_coach', 'Job coach')
+        self.prepare_required_field('sex', 'Sex')
+        self.prepare_required_field('marital_status', 'Marital status')
+        self.prepare_required_field('ethnicity', 'Ethnicity')
 
         # Note: if I use 'disabled' then the post returns nothing for the fields
         self.fields['modified_on'].widget.attrs['readonly'] = True
@@ -98,20 +95,8 @@ class ClientForm(forms.ModelForm):
         self.fields['created_by'].widget.attrs['disabled'] = True
         self.fields['education'].error_messages = {'required': 'Education is required'}
 
-        self.fields['title'].required = False
-        self.fields['recommended_by'].required = False
-        self.fields['jsa'].required = False
-        self.fields['education'].required = False
         self.fields['employment_status'].required = False
         self.fields['stage'].required = False
-        self.fields['client_group'].required = False
-        self.fields['time_unemployed'].required = False
-        self.fields['client_group'].required = False
-        self.fields['job_coach'].required = False
-        self.fields['sex'].required = False
-        self.fields['marital_status'].required = False
-        self.fields['ethnicity'].required = False
-        self.fields['client_status'].required = False
 
 
     # if I make the following field required in the model, then as I am using tabs, the default form validation for
@@ -169,21 +154,18 @@ class ClientForm(forms.ModelForm):
             raise forms.ValidationError(error_msg)
         return email
 
-    class Meta:
+    class Meta(AuditableForm.Meta):
         model = Client
         fields = ('title', 'forename', 'middle_name', 'surname', 'known_as', 'dob', 'sex', 'email_address', 'job_coach',
                   'birth_certificate', 'ethnicity', 'social_work_involved', 'marital_status', 'employment_status_evidence'
-                  ,'modified_by', 'modified_on', 'start_date', 'end_date'
-                  ,'created_on', 'created_by', 'nat_ins_number', 'education', 'recommended_by', 'jsa', 'employment_status'
+                  ,'modified_by', 'modified_on', 'created_on', 'created_by',
+                  'start_date', 'end_date'
+                  , 'nat_ins_number', 'education', 'recommended_by', 'jsa', 'employment_status'
                   ,'time_unemployed', 'stage', 'client_group', 'ref_received', 'client_group_evidence', 'client_status'
                   )
-        widgets = {
-            'dob': forms.DateInput(attrs={'class':'datepicker'}),
-            'created_on': forms.DateInput(format=(settings.DISPLAY_DATE_TIME)),
-            'modified_on': forms.DateInput(format=(settings.DISPLAY_DATE_TIME)),
-            'start_date': forms.DateInput(format=(settings.DISPLAY_DATE)),
-            'end_date': forms.DateInput(format=(settings.DISPLAY_DATE)),}
-
+        AuditableForm.Meta.widgets['dob'] = forms.DateInput(attrs={'class':'datepicker'})
+        AuditableForm.Meta.widgets['start_date'] = forms.DateInput(format=(settings.DISPLAY_DATE))
+        AuditableForm.Meta.widgets['end_date'] = forms.DateInput(format=(settings.DISPLAY_DATE), attrs={'class':'datepicker'})
 
 
 class AddressForm(forms.ModelForm):

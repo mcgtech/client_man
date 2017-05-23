@@ -11,19 +11,11 @@
     <script type="text/javascript" src="{% static 'js/form_helper/formset_manage.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/form_helper/form_handlers.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/form_helper/confirm_bootstrap.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/date_helper.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/client_edit.js' %}"></script>
 {% endblock %}
 {% block content %}
     {% load crispy_forms_tags %}
-    {% if form_errors %}
-        <div class="alert alert-block alert-danger">
-          <ul>
-            {% for value in form_errors %}
-              <li>{{ value }}</li>
-            {% endfor %}
-          </ul>
-        </div>
-    {% endif %}
 
     <form action="{{ the_action }}" method="POST" id="client_edit_form" class="client_details">
         {% crispy form %}
