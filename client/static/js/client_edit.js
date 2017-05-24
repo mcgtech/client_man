@@ -18,7 +18,12 @@ function setup_client_form()
 
 function setup_client_contracts()
 {
-//    $('#contracts').appendTo('.tab-content');
+    $('#contracts_table').appendTo('#contracts');
+
+    //https://www.datatables.net/
+    $('#client_contracts').DataTable({
+        "order": [[ 0, "asc" ]]
+    } );
 }
 
 function setup_client_notes()

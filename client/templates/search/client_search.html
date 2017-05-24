@@ -1,4 +1,13 @@
-{% extends "common/datatable_base.html" %}
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block css %}
+    {% include 'partials/datatable_css_includes.html' %}
+{% endblock %}
+
+{% block js %}
+    {% include 'partials/datatable_js_includes.html' %}
+{% endblock %}
 {% block content %}
   <table class="table table-bordered" id="client_results">
     <thead>

@@ -1,0 +1,3 @@
+. showing list inside a form:
+    template should include <table>.... and make use of the datatable.js pugin - see contracts inside client edit
+. list in a url by itself:  use django-tables2 with django-filter if perf consideration and filtering required

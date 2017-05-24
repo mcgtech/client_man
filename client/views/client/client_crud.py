@@ -12,6 +12,15 @@ from django.conf import settings
 from django.utils import timezone
 from django.contrib import messages
 from django.shortcuts import render
+# from django_tables2 import RequestConfig
+
+# import django_tables2 as tables
+#
+# class SimpleTable(tables.Table):
+#     class Meta:
+#         model = Contract
+#         fields = ("type", "start_date", "end_date")
+#         attrs = {"class": "paleblue"}
 
 @login_required
 @user_passes_test(super_user_or_job_coach, 'client_man_login')
@@ -100,6 +109,8 @@ def manage_client(request, client_id=None):
 
     # https://docs.djangoproject.com/en/1.11/topics/db/queries/#limiting-querysets
     contracts = client.contract.all().order_by('-start_date')
+    # contracts_table = SimpleTable(contracts)
+    # RequestConfig(request).configure(contracts_table)
 
     client_form_errors = form_errors_as_array(client_form)
     address_form_errors = form_errors_as_array(address_form)
