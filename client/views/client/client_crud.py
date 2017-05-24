@@ -98,6 +98,9 @@ def manage_client(request, client_id=None):
     note_helper = NoteFormSetHelper()
     phone_helper = PhoneFormSetHelper()
 
+    # https://docs.djangoproject.com/en/1.11/topics/db/queries/#limiting-querysets
+    contracts = client.contract.all().order_by('-start_date')
+
     client_form_errors = form_errors_as_array(client_form)
     address_form_errors = form_errors_as_array(address_form)
     form_errors = client_form_errors + address_form_errors
@@ -108,6 +111,7 @@ def manage_client(request, client_id=None):
                                                        'edit_form': is_edit_form,
                                                        'the_action': action, 'address_form': address_form,
                                                        'phone_form_set': phone_form_set, 'phone_helper': phone_helper,
+                                                        'contracts' : contracts,
                                                        'form_errors': form_errors})
 
 

@@ -31,6 +31,11 @@
             {% crispy notes_form_set note_helper %}
         </div>
         <div id="contracts" class="tab-pane">
+            {% if contracts %}
+                {% for contract in contracts %}
+                    {{ contract }}
+                {% endfor %}
+            {% endif %}
         </div>
     </form>
 

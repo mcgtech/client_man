@@ -3,13 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="053a4aa4-3808-4504-ab0a-5f7dd90a79bc" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/forms/client.py" afterPath="$PROJECT_DIR$/client/forms/client.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/models/contract.py" afterPath="$PROJECT_DIR$/client/models/contract.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/static/js/client_edit.js" afterPath="$PROJECT_DIR$/client/static/js/client_edit.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/client/client/client_edit.html" afterPath="$PROJECT_DIR$/client/templates/client/client/client_edit.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/client/client_crud.py" afterPath="$PROJECT_DIR$/client/views/client/client_crud.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/contract/contract_crud.py" afterPath="$PROJECT_DIR$/client/views/contract/contract_crud.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/forms.py" afterPath="$PROJECT_DIR$/common/forms.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -53,21 +48,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="client_edit.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="client_edit.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/templates/client/client/client_edit.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="32" column="45" lean-forward="false" selection-start-line="32" selection-start-column="45" selection-end-line="32" selection-end-column="45" />
+            <state relative-caret-position="525">
+              <caret line="35" column="31" lean-forward="false" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="31" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="contract.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="contract.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/models/contract.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="670">
-              <caret line="78" column="20" lean-forward="false" selection-start-line="78" selection-start-column="20" selection-end-line="78" selection-end-column="20" />
+            <state relative-caret-position="535">
+              <caret line="69" column="14" lean-forward="false" selection-start-line="69" selection-start-column="4" selection-end-line="69" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -76,32 +71,8 @@
       <file leaf-file-name="client_crud.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/views/client/client_crud.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="99">
-              <caret line="55" column="55" lean-forward="true" selection-start-line="55" selection-start-column="55" selection-end-line="55" selection-end-column="55" />
-              <folding>
-                <element signature="e#0#56#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/common/forms.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="65" column="4" lean-forward="false" selection-start-line="65" selection-start-column="4" selection-end-line="65" selection-end-column="4" />
-              <folding>
-                <element signature="e#0#24#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="contract_crud.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/views/contract/contract_crud.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="55" column="57" lean-forward="false" selection-start-line="55" selection-start-column="57" selection-end-line="55" selection-end-column="57" />
+            <state relative-caret-position="652">
+              <caret line="113" column="79" lean-forward="false" selection-start-line="113" selection-start-column="70" selection-end-line="113" selection-end-column="79" />
               <folding>
                 <element signature="e#0#56#0" expanded="true" />
               </folding>
@@ -135,14 +106,14 @@
       <find>setup_leave_form_check</find>
       <find>FormHelper</find>
       <find>form</find>
-      <find>git</find>
       <find>setup_client_notes</find>
       <find>setup_inline_client_notes</find>
       <find>setup_client_contracts</find>
       <find>messages.</find>
-      <find>delete-record</find>
-      <find>redire</find>
       <find>get_contract_edit_url</find>
+      <find>delete-record</find>
+      <find>git</find>
+      <find>redire</find>
     </findStrings>
     <replaceStrings>
       <replace>client_notes</replace>
@@ -205,11 +176,11 @@
         <option value="$PROJECT_DIR$/client/forms/contract.py" />
         <option value="$PROJECT_DIR$/client/forms/client.py" />
         <option value="$PROJECT_DIR$/client/static/js/client_edit.js" />
-        <option value="$PROJECT_DIR$/client/templates/client/client/client_edit.html" />
-        <option value="$PROJECT_DIR$/client/views/client/client_crud.py" />
         <option value="$PROJECT_DIR$/common/forms.py" />
         <option value="$PROJECT_DIR$/client/views/contract/contract_crud.py" />
         <option value="$PROJECT_DIR$/client/models/contract.py" />
+        <option value="$PROJECT_DIR$/client/views/client/client_crud.py" />
+        <option value="$PROJECT_DIR$/client/templates/client/client/client_edit.html" />
       </list>
     </option>
   </component>
@@ -1116,11 +1087,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/templates/client/client/client_edit.html">
+    <entry file="file://$PROJECT_DIR$/client/views/contract/contract_crud.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="32" column="45" lean-forward="false" selection-start-line="32" selection-start-column="45" selection-end-line="32" selection-end-column="45" />
-          <folding />
+        <state relative-caret-position="330">
+          <caret line="55" column="57" lean-forward="false" selection-start-line="55" selection-start-column="57" selection-end-line="55" selection-end-column="57" />
+          <folding>
+            <element signature="e#0#56#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1134,30 +1107,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/views/client/client_crud.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="99">
-          <caret line="55" column="55" lean-forward="true" selection-start-line="55" selection-start-column="55" selection-end-line="55" selection-end-column="55" />
-          <folding>
-            <element signature="e#0#56#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/views/contract/contract_crud.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="55" column="57" lean-forward="false" selection-start-line="55" selection-start-column="57" selection-end-line="55" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#56#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/models/contract.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="670">
-          <caret line="78" column="20" lean-forward="false" selection-start-line="78" selection-start-column="20" selection-end-line="78" selection-end-column="20" />
+        <state relative-caret-position="535">
+          <caret line="69" column="14" lean-forward="false" selection-start-line="69" selection-start-column="4" selection-end-line="69" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/views/client/client_crud.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="652">
+          <caret line="113" column="79" lean-forward="false" selection-start-line="113" selection-start-column="70" selection-end-line="113" selection-end-column="79" />
+          <folding>
+            <element signature="e#0#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/templates/client/client/client_edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="35" column="31" lean-forward="false" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="31" />
           <folding />
         </state>
       </provider>
