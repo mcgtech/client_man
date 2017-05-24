@@ -14,7 +14,8 @@ class ContractForm(AuditableForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.prepare_required_field('type', 'Type')
-        self.prepare_required_field('start_date', 'Start date')
+        self.prepare_required_field('secondary_client_group', 'Secondary client group')
+        self.prepare_required_field('type', 'Type')
         self.helper.layout = Layout(
                 TabHolder(
                     Tab(
@@ -43,6 +44,9 @@ class ContractForm(AuditableForm):
     # validate required fields and display error at field level
     def clean_type(self):
         return validate_required_field(self, 'type', 'type')
+
+    def clean_secondary_client_group(self):
+        return validate_required_field(self, 'secondary_client_group', 'secondary client group')
 
     def clean_start_date(self):
         return validate_required_field(self, 'start_date', 'start date')

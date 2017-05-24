@@ -24,8 +24,8 @@
         <tr>
           <td><a href="{{ client.get_absolute_url }}">{{ client.get_full_name }}</a></td>
           <td>
-            {% with client.address_set.all|first as address %}
-              {{ address.line_1 }}
+            {% with client.address.all|first as address %}
+              {{ address }}
             {% endwith %} </td>
           <td>{{ client.age }}</td>
           <td>{{ client.email_address|urlize }}</td>

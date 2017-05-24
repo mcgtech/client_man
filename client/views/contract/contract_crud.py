@@ -53,7 +53,7 @@ def manage_contract(request, client_id, contract_id=None):
         contract = get_object_or_404(Contract, pk=contract_id)
         action = get_contract_edit_url(client_id, contract_id)
 
-    del_request = handle_delete_request(request, contract, 'You have successfully deleted the contract ' + str(contract), '/client_search');
+    del_request = handle_delete_request(request, client, contract, 'You have successfully deleted the contract ' + str(contract), '/client_search');
     if del_request:
         return del_request
     elif request.method == "POST":

@@ -224,6 +224,10 @@ class Client(Person):
     start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
 
+    def get_add_contract_url(self):
+        from django.urls import reverse
+        return reverse('contract_new', args=[str(self.id)])
+
     def get_absolute_url(self):
         from django.urls import reverse
         return reverse('client_edit', args=[str(self.id)])

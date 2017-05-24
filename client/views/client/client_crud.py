@@ -12,6 +12,9 @@ from django.conf import settings
 from django.utils import timezone
 from django.contrib import messages
 from django.shortcuts import render
+import json
+
+
 # from django_tables2 import RequestConfig
 
 # import django_tables2 as tables
@@ -79,7 +82,7 @@ def manage_client(request, client_id=None):
         NoteInlineFormSet = inlineformset_factory(Client, Note, form=NoteForm, extra=extra_notes, can_delete=True)
         PhoneInlineFormSet = inlineformset_factory(Client, Telephone, form=PhoneForm, extra=extra_phones, can_delete=True)
 
-    del_request = handle_delete_request(request, client, 'You have successfully deleted the client ' + client.get_full_name(), '/client_search');
+    del_request = handle_delete_request(request, client, client, 'You have successfully deleted the client ' + client.get_full_name(), '/client_search');
     if del_request:
         return del_request
     elif request.method == "POST":
@@ -112,6 +115,11 @@ def manage_client(request, client_id=None):
     # contracts_table = SimpleTable(contracts)
     # RequestConfig(request).configure(contracts_table)
 
+    # setup js variables for template
+    #https://godjango.com/blog/working-with-json-and-django/
+    js_dict = {'add_con_url' : client.get_add_contract_url()}
+    js_data = json.dumps(js_dict)
+
     client_form_errors = form_errors_as_array(client_form)
     address_form_errors = form_errors_as_array(address_form)
     form_errors = client_form_errors + address_form_errors
@@ -122,7 +130,7 @@ def manage_client(request, client_id=None):
                                                        'edit_form': is_edit_form,
                                                        'the_action': action, 'address_form': address_form,
                                                        'phone_form_set': phone_form_set, 'phone_helper': phone_helper,
-                                                        'contracts' : contracts,
+                                                        'contracts' : contracts, 'js_data' : js_data,
                                                        'form_errors': form_errors})
 
 

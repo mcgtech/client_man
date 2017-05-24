@@ -75,5 +75,9 @@ class Contract(Auditable):
     application_form = models.FileField(upload_to='client/con_app_form/', blank=True, null=True)
     client = models.ForeignKey(Client, on_delete=models.CASCADE, null=True, related_name="contract")
 
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('contract_edit', args=[str(self.client.id), str(self.id)])
+
     def __str__(self):
        return '' if self.client is None else self.client.get_full_name() + ' - '+ self.get_type_display() + ' - ' + self.start_date.strftime(settings.DISPLAY_DATE)

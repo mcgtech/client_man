@@ -3,13 +3,23 @@
     <tr>
       <th>Type</th>
       <th>Start date</th>
+      <th>End date</th>
+      <th>Referral date</th>
+      <th>Secondary client group</th>
+      <th>Evidence</th>
+      <th>App form</th>
     </tr>
   </thead>
   <tbody>
     {% for contract in contracts %}
       <tr>
-        <td><a href="{{ contract.get_absolute_url }}">{{ contract.get_type_display }}</a></td>
+        <td><a href="{{ contract.get_absolute_url }}" target="_blank">{{ contract.get_type_display }}</a></td>
         <td>{{ contract.start_date }}</td>
+        <td>{{ contract.end_date }}</td>
+        <td>{{ contract.referral_date }}</td>
+        <td>{{ contract.get_secondary_client_group_display }}</td>
+        <td>{{ contract.secondary_client_group_evidence }}</td>
+        <td>{{ contract.application_form }}</td>
       </tr>
     {% empty %}
       <tr>

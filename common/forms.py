@@ -63,11 +63,11 @@ def display_client_summary_message(client, request, prefix):
     msg_once_only(request, prefix + ' ' + get_client_summary_link(client), settings.INFO_MSG_TYPE)
 
 
-def handle_delete_request(request, entity, msg, url):
+def handle_delete_request(request, client, target, msg, url):
     redir = None
     if request.POST.get("delete-record"):
-        entity.delete()
-        display_client_summary_message(entity, request, msg)
+        display_client_summary_message(client, request, msg)
+        target.delete()
         redir = redirect(url)
 
     return redir

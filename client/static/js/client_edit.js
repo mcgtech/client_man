@@ -24,6 +24,10 @@ function setup_client_contracts()
     $('#client_contracts').DataTable({
         "order": [[ 0, "asc" ]]
     } );
+
+    $('#button-id-add-contract').click(function(){
+        window.location.href = data_from_django.add_con_url;
+    });
 }
 
 function setup_client_notes()
