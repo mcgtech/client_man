@@ -76,4 +76,4 @@ class Contract(Auditable):
     client = models.ForeignKey(Client, on_delete=models.CASCADE, null=True, related_name="contract")
 
     def __str__(self):
-       return self.client.get_full_name() + ' - '+ self.get_type_display() + ' - ' + self.start_date.strftime(settings.DISPLAY_DATE)
+       return '' if self.client is None else self.client.get_full_name() + ' - '+ self.get_type_display() + ' - ' + self.start_date.strftime(settings.DISPLAY_DATE)

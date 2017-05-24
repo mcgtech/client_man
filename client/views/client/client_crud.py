@@ -70,13 +70,10 @@ def manage_client(request, client_id=None):
         NoteInlineFormSet = inlineformset_factory(Client, Note, form=NoteForm, extra=extra_notes, can_delete=True)
         PhoneInlineFormSet = inlineformset_factory(Client, Telephone, form=PhoneForm, extra=extra_phones, can_delete=True)
 
-    if request.method == "POST":
-        if request.POST.get("delete-client"):
-            client = get_object_or_404(Client, pk=client_id)
-            client.delete()
-            # https://simpleisbetterthancomplex.com/tips/2016/09/06/django-tip-14-messages-framework.html
-            messages.success(request, 'You have successfully deleted the client ' + client.get_full_name())
-            return redirect('/client_search')
+    del_request = handle_delete_request(request, client, 'You have successfully deleted the client ' + client.get_full_name(), '/client_search');
+    if del_request:
+        return del_request
+    elif request.method == "POST":
         client_form = ClientForm(request.POST, request.FILES, instance=client, prefix="main", add_delete=is_edit_form)
         address_form = AddressForm(request.POST, request.FILES, instance=address, prefix="address")
         notes_form_set = NoteInlineFormSet(request.POST, request.FILES, instance=client, prefix="nested")
@@ -90,7 +87,7 @@ def manage_client(request, client_id=None):
             save_client_notes(notes_form_set, request)
             save_client_phones(phone_form_set, request)
             action = '/client/' + str(created_client.id) + '/edit' + '/'
-            messages.success(request, 'Saved ' + client.get_full_name()) # if I dont do this I get save errors
+            display_client_summary_message(client, request, 'Saved ' + client.get_full_name())
             return redirect(action)
     else:
         address_form = AddressForm(instance=address, prefix="address")

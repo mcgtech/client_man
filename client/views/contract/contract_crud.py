@@ -52,11 +52,11 @@ def manage_contract(request, client_id, contract_id=None):
         is_edit_form = True
         contract = get_object_or_404(Contract, pk=contract_id)
         action = get_contract_edit_url(client_id, contract_id)
-    if request.method == "POST":
-        if request.POST.get("delete-contract"):
-            contract.delete()
-            msg_once_only(request, 'You have successfully deleted the contract ' + str(contract), settings.SUCC_MSG_TYPE)
-            return redirect('/client_search')
+
+    del_request = handle_delete_request(request, contract, 'You have successfully deleted the contract ' + str(contract), '/client_search');
+    if del_request:
+        return del_request
+    elif request.method == "POST":
         contract_form = ContractForm(request.POST, request.FILES, instance=contract, prefix="contract", add_delete=is_edit_form)
         if contract_form.is_valid():
             created_contract = contract_form.save(commit=False)

@@ -2,6 +2,7 @@ $(function(){
     setup_client_form();
     setup_client_phones();
     setup_client_address();
+    setup_client_contracts();
     setup_client_notes();
     setup_datepickers();
 });
@@ -13,6 +14,11 @@ function setup_client_form()
     var age_markup = '<div class="col-sm-4"><label for="id_main-birth_certificate" class="control-label ">Age</label>' + age + '</div>';
     $('.dob').append(age_markup);
     manage_disabled_selects_in_a_form($('#client_edit_form'));
+}
+
+function setup_client_contracts()
+{
+//    $('#contracts').appendTo('.tab-content');
 }
 
 function setup_client_notes()

@@ -6,6 +6,7 @@ from django.contrib.messages import info, success, warning, error, debug
 from django.contrib.messages import get_messages
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
+from django.shortcuts import redirect
 
 def validate_required_field(self, field_name, field_name_desc):
     fld = self.cleaned_data[field_name]
@@ -32,7 +33,7 @@ class AuditableForm(forms.ModelForm):
         self.helper.form_tag = False
         self.helper.add_input(Submit("save contract", "Save"))
         if add_delete:
-            self.helper.add_input(Submit("delete contract", "Delete", css_class='btn btn-danger delete-btn'))
+            self.helper.add_input(Submit("delete record", "Delete", css_class='btn btn-danger delete-btn'))
         # the following is to allow control of field required validation at page and field level
         self.form_errors = []        # Note: if I use 'disabled' then the post returns nothing for the fields
         self.fields['modified_on'].widget.attrs['readonly'] = True
@@ -60,8 +61,16 @@ def get_auditable_fields():
 
 def display_client_summary_message(client, request, prefix):
     msg_once_only(request, prefix + ' ' + get_client_summary_link(client), settings.INFO_MSG_TYPE)
-    # messages.info(request, prefix + ' ' + get_client_summary_link(client))
 
+
+def handle_delete_request(request, entity, msg, url):
+    redir = None
+    if request.POST.get("delete-record"):
+        entity.delete()
+        display_client_summary_message(entity, request, msg)
+        redir = redirect(url)
+
+    return redir
 
 # https://stackoverflow.com/questions/23249807/django-remove-duplicate-messages-from-storage/25157660#25157660
 def msg_once_only(request, msg, type):

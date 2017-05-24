@@ -49,6 +49,9 @@ class ClientForm(AuditableForm):
                         css_class="col-sm-6")
                 ),
                 Tab(
+                    'Contracts',
+                ),
+                Tab(
                     'User',
                     'email_address',
                     'username',
