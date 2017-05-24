@@ -4,7 +4,7 @@ from common.models import Note, Address, Telephone
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, HTML, Button, Div, Field
 from crispy_forms.bootstrap import TabHolder, Tab, FormActions, InlineField
-from common.forms import validate_required_field, is_email_valid, AuditableForm
+from common.forms import *
 from django.conf import settings
 
 # forms for editting
@@ -66,7 +66,7 @@ class ClientForm(AuditableForm):
     )
     helper.form_tag = False
     helper.add_input(Submit("save client", "Save"))
-    helper.add_input(Submit("delete client", "Delete", css_class='btn btn-danger'))
+    helper.add_input(Submit("delete client", "Delete", css_class='btn btn-danger delete-btn'))
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -85,15 +85,8 @@ class ClientForm(AuditableForm):
         self.prepare_required_field('marital_status', 'Marital status')
         self.prepare_required_field('ethnicity', 'Ethnicity')
 
-        # Note: if I use 'disabled' then the post returns nothing for the fields
-        self.fields['modified_on'].widget.attrs['readonly'] = True
-        self.fields['created_on'].widget.attrs['readonly'] = True
-        self.fields['start_date'].widget.attrs['readonly'] = True
-        # the form will not post values for these, so I need to remove
-        # the disabled setting before saving - see setup_client_form()
-        self.fields['modified_by'].widget.attrs['disabled'] = True
-        self.fields['created_by'].widget.attrs['disabled'] = True
         self.fields['education'].error_messages = {'required': 'Education is required'}
+        self.fields['start_date'].widget.attrs['readonly'] = True
 
         self.fields['employment_status'].required = False
         self.fields['stage'].required = False
@@ -155,14 +148,14 @@ class ClientForm(AuditableForm):
         return email
 
     class Meta(AuditableForm.Meta):
-        model = Client
-        fields = ('title', 'forename', 'middle_name', 'surname', 'known_as', 'dob', 'sex', 'email_address', 'job_coach',
-                  'birth_certificate', 'ethnicity', 'social_work_involved', 'marital_status', 'employment_status_evidence'
-                  ,'modified_by', 'modified_on', 'created_on', 'created_by',
-                  'start_date', 'end_date'
-                  , 'nat_ins_number', 'education', 'recommended_by', 'jsa', 'employment_status'
-                  ,'time_unemployed', 'stage', 'client_group', 'ref_received', 'client_group_evidence', 'client_status'
-                  )
+        AuditableForm.Meta.model = Client
+        fields = get_auditable_fields() + ('title', 'forename', 'middle_name', 'surname',
+                                           'known_as', 'dob', 'sex', 'email_address', 'job_coach',
+                                           'birth_certificate', 'ethnicity', 'social_work_involved', 'marital_status',
+                                           'employment_status_evidence', 'start_date', 'end_date', 'nat_ins_number',
+                                           'education', 'recommended_by', 'jsa', 'employment_status',
+                                           'time_unemployed', 'stage', 'client_group', 'ref_received',
+                                           'client_group_evidence', 'client_status')
         AuditableForm.Meta.widgets['dob'] = forms.DateInput(attrs={'class':'datepicker'})
         AuditableForm.Meta.widgets['start_date'] = forms.DateInput(format=(settings.DISPLAY_DATE))
         AuditableForm.Meta.widgets['end_date'] = forms.DateInput(format=(settings.DISPLAY_DATE), attrs={'class':'datepicker'})

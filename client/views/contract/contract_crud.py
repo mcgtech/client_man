@@ -12,7 +12,8 @@ from django.conf import settings
 from django.utils import timezone
 from django.contrib import messages
 from django.shortcuts import render
-
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 @login_required
 @user_passes_test(super_user_or_job_coach, 'client_man_login')
@@ -44,9 +45,9 @@ def manage_contract(request, client_id, contract_id=None):
         the_action_text = 'Create'
         is_edit_form = False
         action = '/contract/' + str(client_id) + '/new/'
-        messages.success(request, 'Add a new contract for ' + client.get_full_name())
+        display_client_summary_message(client, request, 'Add a new contract for')
     else:
-        messages.info(request, 'Contract details for ' + get_client_summary_link(client))
+        display_client_summary_message(client, request, 'Contract details for')
         the_action_text = 'Edit'
         is_edit_form = True
         contract = get_object_or_404(Contract, pk=contract_id)
@@ -54,7 +55,7 @@ def manage_contract(request, client_id, contract_id=None):
     if request.method == "POST":
         if request.POST.get("delete-contract"):
             contract.delete()
-            messages.success(request, 'You have successfully deleted the contract ' + contract)
+            msg_once_only(request, 'You have successfully deleted the contract ' + str(contract), settings.SUCC_MSG_TYPE)
             return redirect('/client_search')
         contract_form = ContractForm(request.POST, request.FILES, instance=contract, prefix="contract")
         if contract_form.is_valid():
@@ -63,7 +64,7 @@ def manage_contract(request, client_id, contract_id=None):
             created_contract.client = client
             created_contract.save()
             action = get_contract_edit_url(client_id, created_contract.id)
-            messages.success(request, 'Saved contract for ' + client.get_full_name())
+            msg_once_only(request, 'Saved contract for ' + client.get_full_name(), settings.SUCC_MSG_TYPE)
             return redirect(action)
     else:
         contract_form = ContractForm(instance=contract, prefix="contract")
@@ -73,6 +74,7 @@ def manage_contract(request, client_id, contract_id=None):
                                                        'the_action_text': the_action_text,
                                                        'edit_form': is_edit_form, 'the_action': action,
                                                        'form_errors': contract_form_errors})
+
 
 def get_contract_edit_url(client_id, contract_id):
     return '/contract/' + str(client_id) + '/' + str(contract_id) + '/edit' + '/'

@@ -90,7 +90,7 @@ def manage_client(request, client_id=None):
             save_client_notes(notes_form_set, request)
             save_client_phones(phone_form_set, request)
             action = '/client/' + str(created_client.id) + '/edit' + '/'
-            messages.success(request, 'Saved ' + client.get_full_name())
+            messages.success(request, 'Saved ' + client.get_full_name()) # if I dont do this I get save errors
             return redirect(action)
     else:
         address_form = AddressForm(instance=address, prefix="address")

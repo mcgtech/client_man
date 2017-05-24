@@ -4,14 +4,7 @@ $(function(){
     setup_client_address();
     setup_client_notes();
     setup_datepickers();
-    setup_leave_form_check();
 });
-
-function setup_leave_form_check()
-{
-    // does not work on safari at moment
-    $('form').dirtyForms();
-}
 
 function setup_client_form()
 {
@@ -20,8 +13,6 @@ function setup_client_form()
     var age_markup = '<div class="col-sm-4"><label for="id_main-birth_certificate" class="control-label ">Age</label>' + age + '</div>';
     $('.dob').append(age_markup);
     manage_disabled_selects_in_a_form($('#client_edit_form'));
-    apply_confirm_to_submit_button('#submit-id-delete-client', 'btn-danger', 'del_butt', 'Delete', 'Deletion',
-                                    'Are you sure that you want to delete this client?');
 }
 
 function setup_client_notes()

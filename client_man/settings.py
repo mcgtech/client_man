@@ -155,12 +155,24 @@ ADMIN_GROUP = 'admin'
 CLIENT_GROUP = 'client'
 JOB_COACH = 'job coach'
 
+# Messgae types
+INFO_MSG_TYPE = 0
+SUCC_MSG_TYPE = 1
+WARN_MSG_TYPE = 2
+ERR_MSG_TYPE = 3
+DEBUG_MSG_TYPE = 4
+
 # https://github.com/jakubroztocil/django-settings-export
 # allows us to access constants inside templates
 SETTINGS_EXPORT = [
     'ADMIN_GROUP',
     'CLIENT_GROUP',
     'JOB_COACH',
+    'INFO_MSG_TYPE',
+    'SUCC_MSG_TYPE',
+    'WARN_MSG_TYPE',
+    'ERR_MSG_TYPE',
+    'DEBUG_MSG_TYPE'
 ]
 
 MESSAGE_TAGS = {

@@ -3,7 +3,7 @@ from client.models import Contract
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, HTML, Button, Div, Field
 from crispy_forms.bootstrap import TabHolder, Tab, FormActions, InlineField
-from common.forms import validate_required_field, AuditableForm
+from common.forms import *
 from django.conf import settings
 
 # forms for editting
@@ -25,10 +25,17 @@ class ContractForm(AuditableForm):
         Div('secondary_client_group', 'secondary_client_group_evidence',
             'application_form',
             css_class="col-sm-6"),
-        css_class="row"))))
+        css_class="row")),
+            Tab(
+                'Log',
+                'created_by',
+                'created_on',
+                'modified_by',
+                'modified_on'
+            )))
     helper.form_tag = False
     helper.add_input(Submit("save contract", "Save"))
-    helper.add_input(Submit("delete contract", "Delete", css_class='btn btn-danger'))
+    helper.add_input(Submit("delete contract", "Delete", css_class='btn btn-danger delete-btn'))
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -47,9 +54,8 @@ class ContractForm(AuditableForm):
 
     class Meta(AuditableForm.Meta):
         model = Contract
-        fields = ('type', 'secondary_client_group', 'start_date', 'end_date', 'referral_date',
-                  'secondary_client_group_evidence', 'application_form')
-        AuditableForm.Meta.fields = AuditableForm.Meta.fields + fields
+        fields = get_auditable_fields()  + ('type', 'secondary_client_group', 'start_date', 'end_date', 'referral_date',
+                                            'secondary_client_group_evidence', 'application_form')
         AuditableForm.Meta.widgets['start_date'] = forms.DateInput(attrs={'class':'datepicker'})
         AuditableForm.Meta.widgets['end_date'] = forms.DateInput(attrs={'class':'datepicker'})
         AuditableForm.Meta.widgets['referral_date'] = forms.DateInput(attrs={'class':'datepicker'})

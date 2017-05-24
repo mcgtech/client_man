@@ -6,12 +6,8 @@
 {% endblock %}
 
 {% block js %}
-    <!--https://github.com/snikch/jquery.dirtyforms-->
-    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.dirtyforms/2.0.0/jquery.dirtyforms.min.js"></script>
-    <script type="text/javascript" src="{% static 'js/form_helper/formset_manage.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/form_helper/form_handlers.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/form_helper/confirm_bootstrap.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/date_helper.js' %}"></script>
+    {% include 'partials/form_edit_js_includes.html' %}
+    {% include 'partials/datepicker_js_includes.html' %}
     <script type="text/javascript" src="{% static 'js/contract_edit.js' %}"></script>
 {% endblock %}
 {% block content %}
