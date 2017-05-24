@@ -46,7 +46,7 @@ def apply_auditable_info(form_created_entity, request):
 
 def get_client_name_link(client):
     if client == None:
-        link = 'Unknown'
+        link = 'Unknown client'
     else:
         full_name = client.get_full_name()
         link = '<a href="/client/' + str(client.id) + '/edit">' + full_name + '</a>'

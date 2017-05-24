@@ -1,45 +1,40 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 
+<!--https://simpleisbetterthancomplex.com/2015/12/04/package-of-the-week-django-widget-tweaks.html-->
+{% load widget_tweaks %}
 {% block css %}
-    {% include 'partials/datatable_css_includes.html' %}
+  <link rel="stylesheet" href="{% static 'django_tables2/themes/paleblue/css/screen.css' %}" />
+  <link rel="stylesheet" href="{% static 'django_tables2/themes/bootstrap.css' %}" />
 {% endblock %}
 
-{% block js %}
-    {% include 'partials/datatable_js_includes.html' %}
-{% endblock %}
 {% block content %}
-  <table class="table table-bordered" id="client_results">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Area</th>
-        <th>Age</th>
-        <th>Email</th>
-        <th>Phone</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for client in clients %}
-        <tr>
-          <td><a href="{{ client.get_absolute_url }}">{{ client.get_full_name }}</a></td>
-          <td>
-            {% with client.address.all|first as address %}
-              {{ address }}
-            {% endwith %} </td>
-          <td>{{ client.age }}</td>
-          <td>{{ client.email_address|urlize }}</td>
-          <td>
-            {% for telephone in client.telephone.all %}
-              {{ telephone.number }} ({{ telephone.get_type_display }})
-            {% endfor %}
-          </td>
-        </tr>
-      {% empty %}
-        <tr>
-          <td colspan="5">No data</td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  <form method="get">
+    <div class="well">
+      <h4 style="margin-top: 0">Filter</h4>
+      <div class="row">
+        <div class="form-group col-sm-4 col-md-3">
+          {{ filter.form.forename.label_tag }}
+          {% render_field filter.form.forename class="form-control" %}
+        </div>
+        <div class="form-group col-sm-4 col-md-3">
+          {{ filter.form.surname.label_tag }}
+          {% render_field filter.form.surname class="form-control" %}
+        </div>
+        <div class="form-group col-sm-4 col-md-3">
+          {{ filter.form.sex.label_tag }}
+          {% render_field filter.form.sex class="form-control" %}
+        </div>
+        <div class="form-group col-sm-4 col-md-3">
+          {{ filter.form.year_of_birth.label_tag }}
+          {% render_field filter.form.year_of_birth class="form-control" %}
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">
+        <span class="glyphicon glyphicon-search"></span> Search
+      </button>
+    </div>
+  </form>
+  {% load render_table from django_tables2 %}
+  {% render_table table "table_with_pagination.html" %}
 {% endblock %}

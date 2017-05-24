@@ -5,6 +5,28 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render
 from django.http import HttpResponse
 import json
+from client.filters import ClientFilter
+from django_filters.views import FilterView
+from django_tables2 import SingleTableView, tables
+
+class ClientsTable(tables.Table):
+    class Meta:
+        model = Client
+        fields = ('title', 'forename', 'surname', 'sex')
+        attrs = {"class": "paleblue table table-striped"}
+
+# see filters.py for code that does the filtering
+# https://simpleisbetterthancomplex.com/tutorial/2016/11/28/how-to-filter-querysets-dynamically.html
+# https://simpleisbetterthancomplex.com/2015/12/04/package-of-the-week-django-widget-tweaks.html
+# https://django-tables2.readthedocs.io/en/latest/pages/tutorial.html
+# https://django-filter.readthedocs.io/en/develop/guide/usage.html#the-template
+# TODO: restrict access
+class ClientViewFilter(FilterView, SingleTableView):
+    model = Client
+    table_class = ClientsTable
+    filterset_class = ClientFilter
+    template_name='search/client_search.html'
+
 
 # code in view which returns json data
 # http://www.lalicode.com/post/5/

@@ -14,17 +14,6 @@ from django.contrib import messages
 from django.shortcuts import render
 import json
 
-
-# from django_tables2 import RequestConfig
-
-# import django_tables2 as tables
-#
-# class SimpleTable(tables.Table):
-#     class Meta:
-#         model = Contract
-#         fields = ("type", "start_date", "end_date")
-#         attrs = {"class": "paleblue"}
-
 @login_required
 @user_passes_test(super_user_or_job_coach, 'client_man_login')
 def client_detail(request, pk):

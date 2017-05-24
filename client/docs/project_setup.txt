@@ -115,6 +115,10 @@ pip install --upgrade django-crispy-forms
 pip install django-settings-export
 # for migration: http://stackoverflow.com/questions/969285/how-do-i-translate-a-iso-8601-datetime-string-into-a-python-datetime-object
 pip install python-dateutil
+pip install django-tables2
+pip install django-filter
+pip install django-widget-tweaks
+pip install django-bootstrap-pagination
 if not checking out previous project:
 	# create project
 	cd /Users/stephenmcgonigal/django_projs
