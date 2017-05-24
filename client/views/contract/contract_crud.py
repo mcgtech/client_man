@@ -57,7 +57,7 @@ def manage_contract(request, client_id, contract_id=None):
             contract.delete()
             msg_once_only(request, 'You have successfully deleted the contract ' + str(contract), settings.SUCC_MSG_TYPE)
             return redirect('/client_search')
-        contract_form = ContractForm(request.POST, request.FILES, instance=contract, prefix="contract")
+        contract_form = ContractForm(request.POST, request.FILES, instance=contract, prefix="contract", add_delete=is_edit_form)
         if contract_form.is_valid():
             created_contract = contract_form.save(commit=False)
             apply_auditable_info(created_contract, request)
@@ -67,7 +67,7 @@ def manage_contract(request, client_id, contract_id=None):
             msg_once_only(request, 'Saved contract for ' + client.get_full_name(), settings.SUCC_MSG_TYPE)
             return redirect(action)
     else:
-        contract_form = ContractForm(instance=contract, prefix="contract")
+        contract_form = ContractForm(instance=contract, prefix="contract", add_delete=is_edit_form)
 
     contract_form_errors = form_errors_as_array(contract_form)
     return render(request, 'client/contract/contract_edit.html', {'form': contract_form, 'client' : client,

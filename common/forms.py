@@ -4,6 +4,8 @@ from django.conf import settings
 from common.views import get_client_summary_link
 from django.contrib.messages import info, success, warning, error, debug
 from django.contrib.messages import get_messages
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
 
 def validate_required_field(self, field_name, field_name_desc):
     fld = self.cleaned_data[field_name]
@@ -24,7 +26,13 @@ def is_email_valid(email):
 ## goes hand in hand with common.models.Auditable
 class AuditableForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
+        add_delete = kwargs.pop('add_delete')
         super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+        self.helper.add_input(Submit("save contract", "Save"))
+        if add_delete:
+            self.helper.add_input(Submit("delete contract", "Delete", css_class='btn btn-danger delete-btn'))
         # the following is to allow control of field required validation at page and field level
         self.form_errors = []        # Note: if I use 'disabled' then the post returns nothing for the fields
         self.fields['modified_on'].widget.attrs['readonly'] = True

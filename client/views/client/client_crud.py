@@ -77,7 +77,7 @@ def manage_client(request, client_id=None):
             # https://simpleisbetterthancomplex.com/tips/2016/09/06/django-tip-14-messages-framework.html
             messages.success(request, 'You have successfully deleted the client ' + client.get_full_name())
             return redirect('/client_search')
-        client_form = ClientForm(request.POST, request.FILES, instance=client, prefix="main")
+        client_form = ClientForm(request.POST, request.FILES, instance=client, prefix="main", add_delete=is_edit_form)
         address_form = AddressForm(request.POST, request.FILES, instance=address, prefix="address")
         notes_form_set = NoteInlineFormSet(request.POST, request.FILES, instance=client, prefix="nested")
         phone_form_set = PhoneInlineFormSet(request.POST, request.FILES, instance=client, prefix="phones")
@@ -94,7 +94,7 @@ def manage_client(request, client_id=None):
             return redirect(action)
     else:
         address_form = AddressForm(instance=address, prefix="address")
-        client_form = ClientForm(instance=client, prefix="main")
+        client_form = ClientForm(instance=client, prefix="main", add_delete=is_edit_form)
         notes_form_set = NoteInlineFormSet(instance=client, prefix="nested")
         phone_form_set = PhoneInlineFormSet(instance=client, prefix="phones")
     # crispy form helper for formsets

@@ -14,62 +14,49 @@ from django.conf import settings
 class ClientForm(AuditableForm):
     username = forms.CharField(required=False)
     password = forms.CharField(widget=forms.PasswordInput(), required=False)
-    helper = FormHelper()
-    helper.form_tag = False
-    helper.layout = Layout(
-        TabHolder(
-            Tab(
-                'Main',
-                Div('title',
-                'forename',
-                'middle_name',
-                'surname',
-                'known_as',
-                'sex',
-                css_class="col-sm-6"),
-                Div(
-                    # age is added directly in the template and manipulated via js
-                    Div(Div('dob', css_class="col-sm-4"), Div('birth_certificate', css_class="col-sm-4"), css_class='row dob'),
-                'marital_status',
-                'ethnicity',
-                'created_by',
-                'created_on',
-                'modified_by',
-                'modified_on',
-                css_class="col-sm-6")
-            ),
-            Tab(
-                'Project',
-                Div(
-                    Div(Div('job_coach', css_class="col-sm-6"), Div('client_status', css_class="col-sm-6"), css_class='row'),
-                Div(Div('start_date', css_class="col-sm-6"), Div('end_date', css_class="col-sm-6"), css_class='row'),
-                    'nat_ins_number',
-                'education',
-                'jsa',
-                'recommended_by', 'social_work_involved',
-                css_class="col-sm-6"),
-                Div(
-                    Div(Div('client_group', css_class="col-sm-6"), Div('client_group_evidence', css_class="col-sm-6"), css_class='row'),
-                    Div(Div('employment_status', css_class="col-sm-6"), Div('employment_status_evidence', css_class="col-sm-6"), css_class='row'),
-                'time_unemployed',
-                'stage',
-                'ref_received',
-                css_class="col-sm-6")
-            ),
-            Tab(
-                'User',
-                'email_address',
-                'username',
-                'password'
-            )
-        )
-    )
-    helper.form_tag = False
-    helper.add_input(Submit("save client", "Save"))
-    helper.add_input(Submit("delete client", "Delete", css_class='btn btn-danger delete-btn'))
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.helper.layout = Layout(
+            TabHolder(
+                Tab(
+                    'Main',
+                    Div('title', 'forename', 'middle_name', 'surname', 'known_as', 'sex',
+                        css_class="col-sm-6"),
+                    Div(
+                        # age is added directly in the template and manipulated via js
+                        Div(Div('dob', css_class="col-sm-4"), Div('birth_certificate', css_class="col-sm-4"),
+                            css_class='row dob'),
+                        'marital_status', 'ethnicity',
+                        'created_by', 'created_on', 'modified_by', 'modified_on',
+                        css_class="col-sm-6")
+                ),
+                Tab(
+                    'Project',
+                    Div(
+                        Div(Div('job_coach', css_class="col-sm-6"), Div('client_status', css_class="col-sm-6"),
+                            css_class='row'),
+                        Div(Div('start_date', css_class="col-sm-6"), Div('end_date', css_class="col-sm-6"),
+                            css_class='row'),
+                        'nat_ins_number', 'education', 'jsa', 'recommended_by', 'social_work_involved',
+                        css_class="col-sm-6"),
+                    Div(
+                        Div(Div('client_group', css_class="col-sm-6"),
+                            Div('client_group_evidence', css_class="col-sm-6"), css_class='row'),
+                        Div(Div('employment_status', css_class="col-sm-6"),
+                            Div('employment_status_evidence', css_class="col-sm-6"), css_class='row'),
+                        'time_unemployed', 'stage', 'ref_received',
+                        css_class="col-sm-6")
+                ),
+                Tab(
+                    'User',
+                    'email_address',
+                    'username',
+                    'password'
+                )
+            )
+        )
+
         self.prepare_required_field('title', 'Title')
         self.prepare_required_field('client_status', 'Client status')
         self.prepare_required_field('forename', 'First Name')
