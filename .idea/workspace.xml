@@ -2,26 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="053a4aa4-3808-4504-ab0a-5f7dd90a79bc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/docs/git_commands.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/common/templates/partials/django_tables2_js_includes.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/common/templates/partials/filter_buttons.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/django_tables2/filter_helper.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/css/django_tables2/bs_screen.css" afterPath="$PROJECT_DIR$/static/django_tables2/bs_screen.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/css/django_tables2/img/arrow-active-down.png" afterPath="$PROJECT_DIR$/static/django_tables2/img/arrow-active-down.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/css/django_tables2/img/arrow-active-up.png" afterPath="$PROJECT_DIR$/static/django_tables2/img/arrow-active-up.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/css/django_tables2/img/arrow-inactive-down.png" afterPath="$PROJECT_DIR$/static/django_tables2/img/arrow-inactive-down.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/css/django_tables2/img/arrow-inactive-up.png" afterPath="$PROJECT_DIR$/static/django_tables2/img/arrow-inactive-up.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/css/django_tables2/img/false.gif" afterPath="$PROJECT_DIR$/static/django_tables2/img/false.gif" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/css/django_tables2/img/header-bg.png" afterPath="$PROJECT_DIR$/static/django_tables2/img/header-bg.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/css/django_tables2/img/missing.png" afterPath="$PROJECT_DIR$/static/django_tables2/img/missing.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/css/django_tables2/img/pagination-bg.gif" afterPath="$PROJECT_DIR$/static/django_tables2/img/pagination-bg.gif" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/css/django_tables2/img/true.gif" afterPath="$PROJECT_DIR$/static/django_tables2/img/true.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/docs/project_setup.txt" afterPath="$PROJECT_DIR$/client/docs/project_setup.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/filters.py" afterPath="$PROJECT_DIR$/client/filters.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/client/client/client_search.html" afterPath="$PROJECT_DIR$/client/templates/client/client/client_search.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/client/client_searching.py" afterPath="$PROJECT_DIR$/client/views/client/client_searching.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/templates/partials/django_tables2_css_includes.html" afterPath="$PROJECT_DIR$/common/templates/partials/django_tables2_css_includes.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/templates/partials/filter_buttons.html" afterPath="$PROJECT_DIR$/common/templates/partials/filter_buttons.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -43,11 +24,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="git_commands.txt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="git_commands.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/docs/git_commands.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="2" selection-end-column="16" />
+            <state relative-caret-position="45">
+              <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="filter_buttons.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/common/templates/partials/filter_buttons.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="3" column="66" lean-forward="true" selection-start-line="3" selection-start-column="66" selection-end-line="3" selection-end-column="83" />
               <folding />
             </state>
           </provider>
@@ -153,10 +144,10 @@
         <option value="$PROJECT_DIR$/common/templates/partials/django_tables2_css_includes.html" />
         <option value="$PROJECT_DIR$/common/templates/partials/django_tables2_js_includes.html" />
         <option value="$PROJECT_DIR$/static/django_tables2/filter_helper.js" />
-        <option value="$PROJECT_DIR$/common/templates/partials/filter_buttons.html" />
         <option value="$PROJECT_DIR$/client/templates/client/client/client_search.html" />
         <option value="$PROJECT_DIR$/client/docs/project_setup.txt" />
         <option value="$PROJECT_DIR$/client/docs/git_commands.txt" />
+        <option value="$PROJECT_DIR$/common/templates/partials/filter_buttons.html" />
       </list>
     </option>
   </component>
@@ -1052,14 +1043,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/common/templates/partials/filter_buttons.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="98" lean-forward="false" selection-start-line="3" selection-start-column="98" selection-end-line="3" selection-end-column="98" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/common/templates/nav_bar.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
@@ -1088,8 +1071,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/docs/git_commands.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="2" selection-end-column="16" />
+        <state relative-caret-position="45">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/templates/partials/filter_buttons.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="66" lean-forward="true" selection-start-line="3" selection-start-column="66" selection-end-line="3" selection-end-column="83" />
           <folding />
         </state>
       </provider>
