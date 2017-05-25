@@ -7,17 +7,20 @@ from django.http import HttpResponse
 import json
 from client.filters import ClientFilter
 from django_filters.views import FilterView
-from django_tables2 import SingleTableView, tables, LinkColumn, A
+from django_tables2 import SingleTableView, tables, LinkColumn, A, SingleTableMixin, Column
 from braces.views import GroupRequiredMixin
 
 class ClientsTable(tables.Table):
     # https://stackoverflow.com/questions/33184108/how-to-change-display-text-in-django-tables-2-link-column
     # http://django-tables2.readthedocs.io/en/latest/pages/api-reference.html#linkcolumn
-    client_id = LinkColumn('client_edit', text=lambda record: record.id, args=[A('pk')], attrs={
-                                                                                        'a': {'target': '_blank'}})
+    client_id = LinkColumn('client_edit', text=lambda record: record.id, args=[A('pk')], attrs={'a': {'target': '_blank'}})
+    # https://stackoverflow.com/questions/26168985/django-tables-2-field-accessor-backward-relationship
+    # I do this so that I can show the 1->m el between client and contracts using django-tables2
+    contracts = Column(accessor='contracts_data')
     class Meta:
         model = Client
-        fields = ('title', 'forename', 'surname', 'sex')
+        # fiels to display in table
+        fields = ('title', 'forename', 'surname', 'sex', 'job_coach', 'age', 'address.area', 'contracts')
         attrs = {"class": "paleblue table table-striped table-hover table-bordered"}
         sequence = ('client_id', '...')
 
@@ -33,6 +36,14 @@ class ClientViewFilter(GroupRequiredMixin, FilterView, SingleTableView):
     table_class = ClientsTable
     filterset_class = ClientFilter # see /Users/stephenmcgonigal/django_projs/client/filters.py
     template_name='client/client/client_search.html'
+    # see /Users/stephenmcgonigal/django_projs/cmenv/lib/python3.5/site-packages/django_tables2/views.py
+    # SingleTableMixin class (SingleTableView inherits from it)
+    table_pagination = {'per_page': 5}
+    context_table_name = 'clients_table'
+
+
+    # table_data = Client.objects.select_related('user').all()
+    # table_data = Client.objects.select_related('user').all().filter(surname__startswith='Aitken')
 
 
 # I hae kept the following just in case I need it later

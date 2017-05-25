@@ -62,12 +62,12 @@
         {% with table.page.object_list|length as rows_on_page %}
             {% block pagination %}
                 <div class="row bs_pagin">
-                    <div class="col-sm-2" id="pagin_total">
-                         Showing {{ start_index }} to {{ end_index }} of {{ total_rows }} entries
-                    </div>
-                    <div class="col-sm-10">
+                    <div class="col-sm-12">
                         <!--https://github.com/jmcclell/django-bootstrap-pagination-->
                         {% bootstrap_paginate table.page range=10 show_prev_next="false" show_first_last="true" show_index_range="true" %}
+                    </div>
+                    <div class="col-sm-12" id="pagin_total">
+                         Showing {{ start_index }} to {{ end_index }} of {{ total_rows }} entries
                     </div>
                 </div>
             {% endblock pagination %}

@@ -13,12 +13,8 @@
 {% block content %}
   <form method="get">
     <div class="well">
-      <h4 style="margin-top: 0">Filters</h4>
+      <!--# if I change this then also change: /Users/stephenmcgonigal/django_projs/client/filters.py -->
       <div class="row">
-        <div class="form-group col-sm-4 col-md-3">
-          {{ filter.form.title.label_tag }}
-          {% render_field filter.form.title class="form-control" %}
-        </div>
         <div class="form-group col-sm-4 col-md-3">
           {{ filter.form.forename.label_tag }}
           {% render_field filter.form.forename class="form-control" %}
@@ -32,8 +28,12 @@
           {% render_field filter.form.sex class="form-control" %}
         </div>
         <div class="form-group col-sm-4 col-md-3">
-          {{ filter.form.year_of_birth.label_tag }}
-          {% render_field filter.form.year_of_birth class="form-control" %}
+          {{ filter.form.modified_by.label_tag }}
+          {% render_field filter.form.modified_by class="form-control" %}
+        </div>
+        <div class="form-group col-sm-4 col-md-3">
+          {{ filter.form.contract_type.label_tag }}
+          {% render_field filter.form.contract_type class="form-control" %}
         </div>
       </div>
       {% include 'partials/filter_buttons.html' %}
@@ -43,5 +43,6 @@
     </div>
   </form>
   {% load render_table from django_tables2 %}
-  {% render_table table "table_with_pagination.html" %}
+  <!--/Users/stephenmcgonigal/django_projs/common/templates/table_with_pagination.html-->
+  {% render_table clients_table "table_with_pagination.html" %}
 {% endblock %}

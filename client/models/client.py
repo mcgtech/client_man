@@ -224,6 +224,16 @@ class Client(Person):
     start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
 
+    # https://stackoverflow.com/questions/26168985/django-tables-2-field-accessor-backward-relationship
+    # I do this so that I can show the 1->m el between client and contracts using django-tables2
+    @property
+    def contracts_data(self):
+        contracts = self.contracts.all()
+        for c in contracts:
+            print(c.get_type_display)
+
+        return ', '.join([ str(c.get_type_display) for c in contracts])
+
     def get_add_contract_url(self):
         from django.urls import reverse
         return reverse('contract_new', args=[str(self.id)])
