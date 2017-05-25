@@ -75,6 +75,14 @@ class Contract(Auditable):
     application_form = models.FileField(upload_to='client/con_app_form/', blank=True, null=True)
     client = models.ForeignKey(Client, on_delete=models.CASCADE, null=True, related_name="contract")
 
+    def get_link(self):
+        url = self.get_absolute_url()
+        link = '<a target="_blank" href="' + url + '">' + self.get_type_display() + '</a>'
+        start = self.start_date.strftime(settings.DISPLAY_DATE) if self.start_date is not None else ''
+        end = (' to ' + self.end_date.strftime(settings.DISPLAY_DATE)) if self.end_date is not None else ''
+
+        return link + ' ' + start + end
+
     def get_absolute_url(self):
         from django.urls import reverse
         return reverse('contract_edit', args=[str(self.client.id), str(self.id)])

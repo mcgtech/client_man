@@ -4,6 +4,7 @@
 <!--https://simpleisbetterthancomplex.com/2015/12/04/package-of-the-week-django-widget-tweaks.html-->
 {% load widget_tweaks %}
 {% block css %}
+    <link rel="stylesheet" href="{% static 'css/client_search.css' %}" />
     {% include 'partials/django_tables2_css_includes.html' %}
 {% endblock %}
 {% block js %}
