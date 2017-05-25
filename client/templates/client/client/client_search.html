@@ -6,12 +6,19 @@
 {% block css %}
     {% include 'partials/django_tables2_css_includes.html' %}
 {% endblock %}
+{% block js %}
+    {% include 'partials/django_tables2_js_includes.html' %}
+{% endblock %}
 
 {% block content %}
   <form method="get">
     <div class="well">
-      <h4 style="margin-top: 0">Filter</h4>
+      <h4 style="margin-top: 0">Filters</h4>
       <div class="row">
+        <div class="form-group col-sm-4 col-md-3">
+          {{ filter.form.title.label_tag }}
+          {% render_field filter.form.title class="form-control" %}
+        </div>
         <div class="form-group col-sm-4 col-md-3">
           {{ filter.form.forename.label_tag }}
           {% render_field filter.form.forename class="form-control" %}
@@ -29,8 +36,9 @@
           {% render_field filter.form.year_of_birth class="form-control" %}
         </div>
       </div>
-      <button type="submit" class="btn btn-primary">
-        <span class="glyphicon glyphicon-search"></span> Search
+      {% include 'partials/filter_buttons.html' %}
+      <button style="float:right;" type="button" onclick="javascript:window.location='{% url 'client_new' %}';" class="btn btn-success">
+        <span class="glyphicon glyphicon-plus"></span> Client
       </button>
     </div>
   </form>

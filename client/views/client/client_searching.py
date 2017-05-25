@@ -21,7 +21,7 @@ class ClientsTable(tables.Table):
         attrs = {"class": "paleblue table table-striped table-hover table-bordered"}
         sequence = ('client_id', '...')
 
-# see filters.py for code that does the filtering
+# for code that does the filtering (using django-filter) see /Users/stephenmcgonigal/django_projs/client/filters.py
 # https://simpleisbetterthancomplex.com/tutorial/2016/11/28/how-to-filter-querysets-dynamically.html
 # https://simpleisbetterthancomplex.com/2015/12/04/package-of-the-week-django-widget-tweaks.html
 # https://django-tables2.readthedocs.io/en/latest/pages/tutorial.html
@@ -31,7 +31,7 @@ class ClientViewFilter(GroupRequiredMixin, FilterView, SingleTableView):
     group_required = u"job coach"
     model = Client
     table_class = ClientsTable
-    filterset_class = ClientFilter
+    filterset_class = ClientFilter # see /Users/stephenmcgonigal/django_projs/client/filters.py
     template_name='client/client/client_search.html'
 
 

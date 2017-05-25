@@ -46,12 +46,6 @@ how to get django to communicate with mysql:
 /Users/stephenmcgonigal/django/client_man
 source client_man/bin/activate
 
-git
-git repo: mcgtech/PsE2XGg3csTkI8n7
-git add --all .
-git commit -m ""
-git push -u origin master
-
 start webserver
 cd /Users/stephenmcgonigal/django_projs
 source cmenv/bin/activate

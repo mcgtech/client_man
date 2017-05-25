@@ -2,24 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="053a4aa4-3808-4504-ab0a-5f7dd90a79bc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/docs/rebuild_steps.txt" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/migrations/0001_initial.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/migrations/0002_auto_20170523_1208.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/migrations/0003_auto_20170523_1710.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/common/migrations/0001_initial.py" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/client/templates/search/client_search.html" afterPath="$PROJECT_DIR$/client/templates/client/client/client_search.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/client/templates/search/client_search_old.html" afterPath="$PROJECT_DIR$/client/templates/client/client/client_search_old.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/docs/git_commands.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/common/templates/partials/django_tables2_js_includes.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/common/templates/partials/filter_buttons.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/django_tables2/filter_helper.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/static/css/django_tables2/bs_screen.css" afterPath="$PROJECT_DIR$/static/django_tables2/bs_screen.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/static/css/django_tables2/img/arrow-active-down.png" afterPath="$PROJECT_DIR$/static/django_tables2/img/arrow-active-down.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/static/css/django_tables2/img/arrow-active-up.png" afterPath="$PROJECT_DIR$/static/django_tables2/img/arrow-active-up.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/static/css/django_tables2/img/arrow-inactive-down.png" afterPath="$PROJECT_DIR$/static/django_tables2/img/arrow-inactive-down.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/static/css/django_tables2/img/arrow-inactive-up.png" afterPath="$PROJECT_DIR$/static/django_tables2/img/arrow-inactive-up.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/static/css/django_tables2/img/false.gif" afterPath="$PROJECT_DIR$/static/django_tables2/img/false.gif" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/static/css/django_tables2/img/header-bg.png" afterPath="$PROJECT_DIR$/static/django_tables2/img/header-bg.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/static/css/django_tables2/img/missing.png" afterPath="$PROJECT_DIR$/static/django_tables2/img/missing.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/static/css/django_tables2/img/pagination-bg.gif" afterPath="$PROJECT_DIR$/static/django_tables2/img/pagination-bg.gif" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/static/css/django_tables2/img/true.gif" afterPath="$PROJECT_DIR$/static/django_tables2/img/true.gif" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/docs/project_setup.txt" afterPath="$PROJECT_DIR$/client/docs/project_setup.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/forms/client.py" afterPath="$PROJECT_DIR$/client/forms/client.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/forms/contract.py" afterPath="$PROJECT_DIR$/client/forms/contract.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/client/migration/load_clients.html" afterPath="$PROJECT_DIR$/client/templates/client/migration/load_clients.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/client/client_crud.py" afterPath="$PROJECT_DIR$/client/views/client/client_crud.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/filters.py" afterPath="$PROJECT_DIR$/client/filters.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/client/client/client_search.html" afterPath="$PROJECT_DIR$/client/templates/client/client/client_search.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/client/client_searching.py" afterPath="$PROJECT_DIR$/client/views/client/client_searching.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/contract/contract_crud.py" afterPath="$PROJECT_DIR$/client/views/contract/contract_crud.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/migration/migration.py" afterPath="$PROJECT_DIR$/client/views/migration/migration.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/forms.py" afterPath="$PROJECT_DIR$/common/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/models.py" afterPath="$PROJECT_DIR$/common/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/templates/partials/django_tables2_css_includes.html" afterPath="$PROJECT_DIR$/common/templates/partials/django_tables2_css_includes.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -34,33 +36,19 @@
       <file leaf-file-name="project_setup.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/docs/project_setup.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="703">
-              <caret line="93" column="0" lean-forward="false" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="121" />
+            <state relative-caret-position="690">
+              <caret line="46" column="30" lean-forward="false" selection-start-line="46" selection-start-column="30" selection-end-line="46" selection-end-column="30" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="client_searching.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/client/views/client/client_searching.py">
+      <file leaf-file-name="git_commands.txt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/client/docs/git_commands.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="397">
-              <caret line="29" column="72" lean-forward="false" selection-start-line="29" selection-start-column="72" selection-end-line="29" selection-end-column="72" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="35" lean-forward="false" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="35" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="15">
+              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="2" selection-end-column="16" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -69,7 +57,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>no data</find>
       <find>del_butt</find>
       <find>submit-id-save-record</find>
       <find>submit-id-save-recor</find>
@@ -99,6 +86,7 @@
       <find>client_detail.</find>
       <find>client_detail.h</find>
       <find>client_detail.ht</find>
+      <find>filt</find>
     </findStrings>
     <replaceStrings>
       <replace>client_notes</replace>
@@ -118,12 +106,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/client/forms/__init__.py" />
-        <option value="$PROJECT_DIR$/client/static/css/contract_edit.css" />
-        <option value="$PROJECT_DIR$/common/templates/partials/errors.html" />
-        <option value="$PROJECT_DIR$/common/templates/base.html" />
-        <option value="$PROJECT_DIR$/static/js/date_helper.js" />
-        <option value="$PROJECT_DIR$/client/static/js/contract_edit.js" />
         <option value="$PROJECT_DIR$/client/admin.py" />
         <option value="$PROJECT_DIR$/common/templates/partials/messages.html" />
         <option value="$PROJECT_DIR$/common/templates/partials/form_edit_helpers.html" />
@@ -137,7 +119,6 @@
         <option value="$PROJECT_DIR$/client/filter.py" />
         <option value="$PROJECT_DIR$/client_man/urls.py" />
         <option value="$PROJECT_DIR$/common/views.py" />
-        <option value="$PROJECT_DIR$/client/filters.py" />
         <option value="$PROJECT_DIR$/cmenv/lib/python3.5/site-packages/django_tables2/templates/django_tables2/bootstrap-responsive.html" />
         <option value="$PROJECT_DIR$/common/templates/table_with_page.html" />
         <option value="$PROJECT_DIR$/client/templates/search/test_search.html" />
@@ -148,7 +129,6 @@
         <option value="$PROJECT_DIR$/cmenv/lib/python3.5/site-packages/django_tables2/static/django_tables2/themes/paleblue/css/bs_screen.css" />
         <option value="$PROJECT_DIR$/client/static/css/client.css" />
         <option value="$PROJECT_DIR$/static/css/django_tables2/bs_screen.css" />
-        <option value="$PROJECT_DIR$/common/templates/partials/django_tables2_css_includes.html" />
         <option value="$PROJECT_DIR$/client/templates/search/client_search_old.html" />
         <option value="$PROJECT_DIR$/client/templates/client/client/client_contracts.html" />
         <option value="$PROJECT_DIR$/static/js/form_helper/form_handlers.js" />
@@ -167,8 +147,16 @@
         <option value="$PROJECT_DIR$/client/forms/contract.py" />
         <option value="$PROJECT_DIR$/client/templates/client/migration/load_clients.html" />
         <option value="$PROJECT_DIR$/client/views/migration/migration.py" />
-        <option value="$PROJECT_DIR$/client/docs/project_setup.txt" />
         <option value="$PROJECT_DIR$/client/views/client/client_searching.py" />
+        <option value="$PROJECT_DIR$/client/filters.py" />
+        <option value="$PROJECT_DIR$/static/js/django_tables2/filter_helper.js" />
+        <option value="$PROJECT_DIR$/common/templates/partials/django_tables2_css_includes.html" />
+        <option value="$PROJECT_DIR$/common/templates/partials/django_tables2_js_includes.html" />
+        <option value="$PROJECT_DIR$/static/django_tables2/filter_helper.js" />
+        <option value="$PROJECT_DIR$/common/templates/partials/filter_buttons.html" />
+        <option value="$PROJECT_DIR$/client/templates/client/client/client_search.html" />
+        <option value="$PROJECT_DIR$/client/docs/project_setup.txt" />
+        <option value="$PROJECT_DIR$/client/docs/git_commands.txt" />
       </list>
     </option>
   </component>
@@ -238,6 +226,78 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="django_projs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="django_projs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="static" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="django_tables2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="django_projs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="django_projs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="django_projs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="django_projs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="django_projs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="django_projs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="partials" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -352,36 +412,6 @@
               <option name="myItemId" value="client" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="migration" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="django_projs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="django_projs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="contract" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -423,25 +453,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="migrations" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="django_projs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="django_projs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="forms" />
+              <option name="myItemId" value="models" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -470,18 +482,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/common/templates/partials" />
       <recent name="$PROJECT_DIR$/static/css/django_tables2" />
       <recent name="$PROJECT_DIR$/cmenv/lib/python3.5/site-packages/django_tables2/static/django_tables2/themes/paleblue/css" />
-      <recent name="$PROJECT_DIR$/common/templates/partials" />
       <recent name="$PROJECT_DIR$/static" />
       <recent name="$PROJECT_DIR$/client/templates/search" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/static" />
+      <recent name="$PROJECT_DIR$/static/css/django_tables2" />
       <recent name="$PROJECT_DIR$/client/templates/client/client" />
       <recent name="$PROJECT_DIR$/static/css/django_table2" />
       <recent name="$PROJECT_DIR$/client/templates/client/migration" />
-      <recent name="$PROJECT_DIR$/client/templates/client/contract" />
-      <recent name="$PROJECT_DIR$/client/views/migration" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -656,54 +668,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/common/templates/partials/datatable_css_includes.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="22" lean-forward="false" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/templates/common/datatable_base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="112" lean-forward="true" selection-start-line="3" selection-start-column="15" selection-end-line="4" selection-end-column="112" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/templates/partials/datatable_js_includes.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="22" lean-forward="false" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/models/contract.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="563">
-          <caret line="74" column="20" lean-forward="false" selection-start-line="74" selection-start-column="4" selection-end-line="74" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="48" column="30" lean-forward="false" selection-start-line="48" selection-start-column="30" selection-end-line="48" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/templates/client/client/client_detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="24" lean-forward="true" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/templates/client/client/client_search_old.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -749,16 +713,6 @@
         <state relative-caret-position="98">
           <caret line="62" column="55" lean-forward="false" selection-start-line="62" selection-start-column="55" selection-end-line="62" selection-end-column="55" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/filters.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="18" lean-forward="false" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#32#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -810,7 +764,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/css/django_tables2/bs_screen.css">
+    <entry file="file://$PROJECT_DIR$/static/django_tables2/bs_screen.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="659">
           <caret line="55" column="1" lean-forward="false" selection-start-line="55" selection-start-column="1" selection-end-line="55" selection-end-column="1" />
@@ -826,26 +780,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/common/templates/partials/django_tables2_css_includes.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="76" lean-forward="false" selection-start-line="1" selection-start-column="76" selection-end-line="1" selection-end-column="76" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/templates/client/client/client_search_old.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="570">
           <caret line="38" column="25" lean-forward="true" selection-start-line="37" selection-start-column="17" selection-end-line="38" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/templates/client/client/client_search.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="61" lean-forward="false" selection-start-line="6" selection-start-column="61" selection-end-line="6" selection-end-column="61" />
           <folding />
         </state>
       </provider>
@@ -929,34 +867,6 @@
         <state relative-caret-position="15">
           <caret line="1" column="20" lean-forward="false" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="20" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
-          <caret line="40" column="16" lean-forward="false" selection-start-line="40" selection-start-column="16" selection-end-line="40" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/models/client.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
-          <caret line="215" column="13" lean-forward="false" selection-start-line="215" selection-start-column="11" selection-end-line="215" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="31" column="5" lean-forward="false" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
-          <folding>
-            <marker date="1495706115000" expanded="true" signature="4820:4854" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1062,21 +972,125 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/docs/project_setup.txt">
+    <entry file="file://$PROJECT_DIR$/client/models/client.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="703">
-          <caret line="93" column="0" lean-forward="false" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="121" />
+        <state relative-caret-position="486">
+          <caret line="215" column="13" lean-forward="false" selection-start-line="215" selection-start-column="11" selection-end-line="215" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="32" column="9" lean-forward="false" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="9" />
+          <folding>
+            <marker date="1495706115000" expanded="true" signature="4820:4854" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/templates/partials/datepicker_js_includes.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="79" lean-forward="true" selection-start-line="0" selection-start-column="22" selection-end-line="1" selection-end-column="79" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/templates/partials/django_tables2_css_includes.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="40" lean-forward="false" selection-start-line="2" selection-start-column="40" selection-end-line="2" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/filters.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="131" lean-forward="false" selection-start-line="6" selection-start-column="131" selection-end-line="6" selection-end-column="131" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/django_tables2/filter_helper.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="64" lean-forward="false" selection-start-line="11" selection-start-column="64" selection-end-line="11" selection-end-column="64" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/views/client/client_searching.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="29" column="72" lean-forward="false" selection-start-line="29" selection-start-column="72" selection-end-line="29" selection-end-column="72" />
+        <state relative-caret-position="457">
+          <caret line="33" column="95" lean-forward="false" selection-start-line="33" selection-start-column="95" selection-end-line="33" selection-end-column="95" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="303">
+          <caret line="40" column="117" lean-forward="false" selection-start-line="40" selection-start-column="109" selection-end-line="40" selection-end-column="117" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/templates/partials/django_tables2_js_includes.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="93" lean-forward="false" selection-start-line="1" selection-start-column="93" selection-end-line="1" selection-end-column="93" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/templates/partials/filter_buttons.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="98" lean-forward="false" selection-start-line="3" selection-start-column="98" selection-end-line="3" selection-end-column="98" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/templates/nav_bar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="30" column="25" lean-forward="true" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/templates/client/client/client_search.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="585">
+          <caret line="39" column="33" lean-forward="false" selection-start-line="39" selection-start-column="33" selection-end-line="39" selection-end-column="33" />
+          <folding>
+            <element signature="n#style#0;n#button#0;n#div#0;n#form#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/docs/project_setup.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="690">
+          <caret line="46" column="30" lean-forward="false" selection-start-line="46" selection-start-column="30" selection-end-line="46" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/docs/git_commands.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="2" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
