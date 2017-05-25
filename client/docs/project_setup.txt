@@ -25,34 +25,6 @@ https://scotch.io/tutorials/working-with-django-templates-static-files
 # auto comp lite: http://django-autocomplete-light.readthedocs.io/en/master/tutorial.html
 http://www.lalicode.com/post/5/
 
-to rebuild:
-delete database client_management
-create database client_management
-from env:
-    python manage.py migrate
-    python manage.py makemigrations client
-    python manage.py migrate client
-
-run following two pieces of sql and replace relevant sections in setup.py:
-
-select concat(LOWER(REPLACE(u.name, ' ', '')), ' = ', "User.objects.create_user('", LOWER(REPLACE(u.name, ' ', '')), "', '", u.mail, "', '", LOWER(REPLACE(u.name, ' ', '')), "123');", LOWER(REPLACE(u.name, ' ', '')), ".is_staff=True;", LOWER(REPLACE(u.name, ' ', '')), ".save()")
-from users u, users_roles ur
-where u.uid = ur.uid
-and  ur.rid = 8
-union
-select "closed = User.objects.create_user('closed', 'closed@closed', 'closed123');"
-
-select concat('job_coach_group.user_set.add(', LOWER(REPLACE(u.name, ' ', '')), ')')
-from users u, users_roles ur
-where u.uid = ur.uid
-and  ur.rid = 8
-union
-select "job_coach_group.user_set.add(closed)"
-
-run following:
-python manage.py shell < setup_usres_and_groups.py
-
-
 searching
 if the searching I use is too basic then consider:
 https://simpleisbetterthancomplex.com/tutorial/2016/11/28/how-to-filter-querysets-dynamically.html
@@ -119,6 +91,8 @@ pip install django-tables2
 pip install django-filter
 pip install django-widget-tweaks
 pip install django-bootstrap-pagination
+# https://github.com/brack3t/django-braces & http://django-braces.readthedocs.io/en/v1.4.0/access.html#loginrequiredmixin
+pip install django-braces
 if not checking out previous project:
 	# create project
 	cd /Users/stephenmcgonigal/django_projs

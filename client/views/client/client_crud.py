@@ -81,7 +81,7 @@ def manage_client(request, client_id=None):
     if del_request:
         return del_request
     elif request.method == "POST":
-        client_form = ClientForm(request.POST, request.FILES, instance=client, prefix="main", is_edit_form=is_edit_form, cancel_url=None)
+        client_form = ClientForm(request.POST, request.FILES, instance=client, prefix="main", is_edit_form=is_edit_form, cancel_url=None, add_contract=is_edit_form)
         address_form = AddressForm(request.POST, request.FILES, instance=address, prefix="address")
         notes_form_set = NoteInlineFormSet(request.POST, request.FILES, instance=client, prefix="nested")
         phone_form_set = PhoneInlineFormSet(request.POST, request.FILES, instance=client, prefix="phones")
@@ -99,7 +99,7 @@ def manage_client(request, client_id=None):
     else:
         cancel_url = redirect('client_search').url
         address_form = AddressForm(instance=address, prefix="address")
-        client_form = ClientForm(instance=client, prefix="main", is_edit_form=is_edit_form, cancel_url=cancel_url)
+        client_form = ClientForm(instance=client, prefix="main", is_edit_form=is_edit_form, cancel_url=cancel_url, add_contract=is_edit_form)
         notes_form_set = NoteInlineFormSet(instance=client, prefix="nested")
         phone_form_set = PhoneInlineFormSet(instance=client, prefix="phones")
     # crispy form helper for formsets

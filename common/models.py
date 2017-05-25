@@ -19,17 +19,6 @@ class Auditable(models.Model):
 # https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#abstractuser
 # class Person(Auditable):
 class Person(Auditable):
-    CLIENT = 0
-    JOB_COACH = 1
-    MANAGER = 2
-    PARTNER = 3
-    TYPES = (
-        (None, 'Please select'),
-        (CLIENT, 'Client'),
-        (JOB_COACH, 'Job Coach'),
-        (MANAGER, 'Manager'),
-        (PARTNER, 'Partner'),
-    )
     MR = 0
     MRS = 1
     MISS = 2
@@ -41,7 +30,6 @@ class Person(Auditable):
         (MISS, 'Miss'),
         (MS, 'Ms'),
     )
-    type = models.IntegerField(choices=TYPES, default=None)
     title = models.IntegerField(choices=TITLES, default=None)
     middle_name = models.CharField(max_length=100, blank=True)
     known_as = models.CharField(max_length=100, blank=True)

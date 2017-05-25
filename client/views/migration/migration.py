@@ -47,7 +47,6 @@ def load_clients(request):
                 home_phone = get_clean_json_data(json_client['home_phone'])
                 mobile_phone = get_clean_json_data(json_client['mobile'])
                 client = Client()
-                client.type = Person.CLIENT
 
                 start_date = get_clean_json_data(json_client['start_date'])
                 if len(start_date) > 0:
@@ -140,7 +139,7 @@ def load_clients(request):
                     es = 'Client not created yet ' + str(e)
                 errors.append(es)
 
-    return render(request, 'client/load_clients.html', {'json_clients': json_clients, 'items' : items, 'errors' :  errors})
+    return render(request, 'client/migration/load_clients.html', {'json_clients': json_clients, 'items' : items, 'form_errors' :  errors})
 
 def get_clean_json_data(json_data):
     if json_data is None:

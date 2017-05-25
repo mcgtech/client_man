@@ -8,6 +8,7 @@ import json
 from client.filters import ClientFilter
 from django_filters.views import FilterView
 from django_tables2 import SingleTableView, tables, LinkColumn, A
+from braces.views import GroupRequiredMixin
 
 class ClientsTable(tables.Table):
     # https://stackoverflow.com/questions/33184108/how-to-change-display-text-in-django-tables-2-link-column
@@ -25,12 +26,13 @@ class ClientsTable(tables.Table):
 # https://simpleisbetterthancomplex.com/2015/12/04/package-of-the-week-django-widget-tweaks.html
 # https://django-tables2.readthedocs.io/en/latest/pages/tutorial.html
 # https://django-filter.readthedocs.io/en/develop/guide/usage.html#the-template
-# TODO: restrict access
-class ClientViewFilter(FilterView, SingleTableView):
+# restrict access: # https://github.com/brack3t/django-braces & http://django-braces.readthedocs.io/en/v1.4.0/access.html#loginrequiredmixin
+class ClientViewFilter(GroupRequiredMixin, FilterView, SingleTableView):
+    group_required = u"job coach"
     model = Client
     table_class = ClientsTable
     filterset_class = ClientFilter
-    template_name='search/client_search.html'
+    template_name='client/client/client_search.html'
 
 
 # I hae kept the following just in case I need it later
@@ -77,16 +79,3 @@ def quick_client_search(request):
   mimetype = 'application/json'
 
   return HttpResponse(data, mimetype)
-
-
-@login_required
-@user_passes_test(super_user_or_job_coach, 'client_man_login')
-def client_search(request):
-    # this is simply getting all clients and then filtering client side using the js helper: https://www.datatables.net/
-    # if this becomes a perf problem then read: https://simpleisbetterthancomplex.com/tutorial/2016/11/28/how-to-filter-querysets-dynamically.html
-    # note however that https://www.datatables.net/ can use ajax to reduce no of client returned, if I go down this pass then consider
-    # using https://github.com/shymonk/django-datatable
-    #
-    # https://simpleisbetterthancomplex.com/tips/2016/05/16/django-tip-3-optimize-database-queries.html
-	clients = Client.objects.select_related('user').all()
-	return render(request, 'search/client_search.html', {'clients' : clients})

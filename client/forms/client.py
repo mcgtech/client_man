@@ -16,8 +16,10 @@ class ClientForm(AuditableForm):
     password = forms.CharField(widget=forms.PasswordInput(), required=False)
 
     def __init__(self, *args, **kwargs):
+        add_contract = kwargs.pop('add_contract')
         super().__init__(*args, **kwargs)
-        self.helper.add_input(Button("add contract", "Add New Contract", css_class='btn btn-success add-contract-btn'))
+        if add_contract:
+            self.helper.add_input(Button("add contract", "Add New Contract", css_class='btn btn-success add-contract-btn'))
         self.helper.layout = Layout(
             TabHolder(
                 Tab(

@@ -59,7 +59,7 @@ def manage_contract(request, client_id, contract_id=None):
     if del_request:
         return del_request
     elif request.method == "POST":
-        contract_form = ContractForm(request.POST, request.FILES, instance=contract, prefix="contract", is_edit_form=is_edit_form, cancel_url=None)
+        contract_form = ContractForm(request.POST, request.FILES, instance=contract, prefix="contract", is_edit_form=is_edit_form, cancel_url=None, add_contract=is_edit_form)
         if contract_form.is_valid():
             created_contract = contract_form.save(commit=False)
             apply_auditable_info(created_contract, request)
@@ -70,7 +70,7 @@ def manage_contract(request, client_id, contract_id=None):
             return redirect(action)
     else:
         cancel_url = redirect('client_edit', pk=client.id).url
-        contract_form = ContractForm(instance=contract, prefix="contract", is_edit_form=is_edit_form, cancel_url=cancel_url)
+        contract_form = ContractForm(instance=contract, prefix="contract", is_edit_form=is_edit_form, cancel_url=cancel_url, add_contract=is_edit_form)
 
     # setup js variables for template
     #https://godjango.com/blog/working-with-json-and-django/

@@ -12,8 +12,10 @@ from django.conf import settings
 # otherwise tabs doesn't work
 class ContractForm(AuditableForm):
     def __init__(self, *args, **kwargs):
+        add_contract = kwargs.pop('add_contract')
         super().__init__(*args, **kwargs)
-        self.helper.add_input(Button("add contract", "Add New Contract", css_class='btn btn-success add-contract-btn'))
+        if add_contract:
+            self.helper.add_input(Button("add contract", "Add New Contract", css_class='btn btn-success add-contract-btn'))
         self.prepare_required_field('type', 'Type')
         self.prepare_required_field('secondary_client_group', 'Secondary client group')
         self.prepare_required_field('type', 'Type')
