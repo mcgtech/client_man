@@ -7,33 +7,9 @@ from django.http import HttpResponse
 import json
 from client.filters import ClientFilter
 from django_filters.views import FilterView
-from django_tables2 import SingleTableView, tables, LinkColumn, A, SingleTableMixin, Column
 from braces.views import GroupRequiredMixin
-from django.utils.html import format_html
-
-class ClientsTable(tables.Table):
-    # https://stackoverflow.com/questions/33184108/how-to-change-display-text-in-django-tables-2-link-column
-    # http://django-tables2.readthedocs.io/en/latest/pages/api-reference.html#linkcolumn
-    client_id = LinkColumn('client_edit', text=lambda record: record.id, args=[A('pk')], attrs={'a': {'target': '_blank'}})
-    # https://stackoverflow.com/questions/26168985/django-tables-2-field-accessor-backward-relationship
-    # I do this so that I can show the 1->m el between client and contracts using django-tables2
-    # contracts = Column(accessor='contracts_data')
-
-    # https://github.com/bradleyayers/django-tables2/issues/256
-    contracts = Column(empty_values=(),
-                          verbose_name='Contracts')
-
-    def render_contracts(self, record):
-        if record.contract.exists():
-            con_links = [c.get_link() for c in record.contract.all().order_by('start_date')]
-            return format_html("<br>".join(con_links), record)
-
-    class Meta:
-        model = Client
-        # fiels to display in table
-        fields = ('title', 'forename', 'surname', 'sex', 'job_coach', 'age', 'address.area')
-        attrs = {"class": "paleblue table table-striped table-hover table-bordered"}
-        sequence = ('client_id', '...')
+from client.tables import ClientsTable
+from django_tables2 import SingleTableView
 
 # for code that does the filtering (using django-filter) see /Users/stephenmcgonigal/django_projs/client/filters.py
 # https://simpleisbetterthancomplex.com/tutorial/2016/11/28/how-to-filter-querysets-dynamically.html
@@ -44,20 +20,16 @@ class ClientsTable(tables.Table):
 class ClientViewFilter(GroupRequiredMixin, FilterView, SingleTableView):
     group_required = u"job coach"
     model = Client
-    table_class = ClientsTable
+    table_class = ClientsTable # /Users/stephenmcgonigal/django_projs/client/tables.py
     filterset_class = ClientFilter # see /Users/stephenmcgonigal/django_projs/client/filters.py
     template_name='client/client/client_search.html'
     # see /Users/stephenmcgonigal/django_projs/cmenv/lib/python3.5/site-packages/django_tables2/views.py
     # SingleTableMixin class (SingleTableView inherits from it)
-    table_pagination = {'per_page': 5}
+    table_pagination = {'per_page': 15}
     context_table_name = 'clients_table'
 
 
-    # table_data = Client.objects.select_related('user').all()
-    # table_data = Client.objects.select_related('user').all().filter(surname__startswith='Aitken')
-
-
-# I hae kept the following just in case I need it later
+# I have kept the following just in case I need it later
 # it search and then uses dttatable.js to apply filtering and pagination
 @login_required
 @user_passes_test(super_user_or_job_coach, 'client_man_login')

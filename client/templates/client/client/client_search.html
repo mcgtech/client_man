@@ -8,6 +8,7 @@
     {% include 'partials/django_tables2_css_includes.html' %}
 {% endblock %}
 {% block js %}
+    {% include 'partials/datepicker_js_includes.html' %}
     {% include 'partials/django_tables2_js_includes.html' %}
 {% endblock %}
 
@@ -32,9 +33,29 @@
           {{ filter.form.modified_by.label_tag }}
           {% render_field filter.form.modified_by class="form-control" %}
         </div>
+      </div>
+      <div class="row">
         <div class="form-group col-sm-4 col-md-3">
           {{ filter.form.contract_type.label_tag }}
           {% render_field filter.form.contract_type class="form-control" %}
+        </div>
+        <div class="form-group col-sm-4 col-md-3">
+          {{ filter.form.modified_by.label_tag }}
+          {% render_field filter.form.modified_by class="form-control" %}
+        </div>
+        <div class="form-group col-sm-4 col-md-3">
+          {{ filter.form.modified_on.label_tag }}
+          {% render_field filter.form.modified_on class="form-control datepicker" %}
+        </div>
+        <div class="form-group col-sm-4 col-md-3">
+          {{ filter.form.contract_started.label_tag }}
+          {% render_field filter.form.contract_started class="form-control datepicker" %}
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-4 col-md-3">
+          {{ filter.form.area.label_tag }}
+          {% render_field filter.form.area class="form-control" %}
         </div>
       </div>
       {% include 'partials/filter_buttons.html' %}
