@@ -35,5 +35,5 @@ class ClientFilter(django_filters.FilterSet):
     def filter_address_area(self, queryset, name, value):
         return queryset.filter(**{'address__area': value})
 
-    # def filter_client_age(self, queryset, name, value):
-    #     return queryset.filter(**{'contract__type': value})
+    # def filter_client_age(self, queryset, name, age):
+    #     return queryset.filter()
