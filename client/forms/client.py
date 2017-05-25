@@ -17,7 +17,7 @@ class ClientForm(AuditableForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.helper.add_input(Button("add contract", "Add Contract", css_class='btn btn-success add-contract-btn'))
+        self.helper.add_input(Button("add contract", "Add New Contract", css_class='btn btn-success add-contract-btn'))
         self.helper.layout = Layout(
             TabHolder(
                 Tab(

@@ -1,3 +1,5 @@
 . showing list inside a form:
     template should include <table>.... and make use of the datatable.js pugin - see contracts inside client edit
 . list in a url by itself:  use django-tables2 with django-filter if perf consideration and filtering required
+. request on delete, chec on leaving dirty page and code to enabled readonly selects are all loaded atuomatically in
+/Users/stephenmcgonigal/django_projs/static/js/edit_form_helpers.js

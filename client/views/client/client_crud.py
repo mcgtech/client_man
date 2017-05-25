@@ -40,6 +40,10 @@ def manage_client(request, client_id=None):
     # TODO: suss if I should be using https://simpleisbetterthancomplex.com/tips/2016/05/16/django-tip-3-optimize-database-queries.html in this fn
     extra_notes = 0
     extra_phones = 0
+    # setup js variables for template
+    #https://godjango.com/blog/working-with-json-and-django/
+    # needs {% include 'partials/inject_js_data.html' %} added to template (acced via data_from_django in js)
+    js_dict = {}
     if client_id is None:
         extra_notes = 1
         extra_phones = 1
@@ -50,10 +54,12 @@ def manage_client(request, client_id=None):
         NoteInlineFormSet = inlineformset_factory(Client, Note, form=NoteForm, extra=extra_notes, can_delete=False)
         PhoneInlineFormSet = inlineformset_factory(Client, Telephone, form=PhoneForm, extra=extra_phones, can_delete=False)
         action = '/client/new/'
+        msg_once_only(request, 'Adding a new client', settings.WARN_MSG_TYPE)
     else:
         the_action_text = 'Edit'
         is_edit_form = True
         client = get_object_or_404(Client, pk=client_id)
+        add_contract_js_data(js_dict, client)
         addresses = Address.objects.filter(person_id=client_id)
         if len(addresses) == 1:
             address = addresses[0]
@@ -75,7 +81,7 @@ def manage_client(request, client_id=None):
     if del_request:
         return del_request
     elif request.method == "POST":
-        client_form = ClientForm(request.POST, request.FILES, instance=client, prefix="main", add_delete=is_edit_form)
+        client_form = ClientForm(request.POST, request.FILES, instance=client, prefix="main", is_edit_form=is_edit_form, cancel_url=None)
         address_form = AddressForm(request.POST, request.FILES, instance=address, prefix="address")
         notes_form_set = NoteInlineFormSet(request.POST, request.FILES, instance=client, prefix="nested")
         phone_form_set = PhoneInlineFormSet(request.POST, request.FILES, instance=client, prefix="phones")
@@ -88,11 +94,12 @@ def manage_client(request, client_id=None):
             save_client_notes(notes_form_set, request)
             save_client_phones(phone_form_set, request)
             action = '/client/' + str(created_client.id) + '/edit' + '/'
-            display_client_summary_message(client, request, 'Saved ' + client.get_full_name())
+            display_client_summary_message(client, request, 'Saved ' + client.get_full_name(), settings.INFO_MSG_TYPE)
             return redirect(action)
     else:
+        cancel_url = redirect('client_search').url
         address_form = AddressForm(instance=address, prefix="address")
-        client_form = ClientForm(instance=client, prefix="main", add_delete=is_edit_form)
+        client_form = ClientForm(instance=client, prefix="main", is_edit_form=is_edit_form, cancel_url=cancel_url)
         notes_form_set = NoteInlineFormSet(instance=client, prefix="nested")
         phone_form_set = PhoneInlineFormSet(instance=client, prefix="phones")
     # crispy form helper for formsets
@@ -101,12 +108,7 @@ def manage_client(request, client_id=None):
 
     # https://docs.djangoproject.com/en/1.11/topics/db/queries/#limiting-querysets
     contracts = client.contract.all().order_by('-start_date')
-    # contracts_table = SimpleTable(contracts)
-    # RequestConfig(request).configure(contracts_table)
 
-    # setup js variables for template
-    #https://godjango.com/blog/working-with-json-and-django/
-    js_dict = {'add_con_url' : client.get_add_contract_url()}
     js_data = json.dumps(js_dict)
 
     client_form_errors = form_errors_as_array(client_form)
@@ -122,6 +124,8 @@ def manage_client(request, client_id=None):
                                                         'contracts' : contracts, 'js_data' : js_data,
                                                        'form_errors': form_errors})
 
+def add_contract_js_data(js_dict, client):
+    js_dict['add_con_url'] = client.get_add_contract_url()
 
 # remove request, client_from_db is not required
 def save_client_details(client_form, user, request):

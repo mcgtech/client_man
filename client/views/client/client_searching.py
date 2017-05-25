@@ -7,13 +7,18 @@ from django.http import HttpResponse
 import json
 from client.filters import ClientFilter
 from django_filters.views import FilterView
-from django_tables2 import SingleTableView, tables
+from django_tables2 import SingleTableView, tables, LinkColumn, A
 
 class ClientsTable(tables.Table):
+    # https://stackoverflow.com/questions/33184108/how-to-change-display-text-in-django-tables-2-link-column
+    # http://django-tables2.readthedocs.io/en/latest/pages/api-reference.html#linkcolumn
+    client_id = LinkColumn('client_edit', text=lambda record: record.id, args=[A('pk')], attrs={
+                                                                                        'a': {'target': '_blank'}})
     class Meta:
         model = Client
         fields = ('title', 'forename', 'surname', 'sex')
-        attrs = {"class": "paleblue table table-striped"}
+        attrs = {"class": "paleblue table table-striped table-hover table-bordered"}
+        sequence = ('client_id', '...')
 
 # see filters.py for code that does the filtering
 # https://simpleisbetterthancomplex.com/tutorial/2016/11/28/how-to-filter-querysets-dynamically.html
@@ -26,6 +31,21 @@ class ClientViewFilter(FilterView, SingleTableView):
     table_class = ClientsTable
     filterset_class = ClientFilter
     template_name='search/client_search.html'
+
+
+# I hae kept the following just in case I need it later
+# it search and then uses dttatable.js to apply filtering and pagination
+@login_required
+@user_passes_test(super_user_or_job_coach, 'client_man_login')
+def client_search_old(request):
+    # this is simply getting all clients and then filtering client side using the js helper: https://www.datatables.net/
+    # if this becomes a perf problem then read: https://simpleisbetterthancomplex.com/tutorial/2016/11/28/how-to-filter-querysets-dynamically.html
+    # note however that https://www.datatables.net/ can use ajax to reduce no of client returned, if I go down this pass then consider
+    # using https://github.com/shymonk/django-datatable
+    #
+    # https://simpleisbetterthancomplex.com/tips/2016/05/16/django-tip-3-optimize-database-queries.html
+	clients = Client.objects.select_related('user').all()
+	return render(request, 'search/client_search_old.html', {'clients' : clients})
 
 
 # code in view which returns json data

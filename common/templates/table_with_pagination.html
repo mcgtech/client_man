@@ -55,12 +55,24 @@
     {% endblock table %}
 
     {% if table.page and table.paginator.num_pages > 1 %}
-        {% with table.page.paginator.count as total %}
-        {% with table.page.object_list|length as count %}
+
+        {% with table.page.paginator.count as total_rows %}
+        {% with table.page.start_index as start_index %}
+        {% with table.page.end_index as end_index %}
+        {% with table.page.object_list|length as rows_on_page %}
             {% block pagination %}
-                <!--https://github.com/jmcclell/django-bootstrap-pagination-->
-                {% bootstrap_paginate table.page range=10 show_prev_next="false" show_first_last="true" %} {{ count }} {{ total }}
+                <div class="row bs_pagin">
+                    <div class="col-sm-2" id="pagin_total">
+                         Showing {{ start_index }} to {{ end_index }} of {{ total_rows }} entries
+                    </div>
+                    <div class="col-sm-10">
+                        <!--https://github.com/jmcclell/django-bootstrap-pagination-->
+                        {% bootstrap_paginate table.page range=10 show_prev_next="false" show_first_last="true" show_index_range="true" %}
+                    </div>
+                </div>
             {% endblock pagination %}
+        {% endwith %}
+        {% endwith %}
         {% endwith %}
         {% endwith %}
     {% endif %}

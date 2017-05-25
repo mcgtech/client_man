@@ -13,7 +13,6 @@ function setup_client_form()
     var age = $('#client_age').html();
     var age_markup = '<div class="col-sm-4"><label for="id_main-birth_certificate" class="control-label ">Age</label>' + age + '</div>';
     $('.dob').append(age_markup);
-    manage_disabled_selects_in_a_form($('#client_edit_form'));
 }
 
 function setup_client_contracts()
@@ -21,13 +20,12 @@ function setup_client_contracts()
     $('#contracts_table').appendTo('#contracts');
 
     //https://www.datatables.net/
-    $('#client_contracts').DataTable({
-        "order": [[ 0, "asc" ]]
-    } );
-
-    $('#button-id-add-contract').click(function(){
-        window.location.href = data_from_django.add_con_url;
-    });
+    if ($('#no_data').length == 0)
+    {
+        $('#client_contracts').DataTable({
+            "order": [[ 0, "asc" ]]
+        } );
+    }
 }
 
 function setup_client_notes()

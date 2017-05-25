@@ -61,8 +61,12 @@ class Person(Auditable):
     # decorator to make it look like a normal attribute.
     @property
     def age(self):
-        today = date.today()
-        return today.year - self.dob.year - ((today.month, today.day) < (self.dob.month, self.dob.day))
+        client_age = 0
+        if self.dob is not None:
+            today = date.today()
+            client_age =  today.year - self.dob.year - ((today.month, today.day) < (self.dob.month, self.dob.day))
+
+        return client_age
 
     def find_person_by_full_name(query_name):
        qs = Person.objects.select_related('user').all()

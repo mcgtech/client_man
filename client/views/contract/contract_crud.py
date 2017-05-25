@@ -14,6 +14,8 @@ from django.contrib import messages
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from client.views import add_contract_js_data
+import json
 
 @login_required
 @user_passes_test(super_user_or_job_coach, 'client_man_login')
@@ -45,9 +47,9 @@ def manage_contract(request, client_id, contract_id=None):
         the_action_text = 'Create'
         is_edit_form = False
         action = '/contract/' + str(client_id) + '/new/'
-        display_client_summary_message(client, request, 'Add a new contract for')
+        display_client_summary_message(client, request, 'Adding a new contract for', settings.WARN_MSG_TYPE)
     else:
-        display_client_summary_message(client, request, 'Contract details for')
+        display_client_summary_message(client, request, 'Contract details for', settings.INFO_MSG_TYPE)
         the_action_text = 'Edit'
         is_edit_form = True
         contract = get_object_or_404(Contract, pk=contract_id)
@@ -57,7 +59,7 @@ def manage_contract(request, client_id, contract_id=None):
     if del_request:
         return del_request
     elif request.method == "POST":
-        contract_form = ContractForm(request.POST, request.FILES, instance=contract, prefix="contract", add_delete=is_edit_form)
+        contract_form = ContractForm(request.POST, request.FILES, instance=contract, prefix="contract", is_edit_form=is_edit_form, cancel_url=None)
         if contract_form.is_valid():
             created_contract = contract_form.save(commit=False)
             apply_auditable_info(created_contract, request)
@@ -67,13 +69,21 @@ def manage_contract(request, client_id, contract_id=None):
             msg_once_only(request, 'Saved contract for ' + client.get_full_name(), settings.SUCC_MSG_TYPE)
             return redirect(action)
     else:
-        contract_form = ContractForm(instance=contract, prefix="contract", add_delete=is_edit_form)
+        cancel_url = redirect('client_edit', pk=client.id).url
+        contract_form = ContractForm(instance=contract, prefix="contract", is_edit_form=is_edit_form, cancel_url=cancel_url)
+
+    # setup js variables for template
+    #https://godjango.com/blog/working-with-json-and-django/
+    # needs {% include 'partials/inject_js_data.html' %} added to template (acced via data_from_django in js)
+    js_dict = {}
+    add_contract_js_data(js_dict, client)
+    js_data = json.dumps(js_dict)
 
     contract_form_errors = form_errors_as_array(contract_form)
     return render(request, 'client/contract/contract_edit.html', {'form': contract_form, 'client' : client,
                                                        'the_action_text': the_action_text,
                                                        'edit_form': is_edit_form, 'the_action': action,
-                                                       'form_errors': contract_form_errors})
+                                                       'form_errors': contract_form_errors, 'js_data' : js_data})
 
 
 def get_contract_edit_url(client_id, contract_id):
