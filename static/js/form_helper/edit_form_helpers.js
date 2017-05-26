@@ -12,8 +12,16 @@ function setup_leave_form_check()
 
 function request_conf_on_delete()
 {
-    apply_confirm_to_submit_button('.delete-btn', 'btn-danger', 'del_butt', 'Delete', 'Deletion',
-                                    'Are you sure that you want to delete this record?<br>This cannot be undone and it will delete any child records.');
+    var delete_allowed = typeof data_from_django.delete_allowed !== 'undefined' ? data_from_django.delete_allowed : false;
+    if (delete_allowed)
+    {
+        apply_confirm_to_submit_button('.delete-btn', 'btn-danger', 'del_butt', 'Delete', 'Deletion',
+                                        'Are you sure that you want to delete this record?<br>This cannot be undone and it will delete any child records.');
+    }
+    else
+    {
+        $('.delete-btn').remove();
+    }
 }
 
 // http://stackoverflow.com/questions/1191113/how-to-ensure-a-select-form-field-is-submitted-when-it-is-disabled

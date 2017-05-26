@@ -23,7 +23,7 @@
             </ul>
           </li>
         {% endif %}
-        {% if request.user|has_group:settings.JOB_COACH %}
+        {% if request.user|has_group:settings.JOB_COACH or request.user|has_group:settings.JOB_COACH_MAN %}
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Client<span class="caret"></span></a>
             <ul class="dropdown-menu dropdownhover-top">

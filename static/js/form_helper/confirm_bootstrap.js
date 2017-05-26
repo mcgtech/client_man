@@ -10,7 +10,6 @@
  * copies of this licence document, and changing it is allowed as long
  * as the name is changed.
  *
- *            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENCE
  *   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
  *
  * ========================================================== */

@@ -157,6 +157,7 @@ CRISPY_FAIL_SILENTLY = not DEBUG
 ADMIN_GROUP = 'admin'
 CLIENT_GROUP = 'client'
 JOB_COACH = 'job coach'
+JOB_COACH_MAN = 'job coach manager'
 
 # Messgae types
 INFO_MSG_TYPE = 0

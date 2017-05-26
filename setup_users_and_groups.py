@@ -12,6 +12,9 @@ admin_group.user_set.add(neil)
 admin_group.save()
 job_coach_group = Group(name="job coach")
 job_coach_group.save()
+job_coach_mgr.group = Group(name="job coach manager")
+job_coach_mgr.save()
+
 # run sql to repopulate
 ann = User.objects.create_user('ann', 'ann@ann.com', 'ann123');ann.is_staff=True;ann.save();
 lindasutherland = User.objects.create_user('lindasutherland', 'lindasutherland@shirlie.co.uk', 'lindasutherland123');lindasutherland.is_staff=True;lindasutherland.save();

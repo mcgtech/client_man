@@ -18,20 +18,20 @@ from client.views import add_contract_js_data
 import json
 
 @login_required
-@user_passes_test(super_user_or_job_coach, 'client_man_login')
+@user_passes_test(job_coach_user, 'client_man_login')
 def contract_detail(request, client_pk):
     client = get_object_or_404(Client, pk=client_pk)
     return render(request, 'client/contract_detail.html', {'client': client})
 
 
 @login_required
-@user_passes_test(super_user_or_job_coach, 'client_man_login')
+@user_passes_test(job_coach_user, 'client_man_login')
 def contract_new(request, client_pk):
     return manage_contract(request, client_pk)
 
 
 @login_required
-@user_passes_test(super_user_or_job_coach, 'client_man_login')
+@user_passes_test(job_coach_user, 'client_man_login')
 def contract_edit(request, client_pk, contract_id):
     return manage_contract(request, client_pk, contract_id)
 
@@ -77,6 +77,7 @@ def manage_contract(request, client_id, contract_id=None):
     # needs {% include 'partials/inject_js_data.html' %} added to template (acced via data_from_django in js)
     js_dict = {}
     add_contract_js_data(js_dict, client)
+    set_deletion_status_in_js_data(js_dict, request.user, job_coach_man_user)
     js_data = json.dumps(js_dict)
 
     contract_form_errors = form_errors_as_array(contract_form)
@@ -84,7 +85,6 @@ def manage_contract(request, client_id, contract_id=None):
                                                        'the_action_text': the_action_text,
                                                        'edit_form': is_edit_form, 'the_action': action,
                                                        'form_errors': contract_form_errors, 'js_data' : js_data})
-
 
 def get_contract_edit_url(client_id, contract_id):
     return '/contract/' + str(client_id) + '/' + str(contract_id) + '/edit' + '/'

@@ -3,7 +3,7 @@ from client.models import Client
 from common.models import Note, Address, Telephone
 from django.forms import inlineformset_factory
 from client.forms import *
-from common.views import form_errors_as_array, super_user_or_job_coach, super_user_or_admin, show_form_error, apply_auditable_info
+from common.views import *
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.db import transaction
 from django.contrib.auth.models import User
@@ -15,20 +15,20 @@ from django.shortcuts import render
 import json
 
 @login_required
-@user_passes_test(super_user_or_job_coach, 'client_man_login')
+@user_passes_test(job_coach_user, 'client_man_login')
 def client_detail(request, pk):
     client = get_object_or_404(Client, pk=pk)
     return render(request, 'client/client/client_detail.html', {'client': client})
 
 
 @login_required
-@user_passes_test(super_user_or_job_coach, 'client_man_login')
+@user_passes_test(job_coach_user, 'client_man_login')
 def client_new(request):
     return manage_client(request, None)
 
 
 @login_required
-@user_passes_test(super_user_or_job_coach, 'client_man_login')
+@user_passes_test(job_coach_user, 'client_man_login')
 def client_edit(request, pk):
     return manage_client(request, pk)
 
@@ -42,7 +42,7 @@ def manage_client(request, client_id=None):
     extra_phones = 0
     # setup js variables for template
     #https://godjango.com/blog/working-with-json-and-django/
-    # needs {% include 'partials/inject_js_data.html' %} added to template (acced via data_from_django in js)
+    # needs {% include 'partials/inject_js_data.html' %} added to template (accessed via data_from_django in js)
     js_dict = {}
     if client_id is None:
         extra_notes = 1
@@ -108,7 +108,7 @@ def manage_client(request, client_id=None):
 
     # https://docs.djangoproject.com/en/1.11/topics/db/queries/#limiting-querysets
     contracts = client.contract.all().order_by('-start_date')
-
+    set_deletion_status_in_js_data(js_dict, request.user, job_coach_man_user)
     js_data = json.dumps(js_dict)
 
     client_form_errors = form_errors_as_array(client_form)
@@ -126,6 +126,7 @@ def manage_client(request, client_id=None):
 
 def add_contract_js_data(js_dict, client):
     js_dict['add_con_url'] = client.get_add_contract_url()
+
 
 # remove request, client_from_db is not required
 def save_client_details(client_form, user, request):

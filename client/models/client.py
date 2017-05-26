@@ -1,6 +1,6 @@
 from django.db import models
-from common.models import Person
 from django.conf import settings
+from common.models import Person
 
 class Client(Person):
     MALE = 0
@@ -231,3 +231,4 @@ class Client(Person):
     def get_absolute_url(self):
         from django.urls import reverse
         return reverse('client_edit', args=[str(self.id)])
+

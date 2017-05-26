@@ -1,6 +1,7 @@
 from client.models import Client, Contract
 import django_filters
 from common.models import Address
+from client.queries import *
 
 # https://simpleisbetterthancomplex.com/tutorial/2016/11/28/how-to-filter-querysets-dynamically.html
 class ClientFilter(django_filters.FilterSet):
@@ -13,10 +14,12 @@ class ClientFilter(django_filters.FilterSet):
     # age = django_filters.NumberFilter(method='filter_client_age', name='age', label='Age')
 
     def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')
         super(ClientFilter, self).__init__(*args, **kwargs)
         # if I don't do this then out the box the initial queryset will be set to all Clients because I set
         # model to Client in the meta data below - so this is the starting querset before filter are applied
-        # self.queryset = Client.objects.select_related('user').all().filter(surname__startswith='Aitken')
+        self.queryset = get_client_search_default_queryset(user)
+        # self.queryset = Client.objects.select_related('user').all()
 
     class Meta:
         model = Client

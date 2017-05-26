@@ -23,4 +23,4 @@ union
 select "job_coach_group.user_set.add(closed)"
 
 run following:
-python manage.py shell < setup_usres_and_groups.py
+python manage.py shell < setup_users_and_groups.py.py

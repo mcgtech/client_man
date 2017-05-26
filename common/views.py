@@ -22,16 +22,20 @@ def remove_html_tags(text):
     return re.sub(clean, '', text)
 
 
-def super_user_or_admin(user):
+def admin_user(user):
     return user.is_superuser or user.groups.filter(name=settings.ADMIN_GROUP).exists()
 
+def job_coach_man_user(user):
+    return admin_user(user) or user.groups.filter(name=settings.JOB_COACH_MAN).exists()
 
-def super_user_or_job_coach(user):
-    return user.is_superuser or user.groups.filter(name=settings.ADMIN_GROUP).exists() or user.groups.filter(name=settings.JOB_COACH).exists()
-
+def job_coach_user(user):
+    return job_coach_man_user(user) or user.groups.filter(name=settings.JOB_COACH).exists()
 
 def show_form_error(request, messages, msg, inform_support):
     messages.error(request, msg)
+
+def set_deletion_status_in_js_data(js_dict, user, security_fn):
+    js_dict['delete_allowed'] = security_fn(user)
 
 # the dates and user from the form will be blank so we need to also pass the stored entity
 # so we can retrieve the created date and user

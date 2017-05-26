@@ -2,7 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
 from datetime import date
-from django.db.models import Q
+from django.contrib.sessions.models import Session
+from django.contrib.auth.signals import user_logged_in
 
 class Auditable(models.Model):
     created_on = models.DateTimeField(null=True, blank=True)
@@ -55,13 +56,6 @@ class Person(Auditable):
             client_age =  today.year - self.dob.year - ((today.month, today.day) < (self.dob.month, self.dob.day))
 
         return client_age
-
-    def find_person_by_full_name(query_name):
-       qs = Person.objects.select_related('user').all()
-       for term in query_name.split():
-         qs = qs.filter( Q(forename__icontains = term) | Q(middle_name__icontains = term) | Q(surname__icontains = term))
-
-       return qs
 
 
 class Note(models.Model):

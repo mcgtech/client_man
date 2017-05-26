@@ -1,6 +1,6 @@
 from client.models import Client
 from common.models import Person, Note, Address, Telephone
-from common.views import form_errors_as_array, super_user_or_job_coach, super_user_or_admin, show_form_error
+from common.views import form_errors_as_array, job_coach_user, job_coach_man_user, admin_user, show_form_error
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 from django.shortcuts import render
@@ -8,7 +8,7 @@ import json
 import dateutil.parser
 
 @login_required
-@user_passes_test(super_user_or_admin, 'client_man_login')
+@user_passes_test(admin_user, 'client_man_login')
 def load_clients(request):
     json_data = open('static/json/clients.json')
     # deserialises it
