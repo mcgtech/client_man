@@ -13,6 +13,9 @@ class ClientsTable(tables.Table):
     # https://github.com/bradleyayers/django-tables2/issues/256
     # need orderable= False or it will break
     contracts = Column(empty_values=(), verbose_name='Contracts', orderable= False)
+    # age is a calculatewed field, if I try to sort it django-tables2 will fail
+    # so we do the following (see: http://django-tables2.readthedocs.io/en/latest/pages/ordering.html):
+    age = Column(order_by=('dob'))
 
     def render_contracts(self, record):
         if record.contract.exists():
