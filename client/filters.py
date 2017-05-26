@@ -9,9 +9,10 @@ class ClientFilter(django_filters.FilterSet):
     surname = django_filters.CharFilter(lookup_expr='icontains')
     modified_on = django_filters.DateFilter(lookup_expr='gte')
     contract_type = django_filters.ChoiceFilter(choices=Contract.TYPES, method='filter_contract_type', name='contract_type', label='Contract type')
-    contract_started = django_filters.DateFilter(method='filter_contract_started', name='contract_started', label='Contract started is greater than or equal to:')
+    modified_on = django_filters.DateFilter(label='Modified on >=')
+    contract_started = django_filters.DateFilter(method='filter_contract_started', name='contract_started', label='Contract started >=')
     area = django_filters.ChoiceFilter(choices=Address.AREA, method='filter_address_area', name='filter_address_area', label='Area')
-    # age = django_filters.NumberFilter(method='filter_client_age', name='age', label='Age')
+    age = django_filters.NumberFilter(method='filter_client_age', name='age', label='Age >=')
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user')
@@ -38,5 +39,15 @@ class ClientFilter(django_filters.FilterSet):
     def filter_address_area(self, queryset, name, value):
         return queryset.filter(**{'address__area': value})
 
-    # def filter_client_age(self, queryset, name, age):
-    #     return queryset.filter()
+    def filter_client_age(self, queryset, name, age):
+        # https://stackoverflow.com/questions/23373151/filter-people-from-django-model-using-birth-date
+        from datetime import date
+        min_age = age
+        max_date = date.today()
+        try:
+            max_date = max_date.replace(year=max_date.year - min_age)
+        except ValueError:  # 29th of february and not a leap year
+            assert max_date.month == 2 and max_date.day == 29
+            max_date = max_date.replace(year=max_date.year - min_age, month=2, day=28)
+
+        return queryset.filter(dob__lte=max_date)

@@ -2,25 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="053a4aa4-3808-4504-ab0a-5f7dd90a79bc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/queries.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/setup_usres_and_groups.py" afterPath="$PROJECT_DIR$/setup_users_and_groups.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/js/edit_form_helpers.js" afterPath="$PROJECT_DIR$/static/js/form_helper/edit_form_helpers.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/docs/general_practice.txt" afterPath="$PROJECT_DIR$/client/docs/general_practice.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/docs/rebuild_steps.txt" afterPath="$PROJECT_DIR$/client/docs/rebuild_steps.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/docs/time_so_far.txt" afterPath="$PROJECT_DIR$/client/docs/time_so_far.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/filters.py" afterPath="$PROJECT_DIR$/client/filters.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/models/client.py" afterPath="$PROJECT_DIR$/client/models/client.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/client/client_crud.py" afterPath="$PROJECT_DIR$/client/views/client/client_crud.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/client/client_searching.py" afterPath="$PROJECT_DIR$/client/views/client/client_searching.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/contract/contract_crud.py" afterPath="$PROJECT_DIR$/client/views/contract/contract_crud.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/migration/migration.py" afterPath="$PROJECT_DIR$/client/views/migration/migration.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client_man/settings.py" afterPath="$PROJECT_DIR$/client_man/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/models.py" afterPath="$PROJECT_DIR$/common/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/templates/nav_bar.html" afterPath="$PROJECT_DIR$/common/templates/nav_bar.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/templates/partials/form_edit_js_includes.html" afterPath="$PROJECT_DIR$/common/templates/partials/form_edit_js_includes.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/views.py" afterPath="$PROJECT_DIR$/common/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/form_helper/confirm_bootstrap.js" afterPath="$PROJECT_DIR$/static/js/form_helper/confirm_bootstrap.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/client/client/client_search.html" afterPath="$PROJECT_DIR$/client/templates/client/client/client_search.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -32,78 +15,26 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="edit_form_helpers.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/static/js/form_helper/edit_form_helpers.js">
+      <file leaf-file-name="filters.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/client/filters.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="63" lean-forward="false" selection-start-line="14" selection-start-column="49" selection-end-line="14" selection-end-column="63" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="client_crud.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/views/client/client_crud.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="110" column="77" lean-forward="true" selection-start-line="109" selection-start-column="61" selection-end-line="110" selection-end-column="77" />
+            <state relative-caret-position="165">
+              <caret line="11" column="62" lean-forward="false" selection-start-line="11" selection-start-column="62" selection-end-line="11" selection-end-column="62" />
               <folding>
-                <element signature="e#0#56#0" expanded="true" />
+                <element signature="e#0#42#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="contract_crud.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/client/views/contract/contract_crud.py">
+      <file leaf-file-name="client_search.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/templates/client/client/client_search.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="584">
-              <caret line="79" column="77" lean-forward="false" selection-start-line="79" selection-start-column="77" selection-end-line="79" selection-end-column="77" />
+            <state relative-caret-position="915">
+              <caret line="61" column="41" lean-forward="false" selection-start-line="61" selection-start-column="41" selection-end-line="61" selection-end-column="41" />
               <folding>
-                <element signature="e#0#56#0" expanded="true" />
+                <element signature="n#style#0;n#button#0;n#div#0;n#form#0;n#!!top" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="queries.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/queries.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="29" lean-forward="false" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="client_searching.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/views/client/client_searching.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1179">
-              <caret line="83" column="0" lean-forward="true" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="migration.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/views/migration/migration.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="83" lean-forward="false" selection-start-line="2" selection-start-column="83" selection-end-line="2" selection-end-column="83" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/common/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="290">
-              <caret line="27" column="22" lean-forward="false" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="22" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -192,12 +123,10 @@
         <option value="$PROJECT_DIR$/common/templates/base.html" />
         <option value="$PROJECT_DIR$/client/tables.py" />
         <option value="$PROJECT_DIR$/static/django_tables2/filter_helper.js" />
-        <option value="$PROJECT_DIR$/client/templates/client/client/client_search.html" />
         <option value="$PROJECT_DIR$/common/models.py" />
         <option value="$PROJECT_DIR$/client_man/middleware.py" />
         <option value="$PROJECT_DIR$/client/models/client.py" />
         <option value="$PROJECT_DIR$/queries.py" />
-        <option value="$PROJECT_DIR$/client/filters.py" />
         <option value="$PROJECT_DIR$/client/docs/time_so_far.txt" />
         <option value="$PROJECT_DIR$/setup_usres_and_groups.py" />
         <option value="$PROJECT_DIR$/client/docs/rebuild_steps.txt" />
@@ -213,6 +142,8 @@
         <option value="$PROJECT_DIR$/common/views.py" />
         <option value="$PROJECT_DIR$/client/views/client/client_crud.py" />
         <option value="$PROJECT_DIR$/client/views/contract/contract_crud.py" />
+        <option value="$PROJECT_DIR$/client/templates/client/client/client_search.html" />
+        <option value="$PROJECT_DIR$/client/filters.py" />
       </list>
     </option>
   </component>
@@ -404,6 +335,54 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="django_projs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="django_projs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="django_projs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="django_projs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -864,16 +843,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/templates/client/client/client_search.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="596">
-          <caret line="57" column="42" lean-forward="false" selection-start-line="57" selection-start-column="42" selection-end-line="57" selection-end-column="42" />
-          <folding>
-            <element signature="n#style#0;n#button#0;n#div#0;n#form#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client_man/middleware.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
@@ -921,14 +890,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="17" column="45" lean-forward="false" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/filters.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="22" lean-forward="false" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
           <folding />
         </state>
       </provider>
@@ -1065,6 +1026,26 @@
           <caret line="79" column="77" lean-forward="false" selection-start-line="79" selection-start-column="77" selection-end-line="79" selection-end-column="77" />
           <folding>
             <element signature="e#0#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/templates/client/client/client_search.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="915">
+          <caret line="61" column="41" lean-forward="false" selection-start-line="61" selection-start-column="41" selection-end-line="61" selection-end-column="41" />
+          <folding>
+            <element signature="n#style#0;n#button#0;n#div#0;n#form#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/filters.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="62" lean-forward="false" selection-start-line="11" selection-start-column="62" selection-end-line="11" selection-end-column="62" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
           </folding>
         </state>
       </provider>
