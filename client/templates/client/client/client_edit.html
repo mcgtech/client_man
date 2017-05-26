@@ -1,4 +1,11 @@
 {% extends 'base.html' %}
+{% block title %}
+    {% if edit_form %}
+        Edit client {{ client.get_full_name }}
+    {% else %}
+        Add new client
+    {% endif %}
+{% endblock %}
 {% load staticfiles %}
 
 {% block css %}

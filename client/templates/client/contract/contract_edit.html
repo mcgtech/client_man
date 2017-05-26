@@ -1,4 +1,11 @@
 {% extends 'base.html' %}
+{% block title %}
+    {% if edit_form %}
+        Edit contract for {{ client.get_full_name }}
+    {% else %}
+        Add new contract for {{ client.get_full_name }}
+    {% endif %}
+{% endblock %}
 {% load staticfiles %}
 
 {% block css %}
