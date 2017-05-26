@@ -72,7 +72,7 @@ def quick_client_search(request):
     for client in clients:
         client_json = {}
         client_json['id'] = client.id
-        client_json['label'] = client.get_full_name()
+        client_json['label'] = client.get_full_name() + ' (' + client.job_coach.username + ')'
         client_json['value'] = client.get_full_name()
         results.append(client_json)
     data = json.dumps(results)

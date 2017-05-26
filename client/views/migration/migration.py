@@ -28,31 +28,56 @@ def load_contracts(request):
             contract = None
             try:
                 nid = get_clean_json_data(json_contract['nid'])
-                client = all_clients.filter(original_client_id=nid)
-                if client is not None:
-                    contract = Contract(client=client)
-                    contract.type = get_clean_json_data(json_contract['con_type'])
-                    # I set USE_TZ = False in settings to get this to work
-                    start_date = dateutil.parser.parse(get_clean_json_data(json_contract['con_start_date']));
-                    contract.start_date = start_date
-                    end_date = dateutil.parser.parse(get_clean_json_data(json_contract['con_end_date']));
-                    contract.end_date = end_date
-                    referral_date = dateutil.parser.parse(get_clean_json_data(json_contract['con_app_date']));
-                    contract.referral_date = referral_date
-                    sec_client_group = get_clean_json_data(json_contract['sec_client_group'])
-                    if len(sec_client_group) == 0 or sec_client_group == '-1' or sec_client_group== -1:
-                        sec_client_group = None
-                    client.secondary_client_group = sec_client_group
-                    contract.save()
-                else:
-                    raise ValueError('Client not found for contract, client nid: ' + nid)
+                try:
+                    client = all_clients.get(original_client_id=nid)
+                    if client is not None:
+                        contract = Contract(client=client)
+                        created_by_user_name = get_clean_json_data(json_contract['created_by'])
+                        created_by_list = User.objects.filter(username=created_by_user_name)
+                        created_by = created_by_list.first()
+                        modified_by_user_name = get_clean_json_data(json_contract['modified_by'])
+                        modified_by_list = User.objects.filter(username=modified_by_user_name)
+                        modified_by = modified_by_list.first()
+                        # I set USE_TZ = False in settings to get this to work
+                        created_on = dateutil.parser.parse(get_clean_json_data(json_contract['created_on']));
+                        modified_on = dateutil.parser.parse(get_clean_json_data(json_contract['modified_on']));
+
+                        contract.created_by = created_by
+                        contract.modified_by = modified_by
+                        contract.created_on = created_on
+                        contract.modified_on = modified_on
+
+                        contract.type = get_clean_json_data(json_contract['con_type'])
+                        # I set USE_TZ = False in settings to get this to work
+                        con_start_date = get_clean_json_data(json_contract['con_start_date'])
+                        if len(con_start_date) > 0:
+                            start_date = dateutil.parser.parse(con_start_date);
+                            contract.start_date = start_date
+                        con_end_date = get_clean_json_data(json_contract['con_end_date'])
+                        if len(con_end_date) > 0:
+                            end_date = dateutil.parser.parse(con_end_date);
+                            contract.end_date = end_date
+                        con_app_date = get_clean_json_data(json_contract['con_app_date'])
+                        if len(con_app_date) > 0:
+                            referral_date = dateutil.parser.parse(con_app_date);
+                            contract.referral_date = referral_date
+                        sec_client_group = get_clean_json_data(json_contract['sec_client_group'])
+                        if len(sec_client_group) == 0 or sec_client_group == '-1' or sec_client_group== -1:
+                            sec_client_group = None
+                        client.secondary_client_group = sec_client_group
+                        contract.save()
+                    else:
+                        raise ValueError('Client not found for contract(1), client nid: ' + nid)
+                except Exception as e:
+                    raise ValueError('Client not found for contract(2), client nid: ' + nid + ', ' + str(e))
 
                 items.append(contract)
             except Exception as e:
+                name = get_clean_json_data(json_contract['sec_client_group'])
                 if contract != None:
                     es = str(contract) + ' ' + str(e)
                 else:
-                    es = 'Contract not created yet ' + str(e)
+                    es = 'Contract not created yet for ' + name + ', exception: ' + str(e)
                 errors.append(es)
 
     return render(request, 'client/migration/migration.html', {'items' : items, 'form_errors' :  errors})
@@ -154,7 +179,7 @@ def load_clients(request):
                     client.job_coach = job_coach
                 else:
                     errors.append('Failed to find matching coach ' + job_coach_user_name + ' for ' + client.forename + ' ' + client.surname)
-
+                client.original_client_id = get_clean_json_data(json_client['original_client_id'])
                 client.save()
 
                 # add address

@@ -106,4 +106,5 @@ class Contract(Auditable):
         return reverse('contract_edit', args=[str(self.client.id), str(self.id)])
 
     def __str__(self):
-       return '' if self.client is None else self.client.get_full_name() + ' - '+ self.get_type_display() + ' - ' + self.start_date.strftime(settings.DISPLAY_DATE)
+       start_date = '' if self.start_date is None else self.start_date.strftime(settings.DISPLAY_DATE)
+       return '' if self.client is None else self.client.get_full_name() + ', type: '+ self.get_type_display() + ', start date - ' + start_date
