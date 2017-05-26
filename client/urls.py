@@ -19,4 +19,5 @@ urlpatterns = [
     url(r'^auto/quick_client_search/$', views.quick_client_search, name='quick_client_search'),
     # migration
     url(r'^load_clients/$', views.load_clients, name='load_clients'),
+    url(r'^load_contracts/$', views.load_contracts, name='load_contracts'),
 ]

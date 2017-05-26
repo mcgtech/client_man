@@ -5,21 +5,39 @@ from django.conf import settings
 
 class Contract(Auditable):
     AA = 0
-    BP = 1
-    EF = 2
-    MIR = 3
-    PP = 4
-    TIO = 5
-    WP = 6
+    ATW = 1
+    BP = 2
+    CON_CLOSE = 3
+    EF = 4
+    ESF = 5
+    ESF_LOTT = 6
+    GRFW = 7
+    HC = 8
+    LOTT = 9
+    MIR = 10
+    PP = 11
+    TIO = 12
+    WFH = 13
+    WIO = 14
+    WP = 15
     TYPES = (
         (None, 'Please select'),
-        (AA, 'Activity Agreement'),
-        (BP, 'Big Picture'),
-        (EF, 'Employability Fund'),
-        (MIR, 'MIR'),
+        (AA, 'AA'),
+        (ATW, 'ATW'),
+        (BP, 'BP (Autism)'),
+        (CON_CLOSE, 'Closed'),
+        (EF, 'EF'),
+        (ESF, 'ESF Tracking'),
+        (ESF_LOTT, 'ESF/Lottery Tracking'),
+        (GRFW, 'GRFW'),
+        (HC, 'HC'),
+        (LOTT, 'Lottery Tracking'),
+        (MIR, 'MiR'),
         (PP, 'PP'),
         (TIO, 'TIO'),
-        (WP, 'Work Programme'),
+        (WFH, 'WFH'),
+        (WIO, 'WIO'),
+        (WP, 'WP'),
     )
     ABOVE_54 = 0
     ARM_FORCE = 1
@@ -41,7 +59,7 @@ class Contract(Auditable):
     SR_ISS = 17
     TO_BE = 18
     UNDER = 19
-    YP_IN_CARE = 20
+    YP_LV_CARE = 20
     SEC_CLIENT_GROUPS = (
         (None, 'Please select'),
         (ABOVE_54, 'Above 54 Years Old'),
@@ -64,10 +82,10 @@ class Contract(Auditable):
         (SR_ISS, 'Substance Related Issues'),
         (TO_BE, 'To Be Assigned'),
         (UNDER, 'Underemployed'),
-        (YP_IN_CARE, 'Young People Leaving Care'),
+        (YP_LV_CARE, 'Young People Leaving Care'),
     )
     type = models.IntegerField(choices=TYPES, default=None)
-    start_date = models.DateField()
+    start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
     referral_date = models.DateField(null=True, blank=True)
     secondary_client_group = models.IntegerField(choices=SEC_CLIENT_GROUPS, default=None, null=True)

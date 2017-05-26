@@ -1,0 +1,223 @@
+tio:
+https://backoffice.shirlie.co.uk/partners/info_man/home/tio
+SELECT cmd.nid, CONCAT(cmd.field_md_title_value, ' ', cmd.field_md_first_name_value, ' ', cmd.field_md_surname_value) AS name,
+cmd.field_md_town_value AS area, cmd.field_client_contract_start_value AS start,
+cmd.field_md_job_coach_value AS coach, cmd.field_client_currently_value AS status,
+cmd.field_client_find_us_value AS recoUs,
+cmd.field_md_dob_fid_value as dobFid,
+cmd.field_md_cg_fid_value as cgFid,
+cmd.field_md_scg_fid_value as scgFid,
+cmd.field_md_es_fid_value as esFid,
+cmd.field_md_add_fid_value as addFid,
+cmd.field_md_add_evid_value as addEvid,
+cmd.field_md_sevid_value as secClientGrpEvid,
+IF (LENGTH(p.partner) > 0, p.partner, 'TBC') AS actpart,
+DATE_FORMAT(STR_TO_DATE(cmd.field_md_dob_value, '%Y-%m-%d'), '%d/%m/%Y') AS dob,
+cmd.field_md_client_group_value AS clientGroup,
+IF (tio.field_tio_date_closed_value IS NULL, '', DATE_FORMAT(STR_TO_DATE(tio.field_tio_date_closed_value, '%Y-%m-%d'), '%d/%m/%Y')) AS end,
+DATE_FORMAT(STR_TO_DATE(tio.field_tio_date_fcm_approved_value, '%Y-%m-%d'), '%d/%m/%Y') AS approvedDate,
+tio.nid as tionid, tio.vid as tiovid, tio.field_tio_consent_fid_value as tiofid,
+wf.id as workflowId, wf.state,
+tiou.name as referredBy,
+fu.source AS findUs,
+IF (tio.field_tio_date_closed_value IS NULL, '', STR_TO_DATE(tio.field_tio_date_closed_value, '%Y-%m-%d')) AS tioClosureDate, cmd.vid as cmdVid
+FROM content_type_client_main_details cmd
+    LEFT JOIN content_type_client_partner_dev pd ON pd.field_part_cid_value = cmd.nid
+    LEFT JOIN client_programme_find_us fu on fu.id = cmd.field_client_find_us_value
+    LEFT JOIN partners p on p.id = pd.field_part_partner_value,
+content_type_try_it_out tio,
+node n2, contract_workflow wf, users tiou, node n
+WHERE     cmd.field_client_contract_value = 'TIO'
+AND   cmd.nid = n.nid
+AND   cmd.vid = n.vid
+AND   n.status = 1
+AND tio.vid =
+    (SELECT MAX(tio2.vid) FROM content_type_try_it_out tio2
+     WHERE  tio2.field_tio_cid_value = cmd.nid
+     AND tio2.field_tio_workflow_status_value IN (4, 5)
+      AND tio2.field_tio_date_closed_value IS NULL)
+AND   tio.field_tio_workflow_status_value = wf.id
+AND   tio.nid = n2.nid
+AND   tio.vid = n2.vid
+AND   n2.uid = tiou.uid
+AND   (cmd.field_md_invalid_value != 1 OR cmd.field_md_invalid_value IS NULL)
+AND cmd.field_md_surname_value != 'user'
+GROUP BY cmd.nid ORDER BY  n2.created DESC
+
+
+https://backoffice.shirlie.co.uk/partners/info_man/home/tio/council_referrals
+SELECT cmd.nid, CONCAT(cmd.field_md_title_value, ' ', cmd.field_md_first_name_value, ' ', cmd.field_md_surname_value) AS name,
+cmd.field_md_town_value AS area, cmd.field_client_contract_start_value AS start,
+cmd.field_md_job_coach_value AS coach, cmd.field_client_currently_value AS status,
+cmd.field_client_find_us_value AS recoUs,
+cmd.field_md_dob_fid_value as dobFid,
+cmd.field_md_cg_fid_value as cgFid,
+cmd.field_md_scg_fid_value as scgFid,
+cmd.field_md_es_fid_value as esFid,
+cmd.field_md_add_fid_value as addFid,
+cmd.field_md_add_evid_value as addEvid,
+cmd.field_md_sevid_value as secClientGrpEvid,
+IF (LENGTH(p.partner) > 0, p.partner, 'TBC') AS actpart,
+DATE_FORMAT(STR_TO_DATE(cmd.field_md_dob_value, '%Y-%m-%d'), '%d/%m/%Y') AS dob,
+cmd.field_md_client_group_value AS clientGroup,
+IF (tio.field_tio_date_closed_value IS NULL, '', DATE_FORMAT(STR_TO_DATE(tio.field_tio_date_closed_value, '%Y-%m-%d'), '%d/%m/%Y')) AS end,
+DATE_FORMAT(STR_TO_DATE(tio.field_tio_date_fcm_approved_value, '%Y-%m-%d'), '%d/%m/%Y') AS approvedDate,
+tio.nid as tionid, tio.vid as tiovid, tio.field_tio_consent_fid_value as tiofid,
+wf.id as workflowId, wf.state,
+tiou.name as referredBy,
+fu.source AS findUs,
+IF (tio.field_tio_date_closed_value IS NULL, '', STR_TO_DATE(tio.field_tio_date_closed_value, '%Y-%m-%d')) AS tioClosureDate, cmd.vid as cmdVid
+FROM content_type_client_main_details cmd
+    LEFT JOIN content_type_client_partner_dev pd ON pd.field_part_cid_value = cmd.nid
+    LEFT JOIN client_programme_find_us fu on fu.id = cmd.field_client_find_us_value
+    LEFT JOIN partners p on p.id = pd.field_part_partner_value,
+content_type_try_it_out tio,
+node n2, contract_workflow wf, users tiou, node n
+WHERE     cmd.field_client_contract_value = 'TIO'
+AND   cmd.nid = n.nid
+AND   cmd.vid = n.vid
+AND   n.status = 1
+AND tio.vid =
+    (SELECT MAX(tio2.vid) FROM content_type_try_it_out tio2
+     WHERE  tio2.field_tio_cid_value = cmd.nid
+     AND tio2.field_tio_workflow_status_value IN (4, 5)
+      AND tio2.field_tio_date_closed_value IS NULL)
+AND   tio.field_tio_workflow_status_value = wf.id
+AND   tio.nid = n2.nid
+AND   tio.vid = n2.vid
+AND   n2.uid = tiou.uid
+AND   (cmd.field_md_invalid_value != 1 OR cmd.field_md_invalid_value IS NULL)
+AND cmd.field_md_surname_value != 'user'
+GROUP BY cmd.nid ORDER BY  n2.created DESC
+
+AA:
+https://backoffice.shirlie.co.uk/partners/info_man/home/aa_con
+SELECT CONCAT(cmd.field_md_title_value, ' ', cmd.field_md_first_name_value, ' ', cmd.field_md_surname_value) AS name,
+cmd.field_md_town_value AS area, cmd.field_client_contract_start_value AS start,
+cmd.field_md_client_group_value AS clientGroup,
+cmd.field_client_find_us_value AS recoUs,
+cmd.field_md_dob_fid_value as dobFid,
+cmd.field_md_cg_fid_value as cgFid,
+cmd.field_md_scg_fid_value as scgFid,
+cmd.field_md_es_fid_value as esFid,
+cmd.field_md_add_fid_value as addFid,
+cmd.field_md_add_evid_value as addEvid,
+cmd.field_md_sevid_value as secClientGrpEvid,
+DATE_FORMAT(STR_TO_DATE(cmd.field_md_dob_value, '%Y-%m-%%d'), '%d/%m/%Y') AS dob,
+cmd.field_md_job_coach_value AS coach,
+cmd.field_client_currently_value AS status,
+IF (LENGTH(p.partner) > 0, p.partner, 'TBC') AS actpart,
+cmd.nid,
+IF(cmd.field_client_con_status_value IS NULL, 1, field_client_con_status_value) AS workflowStatus,
+cmd.field_md_consent_form_fid_value AS mdConsentFormFid,
+cmd.field_client_contract_end_value as end,
+cmd.field_client_contract_start_value AS start,
+fu.source AS findUs,
+cmd.field_md_consent_form_fid_value AS conserFormFid,
+cmd.field_md_elig_form_fid_value AS eligFormFid,
+cmd.field_md_init_ass_fid_value AS initAssFid,
+s.stage,
+DATE_FORMAT(STR_TO_DATE(cmd.field_md_im_approve_date_value, '%Y-%m-%%d'), '%%d/%m/%Y') AS approvedDate,
+0 AS isClosed
+
+FROM content_type_client_main_details cmd
+    LEFT JOIN content_type_client_partner_dev pd ON pd.field_part_cid_value = cmd.nid
+    LEFT JOIN client_stages s on s.id = cmd.field_md_stage_value
+    LEFT JOIN client_programme_find_us fu on fu.id = cmd.field_client_find_us_value
+    LEFT JOIN partners p on p.id = pd.field_part_partner_value, node n
+WHERE cmd.nid = n.nid
+AND   cmd.vid = n.vid
+AND   n.status = 1
+AND   cmd.field_client_contract_value = 'AA'
+AND   (cmd.field_md_invalid_value != 1 OR cmd.field_md_invalid_value IS NULL)
+AND   (cmd.field_client_contract_end_value IS NULL OR STR_TO_DATE(cmd.field_client_contract_end_value, '%%d/%m/%Y') > CURDATE())
+AND   cmd.field_client_con_status_value = 5
+AND cmd.field_md_surname_value != 'user'
+GROUP BY n.nid ORDER BY  n.created DESC
+
+https://backoffice.shirlie.co.uk/partners/info_man/home/aa_con?live=y
+SELECT CONCAT(cmd.field_md_title_value, ' ', cmd.field_md_first_name_value, ' ', cmd.field_md_surname_value) AS name,
+cmd.field_md_town_value AS area, cmd.field_client_contract_start_value AS start,
+cmd.field_md_client_group_value AS clientGroup,
+cmd.field_client_find_us_value AS recoUs,
+cmd.field_md_dob_fid_value as dobFid,
+cmd.field_md_cg_fid_value as cgFid,
+cmd.field_md_scg_fid_value as scgFid,
+cmd.field_md_es_fid_value as esFid,
+cmd.field_md_add_fid_value as addFid,
+cmd.field_md_add_evid_value as addEvid,
+cmd.field_md_sevid_value as secClientGrpEvid,
+DATE_FORMAT(STR_TO_DATE(cmd.field_md_dob_value, '%Y-%m-%%d'), '%d/%m/%Y') AS dob,
+cmd.field_md_job_coach_value AS coach,
+cmd.field_client_currently_value AS status,
+IF (LENGTH(p.partner) > 0, p.partner, 'TBC') AS actpart,
+cmd.nid,
+IF(cmd.field_client_con_status_value IS NULL, 1, field_client_con_status_value) AS workflowStatus,
+cmd.field_md_consent_form_fid_value AS mdConsentFormFid,
+cmd.field_client_contract_end_value as end,
+cmd.field_client_contract_start_value AS start,
+fu.source AS findUs,
+cmd.field_md_consent_form_fid_value AS conserFormFid,
+cmd.field_md_elig_form_fid_value AS eligFormFid,
+cmd.field_md_init_ass_fid_value AS initAssFid,
+s.stage,
+DATE_FORMAT(STR_TO_DATE(cmd.field_md_im_approve_date_value, '%Y-%m-%%d'), '%%d/%m/%Y') AS approvedDate,
+0 AS isClosed
+
+FROM content_type_client_main_details cmd
+    LEFT JOIN content_type_client_partner_dev pd ON pd.field_part_cid_value = cmd.nid
+    LEFT JOIN client_stages s on s.id = cmd.field_md_stage_value
+    LEFT JOIN client_programme_find_us fu on fu.id = cmd.field_client_find_us_value
+    LEFT JOIN partners p on p.id = pd.field_part_partner_value, node n
+WHERE cmd.nid = n.nid
+AND   cmd.vid = n.vid
+AND   n.status = 1
+AND   cmd.field_client_contract_value = 'AA'
+AND   (cmd.field_md_invalid_value != 1 OR cmd.field_md_invalid_value IS NULL)
+AND   (cmd.field_client_contract_end_value IS NULL OR STR_TO_DATE(cmd.field_client_contract_end_value, '%%d/%m/%Y') > CURDATE())
+AND   cmd.field_client_con_status_value = 5
+AND cmd.field_md_surname_value != 'user'
+GROUP BY n.nid ORDER BY  n.created DESC
+
+
+https://backoffice.shirlie.co.uk/partners/info_man/home/aa_con?closed=y
+SELECT CONCAT(cmd.field_md_title_value, ' ', cmd.field_md_first_name_value, ' ', cmd.field_md_surname_value) AS name,
+cmd.field_md_town_value AS area, cmd.field_client_contract_start_value AS start,
+cmd.field_md_client_group_value AS clientGroup,
+cmd.field_client_find_us_value AS recoUs,
+cmd.field_md_dob_fid_value as dobFid,
+cmd.field_md_cg_fid_value as cgFid,
+cmd.field_md_scg_fid_value as scgFid,
+cmd.field_md_es_fid_value as esFid,
+cmd.field_md_add_fid_value as addFid,
+cmd.field_md_add_evid_value as addEvid,
+cmd.field_md_sevid_value as secClientGrpEvid,
+DATE_FORMAT(STR_TO_DATE(cmd.field_md_dob_value, '%Y-%m-%%d'), '%d/%m/%Y') AS dob,
+cmd.field_md_job_coach_value AS coach,
+cmd.field_client_currently_value AS status,
+IF (LENGTH(p.partner) > 0, p.partner, 'TBC') AS actpart,
+cmd.nid,
+IF(cmd.field_client_con_status_value IS NULL, 1, field_client_con_status_value) AS workflowStatus,
+cmd.field_md_consent_form_fid_value AS mdConsentFormFid,
+cmd.field_client_contract_end_value as end,
+cmd.field_client_contract_start_value AS start,
+fu.source AS findUs,
+cmd.field_md_consent_form_fid_value AS conserFormFid,
+cmd.field_md_elig_form_fid_value AS eligFormFid,
+cmd.field_md_init_ass_fid_value AS initAssFid,
+s.stage,
+DATE_FORMAT(STR_TO_DATE(cmd.field_md_im_approve_date_value, '%Y-%m-%%d'), '%%d/%m/%Y') AS approvedDate,
+1 AS isClosed,
+MAX(cmd.vid) AS vid
+FROM content_type_client_main_details cmd
+    LEFT JOIN content_type_client_partner_dev pd ON pd.field_part_cid_value = cmd.nid
+    LEFT JOIN client_stages s on s.id = cmd.field_md_stage_value
+    LEFT JOIN client_programme_find_us fu on fu.id = cmd.field_client_find_us_value
+    LEFT JOIN partners p on p.id = pd.field_part_partner_value, node_revisions n
+WHERE cmd.nid = n.nid
+AND   cmd.field_client_contract_value = 'AA'
+AND (cmd.field_md_invalid_value != 1 OR cmd.field_md_invalid_value IS NULL)
+AND STR_TO_DATE(cmd.field_client_contract_end_value, '%d/%m/%Y') <= CURDATE()
+AND cmd.field_md_surname_value != 'user'
+GROUP BY n.nid, cmd.field_client_contract_value
+ORDER BY  n.timestamp DESC

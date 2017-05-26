@@ -1,3 +1,4 @@
 . clear out data and reset all model auto incs
 . migrate staff and then get neil to get them to change passwords and get neil to close down any who are not active
 . neils team to test data and functionality is correct
+. once migrateed set contract type to mand

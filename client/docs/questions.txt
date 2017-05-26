@@ -2,6 +2,14 @@ is employment status related to contracts and hence should be dirived from live 
 
 ... the questions I sent neil
 
+currenlty I am using versions in md to hanlde non tio contracts. When I migrate across I will only hae latest profile filed
+set in main details do I need it as it was in each contract? if so need to move this field to contract, same for stage and clientGroup etc
+see understanding_old_contracts.txt
+
+actpart does not appear t e used so I will not migrate it
+
+in code to get tio list see understanding_old_contracts.txt, not sure that content_type_client_partner_dev is needed - is it?
+
 is sec client group etc to be stored in contracts?
 
 how does currently tie in to contracts ie can I derive from contracts or does it need to be part of client details

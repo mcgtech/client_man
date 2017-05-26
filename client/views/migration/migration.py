@@ -1,4 +1,4 @@
-from client.models import Client
+from client.models import Client, Contract
 from common.models import Person, Note, Address, Telephone
 from common.views import form_errors_as_array, job_coach_user, job_coach_man_user, admin_user, show_form_error
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -9,19 +9,63 @@ import dateutil.parser
 
 @login_required
 @user_passes_test(admin_user, 'client_man_login')
+def load_contracts(request):
+    # how I got the latest non tio rec in each group: https://www.xaprb.com/blog/2006/12/07/how-to-select-the-firstleastmax-row-per-group-in-sql/
+    json_data = open('static/json/non_tio_contracts.json')
+    # deserialises it
+    # need to eset created and last modified date
+    json_contracts = json.load(json_data)
+    # and_steve - a-g
+    items = []
+    errors = []
+    Contract.objects.all().delete()
+    gen_contract = True
+
+    if gen_contract:
+        all_clients = Client.objects.select_related('user').all()
+        for json_contract in json_contracts:
+            # create model instances...
+            contract = None
+            try:
+                nid = get_clean_json_data(json_contract['nid'])
+                client = all_clients.filter(original_client_id=nid)
+                if client is not None:
+                    contract = Contract(client=client)
+                    contract.type = get_clean_json_data(json_contract['con_type'])
+                    # I set USE_TZ = False in settings to get this to work
+                    start_date = dateutil.parser.parse(get_clean_json_data(json_contract['con_start_date']));
+                    contract.start_date = start_date
+                    end_date = dateutil.parser.parse(get_clean_json_data(json_contract['con_end_date']));
+                    contract.end_date = end_date
+                    referral_date = dateutil.parser.parse(get_clean_json_data(json_contract['con_app_date']));
+                    contract.referral_date = referral_date
+                    sec_client_group = get_clean_json_data(json_contract['sec_client_group'])
+                    if len(sec_client_group) == 0 or sec_client_group == '-1' or sec_client_group== -1:
+                        sec_client_group = None
+                    client.secondary_client_group = sec_client_group
+                    contract.save()
+                else:
+                    raise ValueError('Client not found for contract, client nid: ' + nid)
+
+                items.append(contract)
+            except Exception as e:
+                if contract != None:
+                    es = str(contract) + ' ' + str(e)
+                else:
+                    es = 'Contract not created yet ' + str(e)
+                errors.append(es)
+
+    return render(request, 'client/migration/migration.html', {'items' : items, 'form_errors' :  errors})
+
+@login_required
+@user_passes_test(admin_user, 'client_man_login')
 def load_clients(request):
+    # how I got the latest non tio rec in each group: https://www.xaprb.com/blog/2006/12/07/how-to-select-the-firstleastmax-row-per-group-in-sql/
     json_data = open('static/json/clients.json')
     # deserialises it
     # need to eset created and last modified date
     json_clients = json.load(json_data)
-
-    # TODO: get rid of imports that I dont need
-    # TODO: chekc if client already exisits
-    # TODO: trim strings
-    # TODO: how to handle 'null'
-    # TODO: I can pass the json obj directly into client contructor: http://stackoverflow.com/questions/21858465/json-file-reading-by-django
-    # TODO: how will I handle addresses..
-    # Create model instances for each item
+    # and_steve - a-g
     items = []
     errors = []
 
@@ -52,7 +96,7 @@ def load_clients(request):
                 if len(start_date) > 0:
                     client.start_date = start_date
                 end_date = get_clean_json_data(json_client['end_date'])
-                if len(end_date) >0:
+                if len(end_date) > 0:
                     client.end_date = end_date
                 client.title = get_clean_json_data(json_client['title'])
                 client.middle_name = get_clean_json_data(json_client['middle_name'])
@@ -139,7 +183,7 @@ def load_clients(request):
                     es = 'Client not created yet ' + str(e)
                 errors.append(es)
 
-    return render(request, 'client/migration/load_clients.html', {'json_clients': json_clients, 'items' : items, 'form_errors' :  errors})
+    return render(request, 'client/migration/migration.html', {'json_clients': json_clients, 'items' : items, 'form_errors' :  errors})
 
 def get_clean_json_data(json_data):
     if json_data is None:
