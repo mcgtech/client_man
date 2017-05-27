@@ -86,7 +86,8 @@ def manage_contract(request, client_id, con_type, contract_id=None):
     return render(request, 'client/contract/contract_edit.html', {'form': contract_form, 'client' : client,
                                                        'the_action_text': the_action_text,
                                                        'edit_form': is_edit_form, 'the_action': action,
-                                                       'form_errors': contract_form_errors, 'js_data' : js_data})
+                                                       'form_errors': contract_form_errors, 'js_data' : js_data,
+                                                        'contract_choices': Contract.TYPES})
 
 def get_contract_object(type, contract_id):
     if type == Contract.TIO:

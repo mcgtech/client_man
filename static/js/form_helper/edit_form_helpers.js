@@ -6,8 +6,11 @@ $(function(){
 
 function setup_leave_form_check()
 {
+    // https://github.com/snikch/jquery.dirtyforms
     // does not work on safari at moment
-    $('form').dirtyForms();
+    // in chrome on client edit it fires even if nothing changed - however am I using js to change stuff?
+    // TODO: get this to work
+    //$('form').dirtyForms({ ignoreSelector: 'select.ignore_dirty' });
 }
 
 function request_conf_on_delete()

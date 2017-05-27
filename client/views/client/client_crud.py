@@ -122,7 +122,7 @@ def manage_client(request, client_id=None):
                                                        'the_action': action, 'address_form': address_form,
                                                        'phone_form_set': phone_form_set, 'phone_helper': phone_helper,
                                                         'contracts' : contracts, 'js_data' : js_data,
-                                                       'form_errors': form_errors})
+                                                       'form_errors': form_errors, 'contract_choices' : Contract.TYPES})
 
 def add_contract_js_data(js_dict, client):
     js_dict['add_con_url'] = client.get_add_contract_url()

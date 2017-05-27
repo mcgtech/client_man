@@ -9,6 +9,7 @@
 {% load staticfiles %}
 
 {% block css %}
+    <link rel="stylesheet" href="{% static 'css/client_contract_select.css' %}">
     <link rel="stylesheet" href="{% static 'css/contract_edit.css' %}">
 {% endblock %}
 
@@ -21,6 +22,7 @@
 {% endblock %}
 {% block content %}
     {% load crispy_forms_tags %}
+    {% include 'client/client/client_contract_select.html' %}
     <form action="{{ the_action }}" method="POST" id="contract_edit_form" class="contract_details">
         {% crispy form %}
     </form>
