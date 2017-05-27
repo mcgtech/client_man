@@ -146,8 +146,8 @@ class TIOContract(Contract):
     support_esa = models.BooleanField(default=False, verbose_name='Support Group Category')
     wrag_esa = models.BooleanField(default=False, verbose_name='W.R.A.G (less than 3 months sustained employment in the last 3 yrs)')
     emp_pros_inc = models.BooleanField(default=False, verbose_name='To improve employment prospects')
-    other_ben = models.TextField(verbose_name='Other Benefits')
-    fund_mgr_notes = models.TextField(verbose_name='Fund Manager Notes')
+    other_ben = models.TextField(verbose_name='Other Benefits', blank=True)
+    fund_mgr_notes = models.TextField(verbose_name='Fund Manager Notes', blank=True)
 
 
 class ContractStatus(Auditable):

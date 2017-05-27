@@ -1,5 +1,6 @@
 $(function(){
     setup_datepickers();
+    setup_contract_tabs();
 });
 
 function setup_datepickers()
@@ -8,4 +9,13 @@ function setup_datepickers()
     $("#id_contract-start_date").datepicker(options);
     $("#id_contract-referral_date").datepicker(options);
     $("#id_contract-end_date").datepicker(options);
+}
+
+function setup_contract_tabs()
+{
+    var tio_pane_elem = $('li.tab-pane a[href="#tio"]');
+    if (tio_pane_elem.length > 0)
+    {
+        $('li.tab-pane:first').after(tio_pane_elem.parent());
+    }
 }

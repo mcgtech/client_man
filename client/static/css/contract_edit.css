@@ -1,0 +1,12 @@
+fieldset.con_field  {
+    border: 1px solid silver !important;
+    padding: 5px !important;
+    margin-bottom: 20px !important;
+}
+fieldset.con_field legend {
+    font-size: 14px !important;
+    border: 0 !important;
+    margin-bottom: 0 !important;
+    font-weight: bold;
+    width: inherit !important;
+}
