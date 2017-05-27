@@ -62,6 +62,9 @@ class ContractForm(AuditableForm):
 class TIOContractForm(ContractForm):
     class Meta(ContractForm.Meta):
         model = TIOContract
-        ContractForm.Meta.fields = ContractForm.Meta.fields + ('issue', 'consent_form_complete')
+        ContractForm.Meta.fields = ContractForm.Meta.fields + ('issue', 'consent_form_complete', 'aa_progress_jsa_18',
+                                                               'add_support_jsa_18', 'add_support_jsa_25', 'wca_incapacity',
+                                                               'support_esa', 'wrag_esa', 'emp_pros_inc', 'other_ben',
+                                                               'fund_mgr_notes')
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
