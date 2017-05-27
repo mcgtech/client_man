@@ -1,5 +1,5 @@
 from django import forms
-from client.models import Contract
+from client.models import Contract, TIOContract
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, HTML, Button, Div, Field
 from crispy_forms.bootstrap import TabHolder, Tab, FormActions, InlineField
@@ -17,7 +17,6 @@ class ContractForm(AuditableForm):
         if add_contract:
             self.helper.add_input(Button("add contract", "Add New Contract", css_class='btn btn-success add-contract-btn'))
         self.prepare_required_field('type', 'Type')
-        self.prepare_required_field('secondary_client_group', 'Secondary client group')
         self.prepare_required_field('type', 'Type')
         self.helper.layout = Layout(
                 TabHolder(
@@ -48,9 +47,6 @@ class ContractForm(AuditableForm):
     def clean_type(self):
         return validate_required_field(self, 'type', 'type')
 
-    def clean_secondary_client_group(self):
-        return validate_required_field(self, 'secondary_client_group', 'secondary client group')
-
     def clean_start_date(self):
         return validate_required_field(self, 'start_date', 'start date')
 
@@ -62,3 +58,9 @@ class ContractForm(AuditableForm):
         AuditableForm.Meta.widgets['end_date'] = forms.DateInput(attrs={'class':'datepicker'})
         AuditableForm.Meta.widgets['referral_date'] = forms.DateInput(attrs={'class':'datepicker'})
 
+
+class TioContractForm(ContractForm):
+    class Meta(ContractForm.Meta):
+        model = TIOContract
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)

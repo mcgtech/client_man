@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, get_object_or_404
-from client.models import Client
+from client.models import Client, TIOContract
 from common.models import Note, Address, Telephone
 from django.forms import inlineformset_factory
 from client.forms import *
@@ -27,23 +27,25 @@ def contract_detail(request, client_pk):
 @login_required
 @user_passes_test(job_coach_user, 'client_man_login')
 def contract_new(request, client_pk):
-    return manage_contract(request, client_pk)
+    con_type = Contract.AA
+    return manage_contract(request, client_pk, con_type)
 
 
 @login_required
 @user_passes_test(job_coach_user, 'client_man_login')
 def contract_edit(request, client_pk, contract_id):
-    return manage_contract(request, client_pk, contract_id)
+    con_type = Contract.AA
+    return manage_contract(request, client_pk, con_type, contract_id)
 
 
 # http://stackoverflow.com/questions/29758558/inlineformset-factory-create-new-objects-and-edit-objects-after-created
 # https://gist.github.com/ibarovic/3092910
 # TODO: suss if I should be using https://simpleisbetterthancomplex.com/tips/2016/05/16/django-tip-3-optimize-database-queries.html in this fn
 @transaction.atomic
-def manage_contract(request, client_id, contract_id=None):
+def manage_contract(request, client_id, con_type, contract_id=None):
     client = get_object_or_404(Client, pk=client_id)
     if contract_id is None:
-        contract = Contract()
+        contract = get_contract_object(type, contract_id)
         the_action_text = 'Create'
         is_edit_form = False
         action = '/contract/' + str(client_id) + '/new/'
@@ -52,14 +54,14 @@ def manage_contract(request, client_id, contract_id=None):
         display_client_summary_message(client, request, 'Contract details for', settings.INFO_MSG_TYPE)
         the_action_text = 'Edit'
         is_edit_form = True
-        contract = get_object_or_404(Contract, pk=contract_id)
+        contract = get_contract_object(type, contract_id)
         action = get_contract_edit_url(client_id, contract_id)
 
     del_request = handle_delete_request(request, client, contract, 'You have successfully deleted the contract ' + str(contract), '/client_search');
     if del_request:
         return del_request
     elif request.method == "POST":
-        contract_form = ContractForm(request.POST, request.FILES, instance=contract, prefix="contract", is_edit_form=is_edit_form, cancel_url=None, add_contract=is_edit_form)
+        contract_form = get_contract_form(type, request, contract, "contract", is_edit_form, None, is_edit_form)
         if contract_form.is_valid():
             created_contract = contract_form.save(commit=False)
             apply_auditable_info(created_contract, request)
@@ -70,7 +72,7 @@ def manage_contract(request, client_id, contract_id=None):
             return redirect(action)
     else:
         cancel_url = redirect('client_edit', pk=client.id).url
-        contract_form = ContractForm(instance=contract, prefix="contract", is_edit_form=is_edit_form, cancel_url=cancel_url, add_contract=is_edit_form)
+        contract_form = get_contract_form(type, request, contract, "contract", is_edit_form, cancel_url, is_edit_form)
 
     # setup js variables for template
     #https://godjango.com/blog/working-with-json-and-django/
@@ -85,6 +87,35 @@ def manage_contract(request, client_id, contract_id=None):
                                                        'the_action_text': the_action_text,
                                                        'edit_form': is_edit_form, 'the_action': action,
                                                        'form_errors': contract_form_errors, 'js_data' : js_data})
+
+def get_contract_object(type, contract_id):
+    if type == Contract.TIO:
+        if contract_id is None:
+            contract = TIOContract()
+        else:
+            contract = get_object_or_404(TIOContract, pk=contract_id)
+    else:
+        if contract_id is None:
+            contract = Contract()
+        else:
+            contract = get_object_or_404(Contract, pk=contract_id)
+
+    return contract
+
+
+def get_contract_form(type, request, contract, prefix, is_edit_form, cancel_url, add_contract):
+    if type == Contract.TIO:
+        if request.method == "POST":
+            contract_form = TIOContractForm(request.POST, request.FILES, instance=contract, prefix="contract", is_edit_form=is_edit_form, cancel_url=None, add_contract=is_edit_form)
+        else:
+            contract_form = TIOContractForm(instance=contract, prefix=prefix, is_edit_form=is_edit_form, cancel_url=cancel_url, add_contract=add_contract)
+    else:
+        if request.method == "POST":
+            contract_form = ContractForm(request.POST, request.FILES, instance=contract, prefix="contract", is_edit_form=is_edit_form, cancel_url=None, add_contract=is_edit_form)
+        else:
+            contract_form = ContractForm(instance=contract, prefix=prefix, is_edit_form=is_edit_form, cancel_url=cancel_url, add_contract=add_contract)
+
+    return contract_form
 
 def get_contract_edit_url(client_id, contract_id):
     return '/contract/' + str(client_id) + '/' + str(contract_id) + '/edit' + '/'

@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="053a4aa4-3808-4504-ab0a-5f7dd90a79bc" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/models/contract.py" afterPath="$PROJECT_DIR$/client/models/contract.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/client/client/client_contracts.html" afterPath="$PROJECT_DIR$/client/templates/client/client/client_contracts.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/forms/contract.py" afterPath="$PROJECT_DIR$/client/forms/contract.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/models/__init__.py" afterPath="$PROJECT_DIR$/client/models/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/contract/contract_crud.py" afterPath="$PROJECT_DIR$/client/views/contract/contract_crud.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,49 +19,75 @@
       <file leaf-file-name="contract.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/models/contract.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
-              <caret line="109" column="30" lean-forward="false" selection-start-line="109" selection-start-column="8" selection-end-line="109" selection-end-column="30" />
+            <state relative-caret-position="1056">
+              <caret line="90" column="26" lean-forward="false" selection-start-line="90" selection-start-column="4" selection-end-line="90" selection-end-column="26" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="client_edit.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/templates/client/client/client_edit.html">
+      <file leaf-file-name="client.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/models/client.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="404">
-              <caret line="27" column="47" lean-forward="false" selection-start-line="27" selection-start-column="47" selection-end-line="27" selection-end-column="47" />
+            <state relative-caret-position="150">
+              <caret line="197" column="36" lean-forward="true" selection-start-line="197" selection-start-column="36" selection-end-line="197" selection-end-column="36" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="migration.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/docs/migration.txt">
+      <file leaf-file-name="contract.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/forms/contract.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="43" lean-forward="false" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="43" />
-              <folding />
+            <state relative-caret-position="623">
+              <caret line="62" column="27" lean-forward="false" selection-start-line="62" selection-start-column="27" selection-end-line="62" selection-end-column="27" />
+              <folding>
+                <element signature="e#0#24#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tables.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/tables.py">
+      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/common/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="21" column="53" lean-forward="false" selection-start-line="21" selection-start-column="53" selection-end-line="21" selection-end-column="91" />
+            <state relative-caret-position="16">
+              <caret line="27" column="6" lean-forward="false" selection-start-line="27" selection-start-column="6" selection-end-line="27" selection-end-column="6" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="client_contracts.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/models/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="49" lean-forward="false" selection-start-line="4" selection-start-column="49" selection-end-line="4" selection-end-column="49" />
+              <folding>
+                <element signature="e#93#119#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="client_contracts.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/templates/client/client/client_contracts.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="360">
               <caret line="24" column="44" lean-forward="false" selection-start-line="24" selection-start-column="44" selection-end-line="24" selection-end-column="44" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="contract_crud.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/client/views/contract/contract_crud.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="208">
+              <caret line="74" column="8" lean-forward="false" selection-start-line="74" selection-start-column="8" selection-end-line="74" selection-end-column="8" />
+              <folding>
+                <element signature="e#0#56#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -88,16 +114,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="filters.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/filters.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="21" column="37" lean-forward="true" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="queries.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/queries.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -112,7 +128,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>JOB_COACH</find>
       <find>s</find>
       <find>settin</find>
       <find>settings</find>
@@ -138,16 +153,17 @@
       <find>BOOL</find>
       <find>con_state</find>
       <find>status</find>
-      <find>secondary_client_group</find>
       <find>contrac</find>
       <find>c</find>
+      <find>secondary_client_group</find>
       <find>contract</find>
+      <find>employment_status</find>
     </findStrings>
     <replaceStrings>
       <replace>client_notes</replace>
       <replace>paleblue</replace>
-      <replace>contract_status</replace>
       <replace>json_contract</replace>
+      <replace>contract_status</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/client/migrations</dir>
@@ -165,7 +181,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/common/forms.py" />
-        <option value="$PROJECT_DIR$/client/forms/contract.py" />
         <option value="$PROJECT_DIR$/static/js/django_tables2/filter_helper.js" />
         <option value="$PROJECT_DIR$/common/templates/partials/django_tables2_css_includes.html" />
         <option value="$PROJECT_DIR$/common/templates/partials/django_tables2_js_includes.html" />
@@ -191,7 +206,6 @@
         <option value="$PROJECT_DIR$/static/js/form_helper/edit_form_helpers.js" />
         <option value="$PROJECT_DIR$/client/queries.py" />
         <option value="$PROJECT_DIR$/common/views.py" />
-        <option value="$PROJECT_DIR$/client/views/contract/contract_crud.py" />
         <option value="$PROJECT_DIR$/client/filters.py" />
         <option value="$PROJECT_DIR$/common/templates/base.html" />
         <option value="$PROJECT_DIR$/client/templates/client/client/client_search.html" />
@@ -206,7 +220,6 @@
         <option value="$PROJECT_DIR$/setup_users_and_groups.py" />
         <option value="$PROJECT_DIR$/client/docs/rebuild_steps.txt" />
         <option value="$PROJECT_DIR$/client/docs/questions.txt" />
-        <option value="$PROJECT_DIR$/client/models/__init__.py" />
         <option value="$PROJECT_DIR$/client/views/migration/migration.py" />
         <option value="$PROJECT_DIR$/client/admin.py" />
         <option value="$PROJECT_DIR$/common/templates/nav_bar.html" />
@@ -215,6 +228,9 @@
         <option value="$PROJECT_DIR$/client/views/client/client_crud.py" />
         <option value="$PROJECT_DIR$/client/models/contract.py" />
         <option value="$PROJECT_DIR$/client/templates/client/client/client_contracts.html" />
+        <option value="$PROJECT_DIR$/client/models/__init__.py" />
+        <option value="$PROJECT_DIR$/client/forms/contract.py" />
+        <option value="$PROJECT_DIR$/client/views/contract/contract_crud.py" />
       </list>
     </option>
   </component>
@@ -706,7 +722,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/client/views/contract/contract_crud.py</url>
-          <line>43</line>
+          <line>45</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -729,14 +745,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/common/templates/partials/datatable_css_includes.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/common/templates/partials/datatable_js_includes.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -821,14 +829,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="261">
           <caret line="36" column="8" lean-forward="false" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="29" column="49" lean-forward="false" selection-start-line="28" selection-start-column="40" selection-end-line="29" selection-end-column="49" />
           <folding />
         </state>
       </provider>
@@ -981,14 +981,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/models/client.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="217" column="61" lean-forward="true" selection-start-line="216" selection-start-column="96" selection-end-line="217" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/common/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="259">
@@ -1021,16 +1013,6 @@
         <state relative-caret-position="150">
           <caret line="10" column="79" lean-forward="false" selection-start-line="10" selection-start-column="79" selection-end-line="10" selection-end-column="79" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/models/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="48" lean-forward="false" selection-start-line="5" selection-start-column="48" selection-end-line="5" selection-end-column="48" />
-          <folding>
-            <element signature="e#93#119#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1118,16 +1100,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/views/contract/contract_crud.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="57" column="105" lean-forward="false" selection-start-line="57" selection-start-column="102" selection-end-line="57" selection-end-column="105" />
-          <folding>
-            <element signature="e#0#56#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/views/client/client_crud.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="470">
@@ -1138,19 +1110,65 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/models/contract.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="109" column="30" lean-forward="false" selection-start-line="109" selection-start-column="8" selection-end-line="109" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/templates/client/client/client_contracts.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="24" column="44" lean-forward="false" selection-start-line="24" selection-start-column="44" selection-end-line="24" selection-end-column="44" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/models/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="49" lean-forward="false" selection-start-line="4" selection-start-column="49" selection-end-line="4" selection-end-column="49" />
+          <folding>
+            <element signature="e#93#119#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/models/contract.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1056">
+          <caret line="90" column="26" lean-forward="false" selection-start-line="90" selection-start-column="4" selection-end-line="90" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/models/client.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="197" column="36" lean-forward="true" selection-start-line="197" selection-start-column="36" selection-end-line="197" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/forms/contract.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="623">
+          <caret line="62" column="27" lean-forward="false" selection-start-line="62" selection-start-column="27" selection-end-line="62" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16">
+          <caret line="27" column="6" lean-forward="false" selection-start-line="27" selection-start-column="6" selection-end-line="27" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/views/contract/contract_crud.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="74" column="8" lean-forward="false" selection-start-line="74" selection-start-column="8" selection-end-line="74" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#56#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
