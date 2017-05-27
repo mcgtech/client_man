@@ -107,6 +107,16 @@ class Contract(Auditable):
         from django.urls import reverse
         return reverse('contract_edit', args=[str(self.client.id), str(self.id)])
 
+    def get_all_status_as_list(self):
+        table = '<table >'
+        for status in self.contract_status.all().order_by('modified_on'):
+            table = table + '<tr>' + '<td>'
+            table = table + status.get_summary()
+            table = table + '</td>' + '</tr>'
+        table = table + '</table>'
+
+        return table
+
     def __str__(self):
        start_date = '' if self.start_date is None else self.start_date.strftime(settings.DISPLAY_DATE)
        return '' if self.client is None else self.client.get_full_name() + ', type: '+ self.get_type_display() + ', start date - ' + start_date
@@ -155,6 +165,9 @@ class ContractStatus(Auditable):
     )
     status = models.IntegerField(choices=STATUS, default=AWAIT_INF_MAN_APP)
     contract = models.ForeignKey(Contract, on_delete=models.CASCADE, null=True, related_name="contract_status")
+
+    def get_summary(self):
+        return self.get_status_display() + ' - ' + self.modified_on.strftime(settings.DISPLAY_DATE_TIME)
 
     def __str__(self):
        return self.get_status_display() + ' - ' + str(self.contract)

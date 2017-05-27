@@ -21,7 +21,9 @@
         <td>{{ contract.get_secondary_client_group_display }}</td>
         <td>{{ contract.secondary_client_group_evidence }}</td>
         <td>{{ contract.application_form }}</td>
-        <td>{{ contract.get_status_display }}</td>
+        <td>
+          {{ contract.get_all_status_as_list|safe }}
+        </td>
       </tr>
     {% empty %}
       <tr id="no_data">
