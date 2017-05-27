@@ -52,15 +52,16 @@ class ContractForm(AuditableForm):
 
     class Meta(AuditableForm.Meta):
         model = Contract
-        fields = get_auditable_fields()  + ('type', 'secondary_client_group', 'start_date', 'end_date', 'referral_date',
+        fields = get_auditable_fields() + ('type', 'secondary_client_group', 'start_date', 'end_date', 'referral_date',
                                             'secondary_client_group_evidence', 'application_form')
         AuditableForm.Meta.widgets['start_date'] = forms.DateInput(attrs={'class':'datepicker'})
         AuditableForm.Meta.widgets['end_date'] = forms.DateInput(attrs={'class':'datepicker'})
         AuditableForm.Meta.widgets['referral_date'] = forms.DateInput(attrs={'class':'datepicker'})
 
 
-class TioContractForm(ContractForm):
+class TIOContractForm(ContractForm):
     class Meta(ContractForm.Meta):
         model = TIOContract
+        ContractForm.Meta.fields = ContractForm.Meta.fields + ('issue', 'consent_form_complete')
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

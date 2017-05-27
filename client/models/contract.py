@@ -137,7 +137,7 @@ class TIOContract(Contract):
         (PH_SEN, 'Physical and Sensory'),
         (SOC_EM, 'Social and Emotional'),
     )
-    issue = models.IntegerField(choices=ISSUES, default=None, verbose_name='Adult 18+ with')
+    issue = models.IntegerField(choices=ISSUES, default=None, verbose_name='Adult 18+ with', null=True)
     consent_form_complete = models.BooleanField(default=False)
     aa_progress_jsa_18 = models.BooleanField(default=False, verbose_name='Progressing from Activity Agreements')
     add_support_jsa_18 = models.BooleanField(default=False, verbose_name='In need of additional support with health and personal confidence issues')

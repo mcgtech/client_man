@@ -27,14 +27,14 @@ def contract_detail(request, client_pk):
 @login_required
 @user_passes_test(job_coach_user, 'client_man_login')
 def contract_new(request, client_pk):
-    con_type = Contract.AA
+    con_type = Contract.TIO
     return manage_contract(request, client_pk, con_type)
 
 
 @login_required
 @user_passes_test(job_coach_user, 'client_man_login')
 def contract_edit(request, client_pk, contract_id):
-    con_type = Contract.AA
+    con_type = Contract.TIO
     return manage_contract(request, client_pk, con_type, contract_id)
 
 
@@ -45,7 +45,7 @@ def contract_edit(request, client_pk, contract_id):
 def manage_contract(request, client_id, con_type, contract_id=None):
     client = get_object_or_404(Client, pk=client_id)
     if contract_id is None:
-        contract = get_contract_object(type, contract_id)
+        contract = get_contract_object(con_type, contract_id)
         the_action_text = 'Create'
         is_edit_form = False
         action = '/contract/' + str(client_id) + '/new/'
@@ -54,14 +54,14 @@ def manage_contract(request, client_id, con_type, contract_id=None):
         display_client_summary_message(client, request, 'Contract details for', settings.INFO_MSG_TYPE)
         the_action_text = 'Edit'
         is_edit_form = True
-        contract = get_contract_object(type, contract_id)
+        contract = get_contract_object(con_type, contract_id)
         action = get_contract_edit_url(client_id, contract_id)
 
     del_request = handle_delete_request(request, client, contract, 'You have successfully deleted the contract ' + str(contract), '/client_search');
     if del_request:
         return del_request
     elif request.method == "POST":
-        contract_form = get_contract_form(type, request, contract, "contract", is_edit_form, None, is_edit_form)
+        contract_form = get_contract_form(con_type, request, contract, "contract", is_edit_form, None, is_edit_form)
         if contract_form.is_valid():
             created_contract = contract_form.save(commit=False)
             apply_auditable_info(created_contract, request)
@@ -72,7 +72,7 @@ def manage_contract(request, client_id, con_type, contract_id=None):
             return redirect(action)
     else:
         cancel_url = redirect('client_edit', pk=client.id).url
-        contract_form = get_contract_form(type, request, contract, "contract", is_edit_form, cancel_url, is_edit_form)
+        contract_form = get_contract_form(con_type, request, contract, "contract", is_edit_form, cancel_url, is_edit_form)
 
     # setup js variables for template
     #https://godjango.com/blog/working-with-json-and-django/
