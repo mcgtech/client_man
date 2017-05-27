@@ -5,6 +5,10 @@ is employment status related to contracts and hence should be dirived from live 
 in sql to gen contracts file I exclde 'Closed' entries as I assume we want the one before it?
 If I didnt then say we have AA and it gets closed, then we would have a contract of type Closed in the new
 system and we wouldnt know it was AA, only issue would be if the closed dates did not match the closed dates of the AA version
+- if neil wants then I can parese ech version and set closed to be the prior to it?
+
+as status for non tio contracts is driven of info man accepting into the contract for via the main details it means we
+dont have a rec, so what I migrate is a bit iffy same for mod and created dates
 
 currenlty I am using versions in md to hanlde non tio contracts. When I migrate across I will only hae latest profile filed
 set in main details do I need it as it was in each contract? if so need to move this field to contract, same for stage and clientGroup etc

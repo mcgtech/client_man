@@ -14,6 +14,14 @@ job_coach_group = Group(name="job coach")
 job_coach_group.save()
 job_coach_mgr.group = Group(name="job coach manager")
 job_coach_mgr.save()
+partners_group = Group(name="partners")
+partners_group.save()
+info_man_group = Group(name="info manager")
+info_man_group.save()
+supply_chain_man_group = Group(name="supply chain manager")
+supply_chain_man_group.save()
+supply_chain_partner_group = Group(name="supply chain partner")
+supply_chain_partner_group.save()
 
 # run sql to repopulate
 ann = User.objects.create_user('ann', 'ann@ann.com', 'ann123');ann.is_staff=True;ann.save();

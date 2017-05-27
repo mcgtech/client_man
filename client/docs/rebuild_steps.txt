@@ -14,6 +14,13 @@ where u.uid = ur.uid
 and  ur.rid = 8
 union
 select "closed = User.objects.create_user('closed', 'closed@closed', 'closed123');"
+union
+select concat(LOWER(REPLACE(u.name, ' ', '')), ' = ', "User.objects.create_user('", LOWER(REPLACE(u.name, ' ', '')), "', '", u.mail, "', '", LOWER(REPLACE(u.name, ' ', '')), "123');", LOWER(REPLACE(u.name, ' ', '')), ".is_staff=True;", LOWER(REPLACE(u.name, ' ', '')), ".save()")
+from users u, users_roles ur
+where u.uid = ur.uid
+and  ur.rid = 18
+and u.uid not in (226,924,761, 229, 224,223)
+
 
 select concat('job_coach_group.user_set.add(', LOWER(REPLACE(u.name, ' ', '')), ')')
 from users u, users_roles ur
@@ -21,6 +28,31 @@ where u.uid = ur.uid
 and  ur.rid = 8
 union
 select "job_coach_group.user_set.add(closed)"
+union
+select concat('partners_group.user_set.add(', LOWER(REPLACE(u.name, ' ', '')), ')')
+from users u, users_roles ur
+where u.uid = ur.uid
+and  ur.rid = 8
+union
+select concat('job_coach_mgr.user_set.add(', LOWER(REPLACE(u.name, ' ', '')), ')')
+from users u, users_roles ur
+where u.uid = ur.uid
+and  ur.rid = 11
+union
+select concat('info_man_group.user_set.add(', LOWER(REPLACE(u.name, ' ', '')), ')')
+from users u, users_roles ur
+where u.uid = ur.uid
+and  ur.rid = 12
+union
+select concat('supply_chain_man_group.user_set.add(', LOWER(REPLACE(u.name, ' ', '')), ')')
+from users u, users_roles ur
+where u.uid = ur.uid
+and  ur.rid = 13
+union
+select concat('supply_chain_partner_group.user_set.add(', LOWER(REPLACE(u.name, ' ', '')), ')')
+from users u, users_roles ur
+where u.uid = ur.uid
+and  ur.rid in (14, 17)
 
 run following:
 python manage.py shell < setup_users_and_groups.py.py

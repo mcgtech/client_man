@@ -1,4 +1,4 @@
-from client.models import Client, Contract
+from client.models import Client, Contract, ContractStatus
 from common.models import Person, Note, Address, Telephone
 from common.views import form_errors_as_array, job_coach_user, job_coach_man_user, admin_user, show_form_error
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -64,8 +64,17 @@ def load_contracts(request):
                         sec_client_group = get_clean_json_data(json_contract['sec_client_group'])
                         if len(sec_client_group) == 0 or sec_client_group == '-1' or sec_client_group== -1:
                             sec_client_group = None
-                        client.secondary_client_group = sec_client_group
+                        contract.secondary_client_group = sec_client_group
                         contract.save()
+
+                        contract_status = ContractStatus()
+                        contract_status.contract = contract
+                        contract_status.created_by = created_by
+                        contract_status.modified_by = modified_by
+                        contract_status.created_on = created_on
+                        contract_status.modified_on = modified_on
+                        contract_status.status = get_clean_json_data(json_contract['con_state'])
+                        contract_status.save()
                     else:
                         raise ValueError('Client not found for contract(1), client nid: ' + nid)
                 except Exception as e:
