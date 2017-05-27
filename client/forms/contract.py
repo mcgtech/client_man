@@ -15,9 +15,10 @@ class ContractForm(AuditableForm):
         add_contract = kwargs.pop('add_contract')
         super().__init__(*args, **kwargs)
         if add_contract:
-            self.helper.add_input(Button("add contract", "Add New Contract", css_class='btn btn-success add-contract-btn'))
+            self.helper.add_input(Button("add contract", "Add New Contract", css_class='btn btn-success add-contract-btn', data_toggle="modal", data_target="#contract_select_modal"))
         self.prepare_required_field('type', 'Type')
         self.prepare_required_field('type', 'Type')
+        self.fields['type'].widget.attrs['readonly'] = True
         self.helper.layout = Layout(
                 TabHolder(
                     Tab(

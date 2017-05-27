@@ -11,7 +11,8 @@ urlpatterns = [
     url(r'^client/(?P<pk>\d+)/edit/$', views.client_edit, name='client_edit'),
     url(r'^client/(?P<pk>\d+)/$', views.client_detail, name='client_detail'),
     # contract crud
-    url(r'^contract/(?P<client_pk>\d+)/new/$', views.contract_new, name='contract_new'),
+    url(r'^contract/(?P<client_pk>\d+)/new/(?P<con_type>\d+)/$', views.contract_new, name='contract_new'),
+    # url(r'^contract/(?P<client_pk>\d+)/new/$', views.contract_new, name='contract_new'),
     url(r'^contract/(?P<client_pk>\d+)/(?P<contract_id>\d+)/edit/$', views.contract_edit, name='contract_edit'),
     # searching
     url(r'^client_search_old/$', views.client_search_old, name='client_search_old'),

@@ -26,16 +26,15 @@ def contract_detail(request, client_pk):
 
 @login_required
 @user_passes_test(job_coach_user, 'client_man_login')
-def contract_new(request, client_pk):
-    con_type = Contract.TIO
+def contract_new(request, client_pk, con_type):
+    con_type = int(con_type)
     return manage_contract(request, client_pk, con_type)
 
 
 @login_required
 @user_passes_test(job_coach_user, 'client_man_login')
 def contract_edit(request, client_pk, contract_id):
-    con_type = Contract.TIO
-    return manage_contract(request, client_pk, con_type, contract_id)
+    return manage_contract(request, client_pk, None, contract_id)
 
 
 # http://stackoverflow.com/questions/29758558/inlineformset-factory-create-new-objects-and-edit-objects-after-created
@@ -45,16 +44,19 @@ def contract_edit(request, client_pk, contract_id):
 def manage_contract(request, client_id, con_type, contract_id=None):
     client = get_object_or_404(Client, pk=client_id)
     if contract_id is None:
-        contract = get_contract_object(con_type, contract_id)
+        contract = get_contract_object(con_type, contract_id, None)
         the_action_text = 'Create'
         is_edit_form = False
-        action = '/contract/' + str(client_id) + '/new/'
+        action = '/contract/' + str(client_id) + '/new/' + str(con_type) + '/'
         display_client_summary_message(client, request, 'Adding a new contract for', settings.WARN_MSG_TYPE)
     else:
+        # load base contract so we can get its type
+        base_contract = get_object_or_404(Contract, pk=contract_id)
+        con_type = int(base_contract.type)
         display_client_summary_message(client, request, 'Contract details for', settings.INFO_MSG_TYPE)
         the_action_text = 'Edit'
         is_edit_form = True
-        contract = get_contract_object(con_type, contract_id)
+        contract = get_contract_object(con_type, contract_id, base_contract)
         action = get_contract_edit_url(client_id, contract_id)
 
     del_request = handle_delete_request(request, client, contract, 'You have successfully deleted the contract ' + str(contract), '/client_search');
@@ -89,8 +91,9 @@ def manage_contract(request, client_id, con_type, contract_id=None):
                                                        'form_errors': contract_form_errors, 'js_data' : js_data,
                                                         'contract_choices': Contract.TYPES})
 
-def get_contract_object(type, contract_id):
+def get_contract_object(type, contract_id, base_contract):
     if type == Contract.TIO:
+        print('TIO')
         if contract_id is None:
             contract = TIOContract()
         else:
@@ -99,7 +102,9 @@ def get_contract_object(type, contract_id):
         if contract_id is None:
             contract = Contract()
         else:
-            contract = get_object_or_404(Contract, pk=contract_id)
+            # if we have already loaded base contract to get the type then use it here
+            contract = get_object_or_404(Contract, pk=contract_id) if base_contract is None else base_contract
+    contract.type = type
 
     return contract
 

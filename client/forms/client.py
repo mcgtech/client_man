@@ -19,7 +19,7 @@ class ClientForm(AuditableForm):
         add_contract = kwargs.pop('add_contract')
         super().__init__(*args, **kwargs)
         if add_contract:
-            self.helper.add_input(Button("add contract", "Add New Contract", css_class='btn btn-success add-contract-btn'))
+            self.helper.add_input(Button("add contract", "Add New Contract", css_class='btn btn-success add-contract-btn', data_toggle="modal", data_target="#contract_select_modal"))
         self.helper.layout = Layout(
             TabHolder(
                 Tab(

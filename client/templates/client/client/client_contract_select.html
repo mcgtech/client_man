@@ -1,21 +1,28 @@
-<div id="contract_select" class="well">
-    <div class="row">
-        <div class="col-sm-12">
-            Please select a contract type then press create
+<div id="contract_select_modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Select contract type</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-sm-9">
+                <select class="select form-control ignore_dirty" id="con-types">
+                  {% for choice in contract_choices %}
+                    <option value={{choice.0}}>{{choice.1}}</option>
+                  {{choice}}
+                  {% endfor %}%}
+                </select>
+            </div>
+            <div class="col-sm-3">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
         </div>
+      </div>
     </div>
-    <div class="row">
-        <div class="col-sm-8">
-        <select style="width:300px" class="select form-control ignore_dirty" id="con-types">
-          {% for choice in contract_choices %}
-            <option value={{choice.0}}>{{choice.1}}</option>
-          {{choice}}
-          {% endfor %}
-        </select>
-        </div>
-        <div class="col-sm-4">
-            <button disabled type="button" id="con-create" class="btn btn-success">Create Contract</button>
-            <button type="button" id="con-cancel" class="btn btn-default">Cancel</button>
-        </div>
-    </div>
+
+  </div>
 </div>
