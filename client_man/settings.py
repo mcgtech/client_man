@@ -173,6 +173,7 @@ DEBUG_MSG_TYPE = 4
 # status approval
 DISPLAY_APPROVE = 0
 DISPLAY_REJECT = 1
+DISPLAY_CANCEL = 2
 
 
 # https://github.com/jakubroztocil/django-settings-export

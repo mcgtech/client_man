@@ -32,7 +32,7 @@ class AuditableForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = False
-        self.helper.add_input(Submit("save record", "Save"))
+        self.helper.add_input(Submit("save record", "Save", css_class='save_butt'))
         if is_edit_form:
             self.helper.add_input(Submit("delete record", "Delete", css_class='btn btn-danger delete-btn'))
         else:

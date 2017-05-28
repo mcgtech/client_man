@@ -42,6 +42,7 @@ def contract_edit(request, client_pk, contract_id):
 # TODO: suss if I should be using https://simpleisbetterthancomplex.com/tips/2016/05/16/django-tip-3-optimize-database-queries.html in this fn
 @transaction.atomic
 def manage_contract(request, client_id, con_type, contract_id=None):
+    status_list = None
     client = get_object_or_404(Client, pk=client_id)
     if contract_id is None:
         contract = get_contract_object(con_type, contract_id, None)
@@ -53,13 +54,14 @@ def manage_contract(request, client_id, con_type, contract_id=None):
         # load base contract so we can get its type
         base_contract = get_object_or_404(Contract, pk=contract_id)
         con_type = int(base_contract.type)
-        display_client_summary_message(client, request, 'Contract details for', settings.INFO_MSG_TYPE)
         the_action_text = 'Edit'
         is_edit_form = True
         contract = get_contract_object(con_type, contract_id, base_contract)
         action = get_contract_edit_url(client_id, contract_id)
+        status_list = contract.get_ordered_status()
+        curr_state = status_list.first().get_status_display() if status_list is not None else ''
+        display_client_summary_message(client, request, 'Contract currently ' + curr_state + ' for ', settings.INFO_MSG_TYPE)
 
-    print(request.POST)
     del_request = handle_delete_request(request, client, contract, 'You have successfully deleted the contract ' + str(contract), '/client_search');
     if del_request:
         return del_request
@@ -72,15 +74,15 @@ def manage_contract(request, client_id, con_type, contract_id=None):
             created_contract.save()
             # if newly created contract then add a defautl status of awaiting info man approval
             if contract_id is None:
-                con_state = ContractStatus(contract=created_contract, status=ContractStatus.AWAIT_INFO_MAN_APP)
-                apply_auditable_info(con_state, request)
-                con_state.save()
+                add_new_contract_state(request, created_contract, ContractStatus.AWAIT_INFO_MAN_APP)
             action = get_contract_edit_url(client_id, created_contract.id)
 
             if request.POST.get("approve-contract"):
-                msg_once_only(request, 'Approved contract for ' + client.get_full_name(), settings.SUCC_MSG_TYPE)
+                handle_contract_approval(request, client, created_contract)
+            elif request.POST.get("cancel-contract-approval"):
+                handle_contract_approval_cancel(request, client, created_contract)
             elif request.POST.get("reject-contract"):
-                msg_once_only(request, 'Rejected contract for ' + client.get_full_name(), settings.SUCC_MSG_TYPE)
+                handle_contract_rejection(request, client, created_contract)
             else:
                 msg_once_only(request, 'Saved contract for ' + client.get_full_name(), settings.SUCC_MSG_TYPE)
             return redirect(action)
@@ -96,9 +98,9 @@ def manage_contract(request, client_id, con_type, contract_id=None):
     set_deletion_status_in_js_data(js_dict, request.user, job_coach_man_user)
     js_data = json.dumps(js_dict)
 
-    state_buttons = get_state_buttons_to_display(client, request)
+    state_buttons = get_state_buttons_to_display(client, is_edit_form, request)
 
-    status_list = contract.get_ordered_status()
+    status_list = contract.get_ordered_status() if status_list is None else status_list
 
     contract_form_errors = form_errors_as_array(contract_form)
     return render(request, 'client/contract/contract_edit.html', {'form': contract_form, 'client' : client,
@@ -108,21 +110,47 @@ def manage_contract(request, client_id, con_type, contract_id=None):
                                                                   'form_errors': contract_form_errors, 'js_data' : js_data,
                                                                   'contract_choices': Contract.TYPES, 'state_buttons' : state_buttons,
                                                                   'display_approve' : settings.DISPLAY_APPROVE,
-                                                                  'display_reject' : settings.DISPLAY_REJECT})
+                                                                  'display_reject' : settings.DISPLAY_REJECT,
+                                                                  'display_cancel' : settings.DISPLAY_CANCEL})
 
-def get_state_buttons_to_display(client, request):
+def add_new_contract_state(request, contract, status):
+    con_state = ContractStatus(contract=contract, status=status)
+    apply_auditable_info(con_state, request)
+    con_state.save()
+
+
+def handle_contract_approval(request, client, contract):
+    add_new_contract_state(request, contract, ContractStatus.APP_INFO_MAN)
+    msg_once_only(request, 'Approved contract for ' + client.get_full_name(), settings.SUCC_MSG_TYPE)
+
+
+def handle_contract_approval_cancel(request, client, contract):
+    add_new_contract_state(request, contract, ContractStatus.APP_CANC_INFO_MAN)
+    msg_once_only(request, 'Cancelled approved contract for ' + client.get_full_name(), settings.WARN_MSG_TYPE)
+
+
+def handle_contract_rejection(request, client, contract):
+    msg_once_only(request, 'Rejected contract for ' + client.get_full_name(), settings.SUCC_MSG_TYPE)
+
+
+def get_state_buttons_to_display(client, is_edit_form, request):
     buttons = []
-    latest_con_state = client.get_latest_contract_state()
-    status = latest_con_state.status
-    if status == ContractStatus.AWAIT_INFO_MAN_APP:
-        if info_man_user(request.user):
-            buttons.append(settings.DISPLAY_APPROVE)
-    elif status == ContractStatus.AWAIT_FUND_MAN_APP:
-            buttons.append(settings.DISPLAY_APPROVE)
-            buttons.append(settings.DISPLAY_REJECT)
-    elif status == ContractStatus.REJ_FUND_MAN:
-        if info_man_user(request.user):
-            buttons.append(settings.DISPLAY_APPROVE)
+    if is_edit_form:
+        latest_con_state = client.get_latest_contract_state()
+        if latest_con_state is not None:
+            status = latest_con_state.status
+            if status == ContractStatus.AWAIT_INFO_MAN_APP or status == ContractStatus.APP_CANC_INFO_MAN:
+                if info_man_user(request.user):
+                    buttons.append(settings.DISPLAY_APPROVE)
+            elif status == ContractStatus.APP_INFO_MAN:
+                if info_man_user(request.user):
+                    buttons.append(settings.DISPLAY_CANCEL)
+            elif status == ContractStatus.AWAIT_FUND_MAN_APP:
+                    buttons.append(settings.DISPLAY_APPROVE)
+                    buttons.append(settings.DISPLAY_REJECT)
+            elif status == ContractStatus.REJ_FUND_MAN:
+                if info_man_user(request.user):
+                    buttons.append(settings.DISPLAY_APPROVE)
 
     return buttons
 

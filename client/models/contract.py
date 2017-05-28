@@ -94,7 +94,7 @@ class Contract(Auditable):
     client = models.ForeignKey(Client, on_delete=models.CASCADE, null=True, related_name="contract")
 
     def get_latest_status(self):
-        return self.contract_status.all().order_by('modified_on').first()
+        return self.get_ordered_status().first()
 
     def get_link(self):
         url = self.get_absolute_url()
@@ -111,7 +111,7 @@ class Contract(Auditable):
         return reverse('contract_edit', args=[str(self.client.id), str(self.id)])
 
     def get_ordered_status(self):
-        return self.contract_status.all().order_by('modified_on')
+        return self.contract_status.all().order_by('-modified_on')
 
     def get_all_status_as_list(self):
         table = '<table >'
@@ -164,13 +164,15 @@ class ContractStatus(Auditable):
     AWAIT_FUND_MAN_APP = 1
     APP_FUND_MAN = 2
     REJ_FUND_MAN = 3
-    ACC_INFO_MAN = 4
+    APP_INFO_MAN = 4
+    APP_CANC_INFO_MAN = 5
     STATUS = (
         (AWAIT_INFO_MAN_APP, 'Awaiting info man approval'),
         (AWAIT_FUND_MAN_APP, 'Awaiting fund man approval'),
         (APP_FUND_MAN, 'Approved by fund man'),
         (REJ_FUND_MAN, 'Rejected by fund man'),
-        (ACC_INFO_MAN, 'Accepted by info man'),
+        (APP_INFO_MAN, 'Approved by info man'),
+        (APP_CANC_INFO_MAN, 'Approval cancelled by info man'),
     )
     status = models.IntegerField(choices=STATUS, default=AWAIT_INFO_MAN_APP)
     contract = models.ForeignKey(Contract, on_delete=models.CASCADE, null=True, related_name="contract_status")

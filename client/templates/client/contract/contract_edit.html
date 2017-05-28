@@ -16,7 +16,6 @@
 
 {% block js %}
     {% include 'partials/inject_js_data.html' %}
-    {% include 'partials/datatable_js_includes.html' %}
     {% include 'partials/form_edit_js_includes.html' %}
     {% include 'partials/datepicker_js_includes.html' %}
     <script type="text/javascript" src="{% static 'js/contract_helpers.js' %}"></script>
@@ -31,11 +30,15 @@
             {% include 'client/contract/client_contract_status.html' %}
         </div>
         {% if display_approve in state_buttons %}
-            <button type="submit" value="Approve" name="approve-contract" class="btn btn-default">
+            <button type="submit" value="Approve" name="approve-contract" class="save_butt btn btn-default">
                 <span class="glyphicon glyphicon-ok"></span>Approve</button>
         {% endif %}
+        {% if display_cancel in state_buttons %}
+            <button type="submit" value="Cancel" name="cancel-contract-approval" class="save_butt btn btn-warning">
+                <span class="glyphicon glyphicon-remove"></span>Cancel approval</button>
+        {% endif %}
         {% if display_reject in state_buttons %}
-            <button type="submit" value="Reject" name="reject-contract" class="btn btn-default">
+            <button type="submit" value="Reject" name="reject-contract" class="save_butt btn btn-warning">
                 <span class="glyphicon glyphicon-remove"></span>Reject</button>
         {% endif %}
     </form>

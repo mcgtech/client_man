@@ -24,12 +24,4 @@ function setup_contract_tabs()
 function setup_contract_status()
 {
     $('#contract_status_table').appendTo('#status');
-
-    //https://www.datatables.net/
-    if ($('#no_data').length == 0)
-    {
-        $('#contract_status').DataTable({
-            "order": [[ 0, "asc" ]]
-        } );
-    }
 }
