@@ -5,3 +5,4 @@
 . once migrateed set contract type to mand
 . tell neil that the created by and created on for non tio contracts will be the same as its derived from md node
 . remove Original Client Id from client search table?
+. remove EMAIL_BACKEND from settings when ready to actually send emails

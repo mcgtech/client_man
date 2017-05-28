@@ -175,6 +175,7 @@ DISPLAY_APPROVE = 0
 DISPLAY_REJECT = 1
 DISPLAY_CANCEL = 2
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # https://github.com/jakubroztocil/django-settings-export
 # allows us to access constants inside templates

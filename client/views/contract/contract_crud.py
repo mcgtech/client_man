@@ -16,6 +16,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from client.views import add_contract_js_data
 import json
+from templated_email import send_templated_mail
 
 @login_required
 @user_passes_test(job_coach_user, 'client_man_login')
@@ -113,24 +114,61 @@ def manage_contract(request, client_id, con_type, contract_id=None):
                                                                   'display_reject' : settings.DISPLAY_REJECT,
                                                                   'display_cancel' : settings.DISPLAY_CANCEL})
 
+def handle_contract_approval(request, client, contract):
+    new_state = add_new_contract_state(request, contract, ContractStatus.APP_INFO_MAN)
+    handle_state_change(request, client, contract, new_state)
+    msg_once_only(request, 'Approved contract for ' + client.get_full_name(), settings.SUCC_MSG_TYPE)
+
+
+def handle_contract_approval_cancel(request, client, contract):
+    new_state = add_new_contract_state(request, contract, ContractStatus.APP_CANC_INFO_MAN)
+    handle_state_change(request, client, contract, new_state)
+    msg_once_only(request, 'Cancelled approved contract for ' + client.get_full_name(), settings.WARN_MSG_TYPE)
+
+
+def handle_contract_rejection(request, client, contract):
+    new_state = add_new_contract_state(request, contract, ContractStatus.REJ_FUND_MAN)
+    handle_state_change(request, client, contract, new_state)
+    msg_once_only(request, 'Rejected contract for ' + client.get_full_name(), settings.SUCC_MSG_TYPE)
+
+
+def handle_state_change(request, client, contract, new_state):
+    # https://github.com/vintasoftware/django-templated-email
+    template = None
+    if new_state.status == ContractStatus.APP_INFO_MAN:
+        template = 'approved_by_info_man'
+        # TODO: get this to work correctly
+        from_email='from@example.com',
+        recipient_list=['mcgonigalstephen@gmail.com'],
+    elif new_state.status == ContractStatus.APP_CANC_INFO_MAN:
+        template = 'approval_cancelled_by_info_man'
+        # TODO: get this to work correctly
+        from_email='from@example.com',
+        recipient_list=['mcgonigalstephen@gmail.com'],
+    send_templated_mail(
+        template_name=template,
+        from_email=from_email,
+        recipient_list=recipient_list,
+        context={
+            'username': request.user.username,
+            'full_name': request.user.get_full_name(),
+            'signup_date': request.user.date_joined
+        },
+        # Optional:
+        # cc=['cc@example.com'],
+        # bcc=['bcc@example.com'],
+        # headers={'My-Custom-Header':'Custom Value'},
+        # template_prefix="my_emails/",
+        # template_suffix="email",
+    )
+
+
 def add_new_contract_state(request, contract, status):
     con_state = ContractStatus(contract=contract, status=status)
     apply_auditable_info(con_state, request)
     con_state.save()
 
-
-def handle_contract_approval(request, client, contract):
-    add_new_contract_state(request, contract, ContractStatus.APP_INFO_MAN)
-    msg_once_only(request, 'Approved contract for ' + client.get_full_name(), settings.SUCC_MSG_TYPE)
-
-
-def handle_contract_approval_cancel(request, client, contract):
-    add_new_contract_state(request, contract, ContractStatus.APP_CANC_INFO_MAN)
-    msg_once_only(request, 'Cancelled approved contract for ' + client.get_full_name(), settings.WARN_MSG_TYPE)
-
-
-def handle_contract_rejection(request, client, contract):
-    msg_once_only(request, 'Rejected contract for ' + client.get_full_name(), settings.SUCC_MSG_TYPE)
+    return con_state
 
 
 def get_state_buttons_to_display(client, is_edit_form, request):

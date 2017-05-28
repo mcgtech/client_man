@@ -86,6 +86,9 @@ pip install django-widget-tweaks
 pip install django-bootstrap-pagination
 # https://github.com/brack3t/django-braces & http://django-braces.readthedocs.io/en/v1.4.0/access.html#loginrequiredmixin
 pip install django-braces
+# https://github.com/vintasoftware/django-templated-email
+pip install django-templated-email
+# change email settings to write to console until I am on live server: https://stackoverflow.com/questions/4642011/test-sending-email-without-email-server
 if not checking out previous project:
 	# create project
 	cd /Users/stephenmcgonigal/django_projs
