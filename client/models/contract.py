@@ -160,21 +160,19 @@ class TIOContract(Contract):
 
 
 class ContractStatus(Auditable):
-    AWAIT_INFO_MAN_APP = 0
-    AWAIT_FUND_MAN_APP = 1
+    AWAIT_INFO_MAN_ACC = 0
+    ACC_INFO_MAN = 1
     APP_FUND_MAN = 2
     REJ_FUND_MAN = 3
-    APP_INFO_MAN = 4
-    APP_CANC_INFO_MAN = 5
+    ACC_REV_INFO_MAN = 4
     STATUS = (
-        (AWAIT_INFO_MAN_APP, 'Awaiting info man approval'),
-        (AWAIT_FUND_MAN_APP, 'Awaiting fund man approval'),
+        (AWAIT_INFO_MAN_ACC, 'Awaiting info man acceptance'),
+        (ACC_INFO_MAN, 'Accepted by info man'),
         (APP_FUND_MAN, 'Approved by fund man'),
         (REJ_FUND_MAN, 'Rejected by fund man'),
-        (APP_INFO_MAN, 'Approved by info man'),
-        (APP_CANC_INFO_MAN, 'Approval cancelled by info man'),
+        (ACC_REV_INFO_MAN, 'Acceptance revoked by info man'),
     )
-    status = models.IntegerField(choices=STATUS, default=AWAIT_INFO_MAN_APP)
+    status = models.IntegerField(choices=STATUS, default=AWAIT_INFO_MAN_ACC)
     contract = models.ForeignKey(Contract, on_delete=models.CASCADE, null=True, related_name="contract_status")
 
     def get_summary(self):

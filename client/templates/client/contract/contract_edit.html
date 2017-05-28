@@ -29,13 +29,17 @@
         <div id="contract_status_table" class="tab-pane">
             {% include 'client/contract/client_contract_status.html' %}
         </div>
+        {% if display_accept in state_buttons %}
+            <button type="submit" value="Accept" name="accept-contract" class="save_butt btn btn-default">
+                <span class="glyphicon glyphicon-ok"></span>Accept</button>
+        {% endif %}
         {% if display_approve in state_buttons %}
             <button type="submit" value="Approve" name="approve-contract" class="save_butt btn btn-default">
                 <span class="glyphicon glyphicon-ok"></span>Approve</button>
         {% endif %}
-        {% if display_cancel in state_buttons %}
-            <button type="submit" value="Cancel" name="cancel-contract-approval" class="save_butt btn btn-warning">
-                <span class="glyphicon glyphicon-remove"></span>Cancel approval</button>
+        {% if display_revoke in state_buttons %}
+            <button type="submit" value="Cancel" name="revoke-contract-approval" class="save_butt btn btn-warning">
+                <span class="glyphicon glyphicon-remove"></span>Revoke approval</button>
         {% endif %}
         {% if display_reject in state_buttons %}
             <button type="submit" value="Reject" name="reject-contract" class="save_butt btn btn-warning">

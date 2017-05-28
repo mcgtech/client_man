@@ -1,6 +1,9 @@
 from django.conf import settings
 from django.shortcuts import render
 from django.utils import timezone
+from templated_email import send_templated_mail
+from django.contrib.messages import get_messages
+from django.contrib.messages import info, success, warning, error, debug
 
 # http://stackoverflow.com/questions/753052/strip-html-from-strings-in-python
 def form_errors_as_array(form):
@@ -20,6 +23,9 @@ def remove_html_tags(text):
     import re
     clean = re.compile('<.*?>')
     return re.sub(clean, '', text)
+
+def display_client_summary_message(client, request, prefix, msg_type):
+    msg_once_only(request, prefix + ' ' + get_client_summary_link(client), msg_type)
 
 
 def admin_user(user):
@@ -74,3 +80,40 @@ def get_client_summary_link(client):
     name_link = get_client_name_link(client)
 
     return name_link + ' age: ' + str(client.age)
+
+
+# https://stackoverflow.com/questions/23249807/django-remove-duplicate-messages-from-storage/25157660#25157660
+def msg_once_only(request, msg, type):
+    """
+    Just add the message once
+    :param request:
+    :param msg:
+    :return:
+    """
+    if msg not in [m.message for m in get_messages(request)]:
+        if (type == settings.INFO_MSG_TYPE):
+            info(request, msg)
+        elif (type == settings.SUCC_MSG_TYPE):
+            success(request, msg)
+        elif (type == settings.WARN_MSG_TYPE):
+            warning(request, msg)
+        elif (type == settings.ERR_MSG_TYPE):
+            error(request, msg)
+        elif (type == settings.DEBUG_MSG_TYPE):
+            debug(request, msg)
+
+
+def send_email_using_template(from_email, recipient_list, context, template, request):
+    send_templated_mail(
+        template_name=template,
+        from_email=from_email,
+        recipient_list=recipient_list,
+        context=context,
+        # Optional:
+        # cc=['cc@example.com'],
+        # bcc=['bcc@example.com'],
+        # headers={'My-Custom-Header':'Custom Value'},
+        # template_prefix="my_emails/",
+        # template_suffix="email",
+    )
+    msg_once_only(request, 'Email sent to ' + str(recipient_list), settings.SUCC_MSG_TYPE)

@@ -16,7 +16,6 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from client.views import add_contract_js_data
 import json
-from templated_email import send_templated_mail
 
 @login_required
 @user_passes_test(job_coach_user, 'client_man_login')
@@ -46,7 +45,6 @@ def manage_contract(request, client_id, con_type, contract_id=None):
     status_list = None
     client = get_object_or_404(Client, pk=client_id)
     if contract_id is None:
-        contract = get_contract_object(con_type, contract_id, None)
         the_action_text = 'Create'
         is_edit_form = False
         action = '/contract/' + str(client_id) + '/new/' + str(con_type) + '/'
@@ -73,17 +71,20 @@ def manage_contract(request, client_id, con_type, contract_id=None):
             apply_auditable_info(created_contract, request)
             created_contract.client = client
             created_contract.save()
+            contract = created_contract
             # if newly created contract then add a defautl status of awaiting info man approval
             if contract_id is None:
-                add_new_contract_state(request, created_contract, ContractStatus.AWAIT_INFO_MAN_APP)
-            action = get_contract_edit_url(client_id, created_contract.id)
+                add_new_contract_state(request, contract, ContractStatus.AWAIT_INFO_MAN_ACC)
+            action = get_contract_edit_url(client_id, contract.id)
 
-            if request.POST.get("approve-contract"):
-                handle_contract_approval(request, client, created_contract)
-            elif request.POST.get("cancel-contract-approval"):
-                handle_contract_approval_cancel(request, client, created_contract)
+            if request.POST.get("accept-contract"):
+                handle_contract_accept(request, client, contract)
+            elif request.POST.get("approve-contract"):
+                handle_contract_approval(request, client, contract)
+            elif request.POST.get("revoke-contract-approval"):
+                handle_contract_approval_revoked(request, client, contract)
             elif request.POST.get("reject-contract"):
-                handle_contract_rejection(request, client, created_contract)
+                handle_contract_rejection(request, client, contract)
             else:
                 msg_once_only(request, 'Saved contract for ' + client.get_full_name(), settings.SUCC_MSG_TYPE)
             return redirect(action)
@@ -99,7 +100,7 @@ def manage_contract(request, client_id, con_type, contract_id=None):
     set_deletion_status_in_js_data(js_dict, request.user, job_coach_man_user)
     js_data = json.dumps(js_dict)
 
-    state_buttons = get_state_buttons_to_display(client, is_edit_form, request)
+    state_buttons = get_state_buttons_to_display(client, con_type, is_edit_form, request)
 
     status_list = contract.get_ordered_status() if status_list is None else status_list
 
@@ -110,20 +111,28 @@ def manage_contract(request, client_id, con_type, contract_id=None):
                                                                   'edit_form': is_edit_form, 'the_action': action,
                                                                   'form_errors': contract_form_errors, 'js_data' : js_data,
                                                                   'contract_choices': Contract.TYPES, 'state_buttons' : state_buttons,
+                                                                  'display_accept' : settings.DISPLAY_ACCEPT,
                                                                   'display_approve' : settings.DISPLAY_APPROVE,
                                                                   'display_reject' : settings.DISPLAY_REJECT,
-                                                                  'display_cancel' : settings.DISPLAY_CANCEL})
+                                                                  'display_revoke' : settings.DISPLAY_REVOKE})
+
+
+def handle_contract_accept(request, client, contract):
+    new_state = add_new_contract_state(request, contract, ContractStatus.ACC_INFO_MAN)
+    handle_state_change(request, client, contract, new_state)
+    msg_once_only(request, 'Accepted contract for ' + client.get_full_name(), settings.SUCC_MSG_TYPE)
+
 
 def handle_contract_approval(request, client, contract):
-    new_state = add_new_contract_state(request, contract, ContractStatus.APP_INFO_MAN)
+    new_state = add_new_contract_state(request, contract, ContractStatus.APP_FUND_MAN)
     handle_state_change(request, client, contract, new_state)
     msg_once_only(request, 'Approved contract for ' + client.get_full_name(), settings.SUCC_MSG_TYPE)
 
 
-def handle_contract_approval_cancel(request, client, contract):
-    new_state = add_new_contract_state(request, contract, ContractStatus.APP_CANC_INFO_MAN)
+def handle_contract_approval_revoked(request, client, contract):
+    new_state = add_new_contract_state(request, contract, ContractStatus.ACC_REV_INFO_MAN)
     handle_state_change(request, client, contract, new_state)
-    msg_once_only(request, 'Cancelled approved contract for ' + client.get_full_name(), settings.WARN_MSG_TYPE)
+    msg_once_only(request, 'Revoked approved contract for ' + client.get_full_name(), settings.WARN_MSG_TYPE)
 
 
 def handle_contract_rejection(request, client, contract):
@@ -135,36 +144,19 @@ def handle_contract_rejection(request, client, contract):
 def handle_state_change(request, client, contract, new_state):
     # https://github.com/vintasoftware/django-templated-email
     template = None
-    context = {'username': request.user.username,
-               'full_name': request.user.get_full_name(),
-               'signup_date': request.user.date_joined}
-    if new_state.status == ContractStatus.APP_INFO_MAN:
+    context = {'client': client}
+    if new_state.status == ContractStatus.ACC_INFO_MAN:
         template = 'approved_by_info_man'
         # TODO: get this to work correctly
         from_email='from@example.com',
         recipient_list=['mcgonigalstephen@gmail.com'],
-    elif new_state.status == ContractStatus.APP_CANC_INFO_MAN:
+    elif new_state.status == ContractStatus.ACC_REV_INFO_MAN:
         template = 'approval_cancelled_by_info_man'
         # TODO: get this to work correctly
         from_email='from@example.com',
         recipient_list=['mcgonigalstephen@gmail.com'],
     send_email_using_template(from_email, recipient_list, context, template, request)
 
-
-def send_email_using_template(from_email, recipient_list, context, template, request):
-    send_templated_mail(
-        template_name=template,
-        from_email=from_email,
-        recipient_list=recipient_list,
-        context=context,
-        # Optional:
-        # cc=['cc@example.com'],
-        # bcc=['bcc@example.com'],
-        # headers={'My-Custom-Header':'Custom Value'},
-        # template_prefix="my_emails/",
-        # template_suffix="email",
-    )
-    msg_once_only(request, 'Email sent to ' + str(recipient_list), settings.SUCC_MSG_TYPE)
 
 
 def add_new_contract_state(request, contract, status):
@@ -175,26 +167,34 @@ def add_new_contract_state(request, contract, status):
     return con_state
 
 
-def get_state_buttons_to_display(client, is_edit_form, request):
+def get_state_buttons_to_display(client, con_type, is_edit_form, request):
     buttons = []
     if is_edit_form:
         latest_con_state = client.get_latest_contract_state()
         if latest_con_state is not None:
             status = latest_con_state.status
-            if status == ContractStatus.AWAIT_INFO_MAN_APP or status == ContractStatus.APP_CANC_INFO_MAN:
+            if contract_can_be_accepted(status):
                 if info_man_user(request.user):
-                    buttons.append(settings.DISPLAY_APPROVE)
-            elif status == ContractStatus.APP_INFO_MAN:
+                    buttons.append(settings.DISPLAY_ACCEPT)
+            elif contract_can_be_revoked(status):
                 if info_man_user(request.user):
-                    buttons.append(settings.DISPLAY_CANCEL)
-            elif status == ContractStatus.AWAIT_FUND_MAN_APP:
-                    buttons.append(settings.DISPLAY_APPROVE)
-                    buttons.append(settings.DISPLAY_REJECT)
-            elif status == ContractStatus.REJ_FUND_MAN:
-                if info_man_user(request.user):
-                    buttons.append(settings.DISPLAY_APPROVE)
+                    buttons.append(settings.DISPLAY_REVOKE)
+
+            if type == Contract.TIO:
+                if status == ContractStatus.ACC_INFO_MAN:
+                    if partner_user(request.user):
+                        buttons.append(settings.DISPLAY_APPROVE)
+                        buttons.append(settings.DISPLAY_REJECT)
 
     return buttons
+
+
+def contract_can_be_accepted(status):
+    return status == ContractStatus.AWAIT_INFO_MAN_ACC or status == ContractStatus.ACC_REV_INFO_MAN or status == ContractStatus.REJ_FUND_MAN;
+
+
+def contract_can_be_revoked(status):
+    return status == ContractStatus.ACC_INFO_MAN
 
 
 def get_contract_object(type, contract_id, base_contract):

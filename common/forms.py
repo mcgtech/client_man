@@ -2,8 +2,6 @@ from django import forms
 from django.core.validators import validate_email
 from django.conf import settings
 from common.views import get_client_summary_link
-from django.contrib.messages import info, success, warning, error, debug
-from django.contrib.messages import get_messages
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Button
 from django.shortcuts import redirect
@@ -64,10 +62,6 @@ def get_auditable_fields():
     return ('modified_by', 'modified_on', 'created_on', 'created_by')
 
 
-def display_client_summary_message(client, request, prefix, msg_type):
-    msg_once_only(request, prefix + ' ' + get_client_summary_link(client), msg_type)
-
-
 def handle_delete_request(request, client, target, msg, url):
     redir = None
     if request.POST.get("delete-record"):
@@ -76,23 +70,3 @@ def handle_delete_request(request, client, target, msg, url):
         redir = redirect(url)
 
     return redir
-
-# https://stackoverflow.com/questions/23249807/django-remove-duplicate-messages-from-storage/25157660#25157660
-def msg_once_only(request, msg, type):
-    """
-    Just add the message once
-    :param request:
-    :param msg:
-    :return:
-    """
-    if msg not in [m.message for m in get_messages(request)]:
-        if (type == settings.INFO_MSG_TYPE):
-            info(request, msg)
-        elif (type == settings.SUCC_MSG_TYPE):
-            success(request, msg)
-        elif (type == settings.WARN_MSG_TYPE):
-            warning(request, msg)
-        elif (type == settings.ERR_MSG_TYPE):
-            error(request, msg)
-        elif (type == settings.DEBUG_MSG_TYPE):
-            debug(request, msg)

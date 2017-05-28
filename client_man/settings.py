@@ -173,10 +173,12 @@ DEBUG_MSG_TYPE = 4
 # status approval
 DISPLAY_APPROVE = 0
 DISPLAY_REJECT = 1
-DISPLAY_CANCEL = 2
+DISPLAY_REVOKE = 2
+DISPLAY_ACCEPT = 4
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+TEMPLATED_EMAIL_TEMPLATE_DIR = 'templated_email/'
 # https://github.com/jakubroztocil/django-settings-export
 # allows us to access constants inside templates
 SETTINGS_EXPORT = [
