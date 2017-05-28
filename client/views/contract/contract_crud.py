@@ -135,6 +135,9 @@ def handle_contract_rejection(request, client, contract):
 def handle_state_change(request, client, contract, new_state):
     # https://github.com/vintasoftware/django-templated-email
     template = None
+    context = {'username': request.user.username,
+               'full_name': request.user.get_full_name(),
+               'signup_date': request.user.date_joined}
     if new_state.status == ContractStatus.APP_INFO_MAN:
         template = 'approved_by_info_man'
         # TODO: get this to work correctly
@@ -145,15 +148,15 @@ def handle_state_change(request, client, contract, new_state):
         # TODO: get this to work correctly
         from_email='from@example.com',
         recipient_list=['mcgonigalstephen@gmail.com'],
+    send_email_using_template(from_email, recipient_list, context, template, request)
+
+
+def send_email_using_template(from_email, recipient_list, context, template, request):
     send_templated_mail(
         template_name=template,
         from_email=from_email,
         recipient_list=recipient_list,
-        context={
-            'username': request.user.username,
-            'full_name': request.user.get_full_name(),
-            'signup_date': request.user.date_joined
-        },
+        context=context,
         # Optional:
         # cc=['cc@example.com'],
         # bcc=['bcc@example.com'],
@@ -161,6 +164,7 @@ def handle_state_change(request, client, contract, new_state):
         # template_prefix="my_emails/",
         # template_suffix="email",
     )
+    msg_once_only(request, 'Email sent to ' + str(recipient_list), settings.SUCC_MSG_TYPE)
 
 
 def add_new_contract_state(request, contract, status):
