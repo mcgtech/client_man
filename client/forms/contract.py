@@ -34,6 +34,9 @@ class ContractForm(AuditableForm):
                     'application_form',
                     css_class="col-sm-6"),
                 css_class="row")),
+                Tab(
+                    'Status',
+                ),
                     Tab(
                         'Log',
                         'created_by',
@@ -67,7 +70,7 @@ class TIOContractForm(ContractForm):
         ContractForm.Meta.fields = ContractForm.Meta.fields + ('issue', 'consent_form_complete', 'aa_progress_jsa_18',
                                                                'add_support_jsa_18', 'add_support_jsa_25', 'wca_incapacity',
                                                                'support_esa', 'wrag_esa', 'emp_pros_inc', 'other_ben',
-                                                               'fund_mgr_notes')
+                                                               'fund_mgr_notes', 'partner')
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.prepare_required_field('issue', 'Adult 18+ with')
@@ -75,7 +78,7 @@ class TIOContractForm(ContractForm):
         self.helper.layout[0].append(Tab(
                         'TIO',
                         Div(
-                Div('issue',
+                Div('partner', 'issue',
                     'consent_form_complete',
                     Fieldset('JSA claimants 18-24 (less than 9 months)', 'aa_progress_jsa_18', 'add_support_jsa_18', css_class="con_field"),
                     Fieldset('JSA claimants over 25 (less than 12 months)', 'add_support_jsa_25', css_class="con_field"),

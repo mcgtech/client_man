@@ -158,13 +158,22 @@ ADMIN_GROUP = 'admin'
 CLIENT_GROUP = 'client'
 JOB_COACH = 'job coach'
 JOB_COACH_MAN = 'job coach manager'
+INFO_MAN = 'info manager'
+PARTNER = 'partner'
+SUPPLY_CHAIN_MAN = 'supply chain manager'
+SUPPLY_CHAIN_PART = 'supply chain partner'
 
-# Messgae types
+# Message types
 INFO_MSG_TYPE = 0
 SUCC_MSG_TYPE = 1
 WARN_MSG_TYPE = 2
 ERR_MSG_TYPE = 3
 DEBUG_MSG_TYPE = 4
+
+# status approval
+DISPLAY_APPROVE = 0
+DISPLAY_REJECT = 1
+
 
 # https://github.com/jakubroztocil/django-settings-export
 # allows us to access constants inside templates

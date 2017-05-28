@@ -7,8 +7,12 @@ from django.contrib.auth.signals import user_logged_in
 
 class Auditable(models.Model):
     created_on = models.DateTimeField(null=True, blank=True)
+    # if I make it OneToOneField then I get duplicate key error
+    # created_by = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='%(class)s_created_by', null=True, blank=True)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='%(class)s_created_by', blank=True, null=True)
     modified_on = models.DateTimeField(null=True, blank=True)
+    # if I make it OneToOneField then I get duplicate key error
+    # modified_by = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='%(class)s_modified_by', null=True, blank=True)
     modified_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='%(class)s_modified_by', blank=True, null=True)
 
     class Meta:
@@ -39,7 +43,7 @@ class Person(Auditable):
     surname = models.CharField(max_length=100, blank=True)
     email_address = models.CharField(max_length=100, blank=True) # I use the validator in the form
     # https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#onetoone
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name='person')
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name='person')
 
     def get_full_name(self):
         return self.get_title_display() + ' ' + self.forename + ' ' + self.surname

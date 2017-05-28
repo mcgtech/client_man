@@ -93,11 +93,14 @@ class Contract(Auditable):
     application_form = models.FileField(upload_to='client/con_app_form/', blank=True, null=True)
     client = models.ForeignKey(Client, on_delete=models.CASCADE, null=True, related_name="contract")
 
+    def get_latest_status(self):
+        return self.contract_status.all().order_by('modified_on').first()
+
     def get_link(self):
         url = self.get_absolute_url()
         link = '<a target="_blank" href="' + url + '">' + self.get_type_display() + '</a>'
         start = self.start_date.strftime(settings.DISPLAY_DATE) if self.start_date is not None else ''
-        latest_status = self.contract_status.all().order_by('modified_on').first()
+        latest_status = self.get_latest_status()
         status = '' if latest_status is None else ' (' + latest_status.get_status_display() + ' )'
         end = (' to ' + self.end_date.strftime(settings.DISPLAY_DATE)) if self.end_date is not None else ''
 
@@ -107,9 +110,12 @@ class Contract(Auditable):
         from django.urls import reverse
         return reverse('contract_edit', args=[str(self.client.id), str(self.id)])
 
+    def get_ordered_status(self):
+        return self.contract_status.all().order_by('modified_on')
+
     def get_all_status_as_list(self):
         table = '<table >'
-        for status in self.contract_status.all().order_by('modified_on'):
+        for status in self.get_ordered_status():
             table = table + '<tr>' + '<td>'
             table = table + status.get_summary()
             table = table + '</td>' + '</tr>'
@@ -148,22 +154,25 @@ class TIOContract(Contract):
     emp_pros_inc = models.BooleanField(default=False, verbose_name='To improve employment prospects')
     other_ben = models.TextField(verbose_name='Other Benefits', blank=True)
     fund_mgr_notes = models.TextField(verbose_name='Fund Manager Notes', blank=True)
+    # if I make it OneToOneField then I get duplicate key error
+    # partner = models.OneToOneField(settings.AUTH_USER_MODEL, null=True, related_name='tio_contract')
+    partner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='tio_contract', blank=True, null=True, limit_choices_to={'groups__name': settings.SUPPLY_CHAIN_PART})
 
 
 class ContractStatus(Auditable):
-    AWAIT_INF_MAN_APP = 0
+    AWAIT_INFO_MAN_APP = 0
     AWAIT_FUND_MAN_APP = 1
     APP_FUND_MAN = 2
     REJ_FUND_MAN = 3
     ACC_INFO_MAN = 4
     STATUS = (
-        (AWAIT_INF_MAN_APP, 'Awaiting info man approval'),
+        (AWAIT_INFO_MAN_APP, 'Awaiting info man approval'),
         (AWAIT_FUND_MAN_APP, 'Awaiting fund man approval'),
         (APP_FUND_MAN, 'Approved by fund man'),
         (REJ_FUND_MAN, 'Rejected by fund man'),
         (ACC_INFO_MAN, 'Accepted by info man'),
     )
-    status = models.IntegerField(choices=STATUS, default=AWAIT_INF_MAN_APP)
+    status = models.IntegerField(choices=STATUS, default=AWAIT_INFO_MAN_APP)
     contract = models.ForeignKey(Contract, on_delete=models.CASCADE, null=True, related_name="contract_status")
 
     def get_summary(self):

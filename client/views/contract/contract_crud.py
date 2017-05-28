@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, get_object_or_404
-from client.models import Client, TIOContract
+from client.models import Client, TIOContract, ContractStatus
 from common.models import Note, Address, Telephone
 from django.forms import inlineformset_factory
 from client.forms import *
@@ -59,6 +59,7 @@ def manage_contract(request, client_id, con_type, contract_id=None):
         contract = get_contract_object(con_type, contract_id, base_contract)
         action = get_contract_edit_url(client_id, contract_id)
 
+    print(request.POST)
     del_request = handle_delete_request(request, client, contract, 'You have successfully deleted the contract ' + str(contract), '/client_search');
     if del_request:
         return del_request
@@ -69,8 +70,19 @@ def manage_contract(request, client_id, con_type, contract_id=None):
             apply_auditable_info(created_contract, request)
             created_contract.client = client
             created_contract.save()
+            # if newly created contract then add a defautl status of awaiting info man approval
+            if contract_id is None:
+                con_state = ContractStatus(contract=created_contract, status=ContractStatus.AWAIT_INFO_MAN_APP)
+                apply_auditable_info(con_state, request)
+                con_state.save()
             action = get_contract_edit_url(client_id, created_contract.id)
-            msg_once_only(request, 'Saved contract for ' + client.get_full_name(), settings.SUCC_MSG_TYPE)
+
+            if request.POST.get("approve-contract"):
+                msg_once_only(request, 'Approved contract for ' + client.get_full_name(), settings.SUCC_MSG_TYPE)
+            elif request.POST.get("reject-contract"):
+                msg_once_only(request, 'Rejected contract for ' + client.get_full_name(), settings.SUCC_MSG_TYPE)
+            else:
+                msg_once_only(request, 'Saved contract for ' + client.get_full_name(), settings.SUCC_MSG_TYPE)
             return redirect(action)
     else:
         cancel_url = redirect('client_edit', pk=client.id).url
@@ -84,16 +96,39 @@ def manage_contract(request, client_id, con_type, contract_id=None):
     set_deletion_status_in_js_data(js_dict, request.user, job_coach_man_user)
     js_data = json.dumps(js_dict)
 
+    state_buttons = get_state_buttons_to_display(client, request)
+
+    status_list = contract.get_ordered_status()
+
     contract_form_errors = form_errors_as_array(contract_form)
     return render(request, 'client/contract/contract_edit.html', {'form': contract_form, 'client' : client,
-                                                       'the_action_text': the_action_text,
-                                                       'edit_form': is_edit_form, 'the_action': action,
-                                                       'form_errors': contract_form_errors, 'js_data' : js_data,
-                                                        'contract_choices': Contract.TYPES})
+                                                                  'status_list' : status_list,
+                                                                  'the_action_text': the_action_text,
+                                                                  'edit_form': is_edit_form, 'the_action': action,
+                                                                  'form_errors': contract_form_errors, 'js_data' : js_data,
+                                                                  'contract_choices': Contract.TYPES, 'state_buttons' : state_buttons,
+                                                                  'display_approve' : settings.DISPLAY_APPROVE,
+                                                                  'display_reject' : settings.DISPLAY_REJECT})
+
+def get_state_buttons_to_display(client, request):
+    buttons = []
+    latest_con_state = client.get_latest_contract_state()
+    status = latest_con_state.status
+    if status == ContractStatus.AWAIT_INFO_MAN_APP:
+        if info_man_user(request.user):
+            buttons.append(settings.DISPLAY_APPROVE)
+    elif status == ContractStatus.AWAIT_FUND_MAN_APP:
+            buttons.append(settings.DISPLAY_APPROVE)
+            buttons.append(settings.DISPLAY_REJECT)
+    elif status == ContractStatus.REJ_FUND_MAN:
+        if info_man_user(request.user):
+            buttons.append(settings.DISPLAY_APPROVE)
+
+    return buttons
+
 
 def get_contract_object(type, contract_id, base_contract):
     if type == Contract.TIO:
-        print('TIO')
         if contract_id is None:
             contract = TIOContract()
         else:

@@ -1,13 +1,11 @@
 to rebuild:
+delete migrations/*.py files but not _init__.py
 delete database client_management
 create database client_management
-from env:
-    python manage.py migrate
-    python manage.py makemigrations client
-    python manage.py migrate client
 
 run following two pieces of sql and replace relevant sections in setup.py:
 
+# get users
 select concat(LOWER(REPLACE(u.name, ' ', '')), ' = ', "User.objects.create_user('", LOWER(REPLACE(u.name, ' ', '')), "', '", u.mail, "', '", LOWER(REPLACE(u.name, ' ', '')), "123');", LOWER(REPLACE(u.name, ' ', '')), ".is_staff=True;", LOWER(REPLACE(u.name, ' ', '')), ".save()")
 from users u, users_roles ur
 where u.uid = ur.uid
@@ -18,10 +16,10 @@ union
 select concat(LOWER(REPLACE(u.name, ' ', '')), ' = ', "User.objects.create_user('", LOWER(REPLACE(u.name, ' ', '')), "', '", u.mail, "', '", LOWER(REPLACE(u.name, ' ', '')), "123');", LOWER(REPLACE(u.name, ' ', '')), ".is_staff=True;", LOWER(REPLACE(u.name, ' ', '')), ".save()")
 from users u, users_roles ur
 where u.uid = ur.uid
-and  ur.rid = 18
-and u.uid not in (226,924,761, 229, 224,223)
+and  ur.rid in (14, 17, 18)
+group by u.uid
 
-
+# get and assign to groups
 select concat('job_coach_group.user_set.add(', LOWER(REPLACE(u.name, ' ', '')), ')')
 from users u, users_roles ur
 where u.uid = ur.uid
@@ -29,12 +27,12 @@ and  ur.rid = 8
 union
 select "job_coach_group.user_set.add(closed)"
 union
-select concat('partners_group.user_set.add(', LOWER(REPLACE(u.name, ' ', '')), ')')
+select concat('partner_group.user_set.add(', LOWER(REPLACE(u.name, ' ', '')), ')')
 from users u, users_roles ur
 where u.uid = ur.uid
-and  ur.rid = 8
+and  ur.rid = 18
 union
-select concat('job_coach_mgr.user_set.add(', LOWER(REPLACE(u.name, ' ', '')), ')')
+select concat('job_coach_mgr_group.user_set.add(', LOWER(REPLACE(u.name, ' ', '')), ')')
 from users u, users_roles ur
 where u.uid = ur.uid
 and  ur.rid = 11
@@ -54,5 +52,11 @@ from users u, users_roles ur
 where u.uid = ur.uid
 and  ur.rid in (14, 17)
 
-run following:
-python manage.py shell < setup_users_and_groups.py.py
+
+from env:
+python manage.py migrate
+python manage.py makemigrations client
+python manage.py migrate client
+python manage.py shell < setup_users_and_groups.py
+
+run migration scripts from menu to generate json files, then load clients etc from json files

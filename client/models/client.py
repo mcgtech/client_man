@@ -220,9 +220,19 @@ class Client(Person):
     # id on old system - set during migration - can be deleted once migration is complete
     original_client_id = models.IntegerField(default=0)
     nat_ins_number = models.CharField(max_length=100, blank=True)
-    job_coach = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='job_coach', blank=True, null=True, limit_choices_to={'groups__name': "job coach"})
+    # if I make it OneToOneField then I get duplicate key error
+    # job_coach = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='job_coach', null=True, blank=True, limit_choices_to={'groups__name': "job coach"})
+    job_coach = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='job_coach', blank=True, null=True, limit_choices_to={'groups__name': settings.JOB_COACH})
     start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
+
+    def get_latest_contract_state(self):
+        contract = self.get_latest_contract()
+
+        return None if contract is None else contract.get_latest_status()
+
+    def get_latest_contract(self):
+        return self.contract.all().order_by('start_date').first()
 
     def get_absolute_url(self):
         from django.urls import reverse

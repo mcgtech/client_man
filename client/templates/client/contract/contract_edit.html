@@ -9,12 +9,14 @@
 {% load staticfiles %}
 
 {% block css %}
+    {% include 'partials/datatable_css_includes.html' %}
     <link rel="stylesheet" href="{% static 'css/client_contract_select.css' %}">
     <link rel="stylesheet" href="{% static 'css/contract_edit.css' %}">
 {% endblock %}
 
 {% block js %}
     {% include 'partials/inject_js_data.html' %}
+    {% include 'partials/datatable_js_includes.html' %}
     {% include 'partials/form_edit_js_includes.html' %}
     {% include 'partials/datepicker_js_includes.html' %}
     <script type="text/javascript" src="{% static 'js/contract_helpers.js' %}"></script>
@@ -25,6 +27,17 @@
     {% include 'client/client/client_contract_select.html' %}
     <form action="{{ the_action }}" method="POST" id="contract_edit_form" class="contract_details">
         {% crispy form %}
+        <div id="contract_status_table" class="tab-pane">
+            {% include 'client/contract/client_contract_status.html' %}
+        </div>
+        {% if display_approve in state_buttons %}
+            <button type="submit" value="Approve" name="approve-contract" class="btn btn-default">
+                <span class="glyphicon glyphicon-ok"></span>Approve</button>
+        {% endif %}
+        {% if display_reject in state_buttons %}
+            <button type="submit" value="Reject" name="reject-contract" class="btn btn-default">
+                <span class="glyphicon glyphicon-remove"></span>Reject</button>
+        {% endif %}
     </form>
 
 {% endblock %}

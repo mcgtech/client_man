@@ -1,0 +1,2 @@
+python manage.py makemigrations client
+python manage.py migrate client

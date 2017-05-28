@@ -13,9 +13,23 @@ function setup_datepickers()
 
 function setup_contract_tabs()
 {
+    setup_contract_status();
     var tio_pane_elem = $('li.tab-pane a[href="#tio"]');
     if (tio_pane_elem.length > 0)
     {
         $('li.tab-pane:first').after(tio_pane_elem.parent());
+    }
+}
+
+function setup_contract_status()
+{
+    $('#contract_status_table').appendTo('#status');
+
+    //https://www.datatables.net/
+    if ($('#no_data').length == 0)
+    {
+        $('#contract_status').DataTable({
+            "order": [[ 0, "asc" ]]
+        } );
     }
 }
