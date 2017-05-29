@@ -12,6 +12,8 @@ i they were on tio stopped and came back then mig sees it as one session - okay?
 if they dont sort out stat dates then searching and ordering will be a bit screwy - see contract type searching
 wlak neil through how I am migrating and pick some examples to confirm all is okay
 
+is closed_date date in tiocontract needed?
+
 do we need helper.inc:3660 (find it in drupal code)?
 
 in sql to gen contracts file I exclde 'Closed' entries as I assume we want the one before it?

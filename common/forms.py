@@ -1,7 +1,7 @@
 from django import forms
 from django.core.validators import validate_email
 from django.conf import settings
-from common.views import get_client_summary_link
+from common.views import get_client_summary_link, display_client_summary_message
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Button
 from django.shortcuts import redirect
@@ -64,7 +64,7 @@ def get_auditable_fields():
 
 def handle_delete_request(request, client, target, msg, url):
     redir = None
-    if request.POST.get("delete-record"):
+    if target is not None and request.POST.get("delete-record"):
         display_client_summary_message(client, request, msg, settings.INFO_MSG_TYPE)
         target.delete()
         redir = redirect(url)

@@ -45,6 +45,7 @@ def manage_contract(request, client_id, con_type, contract_id=None):
     status_list = None
     client = get_object_or_404(Client, pk=client_id)
     if contract_id is None:
+        contract = get_contract_object(con_type, contract_id, None)
         the_action_text = 'Create'
         is_edit_form = False
         action = '/contract/' + str(client_id) + '/new/' + str(con_type) + '/'

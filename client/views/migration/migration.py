@@ -112,41 +112,51 @@ def add_contract_status(contract, created_by, created_on, modified_by, modified_
 
 def apply_tio_details(nid, contract, json_tio_details):
     # try and find a tio version row created on same day as contract was saved in main details
-    contract_created_on = contract.created_on.strftime(settings.DISPLAY_DATE)
-    # print('Con created: ' + contract_created_on + ' by ' + str(contract.created_by))
+    md_rec_last_changed = contract.created_on.strftime(settings.DISPLAY_DATE)
+    md_rec_last_changed = dateutil.parser.parse(md_rec_last_changed) # get rid of time
+    # print('Con created: ' + md_rec_last_changed + ' by ' + str(contract.created_by))
     tio_nid_match = None
-    for tio_nid, tio_version in json_tio_details['data'][nid].items():
-        for tio_version_row in tio_version:
-            tio_ver_created_on = dateutil.parser.parse(get_clean_json_data(tio_version_row['created_on']))
-            tio_ver_created_on = tio_ver_created_on.strftime(settings.DISPLAY_DATE)
-            if contract_created_on == tio_ver_created_on:
-                tio_nid_match = tio_nid
-                break
-            # print(tio_version_row['nid'] + ' ' + tio_version_row['vid'] + ' ' + tio_version_row['created_by'] + ' ' + tio_ver_created_on)
+    # iterate around each tio node they are in latest first order
+    for tio_nid, tio_node in json_tio_details['data'][nid].items():
+        tio_ver_mod_on = dateutil.parser.parse(get_clean_json_data(tio_node['modified_on']))
+        tio_ver_mod_on = tio_ver_mod_on.strftime(settings.DISPLAY_DATE)
+        tio_ver_mod_on = dateutil.parser.parse(tio_ver_mod_on) # get rid of time
+        # print(md_rec_last_changed.strftime(settings.DISPLAY_DATE) + ' ' + tio_ver_mod_on.strftime(settings.DISPLAY_DATE) + ' ' + tio_nid)
+        if md_rec_last_changed >= tio_ver_mod_on:
+            # print(md_rec_last_changed.strftime(settings.DISPLAY_DATE) + ' ' + tio_ver_mod_on.strftime(settings.DISPLAY_DATE) + ' ' + tio_nid)
+            tio_nid_match = tio_nid
+            # print('tio_nid_match: ' + tio_nid_match)
+            break
+        # print(last_version['nid'] + ' ' + last_version['vid'] + ' ' + last_version['created_by'] + ' ' + tio_ver_created_on)
 
     if tio_nid_match is not None:
-        # use first row in each block to apply tio details
-        # for each row found create a status
-        count = 0
-        for tio_version in json_tio_details['data'][nid][tio_nid_match]:
-            if count == 0:
-                # set tio contract details from row with highest vid
-                contract.aa_progress_jsa_18 = get_clean_json_data(tio_version['aa_progress_jsa_18'])
-                contract.add_support_jsa_18 = get_clean_json_data(tio_version['add_support_jsa_18'])
-                contract.add_support_jsa_25 = get_clean_json_data(tio_version['add_support_jsa_25'])
-                contract.wca_incapacity = get_clean_json_data(tio_version['wca_incapacity'])
-                contract.wrag_esa = get_clean_json_data(tio_version['wrag_esa'])
-                contract.emp_pros_inc = get_clean_json_data(tio_version['emp_pros_inc'])
-                contract.issue = get_clean_json_data(tio_version['issue'])
-                contract.support_esa = get_clean_json_data(tio_version['support_esa'])
-                contract.fund_mgr_notes = get_clean_json_data(tio_version['fund_mgr_notes'])
-                contract.other_ben = get_clean_json_data(tio_version['other_ben'])
-                contract.consent_form_complete = get_clean_json_data(tio_version['consent_form_complete'])
-                contract.save()
-            # add status
-            created_by, created_on, modified_by, modified_on = get_auditable_data(tio_version)
+        tio_node = json_tio_details['data'][nid][tio_nid_match]
+        if tio_node is not None:
+            contract.aa_progress_jsa_18 = get_clean_json_data(tio_node['aa_progress_jsa_18'])
+            contract.add_support_jsa_18 = get_clean_json_data(tio_node['add_support_jsa_18'])
+            contract.add_support_jsa_25 = get_clean_json_data(tio_node['add_support_jsa_25'])
+            contract.wca_incapacity = get_clean_json_data(tio_node['wca_incapacity'])
+            contract.wrag_esa = get_clean_json_data(tio_node['wrag_esa'])
+            contract.emp_pros_inc = get_clean_json_data(tio_node['emp_pros_inc'])
+            contract.issue = get_clean_json_data(tio_node['issue'])
+            contract.support_esa = get_clean_json_data(tio_node['support_esa'])
+            contract.fund_mgr_notes = get_clean_json_data(tio_node['fund_mgr_notes'])
+            contract.other_ben = get_clean_json_data(tio_node['other_ben'])
+            contract.consent_form_complete = get_clean_json_data(tio_node['consent_form_complete'])
+            closed_date = get_clean_json_data(tio_node['closed_date'])
+            if len(closed_date) > 0:
+                closed_date = dateutil.parser.parse(closed_date);
+                contract.closed_date = closed_date
+            partner_user_name = get_clean_json_data(tio_node['partner_id'])
+            if len(partner_user_name) > 0:
+                partner_list = User.objects.filter(username=partner_user_name)
+                partner_user = partner_list.first()
+                contract.partner = partner_user
+            contract.save()
+            # add status for every tio version with a nid of tio_nid_match
+            created_by, created_on, modified_by, modified_on = get_auditable_data(tio_node)
             add_contract_status(contract, created_by, created_on, modified_by, modified_on,
-                                get_clean_json_data(tio_version['con_state']))
+                                get_clean_json_data(tio_node['con_state']))
 
 @login_required
 @user_passes_test(admin_user, 'client_man_login')

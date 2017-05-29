@@ -70,7 +70,9 @@ class TIOContractForm(ContractForm):
         ContractForm.Meta.fields = ContractForm.Meta.fields + ('issue', 'consent_form_complete', 'aa_progress_jsa_18',
                                                                'add_support_jsa_18', 'add_support_jsa_25', 'wca_incapacity',
                                                                'support_esa', 'wrag_esa', 'emp_pros_inc', 'other_ben',
-                                                               'fund_mgr_notes', 'partner')
+                                                               'fund_mgr_notes', 'partner', 'closed_date')
+        AuditableForm.Meta.widgets['closed_date'] = forms.DateInput(attrs={'class':'datepicker'})
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.prepare_required_field('issue', 'Adult 18+ with')
@@ -79,7 +81,7 @@ class TIOContractForm(ContractForm):
                         'TIO',
                         Div(
                 Div('partner', 'issue',
-                    'consent_form_complete',
+                    'consent_form_complete', 'closed_date',
                     Fieldset('JSA claimants 18-24 (less than 9 months)', 'aa_progress_jsa_18', 'add_support_jsa_18', css_class="con_field"),
                     Fieldset('JSA claimants over 25 (less than 12 months)', 'add_support_jsa_25', css_class="con_field"),
                     Fieldset('Incapacity Benefit', 'wca_incapacity', css_class="con_field"),
