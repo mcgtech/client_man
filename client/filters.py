@@ -10,7 +10,7 @@ class ClientFilter(django_filters.FilterSet):
     forename = django_filters.CharFilter(lookup_expr='icontains')
     surname = django_filters.CharFilter(lookup_expr='icontains')
     modified_on = django_filters.DateFilter(lookup_expr='gte')
-    contract_type = django_filters.ChoiceFilter(choices=Contract.TYPES, method='filter_contract_type', name='contract_type', label='Contract type')
+    contract_type = django_filters.ChoiceFilter(choices=Contract.TYPES, method='filter_contract_type', name='contract_type', label='Latest contract type')
     contract_type_hist = django_filters.ChoiceFilter(choices=Contract.TYPES, method='filter_contract_type_hist', name='contract_type_hist', label='Contract type history')
     contract_status = django_filters.ChoiceFilter(choices=ContractStatus.STATUS, method='filter_contract_status', name='contract_status', label='Contract status history')
     modified_on = django_filters.DateFilter(label='Modified on >=')
@@ -35,17 +35,18 @@ class ClientFilter(django_filters.FilterSet):
     def filter_contract_type(self, queryset, name, value):
         # see https://stackoverflow.com/questions/9838264/django-record-with-max-element
         # get the latest contract for each client and filter on type
-        # TODO: suss if this is correct - see post I created: https://stackoverflow.com/questions/44229775/django-filterset-one-to-many-query
-        #cons = Contract.objects.annotate(max_start_date=Max('start_date')).filter(start_date=F('max_start_date')).filter(type=value)
-        # cons = Contract.objects.annotate(max_start_date=Max('start_date'))
-        # print(cons.query)
-        # results = queryset.annotate(max_start_date=Max('contract__start_date')).filter(contract__start_date=F('max_start_date')).filter(contract__type=value)
-        # print(results.query)
-        # return results
-        # cons = Contract.objects.filter(type=value).values('start_date', 'type').annotate(Max('start_date'))
-        # print(cons.query)
+        # my qn: https://stackoverflow.com/questions/44229775/django-filterset-one-to-many-query
+        # for each client get the contract with the latest start date
+        # if that contract has a type that matches the value parameter, then hold on to the pk of its parent
+        # finally strip out any clients that are not in this list, from the queryset django-filter passed in and then return it
+        client_ids = []
+        value = int(value)
+        for client in queryset:
+            con = Contract.objects.filter(client=client).order_by('start_date').last()
+            if con is not None and con.type == value:
+                client_ids.append(con.client.id)
 
-        return queryset
+        return queryset.filter(pk__in=client_ids)
 
     # https://stackoverflow.com/questions/42526670/django-filter-on-values-of-child-objects
     def filter_contract_type_hist(self, queryset, name, value):

@@ -9,6 +9,7 @@ on same day eg esf tracking and lots are missing start day eg Mir - what should 
 as I am group contract on start day lots have clients have multiple contracts os same type - how should I handle this?
 for contract no tion I am grouping on nid, contract type and start date, so as long as these are filled in the contract willl come across - okay?
 i they were on tio stopped and came back then mig sees it as one session - okay?
+if they dont sort out stat dates then searching and ordering will be a bit screwy - see contract type searching
 
 do we need helper.inc:3660 (find it in drupal code)?
 

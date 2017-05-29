@@ -103,7 +103,8 @@ def load_contracts(request):
 def apply_tio_details(nid, contract, json_tio_details):
     # use first row to apply tio details
     # for each row found create a status
-
+    # print(json_tio_details)
+    print(json_tio_details)
 
 @login_required
 @user_passes_test(admin_user, 'client_man_login')
