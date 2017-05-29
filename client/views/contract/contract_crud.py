@@ -59,7 +59,7 @@ def manage_contract(request, client_id, con_type, contract_id=None):
         contract = get_contract_object(con_type, contract_id, base_contract)
         action = get_contract_edit_url(client_id, contract_id)
         status_list = contract.get_ordered_status()
-        curr_state = status_list.first().get_status_display() if status_list is not None else ''
+        curr_state = status_list.first().get_status_display() if status_list.first() is not None else ''
         display_client_summary_message(client, request, 'Contract currently ' + curr_state + ' for ', settings.INFO_MSG_TYPE)
 
     del_request = handle_delete_request(request, client, contract, 'You have successfully deleted the contract ' + str(contract), '/client_search');
@@ -82,8 +82,8 @@ def manage_contract(request, client_id, con_type, contract_id=None):
                 handle_contract_accept(request, client, contract)
             elif request.POST.get("approve-contract"):
                 handle_contract_approval(request, client, contract)
-            elif request.POST.get("revoke-contract-approval"):
-                handle_contract_approval_revoked(request, client, contract)
+            elif request.POST.get("revoke-contract-acceptance"):
+                handle_contract_acceptance_revoked(request, client, contract)
             elif request.POST.get("reject-contract"):
                 handle_contract_rejection(request, client, contract)
             else:
@@ -130,7 +130,7 @@ def handle_contract_approval(request, client, contract):
     msg_once_only(request, 'Approved contract for ' + client.get_full_name(), settings.SUCC_MSG_TYPE)
 
 
-def handle_contract_approval_revoked(request, client, contract):
+def handle_contract_acceptance_revoked(request, client, contract):
     new_state = add_new_contract_state(request, contract, ContractStatus.ACC_REV_INFO_MAN)
     handle_state_change(request, client, contract, new_state)
     msg_once_only(request, 'Revoked approved contract for ' + client.get_full_name(), settings.WARN_MSG_TYPE)
@@ -147,12 +147,22 @@ def handle_state_change(request, client, contract, new_state):
     template = None
     context = {'client': client}
     if new_state.status == ContractStatus.ACC_INFO_MAN:
-        template = 'approved_by_info_man'
+        template = 'accepted_by_info_man'
         # TODO: get this to work correctly
         from_email='from@example.com',
         recipient_list=['mcgonigalstephen@gmail.com'],
     elif new_state.status == ContractStatus.ACC_REV_INFO_MAN:
-        template = 'approval_cancelled_by_info_man'
+        template = 'acceptance_cancelled_by_info_man'
+        # TODO: get this to work correctly
+        from_email='from@example.com',
+        recipient_list=['mcgonigalstephen@gmail.com'],
+    elif new_state.status == ContractStatus.APP_FUND_MAN:
+        template = 'approved_by_fund_man'
+        # TODO: get this to work correctly
+        from_email='from@example.com',
+        recipient_list=['mcgonigalstephen@gmail.com'],
+    elif new_state.status == ContractStatus.REJ_FUND_MAN:
+        template = 'rejected_by_fund_man'
         # TODO: get this to work correctly
         from_email='from@example.com',
         recipient_list=['mcgonigalstephen@gmail.com'],
@@ -181,7 +191,7 @@ def get_state_buttons_to_display(client, con_type, is_edit_form, request):
                 if info_man_user(request.user):
                     buttons.append(settings.DISPLAY_REVOKE)
 
-            if type == Contract.TIO:
+            if con_type == Contract.TIO:
                 if contract_can_be_approved(status):
                     if partner_user(request.user):
                         buttons.append(settings.DISPLAY_APPROVE)
@@ -196,6 +206,7 @@ def contract_can_be_accepted(status):
 
 def contract_can_be_revoked(status):
     return status == ContractStatus.ACC_INFO_MAN or status == ContractStatus.AWAIT_FUND_APP_MAN
+
 
 def contract_can_be_approved(status):
     return status == ContractStatus.ACC_INFO_MAN or status == ContractStatus.AWAIT_FUND_APP_MAN

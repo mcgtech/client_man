@@ -2,8 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="053a4aa4-3808-4504-ab0a-5f7dd90a79bc" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/docs/questions.txt" afterPath="$PROJECT_DIR$/client/docs/questions.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/migration/migration.py" afterPath="$PROJECT_DIR$/client/views/migration/migration.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/common/templates/templated_email/approved_by_fund_man.email" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/common/templates/templated_email/rejected_by_fund_man.email" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/common/templates/templated_email/approval_cancelled_by_info_man.email" afterPath="$PROJECT_DIR$/common/templates/templated_email/acceptance_cancelled_by_info_man.email" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/common/templates/templated_email/approved_by_info_man.email" afterPath="$PROJECT_DIR$/common/templates/templated_email/accepted_by_info_man.email" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/models/client.py" afterPath="$PROJECT_DIR$/client/models/client.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/client/contract/contract_edit.html" afterPath="$PROJECT_DIR$/client/templates/client/contract/contract_edit.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/contract/contract_crud.py" afterPath="$PROJECT_DIR$/client/views/contract/contract_crud.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,7 +21,7 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="migration.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="migration.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/views/migration/migration.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="190">
@@ -27,11 +33,92 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="contract_crud.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/client/views/contract/contract_crud.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="166">
+              <caret line="61" column="84" lean-forward="false" selection-start-line="61" selection-start-column="84" selection-end-line="61" selection-end-column="84" />
+              <folding>
+                <element signature="e#0#56#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="contract_edit.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/templates/client/contract/contract_edit.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="509">
+              <caret line="40" column="55" lean-forward="false" selection-start-line="40" selection-start-column="55" selection-end-line="40" selection-end-column="81" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="approved_by_fund_man.email" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/common/templates/templated_email/approved_by_fund_man.email">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="76" lean-forward="false" selection-start-line="2" selection-start-column="76" selection-end-line="2" selection-end-column="76" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="rejected_by_fund_man.email" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/common/templates/templated_email/rejected_by_fund_man.email">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="76" lean-forward="false" selection-start-line="2" selection-start-column="76" selection-end-line="2" selection-end-column="76" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="accepted_by_info_man.email" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/common/templates/templated_email/accepted_by_info_man.email">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="76" lean-forward="false" selection-start-line="2" selection-start-column="76" selection-end-line="2" selection-end-column="76" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="acceptance_cancelled_by_info_man.email" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/common/templates/templated_email/acceptance_cancelled_by_info_man.email">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="82" lean-forward="false" selection-start-line="2" selection-start-column="82" selection-end-line="2" selection-end-column="82" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="client.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/models/client.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="185">
+              <caret line="111" column="29" lean-forward="false" selection-start-line="111" selection-start-column="29" selection-end-line="111" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="contract.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/models/contract.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="185">
+              <caret line="165" column="4" lean-forward="false" selection-start-line="165" selection-start-column="4" selection-end-line="165" selection-end-column="4" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>AWAIT_FUND_MAN_APP</find>
       <find>msg_once_only</find>
       <find>ACC_INFO_MAN</find>
       <find>stat</find>
@@ -61,6 +148,7 @@
       <find>display_client_summary_message</find>
       <find>22824</find>
       <find>Client not found for contract</find>
+      <find>print</find>
     </findStrings>
     <replaceStrings>
       <replace>client_notes</replace>
@@ -86,10 +174,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/client/templates/client/migration/load_clients.html" />
-        <option value="$PROJECT_DIR$/client/templates/client/client/client_detail.html" />
-        <option value="$PROJECT_DIR$/client/docs/understanding_old_contracts.txt" />
-        <option value="$PROJECT_DIR$/client/views/client/client_searching.py" />
         <option value="$PROJECT_DIR$/client/models/__init__.py" />
         <option value="$PROJECT_DIR$/client/admin.py" />
         <option value="$PROJECT_DIR$/client/static/js/client_contract_select.js" />
@@ -119,9 +203,7 @@
         <option value="$PROJECT_DIR$/client/templates/templated_email/approved_by_info_man.email" />
         <option value="$PROJECT_DIR$/client/templates/templated_email/approval_cancelled_by_info_man.email" />
         <option value="$PROJECT_DIR$/common/templates/templated_email/approval_cancelled_by_info_man.email" />
-        <option value="$PROJECT_DIR$/client/templates/client/contract/contract_edit.html" />
         <option value="$PROJECT_DIR$/client_man/settings.py" />
-        <option value="$PROJECT_DIR$/client/models/client.py" />
         <option value="$PROJECT_DIR$/client/tables.py" />
         <option value="$PROJECT_DIR$/client/docs/time_so_far.txt" />
         <option value="$PROJECT_DIR$/client/filters.py" />
@@ -131,12 +213,18 @@
         <option value="$PROJECT_DIR$/common/templates/nav_bar.html" />
         <option value="$PROJECT_DIR$/static/json/contracts.json" />
         <option value="$PROJECT_DIR$/static/json/tio_details.json" />
-        <option value="$PROJECT_DIR$/client/models/contract.py" />
         <option value="$PROJECT_DIR$/client/forms/contract.py" />
-        <option value="$PROJECT_DIR$/client/views/contract/contract_crud.py" />
         <option value="$PROJECT_DIR$/common/forms.py" />
         <option value="$PROJECT_DIR$/client/docs/questions.txt" />
         <option value="$PROJECT_DIR$/client/views/migration/migration.py" />
+        <option value="$PROJECT_DIR$/client/models/contract.py" />
+        <option value="$PROJECT_DIR$/client/models/client.py" />
+        <option value="$PROJECT_DIR$/common/templates/templated_email/accepted_by_info_man.email" />
+        <option value="$PROJECT_DIR$/common/templates/templated_email/acceptance_cancelled_by_info_man.email" />
+        <option value="$PROJECT_DIR$/common/templates/templated_email/approved_by_fund_man.email" />
+        <option value="$PROJECT_DIR$/common/templates/templated_email/rejected_by_fund_man.email" />
+        <option value="$PROJECT_DIR$/client/templates/client/contract/contract_edit.html" />
+        <option value="$PROJECT_DIR$/client/views/contract/contract_crud.py" />
       </list>
     </option>
   </component>
@@ -238,6 +326,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="django_projs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="django_projs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templated_email" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -383,6 +493,32 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="contract" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="django_projs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="django_projs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="client" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -466,11 +602,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/common/templates/templated_email" />
       <recent name="$PROJECT_DIR$/static/json" />
       <recent name="$PROJECT_DIR$/client/templates/client/contract" />
       <recent name="$PROJECT_DIR$/client/static/js" />
       <recent name="$PROJECT_DIR$/common/templates/partials" />
-      <recent name="$PROJECT_DIR$/static/css/django_tables2" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/common/templates" />
@@ -578,7 +714,7 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25521472" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32887402" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32840237" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -645,20 +781,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/client/views/client/client_searching.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="42" column="29" lean-forward="false" selection-start-line="42" selection-start-column="29" selection-end-line="42" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/docs/reasons_to_rebuild.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="42" lean-forward="false" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/docs/rebuild_steps.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="694">
@@ -790,24 +912,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/common/templates/templated_email/approved_by_info_man.email">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="76" lean-forward="false" selection-start-line="2" selection-start-column="76" selection-end-line="2" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/docs/project_setup.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="303">
           <caret line="88" column="2" lean-forward="false" selection-start-line="88" selection-start-column="2" selection-end-line="88" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/templates/templated_email/approval_cancelled_by_info_man.email">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="2" lean-forward="false" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
         </state>
       </provider>
     </entry>
@@ -818,13 +926,6 @@
           <folding>
             <element signature="e#0#32#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/templates/client/contract/contract_edit.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="35" column="29" lean-forward="false" selection-start-line="35" selection-start-column="14" selection-end-line="35" selection-end-column="29" />
         </state>
       </provider>
     </entry>
@@ -839,14 +940,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="503">
           <caret line="55" column="18" lean-forward="false" selection-start-line="52" selection-start-column="18" selection-end-line="55" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/models/client.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="428">
-          <caret line="234" column="34" lean-forward="true" selection-start-line="234" selection-start-column="34" selection-end-line="234" selection-end-column="57" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -943,29 +1036,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/models/contract.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="145" column="15" lean-forward="false" selection-start-line="145" selection-start-column="4" selection-end-line="145" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/forms/contract.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="440">
           <caret line="83" column="44" lean-forward="false" selection-start-line="83" selection-start-column="44" selection-end-line="83" selection-end-column="44" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/views/contract/contract_crud.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="64" column="51" lean-forward="true" selection-start-line="64" selection-start-column="51" selection-end-line="64" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#56#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1007,6 +1082,72 @@
           <caret line="44" column="55" lean-forward="false" selection-start-line="44" selection-start-column="55" selection-end-line="44" selection-end-column="55" />
           <folding>
             <element signature="e#0#71#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/models/client.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="111" column="29" lean-forward="false" selection-start-line="111" selection-start-column="29" selection-end-line="111" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/models/contract.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="165" column="4" lean-forward="false" selection-start-line="165" selection-start-column="4" selection-end-line="165" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/templates/templated_email/rejected_by_fund_man.email">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="76" lean-forward="false" selection-start-line="2" selection-start-column="76" selection-end-line="2" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/templates/templated_email/approved_by_fund_man.email">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="76" lean-forward="false" selection-start-line="2" selection-start-column="76" selection-end-line="2" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/templates/templated_email/acceptance_cancelled_by_info_man.email">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="82" lean-forward="false" selection-start-line="2" selection-start-column="82" selection-end-line="2" selection-end-column="82" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/templates/templated_email/accepted_by_info_man.email">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="76" lean-forward="false" selection-start-line="2" selection-start-column="76" selection-end-line="2" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/templates/client/contract/contract_edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="509">
+          <caret line="40" column="55" lean-forward="false" selection-start-line="40" selection-start-column="55" selection-end-line="40" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/views/contract/contract_crud.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="166">
+          <caret line="61" column="84" lean-forward="false" selection-start-line="61" selection-start-column="84" selection-end-line="61" selection-end-column="84" />
+          <folding>
+            <element signature="e#0#56#0" expanded="true" />
           </folding>
         </state>
       </provider>

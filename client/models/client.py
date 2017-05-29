@@ -232,7 +232,7 @@ class Client(Person):
         return None if contract is None else contract.get_latest_status()
 
     def get_latest_contract(self):
-        return self.contract.all().order_by('start_date').first()
+        return self.contract.all().order_by('-start_date').first()
 
     def get_absolute_url(self):
         from django.urls import reverse
