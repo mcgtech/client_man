@@ -42,6 +42,9 @@ class ClientFilter(django_filters.FilterSet):
         # results = queryset.annotate(max_start_date=Max('contract__start_date')).filter(contract__start_date=F('max_start_date')).filter(contract__type=value)
         # print(results.query)
         # return results
+        # cons = Contract.objects.filter(type=value).values('start_date', 'type').annotate(Max('start_date'))
+        # print(cons.query)
+
         return queryset
 
     # https://stackoverflow.com/questions/42526670/django-filter-on-values-of-child-objects

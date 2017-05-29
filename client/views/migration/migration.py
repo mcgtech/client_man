@@ -1,4 +1,4 @@
-from client.models import Client, Contract, ContractStatus
+from client.models import Client, Contract, TIOContract, ContractStatus
 from common.models import Person, Note, Address, Telephone
 from common.views import form_errors_as_array, job_coach_user, job_coach_man_user, admin_user, show_form_error
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -11,10 +11,11 @@ import dateutil.parser
 @user_passes_test(admin_user, 'client_man_login')
 def load_contracts(request):
     # how I got the latest non tio rec in each group: https://www.xaprb.com/blog/2006/12/07/how-to-select-the-firstleastmax-row-per-group-in-sql/
-    json_data = open('static/json/non_tio_contracts.json')
-    # deserialises it
-    # need to eset created and last modified date
-    json_contracts = json.load(json_data)
+    contract_json_data = open('static/json/contracts.json')
+    tio_details_json_data = open('static/json/tio_details.json')
+    # deserialises them
+    json_contracts = json.load(contract_json_data)
+    json_tio_details = json.load(tio_details_json_data)
     # and_steve - a-g
     items = []
     errors = []
@@ -31,7 +32,12 @@ def load_contracts(request):
                 try:
                     client = all_clients.get(original_client_id=nid)
                     if client is not None:
-                        contract = Contract(client=client)
+                        con_type = get_clean_json_data(json_contract['con_type'])
+                        if (con_type == Contract.TIO):
+                            contract = TIOContract(client=client)
+                        else:
+                            contract = Contract(client=client)
+                        contract.type = con_type
                         created_by_user_name = get_clean_json_data(json_contract['created_by'])
                         created_by_list = User.objects.filter(username=created_by_user_name)
                         created_by = created_by_list.first()
@@ -47,7 +53,6 @@ def load_contracts(request):
                         contract.created_on = created_on
                         contract.modified_on = modified_on
 
-                        contract.type = get_clean_json_data(json_contract['con_type'])
                         # I set USE_TZ = False in settings to get this to work
                         con_start_date = get_clean_json_data(json_contract['con_start_date'])
                         if len(con_start_date) > 0:
@@ -65,16 +70,19 @@ def load_contracts(request):
                         if len(sec_client_group) == 0 or sec_client_group == '-1' or sec_client_group== -1:
                             sec_client_group = None
                         contract.secondary_client_group = sec_client_group
+                        if (con_type == Contract.TIO):
+                            apply_tio_details(nid, contract, json_tio_details)
                         contract.save()
 
-                        contract_status = ContractStatus()
-                        contract_status.contract = contract
-                        contract_status.created_by = created_by
-                        contract_status.modified_by = modified_by
-                        contract_status.created_on = created_on
-                        contract_status.modified_on = modified_on
-                        contract_status.status = get_clean_json_data(json_contract['con_state'])
-                        contract_status.save()
+                        if (con_type != Contract.TIO):
+                            contract_status = ContractStatus()
+                            contract_status.contract = contract
+                            contract_status.created_by = created_by
+                            contract_status.modified_by = modified_by
+                            contract_status.created_on = created_on
+                            contract_status.modified_on = modified_on
+                            contract_status.status = get_clean_json_data(json_contract['con_state'])
+                            contract_status.save()
                     else:
                         raise ValueError('Client not found for contract(1), client nid: ' + nid)
                 except Exception as e:
@@ -90,6 +98,12 @@ def load_contracts(request):
                 errors.append(es)
 
     return render(request, 'client/migration/migration.html', {'items' : items, 'form_errors' :  errors})
+
+
+def apply_tio_details(nid, contract, json_tio_details):
+    # use first row to apply tio details
+    # for each row found create a status
+
 
 @login_required
 @user_passes_test(admin_user, 'client_man_login')
