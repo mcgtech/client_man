@@ -165,12 +165,14 @@ class ContractStatus(Auditable):
     APP_FUND_MAN = 2
     REJ_FUND_MAN = 3
     ACC_REV_INFO_MAN = 4
+    AWAIT_FUND_APP_MAN = 5
     STATUS = (
         (AWAIT_INFO_MAN_ACC, 'Awaiting info man acceptance'),
         (ACC_INFO_MAN, 'Accepted by info man'),
         (APP_FUND_MAN, 'Approved by fund man'),
         (REJ_FUND_MAN, 'Rejected by fund man'),
         (ACC_REV_INFO_MAN, 'Acceptance revoked by info man'),
+        (AWAIT_FUND_APP_MAN, 'Awaiting fund manager approval'), # only iuse this for migrated tios, it will not be used after this
     )
     status = models.IntegerField(choices=STATUS, default=AWAIT_INFO_MAN_ACC)
     contract = models.ForeignKey(Contract, on_delete=models.CASCADE, null=True, related_name="contract_status")

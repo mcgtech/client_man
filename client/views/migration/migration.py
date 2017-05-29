@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render
 import json
 import dateutil.parser
+from django.conf import settings
 
 @login_required
 @user_passes_test(admin_user, 'client_man_login')
@@ -32,21 +33,13 @@ def load_contracts(request):
                 try:
                     client = all_clients.get(original_client_id=nid)
                     if client is not None:
-                        con_type = get_clean_json_data(json_contract['con_type'])
+                        con_type = int(get_clean_json_data(json_contract['con_type']))
                         if (con_type == Contract.TIO):
                             contract = TIOContract(client=client)
                         else:
                             contract = Contract(client=client)
                         contract.type = con_type
-                        created_by_user_name = get_clean_json_data(json_contract['created_by'])
-                        created_by_list = User.objects.filter(username=created_by_user_name)
-                        created_by = created_by_list.first()
-                        modified_by_user_name = get_clean_json_data(json_contract['modified_by'])
-                        modified_by_list = User.objects.filter(username=modified_by_user_name)
-                        modified_by = modified_by_list.first()
-                        # I set USE_TZ = False in settings to get this to work
-                        created_on = dateutil.parser.parse(get_clean_json_data(json_contract['created_on']));
-                        modified_on = dateutil.parser.parse(get_clean_json_data(json_contract['modified_on']));
+                        created_by, created_on, modified_by, modified_on = get_auditable_data(json_contract)
 
                         contract.created_by = created_by
                         contract.modified_by = modified_by
@@ -72,17 +65,10 @@ def load_contracts(request):
                         contract.secondary_client_group = sec_client_group
                         if (con_type == Contract.TIO):
                             apply_tio_details(nid, contract, json_tio_details)
-                        contract.save()
-
-                        if (con_type != Contract.TIO):
-                            contract_status = ContractStatus()
-                            contract_status.contract = contract
-                            contract_status.created_by = created_by
-                            contract_status.modified_by = modified_by
-                            contract_status.created_on = created_on
-                            contract_status.modified_on = modified_on
-                            contract_status.status = get_clean_json_data(json_contract['con_state'])
-                            contract_status.save()
+                        else:
+                            contract.save()
+                            add_contract_status(contract, created_by, created_on, modified_by,
+                                                modified_on, get_clean_json_data(json_contract['con_state']))
                     else:
                         raise ValueError('Client not found for contract(1), client nid: ' + nid)
                 except Exception as e:
@@ -100,11 +86,67 @@ def load_contracts(request):
     return render(request, 'client/migration/migration.html', {'items' : items, 'form_errors' :  errors})
 
 
+def get_auditable_data(json_data):
+    created_by_user_name = get_clean_json_data(json_data['created_by'])
+    created_by_list = User.objects.filter(username=created_by_user_name)
+    created_by = created_by_list.first()
+    modified_by_user_name = get_clean_json_data(json_data['modified_by'])
+    modified_by_list = User.objects.filter(username=modified_by_user_name)
+    modified_by = modified_by_list.first()
+    # I set USE_TZ = False in settings to get this to work
+    created_on = dateutil.parser.parse(get_clean_json_data(json_data['created_on']));
+    modified_on = dateutil.parser.parse(get_clean_json_data(json_data['modified_on']));
+    return created_by, created_on, modified_by, modified_on
+
+
+def add_contract_status(contract, created_by, created_on, modified_by, modified_on, status):
+    contract_status = ContractStatus()
+    contract_status.contract = contract
+    contract_status.created_by = created_by
+    contract_status.modified_by = modified_by
+    contract_status.created_on = created_on
+    contract_status.modified_on = modified_on
+    contract_status.status = status
+    contract_status.save()
+
+
 def apply_tio_details(nid, contract, json_tio_details):
-    # use first row to apply tio details
-    # for each row found create a status
-    # print(json_tio_details)
-    print(json_tio_details)
+    # try and find a tio version row created on same day as contract was saved in main details
+    contract_created_on = contract.created_on.strftime(settings.DISPLAY_DATE)
+    # print('Con created: ' + contract_created_on + ' by ' + str(contract.created_by))
+    tio_nid_match = None
+    for tio_nid, tio_version in json_tio_details['data'][nid].items():
+        for tio_version_row in tio_version:
+            tio_ver_created_on = dateutil.parser.parse(get_clean_json_data(tio_version_row['created_on']))
+            tio_ver_created_on = tio_ver_created_on.strftime(settings.DISPLAY_DATE)
+            if contract_created_on == tio_ver_created_on:
+                tio_nid_match = tio_nid
+                break
+            # print(tio_version_row['nid'] + ' ' + tio_version_row['vid'] + ' ' + tio_version_row['created_by'] + ' ' + tio_ver_created_on)
+
+    if tio_nid_match is not None:
+        # use first row in each block to apply tio details
+        # for each row found create a status
+        count = 0
+        for tio_version in json_tio_details['data'][nid][tio_nid_match]:
+            if count == 0:
+                # set tio contract details from row with highest vid
+                contract.aa_progress_jsa_18 = get_clean_json_data(tio_version['aa_progress_jsa_18'])
+                contract.add_support_jsa_18 = get_clean_json_data(tio_version['add_support_jsa_18'])
+                contract.add_support_jsa_25 = get_clean_json_data(tio_version['add_support_jsa_25'])
+                contract.wca_incapacity = get_clean_json_data(tio_version['wca_incapacity'])
+                contract.wrag_esa = get_clean_json_data(tio_version['wrag_esa'])
+                contract.emp_pros_inc = get_clean_json_data(tio_version['emp_pros_inc'])
+                contract.issue = get_clean_json_data(tio_version['issue'])
+                contract.support_esa = get_clean_json_data(tio_version['support_esa'])
+                contract.fund_mgr_notes = get_clean_json_data(tio_version['fund_mgr_notes'])
+                contract.other_ben = get_clean_json_data(tio_version['other_ben'])
+                contract.consent_form_complete = get_clean_json_data(tio_version['consent_form_complete'])
+                contract.save()
+            # add status
+            created_by, created_on, modified_by, modified_on = get_auditable_data(tio_version)
+            add_contract_status(contract, created_by, created_on, modified_by, modified_on,
+                                get_clean_json_data(tio_version['con_state']))
 
 @login_required
 @user_passes_test(admin_user, 'client_man_login')

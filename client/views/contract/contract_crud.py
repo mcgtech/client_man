@@ -181,7 +181,7 @@ def get_state_buttons_to_display(client, con_type, is_edit_form, request):
                     buttons.append(settings.DISPLAY_REVOKE)
 
             if type == Contract.TIO:
-                if status == ContractStatus.ACC_INFO_MAN:
+                if contract_can_be_approved(status):
                     if partner_user(request.user):
                         buttons.append(settings.DISPLAY_APPROVE)
                         buttons.append(settings.DISPLAY_REJECT)
@@ -194,7 +194,11 @@ def contract_can_be_accepted(status):
 
 
 def contract_can_be_revoked(status):
-    return status == ContractStatus.ACC_INFO_MAN
+    return status == ContractStatus.ACC_INFO_MAN or status == ContractStatus.AWAIT_FUND_APP_MAN
+
+def contract_can_be_approved(status):
+    return status == ContractStatus.ACC_INFO_MAN or status == ContractStatus.AWAIT_FUND_APP_MAN
+
 
 
 def get_contract_object(type, contract_id, base_contract):

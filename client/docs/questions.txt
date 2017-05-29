@@ -10,6 +10,7 @@ as I am group contract on start day lots have clients have multiple contracts os
 for contract no tion I am grouping on nid, contract type and start date, so as long as these are filled in the contract willl come across - okay?
 i they were on tio stopped and came back then mig sees it as one session - okay?
 if they dont sort out stat dates then searching and ordering will be a bit screwy - see contract type searching
+wlak neil through how I am migrating and pick some examples to confirm all is okay
 
 do we need helper.inc:3660 (find it in drupal code)?
 
@@ -24,6 +25,8 @@ dont have a rec, so what I migrate is a bit iffy same for mod and created dates
 currenlty I am using versions in md to hanlde non tio contracts. When I migrate across I will only hae latest profile filed
 set in main details do I need it as it was in each contract? if so need to move this field to contract, same for stage and clientGroup etc
 see understanding_old_contracts.txt
+
+he needs to see it as integral part of business and test and design accordingly
 
 actpart does not appear t e used so I will not migrate it
 
