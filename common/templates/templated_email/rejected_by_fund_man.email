@@ -1,3 +1,4 @@
+{% block subject %}Shirlie Project contract rejected{% endblock %}
 {% block html %}
   {% include 'templated_email/heading.email' %}
   <p>The latest contract for {{client.get_full_name}} has just been rejected</p>

@@ -10,3 +10,4 @@ old site is past what it should be doing
 system will work and be easier to debug
 and easier for other people to support
 chance to strip out complexity and simplfy
+separation of crud and printing/reporting
