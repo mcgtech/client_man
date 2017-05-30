@@ -7,16 +7,47 @@ from django.contrib.auth.signals import user_logged_in
 
 class Auditable(models.Model):
     created_on = models.DateTimeField(null=True, blank=True)
-    # if I make it OneToOneField then I get duplicate key error
-    # created_by = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='%(class)s_created_by', null=True, blank=True)
+    # https://www.webforefront.com/django/setuprelationshipsdjangomodels.html
+    # a user may have created many Auditable class objects, but an instance of an Auditable can have only created by,
+    # so in django we add the ForeignKey to the many part of the relationship:
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='%(class)s_created_by', blank=True, null=True)
     modified_on = models.DateTimeField(null=True, blank=True)
-    # if I make it OneToOneField then I get duplicate key error
-    # modified_by = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='%(class)s_modified_by', null=True, blank=True)
+    # https://www.webforefront.com/django/setuprelationshipsdjangomodels.html
+    # a user may have created many Auditable class objects, but an instance of an
     modified_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='%(class)s_modified_by', blank=True, null=True)
 
     class Meta:
         abstract = True
+
+# see https://simpleisbetterthancomplex.com/tutorial/2016/07/28/how-to-create-django-signals.html
+# to see how I attach associate person with address
+class Address(models.Model):
+    line_1 = models.CharField(max_length=100, blank=True)
+    line_2 = models.CharField(max_length=100, blank=True)
+    line_3 = models.CharField(max_length=100, blank=True)
+    post_code = models.CharField(max_length=100, blank=True)
+    BAST = 0
+    CAIT = 1
+    INNA = 2
+    LARB = 3
+    ROSS = 4
+    SKYE = 5
+    SUTH = 6
+    AREA = (
+        (None, 'Please select'),
+        (BAST, 'Badenoch and Strathspey'),
+        (CAIT, 'Caithness'),
+        (INNA, 'Inverness and Nairn'),
+        (LARB, 'Lochaber'),
+        (ROSS, 'Ross-shire'),
+        (SKYE, 'Skye'),
+        (SUTH, 'Sutherland'),
+    )
+    area = models.IntegerField(choices=AREA, default=None)
+    evidence = models.FileField(upload_to='client/address_evidence/', blank=True)
+
+    def __str__(self):
+        return self.line_1 + ', ' + self.line_2 + ', ' + self.get_area_display()
 
 
 # drop downs: http://stackoverflow.com/questions/31130706/dropdown-in-django-model
@@ -44,6 +75,7 @@ class Person(Auditable):
     email_address = models.CharField(max_length=100, blank=True) # I use the validator in the form
     # https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#onetoone
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name='person')
+    address = models.OneToOneField(Address, on_delete=models.CASCADE, null=True, related_name="person")
 
     def get_full_name(self):
         return self.get_title_display() + ' ' + self.forename + ' ' + self.surname
@@ -98,35 +130,3 @@ class Telephone(models.Model):
     def __str__(self):
        return self.number
        # return self.number + ' (' + self.get_type_display(self) + ')'
-
-
-# see https://simpleisbetterthancomplex.com/tutorial/2016/07/28/how-to-create-django-signals.html
-# to see how I attach associate person with address
-class Address(models.Model):
-    line_1 = models.CharField(max_length=100, blank=True)
-    line_2 = models.CharField(max_length=100, blank=True)
-    line_3 = models.CharField(max_length=100, blank=True)
-    post_code = models.CharField(max_length=100, blank=True)
-    BAST = 0
-    CAIT = 1
-    INNA = 2
-    LARB = 3
-    ROSS = 4
-    SKYE = 5
-    SUTH = 6
-    AREA = (
-        (None, 'Please select'),
-        (BAST, 'Badenoch and Strathspey'),
-        (CAIT, 'Caithness'),
-        (INNA, 'Inverness and Nairn'),
-        (LARB, 'Lochaber'),
-        (ROSS, 'Ross-shire'),
-        (SKYE, 'Skye'),
-        (SUTH, 'Sutherland'),
-    )
-    area = models.IntegerField(choices=AREA, default=None)
-    evidence = models.FileField(upload_to='client/address_evidence/', blank=True)
-    person = models.OneToOneField(Person, on_delete=models.CASCADE, null=True, related_name="address")
-
-    def __str__(self):
-       return self.line_1 + ', ' + self.line_2 + ', ' + self.get_area_display()

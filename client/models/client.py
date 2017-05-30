@@ -220,8 +220,8 @@ class Client(Person):
     # id on old system - set during migration - can be deleted once migration is complete
     original_client_id = models.IntegerField(default=0)
     nat_ins_number = models.CharField(max_length=100, blank=True)
-    # if I make it OneToOneField then I get duplicate key error
-    # job_coach = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='job_coach', null=True, blank=True, limit_choices_to={'groups__name': "job coach"})
+    # https://www.webforefront.com/django/setuprelationshipsdjangomodels.html
+    # a job coach can have many clients, but a client can have only one coach, so in django we add the ForeignKey to the many part of the relationship:
     job_coach = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='job_coach', blank=True, null=True, limit_choices_to={'groups__name': settings.JOB_COACH})
     start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)

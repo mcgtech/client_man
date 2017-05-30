@@ -18,6 +18,8 @@ is closed_date date in tiocontract needed?
 
 ig ther is no tio node but I find versions of md that have tio then I still create tio record - okay?
 
+needs to pay for postcode lookup - once he does update key used
+
 do we need helper.inc:3660 (find it in drupal code)?
 
 in sql to gen contracts file I exclde 'Closed' entries as I assume we want the one before it?

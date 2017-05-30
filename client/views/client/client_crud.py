@@ -60,12 +60,7 @@ def manage_client(request, client_id=None):
         is_edit_form = True
         client = get_object_or_404(Client, pk=client_id)
         add_contract_js_data(js_dict, client)
-        addresses = Address.objects.filter(person_id=client_id)
-        if len(addresses) == 1:
-            address = addresses[0]
-        else:
-            address = None
-            show_form_error(request, messages, 'Expected a single address and found ' + str(len(addresses)) + ' instead', True)
+        address = client.address
         action = '/client/' + str(client_id) + '/edit' + '/'
         # if client has no notes/phones then we need to have one blank one for the formset js code to work
         notes = Note.objects.filter(person_id=client_id)

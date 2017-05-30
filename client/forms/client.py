@@ -157,14 +157,13 @@ class ClientForm(AuditableForm):
 class AddressForm(forms.ModelForm):
     helper = FormHelper()
     helper.form_tag = False
-    helper.layout = Layout('line_1', 'line_2', 'line_3', 'post_code',
-                    Div(Div('area', css_class="col-sm-6"), Div('evidence', css_class="col-sm-6"), css_class='row'),
+    helper.layout = Layout('line_1', 'line_2', 'line_3',
+                           Div(Div('post_code', css_class="col-sm-6"), css_class='row postcode'),
+                           Div(Div('area', css_class="col-sm-6"), Div('evidence', css_class="col-sm-6"), css_class='row'),
                   )
     class Meta:
         model = Address
-        fields = ('line_1', 'line_2', 'line_3', 'post_code',
-                 'area', 'evidence'
-                  )
+        fields = ('line_1', 'line_2', 'line_3','post_code', 'area', 'evidence')
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # the following is to allow control of field required validation at page and field level

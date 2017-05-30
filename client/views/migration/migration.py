@@ -262,7 +262,7 @@ def load_clients(request):
                 else:
                     errors.append('Failed to find matching coach ' + job_coach_user_name + ' for ' + client.forename + ' ' + client.surname)
                 client.original_client_id = get_clean_json_data(json_client['original_client_id'])
-                client.save()
+
 
                 # add address
                 address = Address()
@@ -271,8 +271,9 @@ def load_clients(request):
                 address.line_3 = get_clean_json_data(json_client['line_3'])
                 address.post_code = get_clean_json_data(json_client['post_code'])
                 address.area = get_clean_json_data(json_client['area'])
-                address.person = client
                 address.save()
+                client.address = address
+                client.save()
 
                 # phones
                 if len(home_phone) > 1:
