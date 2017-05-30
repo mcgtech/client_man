@@ -1,21 +1,15 @@
-from django.shortcuts import redirect, get_object_or_404
-from client.models import Client, TIOContract, ContractStatus
-from common.models import Note, Address, Telephone
-from django.forms import inlineformset_factory
-from client.forms import *
-from common.views import *
+import json
+
+from django.conf import settings
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.db import transaction
-from django.contrib.auth.models import User
-from django.contrib.auth.models import Group
-from django.conf import settings
-from django.utils import timezone
-from django.contrib import messages
+from django.shortcuts import redirect, get_object_or_404
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
-from django.urls import reverse
+
+from client.forms import *
 from client.views import add_contract_js_data
-import json
+from common.views import *
+
 
 @login_required
 @user_passes_test(job_coach_user, 'client_man_login')

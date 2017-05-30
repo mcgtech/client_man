@@ -44,7 +44,15 @@ INSTALLED_APPS = [
     'crispy_forms',
     'common',
     'client',
+    'constance.backends.database',
+    'constance',
 ]
+CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
+
+CONSTANCE_CONFIG = {
+    'THE_ANSWER': (42, 'Answer to the Ultimate Question of Life, '
+                       'The Universe, and Everything'),
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -20,6 +20,9 @@ ig ther is no tio node but I find versions of md that have tio then I still crea
 
 needs to pay for postcode lookup - once he does update key used
 
+when changing state in contract apart from adding new state and sending emails what else should it do (show another scrren?)
+
+
 do we need helper.inc:3660 (find it in drupal code)?
 
 in sql to gen contracts file I exclde 'Closed' entries as I assume we want the one before it?
