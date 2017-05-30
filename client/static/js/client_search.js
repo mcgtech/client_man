@@ -4,8 +4,8 @@ $(function(){
 
 function setup_client_search()
 {
-    //https://www.datatables.net/
-    $('#client_results').DataTable({
-        "order": [[ 0, "asc" ]]
-    } );
+    $('th.selection input').change(function(){
+        var state = $(this).is(':checked');
+        $('td.selection input').prop('checked', state);
+    });
 }
