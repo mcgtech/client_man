@@ -1,5 +1,6 @@
 from django.conf import settings
 from templated_email import send_templated_mail
+from .general import msg_once_only
 
 def send_email_using_template(from_email, recipient_list, context, template, request):
     send_templated_mail(

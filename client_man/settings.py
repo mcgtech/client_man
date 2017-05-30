@@ -50,10 +50,17 @@ INSTALLED_APPS = [
 CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
 
 CONSTANCE_CONFIG = {
-    'THE_ANSWER': (42, 'Answer to the Ultimate Question of Life, '
-                       'The Universe, and Everything'),
+    'GEN_FROM_EMAIL_ADDRESS': ('mcgonigalstephen@gmail.com', 'General From Address'),
+    'ACCEPTANCE_EMAIL_LIST': ('mcgonigalstephen@gmail.com', 'Who to email on acceptance'),
+    'REVOKE_EMAIL_LIST': ('mcgonigalstephen@gmail.com', 'Who to email on revoking'),
+    'APPROVAL_EMAIL_LIST': ('mcgonigalstephen@gmail.com', 'Who to email on approval'),
+    'REJECT_EMAIL_LIST': ('mcgonigalstephen@gmail.com', 'Who to email on rejection'),
 }
 
+CONSTANCE_CONFIG_FIELDSETS = {
+    'General Options': ('GEN_FROM_EMAIL_ADDRESS',),
+    'Contract Options': ('ACCEPTANCE_EMAIL_LIST', 'REVOKE_EMAIL_LIST', 'APPROVAL_EMAIL_LIST', 'REJECT_EMAIL_LIST'),
+}
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

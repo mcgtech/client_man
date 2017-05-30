@@ -3,3 +3,4 @@
 from .authentication import *
 from .general import *
 from .email import *
+from .auditable import *

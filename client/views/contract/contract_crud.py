@@ -1,15 +1,12 @@
 import json
-
-from django.conf import settings
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.db import transaction
-from django.shortcuts import redirect, get_object_or_404
-from django.shortcuts import render
-
+from django.shortcuts import get_object_or_404
 from client.forms import *
 from client.views import add_contract_js_data
 from common.views import *
-
+from django.shortcuts import render
+from constance import config
 
 @login_required
 @user_passes_test(job_coach_user, 'client_man_login')
@@ -140,26 +137,19 @@ def handle_state_change(request, client, contract, new_state):
     # https://github.com/vintasoftware/django-templated-email
     template = None
     context = {'client': client}
+    from_email=config.GEN_FROM_EMAIL_ADDRESS
     if new_state.status == ContractStatus.ACC_INFO_MAN:
         template = 'accepted_by_info_man'
-        # TODO: get this to work correctly
-        from_email='from@example.com',
-        recipient_list=['mcgonigalstephen@gmail.com'],
+        recipient_list= config.ACCEPTANCE_EMAIL_LIST.split(","),
     elif new_state.status == ContractStatus.ACC_REV_INFO_MAN:
-        template = 'acceptance_cancelled_by_info_man'
-        # TODO: get this to work correctly
-        from_email='from@example.com',
-        recipient_list=['mcgonigalstephen@gmail.com'],
+        template = 'acceptance_revoked_by_info_man'
+        recipient_list= config.REVOKE_EMAIL_LIST.split(","),
     elif new_state.status == ContractStatus.APP_FUND_MAN:
         template = 'approved_by_fund_man'
-        # TODO: get this to work correctly
-        from_email='from@example.com',
-        recipient_list=['mcgonigalstephen@gmail.com'],
+        recipient_list= config.APPROVAL_EMAIL_LIST.split(","),
     elif new_state.status == ContractStatus.REJ_FUND_MAN:
         template = 'rejected_by_fund_man'
-        # TODO: get this to work correctly
-        from_email='from@example.com',
-        recipient_list=['mcgonigalstephen@gmail.com'],
+        recipient_list= config.REJECT_EMAIL_LIST.split(","),
     send_email_using_template(from_email, recipient_list, context, template, request)
 
 
