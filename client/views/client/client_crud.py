@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 from django.db import transaction
 from django.forms import inlineformset_factory
 from django.shortcuts import get_object_or_404
-from django.utils import timezone
 from client.forms import *
 from common.views import *
 

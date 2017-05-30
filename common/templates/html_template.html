@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}
+    {% if edit_form %}
+        Edit template
+    {% else %}
+        Add new template
+    {% endif %}
+{% endblock %}
+{% load staticfiles %}
+
+{% block js %}
+    {% include 'partials/inject_js_data.html' %}
+    {% include 'partials/form_edit_js_includes.html' %}
+{% endblock %}
+{% block content %}
+    {% load crispy_forms_tags %}
+    <form action="{{ the_action }}" method="POST" id="html_temp_edit_form" class="html_temp_details">
+        {% crispy form %}
+    </form>
+
+{% endblock %}

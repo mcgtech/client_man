@@ -1,2 +1,6 @@
 python manage.py makemigrations client
 python manage.py migrate client
+python manage.py makemigrations comms_trigger
+python manage.py migrate comms_trigger
+python manage.py makemigrations common
+python manage.py migrate common
