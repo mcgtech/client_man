@@ -1,23 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.conf import settings
 from datetime import date
-from django.contrib.sessions.models import Session
-from django.contrib.auth.signals import user_logged_in
-
-class Auditable(models.Model):
-    created_on = models.DateTimeField(null=True, blank=True)
-    # https://www.webforefront.com/django/setuprelationshipsdjangomodels.html
-    # a user may have created many Auditable class objects, but an instance of an Auditable can have only created by,
-    # so in django we add the ForeignKey to the many part of the relationship:
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='%(class)s_created_by', blank=True, null=True)
-    modified_on = models.DateTimeField(null=True, blank=True)
-    # https://www.webforefront.com/django/setuprelationshipsdjangomodels.html
-    # a user may have created many Auditable class objects, but an instance of an
-    modified_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='%(class)s_modified_by', blank=True, null=True)
-
-    class Meta:
-        abstract = True
+from .auditable import Auditable
 
 # see https://simpleisbetterthancomplex.com/tutorial/2016/07/28/how-to-create-django-signals.html
 # to see how I attach associate person with address
@@ -92,20 +76,6 @@ class Person(Auditable):
             client_age =  today.year - self.dob.year - ((today.month, today.day) < (self.dob.month, self.dob.day))
 
         return client_age
-
-
-class Note(models.Model):
-    note = models.TextField()
-    modified_date = models.DateTimeField(null=True, blank=True)
-    modified_by = models.ForeignKey(User, blank=True, null=True)
-    person = models.ForeignKey(Person, on_delete=models.CASCADE, null=True, related_name="note")
-
-    # def save(self, *args, **kwargs):
-    #     self.modified_date = timezone.now()
-    #     super(Note, self).save(*args, **kwargs)
-
-    def __str__(self):
-       return self.note
 
 
 class Telephone(models.Model):
