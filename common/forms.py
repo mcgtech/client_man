@@ -1,7 +1,7 @@
 from django import forms
 from django.core.validators import validate_email
 from django.conf import settings
-from common.views import get_client_summary_link, display_client_summary_message
+from common.views import display_client_summary_message
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Button
 from django.shortcuts import redirect
