@@ -1,7 +1,7 @@
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, HTML, Button, Div, Field
-from .models import HTMLTemplate
+from common.models import HTMLTemplate
 
 class HTMLTemplateForm(forms.ModelForm):
     helper = FormHelper()

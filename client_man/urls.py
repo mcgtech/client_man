@@ -26,5 +26,7 @@ urlpatterns = [
     url(r'^login/$', login, {'template_name': 'login.html'}, name='client_man_login'),
     url(r'^logout/$', logout, {'next_page': reverse_lazy('client_search')}, name='client_man_logout'),
     url(r'', include('client.urls')),
+    url(r'', include('common.urls')),
+    url(r'', include('reporting.urls')),
     url(r'^$', views.home_page, name='home_page'),
 ]

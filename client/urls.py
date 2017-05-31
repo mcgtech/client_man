@@ -21,7 +21,4 @@ urlpatterns = [
     # migration
     url(r'^load_clients/$', views.load_clients, name='load_clients'),
     url(r'^load_contracts/$', views.load_contracts, name='load_contracts'),
-    # html template crud
-    url(r'^html_temp/new/$', views.html_temp_new, name='html_temp_new'),
-    url(r'^html_temp/(?P<pk>\d+)/edit/$', views.html_temp_edit, name='html_temp_edit'),
 ]

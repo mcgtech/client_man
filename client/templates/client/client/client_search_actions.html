@@ -5,5 +5,7 @@
         <option value="0">delete client</option>
     {% endif %}
     <option value="1">print client</option>
-    <option value="2">print latest client contract</option>
+    {% if request.user|has_group:settings.JOB_COACH_MAN %}
+        <option value="2">print latest client contract</option>
+    {% endif %}
 </select>

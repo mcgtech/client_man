@@ -1,4 +1,3 @@
-import json
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.db import transaction
 from django.shortcuts import get_object_or_404
@@ -7,6 +6,7 @@ from client.views import add_contract_js_data
 from common.views import *
 from django.shortcuts import render
 from constance import config
+import json
 
 @login_required
 @user_passes_test(job_coach_user, 'client_man_login')

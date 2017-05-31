@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django_tables2',
     'crispy_forms',
     'common',
+    'reporting',
     'client',
     'constance.backends.database',
     'constance',
