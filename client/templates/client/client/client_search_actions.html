@@ -1,6 +1,6 @@
 {% load common_extras %}
 <div class="row">
-    <div class="col-sm-4">
+    <div class="col-sm-6">
         <select name="action" class="form-control" id="id_actions">
             <option value="0">Select an action</option>
             {% if request.user|has_group:settings.JOB_COACH_MAN %}

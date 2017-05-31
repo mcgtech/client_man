@@ -1,12 +1,6 @@
 {% extends 'reports_base.html' %}
 {% load staticfiles %}
 
-{% block css %}
-    <link media="print" rel="stylesheet" href="{% static 'reporting/css/client_details.css' %}">
-{% endblock %}
-
-{% block js %}
-{% endblock %}
 {% block content %}
     {%  for client in clients %}
         {% include 'client/client_details.html' %}

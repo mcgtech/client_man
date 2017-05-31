@@ -12,6 +12,7 @@ def form_errors_as_array(form):
 
     return errors
 
+
 def home_page(request):
     return render(request, 'home_page.html', {})
 

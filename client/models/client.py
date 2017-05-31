@@ -235,7 +235,10 @@ class Client(Person):
         return self.contract.all().order_by('-start_date')
 
     def get_latest_contract(self):
-        return self.get_all_contracts_ordered().first()
+        con = self.get_all_contracts_ordered().first()
+        if con is not None:
+            con = con.get_derived_contract()
+        return con
 
     def get_ordered_contracts_with_type_link(self):
         return [c.get_summary(False) for c in self.get_all_contracts_ordered()]

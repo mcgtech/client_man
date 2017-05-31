@@ -1,0 +1,20 @@
+{% extends 'reports_base.html' %}
+{% load staticfiles %}
+
+{% block css %}
+    <link media="print" rel="stylesheet" href="{% static 'reporting/css/tio_reporting.css' %}">
+    {% include 'partials/bootstrap_base_css_includes.html' %}
+{% endblock %}
+{% block content %}
+    {%  for client in clients %}
+        {% with client.get_latest_contract as contract %}
+            {% include 'client/contract_main_details.html' %}
+            {% if client.get_latest_contract.type == TIO_CONTRACT %}
+                {% include 'client/contract_tio_details.html' %}
+            {% endif %}
+            {% if clients.count > 1 and forloop.counter != clients.count %}
+                {% include 'partials/force_page_break.html' %}
+            {% endif %}
+        {% endwith %}
+    {% endfor %}
+{% endblock %}

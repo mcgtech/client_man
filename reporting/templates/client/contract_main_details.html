@@ -1,0 +1,35 @@
+<h2>{{ contract.get_full_type }}</h2>
+<h5>{{ contract.get_latest_status.get_status_display }}</h5>
+
+<table class='con_main_details'>
+    <tr>
+        <td class="print_label">Title</td>
+        <td>{{ client.get_title_display }}</td>
+        <td class="print_label">Area</td>
+        <td>{{ client.address.get_area_display }}</td>
+    </tr>
+    <tr>
+        <td class="print_label">Firstname</td>
+        <td>{{ client.forename }}</td>
+        <td class="print_label">Qualifications</td>
+        <td>{{ client.get_education_display }}</td>
+    </tr>
+    <tr>
+        <td class="print_label">Surname</td>
+        <td>{{ client.surname }}</td>
+        <td class="print_label">Length of time unemployed</td>
+        <td>{{ client.get_time_unemployed_display }}</td>
+    </tr>
+    <tr>
+        <td class="print_label">DOB</td>
+        <td>{{ client.dob }}</td>
+        <td class="print_label">Ethnicity</td>
+        <td>{{ client.get_ethnicity_display }}</td>
+    </tr>
+    <tr>
+        <td class="print_label">End date</td>
+        <td>{{ contract.start_date }}</td>
+        <td class="print_label">Start date</td>
+        <td>{{ contract.end_date }}</td>
+    </tr>
+</table>

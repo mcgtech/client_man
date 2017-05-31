@@ -26,7 +26,7 @@ function setup_list_action_handler_handler()
             case '2':
                 handle_print_action_selection(1);
                 break;
-            case '2':
+            case '3':
                 handle_print_action_selection(2);
                 break;
         }

@@ -39,6 +39,22 @@ class Contract(Auditable):
         (WIO, 'WIO'),
         (WP, 'WP'),
     )
+    FULL_TYPES = {AA: 'AA',
+                ATW : 'ATW',
+                BP : 'BP Autism)',
+                CON_CLOSE : 'Closed',
+                EF : 'EF',
+                ESF : 'ESF Tracking',
+                ESF_LOTT : 'ESF/Lottery Tracking',
+                GRFW : 'GRFW',
+                HC : 'HC',
+                LOTT : 'Lottery Tracking',
+                MIR : 'MiR',
+                PP : 'PP',
+                TIO : 'Try It Out',
+                WFH : 'WFH',
+                WIO : 'WIO',
+                WP : 'WP'}
     ABOVE_54 = 0
     ARM_FORCE = 1
     ASY_SEEK = 2
@@ -106,6 +122,9 @@ class Contract(Auditable):
 
         return the_type + ' ' + start + end + status
 
+    def get_full_type(self):
+        return Contract.FULL_TYPES[self.type]
+
     def get_absolute_url(self):
         from django.urls import reverse
         return reverse('contract_edit', args=[str(self.client.id), str(self.id)])
@@ -122,6 +141,14 @@ class Contract(Auditable):
         table = table + '</table>'
 
         return table
+
+    def get_derived_contract(self):
+        con = self
+        if (self.type == Contract.TIO):
+            if con.__class__.__name__  == 'Contract':
+                con = TIOContract.objects.get(pk=self.pk)
+
+        return con
 
     def __str__(self):
        start_date = '' if self.start_date is None else self.start_date.strftime(settings.DISPLAY_DATE)
@@ -158,7 +185,6 @@ class TIOContract(Contract):
     # if I make it OneToOneField then I get duplicate key error
     # partner = models.OneToOneField(settings.AUTH_USER_MODEL, null=True, related_name='tio_contract')
     partner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='tio_contract', blank=True, null=True, limit_choices_to={'groups__name': settings.SUPPLY_CHAIN_PART})
-
 
 class ContractStatus(Auditable):
     AWAIT_INFO_MAN_ACC = 0
