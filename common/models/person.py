@@ -31,7 +31,16 @@ class Address(models.Model):
     evidence = models.FileField(upload_to='client/address_evidence/', blank=True)
 
     def __str__(self):
-        return self.line_1 + ', ' + self.line_2 + ', ' + self.get_area_display()
+        add = []
+        if len(self.line_1.strip()):
+            add.append(self.line_1.strip())
+        if len(self.line_2.strip()):
+            add.append(self.line_2.strip())
+        if len(self.line_3.strip()):
+            add.append(self.line_3.strip())
+        add.append(self.get_area_display())
+
+        return ", ".join(add)
 
 
 # drop downs: http://stackoverflow.com/questions/31130706/dropdown-in-django-model

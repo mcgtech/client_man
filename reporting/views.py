@@ -17,7 +17,9 @@ def show_report(request, entity_id, report_id):
 @user_passes_test(admin_user, 'job_coach_user')
 def show_client_report(request, entity_id):
     client = get_object_or_404(Client, pk=entity_id)
-    return render(request, 'client/client_details.html', {'client': client})
+    contracts = [c.get_summary(False) for c in client.get_all_contracts_ordered()]
+
+    return render(request, 'client/client_details.html', {'client': client, 'contracts' : contracts})
 
 @login_required
 @user_passes_test(admin_user, 'client_man_login')

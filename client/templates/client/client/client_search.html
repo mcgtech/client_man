@@ -12,10 +12,12 @@
 {% block js %}
     {% include 'partials/datepicker_js_includes.html' %}
     {% include 'partials/django_tables2_js_includes.html' %}
+    {% include 'partials/reporting_js_includes.html' %}
     <script type="text/javascript" src="{% static 'js/client_search.js' %}"></script>
 {% endblock %}
 
 {% block content %}
+  {% include 'partials/printing_block.html' %}
   <form method="get">
     <div class="well">
       <!--# if I change this then also change: /Users/stephenmcgonigal/django_projs/client/filters.py -->

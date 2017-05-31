@@ -1,0 +1,7 @@
+table.main_details {
+    width: 100%;
+}
+table.main_details td.label {
+    font-weight: bold;
+    width: 40%;
+}

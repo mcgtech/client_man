@@ -96,15 +96,15 @@ class Contract(Auditable):
     def get_latest_status(self):
         return self.get_ordered_status().first()
 
-    def get_link(self):
+    def get_summary(self, type_as_link):
         url = self.get_absolute_url()
-        link = '<a target="_blank" href="' + url + '">' + self.get_type_display() + '</a>'
+        the_type = '<a target="_blank" href="' + url + '">' + self.get_type_display() + '</a>' if type_as_link else self.get_type_display()
         start = self.start_date.strftime(settings.DISPLAY_DATE) if self.start_date is not None else ''
         latest_status = self.get_latest_status()
         status = '' if latest_status is None else ' (' + latest_status.get_status_display() + ' )'
         end = (' to ' + self.end_date.strftime(settings.DISPLAY_DATE)) if self.end_date is not None else ''
 
-        return link + ' ' + start + end + status
+        return the_type + ' ' + start + end + status
 
     def get_absolute_url(self):
         from django.urls import reverse

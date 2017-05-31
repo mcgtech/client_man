@@ -23,7 +23,7 @@ class ClientsTable(tables.Table):
 
     def render_contracts(self, record):
         if record.contract.exists():
-            con_links = [c.get_link() for c in record.contract.all().order_by('-start_date')]
+            con_links = [c.get_summary(True) for c in record.get_all_contracts_ordered()]
             return format_html("<br>".join(con_links), record)
 
     # def render_selected(self, record):

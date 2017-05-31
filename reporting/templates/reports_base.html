@@ -1,59 +1,16 @@
 {% load staticfiles %}
 <html>
     <head>
-      <!--https://www.silviogutierrez.com/blog/django-tip-templates-and-page-titles/  -->
-      <title>
-        {% block title %}{% endblock %}
-      </title>
-        <link rel="shortcut icon" href="{% static 'favicon/favicon.ico' %}"/>
-        <!-- https://developers.google.com/speed/libraries/#jquery-ui -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-        <!-- http://getbootstrap.com/getting-started/ -->
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="{% static 'css/client.css' %}">
-        <!--<link rel="stylesheet" href="{% static 'css/client_inline_form.css' %}">-->
-        {% if user.is_authenticated %}
-            <script type="text/javascript" src="{% static 'js/client_search_auto_comp.js' %}"></script>
-            <link rel="stylesheet" href="{% static 'js/bootstrap_dropdown_hover/css/bootstrap-dropdownhover.css' %}">
-            <script type="text/javascript" src="{% static 'js/bootstrap_dropdown_hover/js/bootstrap-dropdownhover.min.js' %}"></script>
-        {% endif %}
+        <link media="screen" rel="stylesheet" href="{% static 'reporting/css/reporting_screen.css' %}">
+        <link media="print" rel="stylesheet" href="{% static 'reporting/css/reporting_print.css' %}">
         {% block js %}
         {% endblock %}
         {% block css %}
         {% endblock %}
     </head>
     <body>
-        {% if user.is_authenticated == False %}
-            <div class="page-header">
-                <a href="{% url 'client_man_login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
-                <h1><a href="/">Client Management</a></h1>
-                <h3>We believe in people and support them to achieve their aims</h3>
-            </div>
-        {% endif %}
-        <div class="content container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    {% if user.is_authenticated %}
-                        {% include "nav_bar.html" %}
-                    {% endif %}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    {% include 'partials/errors.html' %}
-                    {% include 'partials/messages.html' %}
-                    {% block content %}
-                    {% endblock %}
-                </div>
-            </div>
-        </div>
+        {% block content %}
+        {% endblock %}
+        {% include 'reports_footer.html' %}
     </body>
 </html>

@@ -28,6 +28,7 @@
             confirmStyle     : 'primary',
             confirmCallback  : defaultCallback,
             confirmDismiss   : true,
+            includeConfirm   : true,
             confirmAutoOpen  : false
         };
 
@@ -61,17 +62,18 @@
 
             var modalId = "confirmModal" + Math.floor(Math.random()*(1e+9));
             var modalTemplate = headModalTemplate;
-            var buttonTemplate =
-                '<button class="btn btn-default" data-dismiss="modal">#Cancel#</button>' +
-                '<button class="btn btn-#Style#" data-dismiss="ok">#Ok#</button>'
-            ;
+            var buttonTemplate = '<button class="btn btn-default" data-dismiss="modal">#Cancel#</button>';
+            buttonTemplate = buttonTemplate + '<button class="btn btn-#Style#" data-dismiss="ok">#Ok#</button>';
+
+            if (options.includeConfirm)
+            {
+                buttonTemplate = buttonTemplate + '<button class="btn btn-#Style#" data-dismiss="ok">#Ok#</button>';
+            }
 
             if(options.confirmDirection == 'ltr')
             {
-                buttonTemplate =
-                    '<button class="btn btn-#Style#" data-dismiss="ok">#Ok#</button>' +
-                    '<button class="btn btn-default" data-dismiss="modal">#Cancel#</button>'
-                ;
+                buttonTemplate = '<button class="btn btn-#Style#" data-dismiss="ok">#Ok#</button>';
+                buttonTemplate = buttonTemplate + '<button class="btn btn-default" data-dismiss="modal">#Cancel#</button>';
             }
 
             var confirmTitle = options.confirmTitle;

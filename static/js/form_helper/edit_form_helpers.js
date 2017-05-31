@@ -32,10 +32,6 @@ function request_conf_on_delete()
 // result in data being lost on a save
 function manage_disabled_selects_in_a_form()
 {
-//    var save_pressed = false;
-//    $('#submit-id-save-record').click(function() {
-//          save_pressed = true;
-//    });
     $('.save_butt').click(function() {
           save_pressed = true;
     });
