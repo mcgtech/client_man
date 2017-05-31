@@ -29,7 +29,10 @@ h2, h3 {
     font-weight:bold;
 }
 table{
-    widht:100%;
+    width:100%;
+}
+td {
+    vertical-align: top;
 }
 img {
     max-width: 100% !important;

@@ -1,6 +1,6 @@
 $(function(){
     setup_leave_form_check();
-    request_conf_on_delete();
+    request_conf_on_delete_in_form_edit();
     manage_disabled_selects_in_a_form();
 });
 
@@ -13,7 +13,7 @@ function setup_leave_form_check()
     //$('form').dirtyForms({ ignoreSelector: 'select.ignore_dirty' });
 }
 
-function request_conf_on_delete()
+function request_conf_on_delete_in_form_edit()
 {
     var delete_allowed = typeof data_from_django.delete_allowed !== 'undefined' ? data_from_django.delete_allowed : false;
     if (delete_allowed)

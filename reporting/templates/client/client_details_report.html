@@ -1,0 +1,17 @@
+{% extends 'reports_base.html' %}
+{% load staticfiles %}
+
+{% block css %}
+    <link media="print" rel="stylesheet" href="{% static 'reporting/css/client_details.css' %}">
+{% endblock %}
+
+{% block js %}
+{% endblock %}
+{% block content %}
+    {%  for client in clients %}
+        {% include 'client/client_details.html' %}
+        {% if clients.count > 1 and forloop.counter != clients.count %}
+            {% include 'partials/force_page_break.html' %}
+        {% endif %}
+    {% endfor %}
+{% endblock %}

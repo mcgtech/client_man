@@ -8,8 +8,10 @@
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/client_search.css' %}" />
     {% include 'partials/django_tables2_css_includes.html' %}
+    {% include 'partials/ajax_loading_css_includes.html' %}
 {% endblock %}
 {% block js %}
+    {% include 'partials/ajax_loading_js_includes.html' %}
     {% include 'partials/datepicker_js_includes.html' %}
     {% include 'partials/django_tables2_js_includes.html' %}
     {% include 'partials/reporting_js_includes.html' %}

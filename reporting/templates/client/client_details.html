@@ -1,30 +1,20 @@
-{% extends 'reports_base.html' %}
 {% load staticfiles %}
-
-{% block css %}
-    <link media="print" rel="stylesheet" href="{% static 'reporting/css/client_details.css' %}">
-{% endblock %}
-
-{% block js %}
-{% endblock %}
-{% block content %}
-    <h1>Client details for {{ client.get_full_name }}</h1>
-    <table class='main_details'>
-        <tr>
-            <td class="print_label">Date of Birth</td>
-            <td>{{ client.dob }}</td>
-        </tr>
-        <tr>
-            <td class="print_label">Address</td>
-            <td>{{ client.address }}</td>
-        </tr>
-        <tr>
-            <td class="print_label">Contracts</td>
-            <td>
-                {% for con in contracts %}
-                    <div>{{ con }}</div>
-                {%  endfor %}
-            </td>
-        </tr>
-    </table>
-{% endblock %}
+<h1>Client details for {{ client.get_full_name }}</h1>
+<table class='main_details'>
+    <tr>
+        <td class="print_label">Date of Birth</td>
+        <td>{{ client.dob }}</td>
+    </tr>
+    <tr>
+        <td class="print_label">Address</td>
+        <td>{{ client.address }}</td>
+    </tr>
+    <tr>
+        <td class="print_label">Contracts</td>
+        <td>
+            {% for con in client.get_ordered_contracts_with_type_link %}
+                <div>{{ con }}</div>
+            {%  endfor %}
+        </td>
+    </tr>
+</table>

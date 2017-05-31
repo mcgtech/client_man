@@ -237,6 +237,9 @@ class Client(Person):
     def get_latest_contract(self):
         return self.get_all_contracts_ordered().first()
 
+    def get_ordered_contracts_with_type_link(self):
+        return [c.get_summary(False) for c in self.get_all_contracts_ordered()]
+
     def get_absolute_url(self):
         from django.urls import reverse
         return reverse('client_edit', args=[str(self.id)])

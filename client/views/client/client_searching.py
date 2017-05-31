@@ -24,7 +24,7 @@ class ClientViewFilter(GroupRequiredMixin, FilterView, SingleTableView):
     table_class = ClientsTable # /Users/stephenmcgonigal/django_projs/client/tables.py
     filterset_class = ClientFilter # see /Users/stephenmcgonigal/django_projs/client/filters.py
     template_name='client/client/client_search.html'
-    # see /Users/stephenmcgonigal/django_projs/cmenv/lib/python3.5/site-packages/django_tables2/views.py
+    # see /Users/stephenmcgonigal/django_projs/cmenv/lib/python3.5/site-packages/django_tables2/client.py
     # SingleTableMixin class (SingleTableView inherits from it)
     table_pagination = {'per_page': 15}
     context_table_name = 'clients_table'
