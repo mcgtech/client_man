@@ -20,8 +20,10 @@ info_man_group = Group(name="info manager")
 info_man_group.save()
 supply_chain_man_group = Group(name="supply chain manager")
 supply_chain_man_group.save()
-supply_chain_partner_group = Group(name="supply chain partner")
-supply_chain_partner_group.save()
+rag_tag_group = Group(name="supply chain partner")
+rag_tag_group.save()
+hicouncil_group = Group(name="tio partner")
+hicouncil_group.save()
 
 # run sql to repopulate
 ann = User.objects.create_user('ann', 'ann@ann.com', 'ann123');ann.is_staff=True;ann.save()
@@ -173,17 +175,18 @@ supply_chain_man_group.user_set.add(infoman)
 supply_chain_man_group.user_set.add(christinebruce)
 supply_chain_man_group.user_set.add(traceythomson)
 supply_chain_man_group.user_set.add(annlee)
-supply_chain_partner_group.user_set.add(hicouncil)
-supply_chain_partner_group.user_set.add(janegair)
-supply_chain_partner_group.user_set.add(hicounciluser)
-supply_chain_partner_group.user_set.add(neilmacleod)
-supply_chain_partner_group.user_set.add(ragtag)
-supply_chain_partner_group.user_set.add(joan)
-supply_chain_partner_group.user_set.add(vickysamuels)
+rag_tag_group.user_set.add(neilmacleod)
+rag_tag_group.user_set.add(ragtag)
+rag_tag_group.user_set.add(joan)
+hicouncil_group.user_set.add(hicouncil)
+hicouncil_group.user_set.add(janegair)
+hicouncil_group.user_set.add(hicounciluser)
+hicouncil_group.user_set.add(neilmacleod)
+hicouncil_group.user_set.add(vickysamuels)
 
 job_coach_group.save();
 partner_group.save();
 job_coach_mgr_group.save();
 info_man_group.save();
 supply_chain_man_group.save();
-supply_chain_partner_group.save();
+hicouncil_group.save();

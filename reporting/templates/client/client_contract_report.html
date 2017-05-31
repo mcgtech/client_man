@@ -8,8 +8,11 @@
 {% block content %}
     {%  for client in clients %}
         {% with client.get_latest_contract as contract %}
+            {% if contract.type == TIO_CONTRACT %}
+                {% include 'client/contract_partner_head.html' %}
+            {% endif %}
             {% include 'client/contract_main_details.html' %}
-            {% if client.get_latest_contract.type == TIO_CONTRACT %}
+            {% if contract.type == TIO_CONTRACT %}
                 {% include 'client/contract_tio_details.html' %}
             {% endif %}
             {% if clients.count > 1 and forloop.counter != clients.count %}

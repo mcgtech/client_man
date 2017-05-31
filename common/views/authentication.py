@@ -19,8 +19,14 @@ def partner_user(user):
 def supply_chain_man_user(user):
     return admin_user(user) or user.groups.filter(name=settings.SUPPLY_CHAIN_MAN).exists()
 
+def highland_council_user(user):
+    return admin_user(user) or user.groups.filter(name=settings.HI_COUNCIL_PART).exists()
+
+def rag_tag_user(user):
+    return admin_user(user) or user.groups.filter(name=settings.HI_COUNCIL_PART).exists()
+
 def supply_chain_partner_user(user):
-    return admin_user(user) or user.groups.filter(name=settings.SUPPLY_CHAIN_PART).exists()
+    return admin_user(user) or highland_council_user(user) or rag_tag_user(user)
 
 def show_form_error(request, messages, msg, inform_support):
     messages.error(request, msg)

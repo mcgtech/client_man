@@ -11,3 +11,6 @@ system will work and be easier to debug
 and easier for other people to support
 chance to strip out complexity and simplfy
 separation of crud and printing/reporting
+drupal upgrade is bledding edge
+django has good community support
+ckd has a bunch of experienced dev in django

@@ -1,6 +1,7 @@
 from django import template
 from django.contrib.auth.models import Group
 from django.utils.safestring import mark_safe
+from django.conf import settings
 
 register = template.Library()
 
@@ -17,3 +18,15 @@ def has_group(user, group_name):
 def render_checkbox(checked):
     icon = 'glyphicon-ok' if checked else 'glyphicon-remove'
     return mark_safe('<span class="glyphicon ' + icon + '"></span>')
+
+
+@register.filter(name='get_partner_logo')
+def get_partner_logo(user):
+    logo = None
+    if has_group(user, settings.HI_COUNCIL_PART):
+        logo = 'high_council_logo.png'
+    elif has_group(user, settings.RAG_TAG_PART):
+        logo = 'rag_tag_logo.png.png'
+    if logo is not None:
+        logo = '<img src="/static/img/' + logo + '"/>'
+    return mark_safe(logo)

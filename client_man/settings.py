@@ -177,7 +177,8 @@ JOB_COACH_MAN = 'job coach manager'
 INFO_MAN = 'info manager'
 PARTNER = 'partner'
 SUPPLY_CHAIN_MAN = 'supply chain manager'
-SUPPLY_CHAIN_PART = 'supply chain partner'
+HI_COUNCIL_PART = 'highland council'
+RAG_TAG_PART = 'rag tag'
 
 # Message types
 INFO_MSG_TYPE = 0
@@ -205,7 +206,8 @@ SETTINGS_EXPORT = [
     'INFO_MAN',
     'PARTNER',
     'SUPPLY_CHAIN_MAN',
-    'SUPPLY_CHAIN_PART',
+    'HI_COUNCIL_PART',
+    'RAG_TAG_PART',
     'INFO_MSG_TYPE',
     'SUCC_MSG_TYPE',
     'WARN_MSG_TYPE',

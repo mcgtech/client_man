@@ -184,7 +184,7 @@ class TIOContract(Contract):
     fund_mgr_notes = models.TextField(verbose_name='Fund Manager Notes', blank=True)
     # if I make it OneToOneField then I get duplicate key error
     # partner = models.OneToOneField(settings.AUTH_USER_MODEL, null=True, related_name='tio_contract')
-    partner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='tio_contract', blank=True, null=True, limit_choices_to={'groups__name': settings.SUPPLY_CHAIN_PART})
+    partner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='tio_contract', blank=True, null=True, limit_choices_to={'groups__name__in': [settings.HI_COUNCIL_PART, settings.RAG_TAG_PART]})
 
 class ContractStatus(Auditable):
     AWAIT_INFO_MAN_ACC = 0

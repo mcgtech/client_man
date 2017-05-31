@@ -47,10 +47,14 @@ from users u, users_roles ur
 where u.uid = ur.uid
 and  ur.rid = 13
 union
-select concat('supply_chain_partner_group.user_set.add(', LOWER(REPLACE(u.name, ' ', '')), ')')
+select concat('hicouncil_group.user_set.add(', LOWER(REPLACE(u.name, ' ', '')), ')')
 from users u, users_roles ur
 where u.uid = ur.uid
-and  ur.rid in (14, 17)
+and  ur.rid = 14
+select concat('rag_tag_group.user_set.add(', LOWER(REPLACE(u.name, ' ', '')), ')')
+from users u, users_roles ur
+where u.uid = ur.uid
+and  ur.rid = 17
 
 
 from env:
