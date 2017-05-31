@@ -1,0 +1,3 @@
+@page {
+    margin: 2cm;
+} does not work in safari: https://stackoverflow.com/questions/1542320/margin-while-printing-html-page

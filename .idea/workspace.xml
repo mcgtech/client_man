@@ -2,22 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="053a4aa4-3808-4504-ab0a-5f7dd90a79bc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/common/templates/partials/bootstrap_base_css_includes.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/reporting/static/reporting/css/tio_reporting.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/reporting/templates/client/client_contract_report.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/reporting/templates/client/contract_main_details.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/reporting/templates/client/contract_tio_details.html" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/reporting/static/reporting/css/client_details.css" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/img/fund_logo.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/docs/notes.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/reporting/templates/partials/fund_logo.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/models/client.py" afterPath="$PROJECT_DIR$/client/models/client.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/models/contract.py" afterPath="$PROJECT_DIR$/client/models/contract.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/static/js/client_search.js" afterPath="$PROJECT_DIR$/client/static/js/client_search.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/client/client/client_search_actions.html" afterPath="$PROJECT_DIR$/client/templates/client/client/client_search_actions.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/templates/base.html" afterPath="$PROJECT_DIR$/common/templates/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/templatetags/common_extras.py" afterPath="$PROJECT_DIR$/common/templatetags/common_extras.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/views/general.py" afterPath="$PROJECT_DIR$/common/views/general.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reporting/templates/client/client_details_report.html" afterPath="$PROJECT_DIR$/reporting/templates/client/client_details_report.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reporting/views/client.py" afterPath="$PROJECT_DIR$/reporting/views/client.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/docs/questions.txt" afterPath="$PROJECT_DIR$/client/docs/questions.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reporting/static/reporting/css/reporting_print.css" afterPath="$PROJECT_DIR$/reporting/static/reporting/css/reporting_print.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reporting/static/reporting/css/tio_reporting.css" afterPath="$PROJECT_DIR$/reporting/static/reporting/css/tio_reporting.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reporting/templates/client/client_contract_report.html" afterPath="$PROJECT_DIR$/reporting/templates/client/client_contract_report.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reporting/templates/client/contract_tio_details.html" afterPath="$PROJECT_DIR$/reporting/templates/client/contract_tio_details.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -35,21 +28,21 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="contract_tio_details.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/reporting/templates/client/contract_tio_details.html">
+      <file leaf-file-name="reporting_print.css" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/reporting/static/reporting/css/reporting_print.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="31" lean-forward="false" selection-start-line="1" selection-start-column="31" selection-end-line="1" selection-end-column="31" />
+            <state relative-caret-position="259">
+              <caret line="19" column="19" lean-forward="false" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="client_contract_report.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/reporting/templates/client/client_contract_report.html">
+      <file leaf-file-name="notes.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/docs/notes.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="21" lean-forward="false" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
+            <state relative-caret-position="30">
+              <caret line="2" column="102" lean-forward="false" selection-start-line="2" selection-start-column="102" selection-end-line="2" selection-end-column="102" />
               <folding />
             </state>
           </provider>
@@ -59,7 +52,57 @@
         <entry file="file://$PROJECT_DIR$/reporting/templates/client/contract_main_details.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="495">
-              <caret line="33" column="9" lean-forward="true" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
+              <caret line="33" column="9" lean-forward="false" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="contract_tio_details.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/reporting/templates/client/contract_tio_details.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="441">
+              <caret line="85" column="23" lean-forward="false" selection-start-line="85" selection-start-column="9" selection-end-line="85" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="questions.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/docs/questions.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="80" lean-forward="false" selection-start-line="6" selection-start-column="80" selection-end-line="6" selection-end-column="80" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fund_logo.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/reporting/templates/partials/fund_logo.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" column="18" lean-forward="false" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="client_contract_report.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/reporting/templates/client/client_contract_report.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="17" column="21" lean-forward="true" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tio_reporting.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/reporting/static/reporting/css/tio_reporting.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="17" column="15" lean-forward="false" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -69,39 +112,7 @@
         <entry file="file://$PROJECT_DIR$/reporting/templates/client/client_details_report.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="75">
-              <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="8" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="contract.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/models/contract.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="701">
-              <caret line="148" column="57" lean-forward="false" selection-start-line="148" selection-start-column="57" selection-end-line="148" selection-end-column="57" />
-              <folding>
-                <element signature="e#0#28#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="client_search_actions.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/templates/client/client/client_search_actions.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="24" lean-forward="false" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="client_search.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/client/static/js/client_search.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="25" column="21" lean-forward="true" selection-start-line="25" selection-start-column="21" selection-end-line="25" selection-end-column="21" />
+              <caret line="5" column="50" lean-forward="true" selection-start-line="4" selection-start-column="32" selection-end-line="5" selection-end-column="50" />
               <folding />
             </state>
           </provider>
@@ -118,8 +129,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>client_man_login</find>
-      <find>static</find>
       <find>'-start_date'</find>
       <find>get_summary</find>
       <find>print_area</find>
@@ -148,6 +157,8 @@
       <find>, '</find>
       <find>print_label</find>
       <find>TIOContract</find>
+      <find>25</find>
+      <find>print_label_with_suff</find>
     </findStrings>
     <replaceStrings>
       <replace>client_notes</replace>
@@ -159,6 +170,7 @@
       <replace>tio_node</replace>
       <replace>,</replace>
       <replace>: '</replace>
+      <replace>65</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/client/migrations</dir>
@@ -176,9 +188,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/common/models/person.py" />
-        <option value="$PROJECT_DIR$/client/views/client/client_crud.py" />
-        <option value="$PROJECT_DIR$/client/tables.py" />
         <option value="$PROJECT_DIR$/reporting/views.py" />
         <option value="$PROJECT_DIR$/common/templates/partials/printing_block.html" />
         <option value="$PROJECT_DIR$/client/docs/time_so_far.txt" />
@@ -199,7 +208,6 @@
         <option value="$PROJECT_DIR$/reporting/templates/client/client_details_multiple.html" />
         <option value="$PROJECT_DIR$/reporting/templates/client/client_details.html" />
         <option value="$PROJECT_DIR$/reporting/urls.py" />
-        <option value="$PROJECT_DIR$/reporting/static/reporting/css/reporting_print.css" />
         <option value="$PROJECT_DIR$/static/js/form_helper/edit_form_helpers.js" />
         <option value="$PROJECT_DIR$/static/js/ajax_progress.js" />
         <option value="$PROJECT_DIR$/common/templates/partials/ajax_loading_js_includes.html" />
@@ -218,15 +226,19 @@
         <option value="$PROJECT_DIR$/common/templatetags/common_extras.py" />
         <option value="$PROJECT_DIR$/common/templates/base.html" />
         <option value="$PROJECT_DIR$/common/templates/partials/bootstrap_base_css_includes.html" />
-        <option value="$PROJECT_DIR$/reporting/static/reporting/css/tio_reporting.css" />
-        <option value="$PROJECT_DIR$/reporting/templates/client/contract_tio_details.html" />
         <option value="$PROJECT_DIR$/client/models/client.py" />
         <option value="$PROJECT_DIR$/reporting/templates/client/contract_main_details.html" />
         <option value="$PROJECT_DIR$/reporting/templates/client/client_details_report.html" />
-        <option value="$PROJECT_DIR$/reporting/templates/client/client_contract_report.html" />
         <option value="$PROJECT_DIR$/client/models/contract.py" />
         <option value="$PROJECT_DIR$/client/templates/client/client/client_search_actions.html" />
         <option value="$PROJECT_DIR$/client/static/js/client_search.js" />
+        <option value="$PROJECT_DIR$/client/docs/notes.txt" />
+        <option value="$PROJECT_DIR$/reporting/templates/client/contract_tio_details.html" />
+        <option value="$PROJECT_DIR$/reporting/static/reporting/css/tio_reporting.css" />
+        <option value="$PROJECT_DIR$/client/docs/questions.txt" />
+        <option value="$PROJECT_DIR$/reporting/templates/client/client_contract_report.html" />
+        <option value="$PROJECT_DIR$/reporting/templates/partials/fund_logo.html" />
+        <option value="$PROJECT_DIR$/reporting/static/reporting/css/reporting_print.css" />
       </list>
     </option>
   </component>
@@ -267,6 +279,38 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="django_projs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="django_projs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="django_projs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="static" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="django_projs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="django_projs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="static" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="img" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -413,96 +457,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="django_projs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="django_projs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="common" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="django_projs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="django_projs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="common" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="django_projs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="django_projs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="common" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templatetags" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="django_projs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="django_projs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="common" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="django_projs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="django_projs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="common" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="partials" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -713,17 +667,17 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/reporting/templates/partials" />
       <recent name="$PROJECT_DIR$/reporting/templates/client" />
       <recent name="$PROJECT_DIR$/common/templates/partials" />
       <recent name="$PROJECT_DIR$/static/js" />
       <recent name="$PROJECT_DIR$/reporting/views" />
-      <recent name="$PROJECT_DIR$/reporting/static/reporting/css" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/static/img" />
       <recent name="$PROJECT_DIR$/static/js/loadmask" />
       <recent name="$PROJECT_DIR$/reporting/views" />
       <recent name="$PROJECT_DIR$/reporting/templates" />
-      <recent name="$PROJECT_DIR$/static/img" />
       <recent name="$PROJECT_DIR$/reporting/static/reporting/js" />
     </key>
   </component>
@@ -982,7 +936,7 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32951945" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19201726" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25134844" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32837528" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1064,30 +1018,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/client/docs/time_so_far.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="14" lean-forward="false" selection-start-line="0" selection-start-column="14" selection-end-line="0" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/templates/partials/confirm_bootstrap_js_includes.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="22" lean-forward="false" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reporting/templates/partials/printing_block.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="27" lean-forward="false" selection-start-line="0" selection-start-column="27" selection-end-line="0" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/js/printThis/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1170,14 +1100,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="21" lean-forward="false" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reporting/static/reporting/css/reporting_print.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="34" column="23" lean-forward="false" selection-start-line="34" selection-start-column="23" selection-end-line="34" selection-end-column="23" />
           <folding />
         </state>
       </provider>
@@ -1396,14 +1318,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/reporting/static/reporting/css/tio_reporting.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="20" lean-forward="false" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/reporting/views/client.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
@@ -1434,38 +1348,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/reporting/templates/client/contract_tio_details.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="31" lean-forward="false" selection-start-line="1" selection-start-column="31" selection-end-line="1" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reporting/templates/client/client_details_report.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="8" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reporting/templates/client/contract_main_details.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="33" column="9" lean-forward="true" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reporting/templates/client/client_contract_report.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="21" lean-forward="false" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/models/contract.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="701">
@@ -1487,7 +1369,79 @@
     <entry file="file://$PROJECT_DIR$/client/static/js/client_search.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
-          <caret line="25" column="21" lean-forward="true" selection-start-line="25" selection-start-column="21" selection-end-line="25" selection-end-column="21" />
+          <caret line="25" column="21" lean-forward="false" selection-start-line="25" selection-start-column="21" selection-end-line="25" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/docs/notes.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="102" lean-forward="false" selection-start-line="2" selection-start-column="102" selection-end-line="2" selection-end-column="102" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reporting/templates/client/contract_main_details.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="33" column="9" lean-forward="false" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reporting/templates/client/client_details_report.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="50" lean-forward="true" selection-start-line="4" selection-start-column="32" selection-end-line="5" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reporting/static/reporting/css/tio_reporting.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="15" lean-forward="false" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reporting/templates/client/contract_tio_details.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="85" column="23" lean-forward="false" selection-start-line="85" selection-start-column="9" selection-end-line="85" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/docs/questions.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="80" lean-forward="false" selection-start-line="6" selection-start-column="80" selection-end-line="6" selection-end-column="80" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reporting/templates/client/client_contract_report.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="21" lean-forward="true" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reporting/templates/partials/fund_logo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="18" lean-forward="false" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reporting/static/reporting/css/reporting_print.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="19" column="19" lean-forward="false" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
           <folding />
         </state>
       </provider>

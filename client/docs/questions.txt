@@ -4,6 +4,8 @@ is employment status related to contracts and hence should be dirived from live 
 
 I am assuming person is on only one live contract at a time?
 
+in tio print screen should Developing Employment Skills be included in printing?
+
 lots of non-tio projects have sae start date within a client, so if client has more than 1 contract then each one starts
 on same day eg esf tracking and lots are missing start day eg Mir - what should I do?
 as I am group contract on start day lots have clients have multiple contracts os same type - how should I handle this?
