@@ -23,3 +23,6 @@ class HTMLTemplate(Auditable):
     template_identifier = models.IntegerField(choices=TEMPLATE_NAMES, default=None)
     type = models.IntegerField(choices=TEMPLATE_TYPES, default=None)
     body = models.TextField()
+
+    def __str__(self):
+       return self.get_template_identifier_display()
