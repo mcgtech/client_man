@@ -1,6 +1,7 @@
 from django.db import models
+from common.models import Auditable
 
-class HTMLTemplate(models.Model):
+class HTMLTemplate(Auditable):
     CON_ACCEPT = 0
     CON_REVOKE = 1
     CON_APPROVE = 2
@@ -19,6 +20,6 @@ class HTMLTemplate(models.Model):
         (EMAIL_TEMP_TYPE, 'Email'),
         (REPORT_TEMP_TYPE, 'Report'),
     )
+    template_identifier = models.IntegerField(choices=TEMPLATE_NAMES, default=None)
     type = models.IntegerField(choices=TEMPLATE_TYPES, default=None)
-    title = models.IntegerField(choices=TEMPLATE_NAMES, default=None)
     body = models.TextField()

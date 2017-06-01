@@ -6,8 +6,14 @@ from crispy_forms.layout import Submit, Button
 ## goes hand in hand with common.models.Auditable
 class AuditableForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        is_edit_form = kwargs.pop('is_edit_form')
-        cancel_url = kwargs.pop('cancel_url')
+        try:
+            is_edit_form = kwargs.pop('is_edit_form')
+        except KeyError:
+            is_edit_form = False
+        try:
+            cancel_url = kwargs.pop('cancel_url')
+        except KeyError:
+            cancel_url = None
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = False

@@ -6,6 +6,7 @@ from client.views import add_contract_js_data
 from common.views import *
 from django.shortcuts import render
 from constance import config
+import json
 
 @login_required
 @user_passes_test(job_coach_user, 'client_man_login')
@@ -39,27 +40,27 @@ def manage_html_temp(request, temp_id=None):
         temp = get_object_or_404(HTMLTemplate, pk=temp_id)
         action = '/html_temp/' + str(temp_id) + '/edit' + '/'
 
-    del_request = handle_delete_request(request, client, client, 'You have successfully deleted the template ' + str(temp), '/html_temp_search');
-    if del_request:
-        return del_request
     if request.method == "POST":
         if request.POST.get("delete-record"):
             msg_once_only(request, 'You have successfully deleted the template ' + str(temp), settings.INFO_MSG_TYPE)
             temp.delete()
             return redirect('/html_temp_search')
-        temp_form = HTMLTemplateForm(request.POST, request.FILES, instance=temp, prefix="main")
+        temp_form = HTMLTemplateForm(request.POST, request.FILES, instance=temp, prefix="main", is_edit_form=is_edit_form)
         if temp_form.is_valid():
-            temp_form.save()
+            temp = temp_form.save(commit=False)
+            apply_auditable_info(temp, request)
+            temp.save()
             action = '/html_temp/' + str(temp.id) + '/edit' + '/'
             msg_once_only(request, 'Saved template ' + str(temp), settings.INFO_MSG_TYPE)
             return redirect(action)
     else:
-        client_form = HTMLTemplateForm(instance=temp, prefix="main")
+        temp_form = HTMLTemplateForm(instance=temp, prefix="main", is_edit_form=is_edit_form)
+    set_deletion_status_in_js_data(js_dict, request.user, admin_user)
     js_data = json.dumps(js_dict)
 
     temp_form_errors = form_errors_as_array(temp_form)
 
-    return render(request, 'common/html_template.html', {'form': temp_form,
+    return render(request, 'html_template.html', {'form': temp_form,
                                                        'the_action_text': the_action_text,
                                                        'edit_form': is_edit_form,
                                                        'the_action': action, 'js_data' : js_data,
