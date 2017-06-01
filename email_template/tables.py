@@ -9,6 +9,6 @@ class EmailTempTable(tables.Table):
     class Meta:
         model = EmailTemplate
         # fields to display in table
-        fields = ('id', 'template_identifier', 'subject', 'from_address', 'to_address', 'cc_addresses', 'bcc_addresses', 'plain_body', 'html_body')
+        fields = ('id', 'template_identifier', 'subject', 'from_address', 'to_addresses', 'cc_addresses', 'bcc_addresses', 'plain_body', 'html_body')
         attrs = {"class": "paleblue table table-striped table-hover table-bordered"}
-        sequence = ('id', 'template_identifier', 'subject', 'from_address', 'to_address', 'cc_addresses', 'bcc_addresses', 'plain_body', 'html_body')
+        sequence = ('id', 'template_identifier', 'subject', 'from_address', 'to_addresses', 'cc_addresses', 'bcc_addresses', 'plain_body', 'html_body')

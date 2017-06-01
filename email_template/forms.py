@@ -26,5 +26,6 @@ class EmailTemplateForm(AuditableForm):
     class Meta(AuditableForm.Meta):
         model = EmailTemplate
         fields = get_auditable_fields() + ('template_identifier', 'subject', 'from_address', 'to_addresses', 'cc_addresses', 'bcc_addresses', 'plain_body', 'html_body')
+        AuditableForm.Meta.widgets['to_addresses'] = forms.Textarea(attrs={'rows':2})
         AuditableForm.Meta.widgets['cc_addresses'] = forms.Textarea(attrs={'rows':2})
         AuditableForm.Meta.widgets['bcc_addresses'] = forms.Textarea(attrs={'rows':2})

@@ -53,11 +53,12 @@ CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
 
 CONSTANCE_CONFIG = {
     'GEN_FROM_EMAIL_ADDRESS': ('mcgonigalstephen@gmail.com', 'General from address'),
+    'AGENCY_NAME': ('The Shirlie Project', 'Agency name'),
     'GEN_CONTRACT_FROM_EMAIL_ADDRESS': ('mcgonigalstephen@gmail.com', 'General contract from address'),
 }
 
 CONSTANCE_CONFIG_FIELDSETS = {
-    'General Options': ('GEN_FROM_EMAIL_ADDRESS',),
+    'General Options': ('AGENCY_NAME', 'GEN_FROM_EMAIL_ADDRESS',),
     'Contract Options': ('GEN_CONTRACT_FROM_EMAIL_ADDRESS',),
 }
 MIDDLEWARE = [

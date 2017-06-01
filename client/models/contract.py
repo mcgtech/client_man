@@ -109,6 +109,9 @@ class Contract(Auditable):
     application_form = models.FileField(upload_to='client/con_app_form/', blank=True, null=True)
     client = models.ForeignKey(Client, on_delete=models.CASCADE, null=True, related_name="contract")
 
+    def contract_has_a_partner(self):
+        return self.type == Contract.TIO
+
     def get_latest_status(self):
         return self.get_ordered_status().first()
 

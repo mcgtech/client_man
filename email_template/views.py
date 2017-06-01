@@ -12,6 +12,7 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django_filters.views import FilterView
 from django_tables2 import SingleTableView
+from constance import config
 
 from client.forms import *
 from common.views import *
@@ -74,7 +75,7 @@ def manage_email_temp(request, temp_id=None):
             msg_once_only(request, 'You have successfully deleted the template ' + str(temp), settings.INFO_MSG_TYPE)
             temp.delete()
             return redirect('/email_temp_search')
-        temp_form = EmailTemplateForm(request.POST, request.FILES, instance=temp, prefix="main", is_edit_form=is_edit_form)
+        temp_form = EmailTemplateForm(request.POST, request.FILES, instance=temp, prefix="main", is_edit_form=is_edit_form, cancel_url=None)
         if temp_form.is_valid():
             temp = temp_form.save(commit=False)
             apply_auditable_info(temp, request)
@@ -83,7 +84,8 @@ def manage_email_temp(request, temp_id=None):
             msg_once_only(request, 'Saved template ' + str(temp), settings.INFO_MSG_TYPE)
             return redirect(action)
     else:
-        temp_form = EmailTemplateForm(instance=temp, prefix="main", is_edit_form=is_edit_form)
+        cancel_url = redirect('email_temp_search').url
+        temp_form = EmailTemplateForm(instance=temp, prefix="main", is_edit_form=is_edit_form, cancel_url=cancel_url)
 
     set_deletion_status_in_js_data(js_dict, request.user, admin_user)
     js_data = json.dumps(js_dict)
@@ -100,13 +102,15 @@ def send_email_using_template(context, template_id, request):
     if template_id is not None:
         temp = EmailTemplate.objects.get(template_identifier=template_id)
         if temp is not None:
+            apply_agency_details_to_context(context)
             # run body through template to replace template variables - ie the stuff inside {{ }}
             html_content = apply_context_to_string(temp.html_body, context)
             plain_content = apply_context_to_string(temp.plain_body, context)
             subject = apply_context_to_string(temp.subject, context)
             from_email = apply_context_to_string(temp.from_address, context)
-            cc_addresses = apply_context_to_string(temp.cc_addresses, context)
-            bcc_addresses = apply_context_to_string(temp.bcc_addresses, context)
+            to_addresses = apply_context_to_string(temp.to_addresses, context, True)
+            cc_addresses = apply_context_to_string(temp.cc_addresses, context, True)
+            bcc_addresses = apply_context_to_string(temp.bcc_addresses, context, True)
             # https://docs.djangoproject.com/en/1.11/topics/email/
             try:
                 email = EmailMultiAlternatives(
@@ -119,18 +123,21 @@ def send_email_using_template(context, template_id, request):
                 )
                 email.attach_alternative(html_content, "text/html")
                 email.send(False)
-                msg_once_only(request, 'Email sent to ' + str(recipient_list), settings.SUCC_MSG_TYPE)
-            except:
-                msg_once_only(request, 'Failed to email ' + str(recipient_list) + ' as an exception occurred', settings.ERR_MSG_TYPE)
+                msg_once_only(request, 'Email sent to ' + str(to_addresses), settings.SUCC_MSG_TYPE)
+            except Exception as e:
+                msg_once_only(request, 'Failed to email ' + str(to_addresses) + ' as an exception occurred: ' + str(e), settings.ERR_MSG_TYPE)
         else:
-            msg_once_only(request, 'Failed to email ' + str(recipient_list) + ' as no valid template id was found for id: ' + template_id, settings.ERR_MSG_TYPE)
+            msg_once_only(request, 'Failed to email as no valid template id was found for id: ' + template_id, settings.ERR_MSG_TYPE)
     else:
-        msg_once_only(request, 'Failed to email ' + str(recipient_list) + ' as no valid template id was provided', settings.ERR_MSG_TYPE)
+        msg_once_only(request, 'Failed to email as no valid template id was provided', settings.ERR_MSG_TYPE)
 
+def apply_agency_details_to_context(context):
+    context['agency_name'] = config.AGENCY_NAME
+    context['gen_con_from_address'] = config.GEN_CONTRACT_FROM_EMAIL_ADDRESS
 
 # run str through template to replace template variables - ie the stuff inside {{ }}
-def apply_context_to_string(str, context):
+def apply_context_to_string(str, context, return_as_list = False):
     str_tpl = Template(str)
-
-    return  str_tpl.render(Context(context))
+    str_with_context_applied = str_tpl.render(Context(context))
+    return str_with_context_applied.split(",") if return_as_list else str_with_context_applied
 

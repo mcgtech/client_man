@@ -50,7 +50,8 @@ def msg_once_only(request, msg, type):
     :param msg:
     :return:
     """
-    if msg not in [m.message for m in get_messages(request)]:
+    storage = get_messages(request)
+    if msg not in [m.message for m in storage]:
         if (type == settings.INFO_MSG_TYPE):
             info(request, msg)
         elif (type == settings.SUCC_MSG_TYPE):
@@ -61,3 +62,4 @@ def msg_once_only(request, msg, type):
             error(request, msg)
         elif (type == settings.DEBUG_MSG_TYPE):
             debug(request, msg)
+    storage.used = False # to ensure we dont clear the messages we got in storage = get_messages(request)
