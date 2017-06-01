@@ -24,5 +24,8 @@ class HTMLTemplate(Auditable):
     type = models.IntegerField(choices=TEMPLATE_TYPES, default=None)
     body = models.TextField()
 
+    class Meta:
+        unique_together = ('template_identifier', 'type',)
+
     def __str__(self):
        return self.get_template_identifier_display()

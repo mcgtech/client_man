@@ -79,6 +79,7 @@ def manage_html_temp(request, temp_id=None):
             return redirect(action)
     else:
         temp_form = HTMLTemplateForm(instance=temp, prefix="main", is_edit_form=is_edit_form)
+
     set_deletion_status_in_js_data(js_dict, request.user, admin_user)
     js_data = json.dumps(js_dict)
 
