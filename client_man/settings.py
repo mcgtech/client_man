@@ -52,16 +52,13 @@ INSTALLED_APPS = [
 CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
 
 CONSTANCE_CONFIG = {
-    'GEN_FROM_EMAIL_ADDRESS': ('mcgonigalstephen@gmail.com', 'General From Address'),
-    'ACCEPTANCE_EMAIL_LIST': ('mcgonigalstephen@gmail.com', 'Who to email on acceptance'),
-    'REVOKE_EMAIL_LIST': ('mcgonigalstephen@gmail.com', 'Who to email on revoking'),
-    'APPROVAL_EMAIL_LIST': ('mcgonigalstephen@gmail.com', 'Who to email on approval'),
-    'REJECT_EMAIL_LIST': ('mcgonigalstephen@gmail.com', 'Who to email on rejection'),
+    'GEN_FROM_EMAIL_ADDRESS': ('mcgonigalstephen@gmail.com', 'General from address'),
+    'GEN_CONTRACT_FROM_EMAIL_ADDRESS': ('mcgonigalstephen@gmail.com', 'General contract from address'),
 }
 
 CONSTANCE_CONFIG_FIELDSETS = {
     'General Options': ('GEN_FROM_EMAIL_ADDRESS',),
-    'Contract Options': ('ACCEPTANCE_EMAIL_LIST', 'REVOKE_EMAIL_LIST', 'APPROVAL_EMAIL_LIST', 'REJECT_EMAIL_LIST'),
+    'Contract Options': ('GEN_CONTRACT_FROM_EMAIL_ADDRESS',),
 }
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

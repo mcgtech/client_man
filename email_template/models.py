@@ -16,9 +16,9 @@ class EmailTemplate(Auditable):
     template_identifier = models.IntegerField(choices=TEMPLATE_NAMES, default=None, unique=True)
     subject = models.CharField(max_length=100)
     from_address = models.CharField(max_length=100)
-    to_address = models.CharField(max_length=100)
-    cc_address = models.TextField(blank=True)
-    bcc_address = models.TextField(blank=True)
+    to_addresses = models.TextField()
+    cc_addresses = models.TextField(blank=True)
+    bcc_addresses = models.TextField(blank=True)
     plain_body = models.TextField(help_text='This will be used if recipients software can not handle html')
     html_body = models.TextField(help_text='This will be used if recipients software can handle html')
 

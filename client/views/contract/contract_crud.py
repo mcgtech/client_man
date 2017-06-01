@@ -138,23 +138,17 @@ def handle_contract_rejection(request, client, contract):
 def handle_state_change(request, client, new_state):
     # https://github.com/vintasoftware/django-templated-email
     template_id = None
-    context = {'client': client}
-    from_email=config.GEN_FROM_EMAIL_ADDRESS
+    context = {'client': client, 'new_state' : new_state}
     if new_state.status == ContractStatus.ACC_INFO_MAN:
         template_id = EmailTemplate.CON_ACCEPT
-        recipient_list= config.ACCEPTANCE_EMAIL_LIST.split(","),
     elif new_state.status == ContractStatus.ACC_REV_INFO_MAN:
         template_id = EmailTemplate.CON_REVOKE
-        recipient_list= config.REVOKE_EMAIL_LIST.split(","),
     elif new_state.status == ContractStatus.APP_FUND_MAN:
         template_id = EmailTemplate.CON_APPROVE
-        recipient_list= config.APPROVAL_EMAIL_LIST.split(","),
     elif new_state.status == ContractStatus.REJ_FUND_MAN:
         template_id = EmailTemplate.CON_REJECT
-        recipient_list= config.REJECT_EMAIL_LIST.split(","),
     if template_id is not None:
-        print(template_id)
-        send_email_using_template(from_email, recipient_list, None, None, context, template_id, request)
+        send_email_using_template(context, template_id, request)
     else:
         msg_once_only(request, 'Failed to set template id in handle_state_change', settings.ERR_MSG_TYPE)
 

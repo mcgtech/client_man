@@ -96,30 +96,28 @@ def manage_email_temp(request, temp_id=None):
                                                        'the_action': action, 'js_data' : js_data,
                                                        'form_errors': temp_form_errors})
 
-def send_email_using_template(from_email, recipient_list, cc_list, bcc_list, context, template_id, request):
+def send_email_using_template(context, template_id, request):
     if template_id is not None:
-        # msg_plain = render_to_string('templates/email.txt', context)
-        # msg_html = render_to_string('templates/email.html', context)
-        temp = EmailTemplate.objects.get(template_identifier=template_id, type=EmailTemplate.EMAIL_TEMP_TYPE)
+        temp = EmailTemplate.objects.get(template_identifier=template_id)
         if temp is not None:
-            email_tpl = Template(temp.email_body)
-            email_content = email_tpl.render(Context(context))
-            plain_tpl = Template(temp.email_body)
-            plain_content = plain_tpl.render(Context(context))
-
-            cc_list = cc_list if cc_list is not None else []
-            bcc_list = bcc_list if bcc_list is not None else []
+            # run body through template to replace template variables - ie the stuff inside {{ }}
+            html_content = apply_context_to_string(temp.html_body, context)
+            plain_content = apply_context_to_string(temp.plain_body, context)
+            subject = apply_context_to_string(temp.subject, context)
+            from_email = apply_context_to_string(temp.from_address, context)
+            cc_addresses = apply_context_to_string(temp.cc_addresses, context)
+            bcc_addresses = apply_context_to_string(temp.bcc_addresses, context)
             # https://docs.djangoproject.com/en/1.11/topics/email/
             try:
                 email = EmailMultiAlternatives(
-                    subject = 'Hello',
+                    subject = subject,
                     body = plain_content,
                     from_email = from_email,
-                    to = recipient_list,
-                    cc = cc_list,
-                    bcc = bcc_list,
+                    to = to_addresses,
+                    cc = cc_addresses,
+                    bcc = bcc_addresses,
                 )
-                email.attach_alternative(email_content, "text/html")
+                email.attach_alternative(html_content, "text/html")
                 email.send(False)
                 msg_once_only(request, 'Email sent to ' + str(recipient_list), settings.SUCC_MSG_TYPE)
             except:
@@ -128,3 +126,11 @@ def send_email_using_template(from_email, recipient_list, cc_list, bcc_list, con
             msg_once_only(request, 'Failed to email ' + str(recipient_list) + ' as no valid template id was found for id: ' + template_id, settings.ERR_MSG_TYPE)
     else:
         msg_once_only(request, 'Failed to email ' + str(recipient_list) + ' as no valid template id was provided', settings.ERR_MSG_TYPE)
+
+
+# run str through template to replace template variables - ie the stuff inside {{ }}
+def apply_context_to_string(str, context):
+    str_tpl = Template(str)
+
+    return  str_tpl.render(Context(context))
+

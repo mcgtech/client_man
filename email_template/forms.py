@@ -12,8 +12,8 @@ class EmailTemplateForm(AuditableForm):
                 Tab(
                     'Main',
                     Div(Div('template_identifier', css_class="col-sm-6"), Div('subject', css_class="col-sm-6"), css_class='row'),
-                    Div(Div('from_address', css_class="col-sm-6"), Div('to_address', css_class="col-sm-6"), css_class='row'),
-                    Div(Div('cc_address', css_class="col-sm-6"), Div('bcc_address', css_class="col-sm-6"), css_class='row'),
+                    Div(Div('from_address', css_class="col-sm-6"), Div('to_addresses', css_class="col-sm-6"), css_class='row'),
+                    Div(Div('cc_addresses', css_class="col-sm-6"), Div('bcc_addresses', css_class="col-sm-6"), css_class='row'),
                     'plain_body', 'html_body'),
                 Tab(
                     'Log',
@@ -25,6 +25,6 @@ class EmailTemplateForm(AuditableForm):
 
     class Meta(AuditableForm.Meta):
         model = EmailTemplate
-        fields = get_auditable_fields() + ('template_identifier', 'subject', 'from_address', 'to_address', 'cc_address', 'bcc_address', 'plain_body', 'html_body')
-        AuditableForm.Meta.widgets['cc_address'] = forms.Textarea(attrs={'rows':2})
-        AuditableForm.Meta.widgets['bcc_address'] = forms.Textarea(attrs={'rows':2})
+        fields = get_auditable_fields() + ('template_identifier', 'subject', 'from_address', 'to_addresses', 'cc_addresses', 'bcc_addresses', 'plain_body', 'html_body')
+        AuditableForm.Meta.widgets['cc_addresses'] = forms.Textarea(attrs={'rows':2})
+        AuditableForm.Meta.widgets['bcc_addresses'] = forms.Textarea(attrs={'rows':2})
