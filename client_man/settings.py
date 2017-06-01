@@ -196,7 +196,6 @@ DISPLAY_ACCEPT = 4
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-TEMPLATED_EMAIL_TEMPLATE_DIR = 'templated_email/'
 # https://github.com/jakubroztocil/django-settings-export
 # allows us to access constants inside templates
 SETTINGS_EXPORT = [
