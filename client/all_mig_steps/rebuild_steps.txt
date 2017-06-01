@@ -62,5 +62,9 @@ from env:
 python manage.py migrate
 python manage.py makemigrations client
 python manage.py migrate client
+python manage.py makemigrations common
+python manage.py migrate common
+python manage.py makemigrations email_template
+python manage.py migrate email_template
 python manage.py shell < client/all_mig_steps/setup_users_and_groups.py
 login as admin and from admin menu: run migration scripts from menu to generate json files, then load clients etc from json files

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'django_tables2',
     'crispy_forms',
+    'email_template',
     'common',
     'reporting',
     'client',

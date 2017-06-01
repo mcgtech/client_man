@@ -2,6 +2,5 @@
 from .auditable import Auditable
 from .note import Note
 from .person import Address, Person, Telephone
-from .html_template import *
 
 __all__ = ['Auditable', 'Note', 'Address', 'Person', 'Telephone']

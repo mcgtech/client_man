@@ -86,8 +86,6 @@ pip install django-widget-tweaks
 pip install django-bootstrap-pagination
 # https://github.com/brack3t/django-braces & http://django-braces.readthedocs.io/en/v1.4.0/access.html#loginrequiredmixin
 pip install django-braces
-# https://github.com/vintasoftware/django-templated-email
-pip install django-templated-email
 # https://django-constance.readthedocs.io/en/latest/
 pip install "django-constance[database]"
 python manage.py migrate database

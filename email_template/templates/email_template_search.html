@@ -28,12 +28,12 @@
         </div>
       </div>
       {% include 'partials/filter_buttons.html' %}
-      <button style="float:right;" type="button" onclick="javascript:window.location='{% url 'html_temp_new' %}';" class="btn btn-success">
+      <button style="float:right;" type="button" onclick="javascript:window.location='{% url 'email_temp_new' %}';" class="btn btn-success">
         <span class="glyphicon glyphicon-plus"></span> Template
       </button>
     </div>
   </form>
   {% load render_table from django_tables2 %}
   <!--/Users/stephenmcgonigal/django_projs/common/templates/table_with_pagination.html-->
-  {% render_table html_temp_table "table_with_pagination.html" %}
+  {% render_table email_temp_table "table_with_pagination.html" %}
 {% endblock %}

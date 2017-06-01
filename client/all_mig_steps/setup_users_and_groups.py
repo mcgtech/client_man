@@ -2,6 +2,8 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
 from django.contrib.auth.models import Permission
+from email_template.models import EmailTemplate
+from datetime import datetime
 User.objects.create_superuser('admin', 'a@a.com', 'new3lifeok')
 admin_group = Group(name="admin")
 admin_group.save()
@@ -190,3 +192,53 @@ info_man_group.save()
 supply_chain_man_group.save()
 hicouncil_group.save()
 rag_tag_group.save()
+
+# setup email templates
+admin = User.objects.get(pk=1)
+accept_temp = EmailTemplate(template_identifier=EmailTemplate.CON_ACCEPT)
+accept_temp.subject = '{{ agency }} - contract acceptance for {{ client.get_full_name}}'
+accept_temp.from_address = '{{ from_address }}'
+accept_temp.to_address = '{{ to_address }}'
+accept_temp.html_body = '<p>The latest contract for {{client.get_full_name}} has just been accepted</p>'
+accept_temp.plain_body = 'The latest contract for {{client.get_full_name}} has just been accepted'
+accept_temp.created_by = admin
+accept_temp.modified_by = admin
+accept_temp.created_on = datetime.now()
+accept_temp.modified_on = datetime.now()
+accept_temp.save()
+
+approve_temp = EmailTemplate(template_identifier=EmailTemplate.CON_APPROVE)
+approve_temp.subject = '{{ agency }} - contract approval for {{ client.get_full_name}}'
+approve_temp.from_address = '{{ from_address }}'
+approve_temp.to_address = '{{ to_address }}'
+approve_temp.html_body = '<p>The latest contract for {{client.get_full_name}} has just been approved</p>'
+approve_temp.plain_body = 'The latest contract for {{client.get_full_name}} has just been approved'
+approve_temp.created_by = admin
+approve_temp.modified_by = admin
+approve_temp.created_on = datetime.now()
+approve_temp.modified_on = datetime.now()
+approve_temp.save()
+
+revoke_temp = EmailTemplate(template_identifier=EmailTemplate.CON_REVOKE)
+revoke_temp.subject = '{{ agency }} - contract approval for {{ client.get_full_name}}'
+revoke_temp.from_address = '{{ from_address }}'
+revoke_temp.to_address = '{{ to_address }}'
+revoke_temp.html_body = '<p>The latest contract for {{client.get_full_name}} has just been revoked</p>'
+revoke_temp.plain_body = 'The latest contract for {{client.get_full_name}} has just been revoked'
+revoke_temp.created_by = admin
+revoke_temp.modified_by = admin
+revoke_temp.created_on = datetime.now()
+revoke_temp.modified_on = datetime.now()
+revoke_temp.save()
+
+reject_temp = EmailTemplate(template_identifier=EmailTemplate.CON_REJECT)
+reject_temp.subject = '{{ agency }} - contract rejection for {{ client.get_full_name}}'
+reject_temp.from_address = '{{ from_address }}'
+reject_temp.to_address = '{{ to_address }}'
+reject_temp.html_body = '<p>The latest contract for {{client.get_full_name}} has just been rejected</p>'
+reject_temp.plain_body = 'The latest contract for {{client.get_full_name}} has just been rejected'
+reject_temp.created_by = admin
+reject_temp.modified_by = admin
+reject_temp.created_on = datetime.now()
+reject_temp.modified_on = datetime.now()
+reject_temp.save()

@@ -2,6 +2,4 @@
 # https://stackoverflow.com/questions/20010991/split-views-py-into-multiple-files
 from .authentication import *
 from .general import *
-from .email import *
 from .auditable import *
-from .html_template import *

@@ -1,9 +1,7 @@
 from common.views import *
 from client.forms import *
-from common.models import HTMLTemplate
-from common.forms import HTMLTemplateForm
-from django.shortcuts import get_object_or_404
-import json
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import user_passes_test
 
 def show_report(request, entity_ids, report_id):
     report_id = int(report_id)

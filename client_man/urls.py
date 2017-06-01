@@ -28,5 +28,6 @@ urlpatterns = [
     url(r'', include('client.urls')),
     url(r'', include('common.urls')),
     url(r'', include('reporting.urls')),
+    url(r'', include('email_template.urls')),
     url(r'^$', views.home_page, name='home_page'),
 ]

@@ -7,6 +7,8 @@ from common.views import *
 from django.shortcuts import render
 from constance import config
 import json
+from email_template.models import EmailTemplate
+from email_template.views import send_email_using_template
 
 @login_required
 @user_passes_test(job_coach_user, 'client_man_login')
@@ -111,46 +113,50 @@ def manage_contract(request, client_id, con_type, contract_id=None):
 
 def handle_contract_accept(request, client, contract):
     new_state = add_new_contract_state(request, contract, ContractStatus.ACC_INFO_MAN)
-    handle_state_change(request, client, contract, new_state)
+    handle_state_change(request, client, new_state)
     msg_once_only(request, 'Accepted contract for ' + client.get_full_name(), settings.SUCC_MSG_TYPE)
 
 
 def handle_contract_approval(request, client, contract):
     new_state = add_new_contract_state(request, contract, ContractStatus.APP_FUND_MAN)
-    handle_state_change(request, client, contract, new_state)
+    handle_state_change(request, client, new_state)
     msg_once_only(request, 'Approved contract for ' + client.get_full_name(), settings.SUCC_MSG_TYPE)
 
 
 def handle_contract_acceptance_revoked(request, client, contract):
     new_state = add_new_contract_state(request, contract, ContractStatus.ACC_REV_INFO_MAN)
-    handle_state_change(request, client, contract, new_state)
+    handle_state_change(request, client, new_state)
     msg_once_only(request, 'Revoked approved contract for ' + client.get_full_name(), settings.WARN_MSG_TYPE)
 
 
 def handle_contract_rejection(request, client, contract):
     new_state = add_new_contract_state(request, contract, ContractStatus.REJ_FUND_MAN)
-    handle_state_change(request, client, contract, new_state)
+    handle_state_change(request, client, new_state)
     msg_once_only(request, 'Rejected contract for ' + client.get_full_name(), settings.SUCC_MSG_TYPE)
 
 
-def handle_state_change(request, client, contract, new_state):
+def handle_state_change(request, client, new_state):
     # https://github.com/vintasoftware/django-templated-email
-    template = None
+    template_id = None
     context = {'client': client}
     from_email=config.GEN_FROM_EMAIL_ADDRESS
     if new_state.status == ContractStatus.ACC_INFO_MAN:
-        template = 'accepted_by_info_man'
+        template_id = EmailTemplate.CON_ACCEPT
         recipient_list= config.ACCEPTANCE_EMAIL_LIST.split(","),
     elif new_state.status == ContractStatus.ACC_REV_INFO_MAN:
-        template = 'acceptance_revoked_by_info_man'
+        template_id = EmailTemplate.CON_REVOKE
         recipient_list= config.REVOKE_EMAIL_LIST.split(","),
     elif new_state.status == ContractStatus.APP_FUND_MAN:
-        template = 'approved_by_fund_man'
+        template_id = EmailTemplate.CON_APPROVE
         recipient_list= config.APPROVAL_EMAIL_LIST.split(","),
     elif new_state.status == ContractStatus.REJ_FUND_MAN:
-        template = 'rejected_by_fund_man'
+        template_id = EmailTemplate.CON_REJECT
         recipient_list= config.REJECT_EMAIL_LIST.split(","),
-    send_email_using_template(from_email, recipient_list, context, template, request)
+    if template_id is not None:
+        print(template_id)
+        send_email_using_template(from_email, recipient_list, None, None, context, template_id, request)
+    else:
+        msg_once_only(request, 'Failed to set template id in handle_state_change', settings.ERR_MSG_TYPE)
 
 
 
