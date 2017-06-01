@@ -192,6 +192,8 @@ DISPLAY_REJECT = 1
 DISPLAY_REVOKE = 2
 DISPLAY_ACCEPT = 4
 
+BASE_URL = 'http://127.0.0.1:8000'
+
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # https://github.com/jakubroztocil/django-settings-export
@@ -210,7 +212,8 @@ SETTINGS_EXPORT = [
     'SUCC_MSG_TYPE',
     'WARN_MSG_TYPE',
     'ERR_MSG_TYPE',
-    'DEBUG_MSG_TYPE'
+    'DEBUG_MSG_TYPE',
+    'BASE_URL'
 ]
 
 MESSAGE_TAGS = {

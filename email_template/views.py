@@ -50,6 +50,16 @@ def email_temp_edit(request, pk):
     return manage_email_temp(request, pk)
 
 
+@login_required
+@user_passes_test(job_coach_user, 'client_man_login')
+def email_temp_test(request, temp_id, client_id):
+    temp = EmailTemplate.objects.get(template_identifier=temp_id)
+    client = get_object_or_404(Client, pk=client_id)
+    context = {'client': client, 'contract' : contract, 'new_state' : None}
+    send_email_using_template(context, temp_id, request)
+    return render(request, 'email_test.html')
+
+
 # http://stackoverflow.com/questions/29758558/inlineformset-factory-create-new-objects-and-edit-objects-after-created
 # https://gist.github.com/ibarovic/3092910
 @transaction.atomic
@@ -96,9 +106,10 @@ def manage_email_temp(request, temp_id=None):
                                                        'the_action_text': the_action_text,
                                                        'edit_form': is_edit_form,
                                                        'the_action': action, 'js_data' : js_data,
-                                                       'form_errors': temp_form_errors})
+                                                       'form_errors': temp_form_errors,
+                                                        'client_reflections' : get_client_reflections()})
 
-def send_email_using_template(context, template_id, request):
+def send_email_using_template(context, template_id, request, show_message = True):
     if template_id is not None:
         temp = EmailTemplate.objects.get(template_identifier=template_id)
         if temp is not None:
@@ -108,6 +119,7 @@ def send_email_using_template(context, template_id, request):
             plain_content = apply_context_to_string(temp.plain_body, context)
             subject = apply_context_to_string(temp.subject, context)
             from_email = apply_context_to_string(temp.from_address, context)
+            temp.to_addresses = 'mcgonigalstephen@gmail.com'
             to_addresses = apply_context_to_string(temp.to_addresses, context, True)
             cc_addresses = apply_context_to_string(temp.cc_addresses, context, True)
             bcc_addresses = apply_context_to_string(temp.bcc_addresses, context, True)
@@ -123,7 +135,8 @@ def send_email_using_template(context, template_id, request):
                 )
                 email.attach_alternative(html_content, "text/html")
                 email.send(False)
-                msg_once_only(request, 'Email sent to ' + str(to_addresses), settings.SUCC_MSG_TYPE)
+                if show_message:
+                    msg_once_only(request, 'Email sent to ' + str(to_addresses), settings.SUCC_MSG_TYPE)
             except Exception as e:
                 msg_once_only(request, 'Failed to email ' + str(to_addresses) + ' as an exception occurred: ' + str(e), settings.ERR_MSG_TYPE)
         else:
@@ -141,3 +154,24 @@ def apply_context_to_string(str, context, return_as_list = False):
     str_with_context_applied = str_tpl.render(Context(context))
     return str_with_context_applied.split(",") if return_as_list else str_with_context_applied
 
+def get_client_reflections():
+    from django.contrib.auth.models import User
+    client_reflections = get_reflections(Client._meta, 'client')
+    phone_reflections = get_reflections(Telephone._meta, 'client.telephone')
+    address_reflections = get_reflections(Address._meta, 'client.address')
+    contract_reflections = get_reflections(Contract._meta, 'client.get_latest_contract')
+    status_reflections = get_reflections(Contract._meta, 'client.get_latest_contract.get_latest_status')
+    user_reflections = get_reflections(User._meta, 'client.user')
+
+    return client_reflections + contract_reflections + status_reflections + phone_reflections + address_reflections + user_reflections
+
+def get_reflections(meta, prefix):
+    refs = []
+    for f in meta.get_fields(include_parents=True, include_hidden=True):
+        name = f.name
+        if f.get_internal_type() == 'IntegerField' and f.choices is not None and len(f.choices) > 0:
+            name = 'get_' + name + '_display'
+        elif f.get_internal_type() == 'BooleanField':
+            name = name + '|yesno:"Yes,No"'
+        refs.append('{{ ' + prefix + '.' + name + ' }}')
+    return refs

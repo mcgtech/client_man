@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from common.models import Person
+from django.utils.safestring import mark_safe
 
 class Client(Person):
     MALE = 0
@@ -246,4 +247,8 @@ class Client(Person):
     def get_absolute_url(self):
         from django.urls import reverse
         return reverse('client_edit', args=[str(self.id)])
+
+    def get_absolute_url_markup(self):
+        url = settings.BASE_URL + self.get_absolute_url()
+        return mark_safe('<a href="' + url + '">client ' + str(self.id) + '</a>')
 
