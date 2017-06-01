@@ -20,9 +20,9 @@ info_man_group = Group(name="info manager")
 info_man_group.save()
 supply_chain_man_group = Group(name="supply chain manager")
 supply_chain_man_group.save()
-rag_tag_group = Group(name="supply chain partner")
+rag_tag_group = Group(name="rag tag")
 rag_tag_group.save()
-hicouncil_group = Group(name="tio partner")
+hicouncil_group = Group(name="highland council")
 hicouncil_group.save()
 
 # run sql to repopulate
@@ -78,13 +78,13 @@ heatherharper = User.objects.create_user('heatherharper', 'h.harper@shirlie.co.u
 scottfraser = User.objects.create_user('scottfraser', 's.fraser@shirlie.co.uk', 'scottfraser123');scottfraser.is_staff=True;scottfraser.save()
 dawncattanach = User.objects.create_user('dawncattanach', 'd.cattanach@shirlie.co.uk', 'dawncattanach123');dawncattanach.is_staff=True;dawncattanach.save()
 closed = User.objects.create_user('closed', 'closed@closed', 'closed123');
-neilmacleod = User.objects.create_user('neilmacleod', 'neilmacLeod@shirlie.co.uk', 'neilmacleod123');neilmacleod.is_staff=True;neilmacleod.save()
-hicouncil = User.objects.create_user('hicouncil', 'highlandcouncil123@gmail.com', 'hicouncil123');hicouncil.is_staff=True;hicouncil.save()
-ragtag = User.objects.create_user('ragtag', 'ragtag1456@gmail.com', 'ragtag123');ragtag.is_staff=True;ragtag.save()
-janegair = User.objects.create_user('janegair', 'Jane.gair@highland-opportunity.com', 'janegair123');janegair.is_staff=True;janegair.save()
-vickysamuels = User.objects.create_user('vickysamuels', 'vickisamuels@yahoo.co.uk', 'vickysamuels123');vickysamuels.is_staff=True;vickysamuels.save()
-joan = User.objects.create_user('joan', 'joan.mackay@ragtagskye.org', 'joan123');joan.is_staff=True;joan.save()
-hicounciluser = User.objects.create_user('hicounciluser', 'hicouncil@hicouncil.com', 'hicounciluser123');hicounciluser.is_staff=True;hicounciluser.save()
+neilmacleod = User.objects.create_user('neilmacleod', 'neilmacLeod@shirlie.co.uk', 'neilmacleod123');neilmacleod.save()
+hicouncil = User.objects.create_user('hicouncil', 'highlandcouncil123@gmail.com', 'hicouncil123');hicouncil.save()
+ragtag = User.objects.create_user('ragtag', 'ragtag1456@gmail.com', 'ragtag123');ragtag.save()
+janegair = User.objects.create_user('janegair', 'Jane.gair@highland-opportunity.com', 'janegair123');janegair.save()
+vickysamuels = User.objects.create_user('vickysamuels', 'vickisamuels@yahoo.co.uk', 'vickysamuels123');vickysamuels.save()
+joan = User.objects.create_user('joan', 'joan.mackay@ragtagskye.org', 'joan123');joan.save()
+hicounciluser = User.objects.create_user('hicounciluser', 'hicouncil@hicouncil.com', 'hicounciluser123');hicounciluser.save()
 # run sql to repopulate
 job_coach_group.user_set.add(ann)
 job_coach_group.user_set.add(lindasutherland)
@@ -175,18 +175,18 @@ supply_chain_man_group.user_set.add(infoman)
 supply_chain_man_group.user_set.add(christinebruce)
 supply_chain_man_group.user_set.add(traceythomson)
 supply_chain_man_group.user_set.add(annlee)
-rag_tag_group.user_set.add(neilmacleod)
-rag_tag_group.user_set.add(ragtag)
-rag_tag_group.user_set.add(joan)
 hicouncil_group.user_set.add(hicouncil)
 hicouncil_group.user_set.add(janegair)
 hicouncil_group.user_set.add(hicounciluser)
 hicouncil_group.user_set.add(neilmacleod)
-hicouncil_group.user_set.add(vickysamuels)
+rag_tag_group.user_set.add(ragtag)
+rag_tag_group.user_set.add(joan)
+rag_tag_group.user_set.add(vickysamuels)
 
-job_coach_group.save();
-partner_group.save();
-job_coach_mgr_group.save();
-info_man_group.save();
-supply_chain_man_group.save();
-hicouncil_group.save();
+job_coach_group.save()
+partner_group.save()
+job_coach_mgr_group.save()
+info_man_group.save()
+supply_chain_man_group.save()
+hicouncil_group.save()
+rag_tag_group.save()

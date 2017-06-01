@@ -8,16 +8,22 @@ register = template.Library()
 # http://stackoverflow.com/questions/34571880/how-to-check-in-template-whether-user-belongs-to-group
 @register.filter(name='has_group')
 def has_group(user, group_name):
-    group = Group.objects.get(name=group_name)
-    admin_group = Group.objects.get(name='admin')
-    all_groups = user.groups.all()
-    user_in_group = True if group in all_groups or admin_group in all_groups else False
-    return user.is_superuser or user_in_group
+    if user is not None:
+        group = Group.objects.get(name=group_name)
+        admin_group = Group.objects.get(name='admin')
+        all_groups = user.groups.all()
+        user_in_group = True if group in all_groups or admin_group in all_groups else False
+        return user.is_superuser or user_in_group
+    else:
+        return None
 
 @register.filter(name='render_checkbox')
 def render_checkbox(checked):
-    icon = 'glyphicon-ok' if checked else 'glyphicon-remove'
-    return mark_safe('<span class="glyphicon ' + icon + '"></span>')
+    # icon = 'glyphicon-ok' if checked else 'glyphicon-remove'
+    # return mark_safe('<span class="glyphicon ' + icon + '"></span>')
+    checked = 'checked' if checked else ''
+
+    return mark_safe('<input type="checkbox" ' + checked + '>')
 
 
 @register.filter(name='get_partner_logo')
@@ -28,5 +34,5 @@ def get_partner_logo(user):
     elif has_group(user, settings.RAG_TAG_PART):
         logo = 'rag_tag_logo.png.png'
     if logo is not None:
-        logo = '<img src="/static/img/' + logo + '"/>'
-    return mark_safe(logo)
+        logo = mark_safe('<img src="/static/img/' + logo + '"/>')
+    return logo

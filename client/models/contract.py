@@ -112,6 +112,12 @@ class Contract(Auditable):
     def get_latest_status(self):
         return self.get_ordered_status().first()
 
+    def get_latest_status_with_state(self, status):
+        return self.get_ordered_status().filter(status=status).first()
+
+    def get_ordered_status(self):
+        return self.contract_status.all().order_by('-modified_on')
+
     def get_summary(self, type_as_link):
         url = self.get_absolute_url()
         the_type = '<a target="_blank" href="' + url + '">' + self.get_type_display() + '</a>' if type_as_link else self.get_type_display()
@@ -128,9 +134,6 @@ class Contract(Auditable):
     def get_absolute_url(self):
         from django.urls import reverse
         return reverse('contract_edit', args=[str(self.client.id), str(self.id)])
-
-    def get_ordered_status(self):
-        return self.contract_status.all().order_by('-modified_on')
 
     def get_all_status_as_list(self):
         table = '<table >'
@@ -185,6 +188,18 @@ class TIOContract(Contract):
     # if I make it OneToOneField then I get duplicate key error
     # partner = models.OneToOneField(settings.AUTH_USER_MODEL, null=True, related_name='tio_contract')
     partner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='tio_contract', blank=True, null=True, limit_choices_to={'groups__name__in': [settings.HI_COUNCIL_PART, settings.RAG_TAG_PART]})
+
+    def get_info_man_acceptance_date(self):
+        status = self.get_latest_status_with_state(ContractStatus.ACC_INFO_MAN)
+        return status.created_on if status is not None else ''
+
+    def get_fund_man_contact_date(self):
+        return self.get_info_man_acceptance_date()
+
+    def get_fund_man_approval_date(self):
+        status = self.get_latest_status_with_state(ContractStatus.APP_FUND_MAN)
+
+        return status.created_on if status is not None else ''
 
 class ContractStatus(Auditable):
     AWAIT_INFO_MAN_ACC = 0

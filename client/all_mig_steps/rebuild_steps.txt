@@ -13,10 +13,10 @@ and  ur.rid = 8
 union
 select "closed = User.objects.create_user('closed', 'closed@closed', 'closed123');"
 union
-select concat(LOWER(REPLACE(u.name, ' ', '')), ' = ', "User.objects.create_user('", LOWER(REPLACE(u.name, ' ', '')), "', '", u.mail, "', '", LOWER(REPLACE(u.name, ' ', '')), "123');", LOWER(REPLACE(u.name, ' ', '')), ".is_staff=True;", LOWER(REPLACE(u.name, ' ', '')), ".save()")
+select concat(LOWER(REPLACE(u.name, ' ', '')), ' = ', "User.objects.create_user('", LOWER(REPLACE(u.name, ' ', '')), "', '", u.mail, "', '", LOWER(REPLACE(u.name, ' ', '')), "123');", LOWER(REPLACE(u.name, ' ', '')), ".save()")
 from users u, users_roles ur
 where u.uid = ur.uid
-and  ur.rid in (14, 17, 18)
+and  ur.rid in (14, 17)
 group by u.uid
 
 # get and assign to groups
@@ -51,6 +51,7 @@ select concat('hicouncil_group.user_set.add(', LOWER(REPLACE(u.name, ' ', '')), 
 from users u, users_roles ur
 where u.uid = ur.uid
 and  ur.rid = 14
+union
 select concat('rag_tag_group.user_set.add(', LOWER(REPLACE(u.name, ' ', '')), ')')
 from users u, users_roles ur
 where u.uid = ur.uid
@@ -61,6 +62,5 @@ from env:
 python manage.py migrate
 python manage.py makemigrations client
 python manage.py migrate client
-python manage.py shell < setup_users_and_groups.py
-
-run migration scripts from menu to generate json files, then load clients etc from json files
+python manage.py shell < client/all_mig_steps/setup_users_and_groups.py
+login as admin and from admin menu: run migration scripts from menu to generate json files, then load clients etc from json files

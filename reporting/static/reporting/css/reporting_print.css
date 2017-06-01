@@ -29,7 +29,7 @@ h2 {
 h2, h3 {
    page-break-after: avoid;
 }
-.print_label
+.print_label, .print_label_with_suff
 {
     font-weight:bold;
 }

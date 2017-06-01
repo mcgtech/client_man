@@ -86,22 +86,18 @@
 <div id='approval_block'>
     <table>
         <tr>
-            <td class="print_label_with_suff">Approved by Info Manager</td>
-            <td>?</td>
-            <td class="print_label_with_suff">Approved Date</td>
-            <td>?</td>
+            <td class="print_label_with_suff">Info Manager</td>
+            <td colspan="2">{{ contract.modified_by }}</td>
+            <td class="print_label_with_suff">Accepted Date</td>
+            <td colspan="2">{{ contract.get_info_man_acceptance_date }}</td>
         </tr>
         <tr>
             <td class="print_label_with_suff">Fund Manager Contact</td>
-            <td>?</td>
+            <td>{{ contract.partner }}</td>
             <td class="print_label_with_suff">Contact Date</td>
-            <td>?</td>
-        </tr>
-        <tr>
-            <td class="print_label_with_suff">Approved by Fund Manager</td>
-            <td>?</td>
+            <td>{{ contract.get_fund_man_contact_date }}</td>
             <td class="print_label_with_suff">Approved Date</td>
-            <td>?</td>
+            <td>{{ contract.get_fund_man_approval_date }}</td>
         </tr>
     </table>
 </div>
