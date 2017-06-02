@@ -74,9 +74,16 @@ client_tio_con_temp.modified_by = admin
 client_tio_con_temp.created_on = datetime.now()
 client_tio_con_temp.modified_on = datetime.now()
 
-client_dets_temp.body = ''
-client_con_temp.body = ''
-client_tio_con_temp.body = ''
+root = '/Users/stephenmcgonigal/django_projs'
+with open(root + '/all_mig_steps/templates/client_dets_temp.html', 'r') as client_dets_file:
+    client_dets_temp_html = client_dets_file.read()
+with open(root + '/all_mig_steps/templates/client_con_temp.html', 'r') as client_con_file:
+    client_con_html = client_con_file.read()
+with open(root + '/all_mig_steps/templates/client_tio_con_temp.html', 'r') as client_tio_con_file:
+    client_tio_con_html = client_tio_con_file.read()
+client_dets_temp.body = client_dets_temp_html
+client_con_temp.body = client_con_html
+client_tio_con_temp.body = client_tio_con_html
 
 client_dets_temp.save()
 client_con_temp.save()

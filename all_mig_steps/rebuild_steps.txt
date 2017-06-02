@@ -70,6 +70,6 @@ python manage.py makemigrations reporting
 python manage.py migrate reporting
 python manage.py makemigrations email_template
 python manage.py migrate email_template
-python manage.py shell < client/all_mig_steps/setup_users_and_groups.py
-python manage.py shell < client/all_mig_steps/setup_templates.py
+python manage.py shell < all_mig_steps/setup_users_and_groups.py
+python manage.py shell < all_mig_steps/setup_templates.py
 login as admin and from admin menu: run migration scripts from menu to generate json files, then load clients etc from json files
