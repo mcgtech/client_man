@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}
+    {% if edit_form %}
+        Edit template
+    {% else %}
+        Add new template
+    {% endif %}
+{% endblock %}
+{% load staticfiles %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'reporting/css/report_template.css' %}">
+{% endblock %}
+{% block js %}
+    {% include 'partials/inject_js_data.html' %}
+    {% include 'partials/form_edit_js_includes.html' %}
+    {% include 'partials/bootbox_js_includes.html' %}
+    <script type="text/javascript" src="{% static 'reporting/js/report_template.js' %}"></script>
+{% endblock %}
+{% block content %}
+    {% load crispy_forms_tags %}
+    <form action="{{ the_action }}" method="POST" id="report_temp_edit_form" class="report_temp_details">
+        {% crispy form %}
+    </form>
+    <div id="client_reflections">
+        <div class="alert alert-success alert-dismissible" role="alert">
+            The following Django tags can be used in your report template. They will get replaced with real values when the report is generated.<br>
+            When you encounter |yesno:"Yes,No", you can replace the two words inside the quotes with any words that you wish.
+        </div>
+        <ul>
+        {% for r in client_reflections %}
+            <li>{{ r }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

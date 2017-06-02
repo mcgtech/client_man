@@ -2,10 +2,5 @@
 {% load staticfiles %}
 
 {% block content %}
-    {%  for client in clients %}
-        {% include 'client/client_details.html' %}
-        {% if clients.count > 1 and forloop.counter != clients.count %}
-            {% include 'partials/force_page_break.html' %}
-        {% endif %}
-    {% endfor %}
+    {{ clients_markup|safe }}
 {% endblock %}

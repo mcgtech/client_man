@@ -21,18 +21,14 @@
           {{ filter.form.template_identifier.label_tag }}
           {% render_field filter.form.template_identifier class="form-control" %}
         </div>
-        <div class="form-group col-sm-3">
-          {{ filter.form.type.label_tag }}
-          {% render_field filter.form.type class="form-control" %}
-        </div>
       </div>
       {% include 'partials/filter_buttons.html' %}
-      <button style="float:right;" type="button" onclick="javascript:window.location='{% url 'email_temp_new' %}';" class="btn btn-success">
+      <button style="float:right;" type="button" onclick="javascript:window.location='{% url 'report_temp_new' %}';" class="btn btn-success">
         <span class="glyphicon glyphicon-plus"></span> Template
       </button>
     </div>
   </form>
   {% load render_table from django_tables2 %}
   <!--/Users/stephenmcgonigal/django_projs/common/templates/table_with_pagination.html-->
-  {% render_table email_temp_table "table_with_pagination.html" %}
+  {% render_table report_temp_table "table_with_pagination.html" %}
 {% endblock %}

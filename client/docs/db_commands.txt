@@ -2,5 +2,7 @@ python manage.py makemigrations client
 python manage.py migrate client
 python manage.py makemigrations common
 python manage.py migrate common
+python manage.py makemigrations reporting
+python manage.py migrate reporting
 python manage.py makemigrations email_template
 python manage.py migrate email_template

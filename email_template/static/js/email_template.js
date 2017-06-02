@@ -28,8 +28,7 @@ function setup_testing_template()
         }
         else
         {
-            var temp_id = $('#id_main-template_identifier').val();
-            window.location.href = '/email_temp_test/' + temp_id + '/' + client_id + '/' + email + '/'
+            window.location.href = '/email_temp_test/' + temp_id + '/' + client_id + '/' + email + '/';
         }
     });
 }

@@ -66,6 +66,9 @@ def msg_once_only(request, msg, type):
             debug(request, msg)
     storage.used = False # to ensure we dont clear the messages we got in storage = get_messages(request)
 
+def get_force_page_break_markup():
+    return '<div style="display: block; page-break-after: always; position: relative;"></div>'
+
 
 def get_client_reflections():
     from django.contrib.auth.models import User
