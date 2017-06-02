@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load common_extras %}
 {% block title %}
     {% if edit_form %}
         Edit contract for {{ client.get_full_name }}
@@ -12,6 +13,9 @@
     {% include 'partials/datatable_css_includes.html' %}
     <link rel="stylesheet" href="{% static 'css/client_contract_select.css' %}">
     <link rel="stylesheet" href="{% static 'css/contract_edit.css' %}">
+    {% if request.user|has_group:settings.JOB_COACH or request.user|has_group:settings.JOB_COACH_MAN or request.user|is_partner %}
+        <link rel="stylesheet" href="{% static 'css/client_con_edit_as_partner.css' %}">
+    {% endif %}
 {% endblock %}
 
 {% block js %}
@@ -29,26 +33,28 @@
         <div id="contract_status_table" class="tab-pane">
             {% include 'client/contract/client_contract_status.html' %}
         </div>
-        {% if display_accept in state_buttons %}
-            <button type="submit" value="Accept" name="accept-contract" class="save_butt btn btn-default">
-                <span class="glyphicon glyphicon-ok"></span>Accept</button>
-        {% endif %}
-        {% if display_approve in state_buttons %}
-            <button type="submit" value="Approve" name="approve-contract" class="save_butt btn btn-default">
-                <span class="glyphicon glyphicon-ok"></span>Approve</button>
-        {% endif %}
-        {% if display_revoke in state_buttons %}
-            <button type="submit" value="Cancel" name="revoke-contract-acceptance" class="save_butt btn btn-warning">
-                <span class="glyphicon glyphicon-remove"></span>Revoke acceptance</button>
-        {% endif %}
-        {% if display_reject in state_buttons %}
-            <button type="submit" value="Reject" name="reject-contract" class="save_butt btn btn-warning">
-                <span class="glyphicon glyphicon-remove"></span>Reject</button>
-        {% endif %}
-        {% if display_undo in state_buttons %}
-            <button type="submit" value="Undo" name="undo-contract" class="save_butt btn btn-warning">
-                <span class="glyphicon glyphicon-remove"></span>Undo</button>
-        {% endif %}
+        <div id="work_flow_buttons">
+            {% if display_accept in state_buttons %}
+                <button type="submit" value="Accept" name="accept-contract" class="save_butt btn btn-default">
+                    <span class="glyphicon glyphicon-ok"></span>Accept</button>
+            {% endif %}
+            {% if display_approve in state_buttons %}
+                <button type="submit" value="Approve" name="approve-contract" class="save_butt btn btn-default">
+                    <span class="glyphicon glyphicon-ok"></span>Approve</button>
+            {% endif %}
+            {% if display_revoke in state_buttons %}
+                <button type="submit" value="Cancel" name="revoke-contract-acceptance" class="save_butt btn btn-warning">
+                    <span class="glyphicon glyphicon-remove"></span>Revoke acceptance</button>
+            {% endif %}
+            {% if display_reject in state_buttons %}
+                <button type="submit" value="Reject" name="reject-contract" class="save_butt btn btn-warning">
+                    <span class="glyphicon glyphicon-remove"></span>Reject</button>
+            {% endif %}
+            {% if display_undo in state_buttons %}
+                <button type="submit" value="Undo" name="undo-contract" class="save_butt btn btn-warning">
+                    <span class="glyphicon glyphicon-remove"></span>Undo</button>
+            {% endif %}
+        </div>
     </form>
 
 {% endblock %}

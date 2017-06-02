@@ -1,7 +1,16 @@
 $(function(){
     setup_datepickers();
     setup_contract_tabs();
+    handle_page_readonly_state();
 });
+
+function handle_page_readonly_state()
+{
+    if (data_from_django.read_only)
+    {
+        make_page_read_only();
+    }
+}
 
 function setup_datepickers()
 {

@@ -1,0 +1,6 @@
+.main-butt, .add-row, .delete-row, .clearablefileinput, #button-id-add-contract,
+#div_id_main-birth_certificate, .pc-lookup, #div_id_address-evidence,
+.evid, .emp_state
+{
+    display:none;
+}

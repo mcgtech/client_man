@@ -43,9 +43,9 @@ class ClientForm(EditForm, AuditableForm):
                         css_class="col-sm-6"),
                     Div(
                         Div(Div('client_group', css_class="col-sm-6"),
-                            Div('client_group_evidence', css_class="col-sm-6"), css_class='row'),
+                            Div('client_group_evidence', css_class="col-sm-6"), css_class='row evid'),
                         Div(Div('employment_status', css_class="col-sm-6"),
-                            Div('employment_status_evidence', css_class="col-sm-6"), css_class='row'),
+                            Div('employment_status_evidence', css_class="col-sm-6"), css_class='row emp_state'),
                         'time_unemployed', 'stage', 'ref_received',
                         css_class="col-sm-6")
                 ),

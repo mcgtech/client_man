@@ -16,6 +16,9 @@
     {% include 'partials/datepicker_js_includes.html' %}
     {% include 'partials/django_tables2_js_includes.html' %}
     {% include 'partials/reporting_js_includes.html' %}
+    {% if request.user|has_group:settings.JOB_COACH or request.user|has_group:settings.JOB_COACH_MAN or request.user|is_partner %}
+        <script type="text/javascript" src="{% static 'js/client_search_as_partner.js' %}"></script>
+    {% endif %}
     <script type="text/javascript" src="{% static 'js/client_search.js' %}"></script>
 {% endblock %}
 

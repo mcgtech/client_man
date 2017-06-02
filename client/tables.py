@@ -26,12 +26,6 @@ class ClientsTable(tables.Table):
             con_links = [c.get_summary(True) for c in record.get_all_contracts_ordered()]
             return format_html("<br>".join(con_links), record)
 
-    # def render_selected(self, record):
-    #     if record.selected:
-    #         return mark_safe('<input class="nameCheckBox" name="name[]" type="checkbox" checked/>')
-    #     else:
-    #         return mark_safe('<input class="nameCheckBox" name="name[]" type="checkbox"/>')
-
 
     class Meta:
         model = Client

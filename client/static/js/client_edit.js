@@ -14,6 +14,7 @@ function handle_page_readonly_state()
     if (data_from_django.read_only)
     {
         make_page_read_only();
+        disable_old_links($('#contracts a'));
     }
 }
 
@@ -57,14 +58,6 @@ function setup_client_form()
 function setup_client_contracts()
 {
     $('#contracts_table').appendTo('#contracts');
-
-    //https://www.datatables.net/
-    if ($('#no_data').length == 0)
-    {
-        $('#client_contracts').DataTable({
-            "order": [[ 0, "asc" ]]
-        } );
-    }
 }
 
 function setup_client_notes()

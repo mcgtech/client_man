@@ -50,5 +50,4 @@ function make_page_read_only()
 {
     $('textarea, input').prop('readonly', true);
     $('select, input[type="checkbox"]').prop('disabled', true);
-    $('.main-butt, .add-row, .delete-row, .clearablefileinput, #lookup_field, #button-id-add-contract').remove();
 }

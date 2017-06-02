@@ -24,5 +24,5 @@ function setup_postcode_lookup() {
 
 function add_lookup_field_to_dom()
 {
-    $('.row.postcode').append('<label class="control-label ">Post code lookup</label><div class="col-sm-6"><div id="lookup_field"></div></div>');
+    $('.row.postcode').append('<label class="control-label pc-lookup">Post code lookup</label><div class="col-sm-6 pc-lookup"><div id="lookup_field"></div></div>');
 }

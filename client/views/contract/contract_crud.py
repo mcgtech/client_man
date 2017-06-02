@@ -25,7 +25,7 @@ def contract_new(request, client_pk, con_type):
 
 
 @login_required
-@user_passes_test(job_coach_user, 'client_man_login')
+@user_passes_test(access_client_details, 'client_man_login')
 def contract_edit(request, client_pk, contract_id):
     return manage_contract(request, client_pk, None, contract_id)
 
@@ -92,6 +92,7 @@ def manage_contract(request, client_id, con_type, contract_id=None):
     # needs {% include 'partials/inject_js_data.html' %} added to template (acced via data_from_django in js)
     js_dict = {}
     add_contract_js_data(js_dict, client)
+    set_page_read_only_status_in_js_data(js_dict, request.user)
     set_deletion_status_in_js_data(js_dict, request.user, job_coach_man_user)
     js_data = json.dumps(js_dict)
 
