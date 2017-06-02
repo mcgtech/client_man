@@ -36,8 +36,7 @@ class ClientForm(EditForm, AuditableForm):
                 Tab(
                     'Project',
                     Div(
-                        Div(Div('job_coach', css_class="col-sm-6"), Div('client_status', css_class="col-sm-6"),
-                            css_class='row'),
+                        'client_status',
                         Div(Div('start_date', css_class="col-sm-6"), Div('end_date', css_class="col-sm-6"),
                             css_class='row'),
                         'nat_ins_number', 'education', 'jsa', 'recommended_by', 'social_work_involved',
@@ -72,7 +71,6 @@ class ClientForm(EditForm, AuditableForm):
         self.prepare_required_field('education', 'Education')
         self.prepare_required_field('client_group', 'Client group')
         self.prepare_required_field('time_unemployed', 'Time unemployed')
-        self.prepare_required_field('job_coach', 'Job coach')
         self.prepare_required_field('sex', 'Sex')
         self.prepare_required_field('marital_status', 'Marital status')
         self.prepare_required_field('ethnicity', 'Ethnicity')
@@ -128,9 +126,6 @@ class ClientForm(EditForm, AuditableForm):
     def clean_client_group(self):
         return validate_required_field(self, 'client_group', 'client group')
 
-    def clean_job_coach(self):
-        return validate_required_field(self, 'job_coach', 'job coach')
-
     def clean_email_address(self):
         email = self.cleaned_data['email_address']
         if email and not is_email_valid(email):
@@ -142,7 +137,7 @@ class ClientForm(EditForm, AuditableForm):
     class Meta(AuditableForm.Meta):
         AuditableForm.Meta.model = Client
         fields = get_auditable_fields() + ('title', 'forename', 'middle_name', 'surname',
-                                           'known_as', 'dob', 'sex', 'email_address', 'job_coach',
+                                           'known_as', 'dob', 'sex', 'email_address',
                                            'birth_certificate', 'ethnicity', 'social_work_involved', 'marital_status',
                                            'employment_status_evidence', 'start_date', 'end_date', 'nat_ins_number',
                                            'education', 'recommended_by', 'jsa', 'employment_status',

@@ -1,6 +1,6 @@
 from client.models import Client
 from django.db.models import Q
-from common.views import job_coach_user, admin_user, job_coach_man_user
+from common.views import job_coach_user, admin_user, job_coach_man_user, supply_chain_partner_user
 
 def find_client_by_full_name(query_name, user):
     qs = get_client_search_default_queryset(user)
@@ -13,6 +13,24 @@ def find_client_by_full_name(query_name, user):
 def get_client_search_default_queryset(user):
     qs = Client.objects.select_related('user').all()
     if job_coach_man_user(user) == False:
-        qs = qs.filter(job_coach=user)
-
+        if job_coach_user(user):
+            # qs = get_clients_where_user_is_current_coach(user, qs)
+            qs = qs.filter(contract__job_coach=user).distinct()
+        elif supply_chain_partner_user(user):
+            qs = qs.filter(contract__partner=user).distinct()
+        else:
+            qs = Client.objects.none()
     return qs
+
+# this is quite slow and would need speeding up if I use it
+# see
+def get_clients_where_user_is_current_coach(user, qs):
+    # only return clients where user is current job coach
+    from client.models import Contract
+    client_ids = []
+    for client in qs:
+        latest_con = Contract.objects.filter(client=client).order_by('start_date').last()
+        if latest_con is not None and latest_con.job_coach == user:
+            client_ids.append(latest_con.client.id)
+
+    return qs.filter(pk__in=client_ids)

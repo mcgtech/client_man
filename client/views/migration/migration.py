@@ -63,6 +63,16 @@ def load_contracts(request):
                         if len(sec_client_group) == 0 or sec_client_group == '-1' or sec_client_group== -1:
                             sec_client_group = None
                         contract.secondary_client_group = sec_client_group
+
+                        # associate with job coach - they need to be created before this runs
+                        job_coach_user_name = get_clean_json_data(json_contract['job_coach'])
+                        job_coaches = User.objects.filter(username=job_coach_user_name)
+                        if len(job_coaches) > 0:
+                            job_coach = job_coaches.first()
+                            contract.job_coach = job_coach
+                        else:
+                            errors.append('Failed to find matching coach ' + job_coach_user_name + ' for ' + client.forename + ' ' + client.surname)
+
                         if (con_type == Contract.TIO):
                             apply_tio_details(nid, contract, json_tio_details)
                         else:
@@ -254,13 +264,13 @@ def load_clients(request):
                 client.modified_on = modified_on
 
                  # associate with job coach - they need to be created before this runs
-                job_coach_user_name = get_clean_json_data(json_client['job_coach'])
-                job_coaches = User.objects.filter(username=job_coach_user_name)
-                if len(job_coaches) > 0:
-                    job_coach = job_coaches.first()
-                    client.job_coach = job_coach
-                else:
-                    errors.append('Failed to find matching coach ' + job_coach_user_name + ' for ' + client.forename + ' ' + client.surname)
+                # job_coach_user_name = get_clean_json_data(json_client['job_coach'])
+                # job_coaches = User.objects.filter(username=job_coach_user_name)
+                # if len(job_coaches) > 0:
+                #     job_coach = job_coaches.first()
+                #     client.job_coach = job_coach
+                # else:
+                #     errors.append('Failed to find matching coach ' + job_coach_user_name + ' for ' + client.forename + ' ' + client.surname)
                 client.original_client_id = get_clean_json_data(json_client['original_client_id'])
 
 

@@ -5,7 +5,7 @@ function populate_print_area(entity_ids, report_id)
         if (status == 'error')
         {
             var msg = "Sorry but there was a printing error: " + xhr.status + " " + xhr.statusText;
-            bootbox.alert(message);
+            bootbox.alert(msg);
         }
         else
         {

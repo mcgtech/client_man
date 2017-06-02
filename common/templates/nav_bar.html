@@ -27,12 +27,14 @@
             </ul>
           </li>
         {% endif %}
-        {% if request.user|has_group:settings.JOB_COACH or request.user|has_group:settings.JOB_COACH_MAN %}
+        {% if request.user|has_group:settings.JOB_COACH or request.user|has_group:settings.JOB_COACH_MAN or request.user|is_partner %}
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Client<span class="caret"></span></a>
             <ul class="dropdown-menu dropdownhover-top">
             <li><a href="{% url 'client_search' %}">Search</a></li>
-            <li><a href="{% url 'client_new' %}">Add</a></li>
+            {% if request.user|has_group:settings.JOB_COACH or request.user|has_group:settings.JOB_COACH_MAN %}
+                <li><a href="{% url 'client_new' %}">Add</a></li>
+            {% endif %}
             </ul>
           </li>
         {% endif %}
@@ -55,9 +57,11 @@
             <a href="{% url 'client_man_logout' %}">Log out {{ user.username }}</a>
         </li>
       </ul>
-      <div class="navbar-form navbar-right">
-          <input title="select a client to edit" type="text" class="form-control autocomplete" placeholder="client id or name" id="quick_client">
-      </div>
+      {% if request.user|has_group:settings.JOB_COACH or request.user|has_group:settings.JOB_COACH_MAN %}
+          <div class="navbar-form navbar-right">
+              <input title="select a client to edit" type="text" class="form-control autocomplete" placeholder="client id or name" id="quick_client">
+          </div>
+      {% endif %}
     </div>
   </div>
 </nav>

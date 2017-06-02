@@ -2,8 +2,10 @@ from client.models import Client, Contract, ContractStatus
 import django_filters
 from common.models import Address
 from client.queries import *
+from django.contrib.auth.models import User
 from django.db.models import Max
 from django.db.models import F
+from django.conf import settings
 
 # https://simpleisbetterthancomplex.com/tutorial/2016/11/28/how-to-filter-querysets-dynamically.html
 class ClientFilter(django_filters.FilterSet):
@@ -17,6 +19,11 @@ class ClientFilter(django_filters.FilterSet):
     contract_started = django_filters.DateFilter(method='filter_contract_started', name='contract_started', label='Contract started >=')
     area = django_filters.ChoiceFilter(choices=Address.AREA, method='filter_address_area', name='filter_address_area', label='Area')
     age = django_filters.NumberFilter(method='filter_client_age', name='age', label='Age >=')
+    all_coaches = User.objects.filter(groups__name=settings.JOB_COACH)
+    coach_choices = []
+    for coach in all_coaches:
+        coach_choices.append((coach.id, coach.username))
+    job_coach = django_filters.ChoiceFilter(choices=coach_choices, method='filter_job_coach_hist', label='Coach history')
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user')
@@ -47,6 +54,10 @@ class ClientFilter(django_filters.FilterSet):
                 client_ids.append(con.client.id)
 
         return queryset.filter(pk__in=client_ids)
+
+    # https://stackoverflow.com/questions/42526670/django-filter-on-values-of-child-objects
+    def filter_job_coach_hist(self, queryset, name, value):
+        return queryset.filter(**{'contract__job_coach': value})
 
     # https://stackoverflow.com/questions/42526670/django-filter-on-values-of-child-objects
     def filter_contract_type_hist(self, queryset, name, value):

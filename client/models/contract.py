@@ -107,6 +107,13 @@ class Contract(Auditable):
     secondary_client_group = models.IntegerField(choices=SEC_CLIENT_GROUPS, default=None, null=True)
     secondary_client_group_evidence = models.FileField(upload_to='client/group_evid/', blank=True, null=True)
     application_form = models.FileField(upload_to='client/con_app_form/', blank=True, null=True)
+    # https://www.webforefront.com/django/setuprelationshipsdjangomodels.html
+    # a job coach can have many clients, but a client can have only one coach, so in django we add the ForeignKey to the many part of the relationship:
+    job_coach = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='job_coach', blank=True, null=True, limit_choices_to={'groups__name': settings.JOB_COACH})
+    # if I make it OneToOneField then I get duplicate key error
+    # partner = models.OneToOneField(settings.AUTH_USER_MODEL, null=True, related_name='tio_contract')
+    # I moved this from TIO as other contracts like tio may need it but mainly because I need to query partner on the base class
+    partner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='tio_contract', blank=True, null=True, limit_choices_to={'groups__name__in': [settings.HI_COUNCIL_PART, settings.RAG_TAG_PART]})
     client = models.ForeignKey(Client, on_delete=models.CASCADE, null=True, related_name="contract")
 
     def contract_has_a_partner(self):
@@ -123,13 +130,14 @@ class Contract(Auditable):
 
     def get_summary(self, type_as_link):
         url = self.get_absolute_url()
+        coach = self.job_coach.username
         the_type = '<a target="_blank" href="' + url + '">' + self.get_type_display() + '</a>' if type_as_link else self.get_type_display()
         start = self.start_date.strftime(settings.DISPLAY_DATE) if self.start_date is not None else ''
         latest_status = self.get_latest_status()
         status = '' if latest_status is None else ' (' + latest_status.get_status_display() + ' )'
         end = (' to ' + self.end_date.strftime(settings.DISPLAY_DATE)) if self.end_date is not None else ''
 
-        return the_type + ' ' + start + end + status
+        return the_type + ':' + coach + ' ' + start + end + status
 
     def get_full_type(self):
         return Contract.FULL_TYPES[self.type]
@@ -188,9 +196,6 @@ class TIOContract(Contract):
     emp_pros_inc = models.BooleanField(default=False, verbose_name='To improve employment prospects')
     other_ben = models.TextField(verbose_name='Other Benefits', blank=True)
     fund_mgr_notes = models.TextField(verbose_name='Fund Manager Notes', blank=True)
-    # if I make it OneToOneField then I get duplicate key error
-    # partner = models.OneToOneField(settings.AUTH_USER_MODEL, null=True, related_name='tio_contract')
-    partner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='tio_contract', blank=True, null=True, limit_choices_to={'groups__name__in': [settings.HI_COUNCIL_PART, settings.RAG_TAG_PART]})
 
     def get_info_man_acceptance_date(self):
         status = self.get_latest_status_with_state(ContractStatus.ACC_INFO_MAN)

@@ -2,6 +2,8 @@ is employment status related to contracts and hence should be dirived from live 
 
 ... add the questions I sent neil in email
 
+I have made assumption that coaches belowng to contract and so I have moved the job coach filed to contract
+
 I am assuming person is on only one live contract at a time?
 
 in tio print screen should Developing Employment Skills be included in printing?
@@ -24,6 +26,7 @@ needs to pay for postcode lookup - once he does update key used
 
 when changing state in contract apart from adding new state and sending emails what else should it do (show another scrren?)
 
+go through screens logged in as infor man and as partner to ensure access levels are correct
 
 do we need helper.inc:3660 (find it in drupal code)?
 

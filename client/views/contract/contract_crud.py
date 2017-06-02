@@ -183,7 +183,7 @@ def get_state_buttons_to_display(client, contract, is_edit_form, request):
                 if info_man_user(request.user):
                     buttons.append(settings.DISPLAY_REVOKE)
 
-            if contract.contract_has_a_partner() and partner_user(request.user):
+            if contract.contract_has_a_partner() and supply_chain_partner_user(request.user):
                 if contract_can_be_approved(status):
                     buttons.append(settings.DISPLAY_APPROVE)
                     buttons.append(settings.DISPLAY_REJECT)

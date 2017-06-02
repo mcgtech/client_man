@@ -36,6 +36,6 @@ class ClientsTable(tables.Table):
     class Meta:
         model = Client
         # fiels to display in table
-        fields = ('title', 'forename', 'surname', 'sex', 'job_coach', 'age', 'address.area', 'original_client_id')
+        fields = ('title', 'forename', 'surname', 'sex', 'age', 'address.area', 'original_client_id')
         attrs = {"class": "paleblue table table-striped table-hover table-bordered"}
         sequence = ('selection', 'client_id', '...')

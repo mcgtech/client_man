@@ -42,3 +42,13 @@ function manage_disabled_selects_in_a_form()
         }
     });
 }
+
+// used for example when highland council view and edit page
+// still need manage_disabled_selects_in_a_form to work as for example
+// partners can press approve which does a post
+function make_page_read_only()
+{
+    $('textarea, input').prop('readonly', true);
+    $('select, input[type="checkbox"]').prop('disabled', true);
+    $('.main-butt, .add-row, .delete-row, .clearablefileinput, #lookup_field, #button-id-add-contract').remove();
+}

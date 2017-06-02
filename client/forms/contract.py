@@ -26,11 +26,11 @@ class ContractForm(EditForm, AuditableForm):
                         'Main',
                         Div(
                 Div('type',
+                    'job_coach',
                     'start_date',
                     'end_date',
-                    'referral_date',
                     css_class="col-sm-6"),
-                Div('secondary_client_group', 'secondary_client_group_evidence',
+                Div('referral_date', 'secondary_client_group', 'secondary_client_group_evidence',
                     'application_form',
                     css_class="col-sm-6"),
                 css_class="row")),
@@ -58,7 +58,7 @@ class ContractForm(EditForm, AuditableForm):
     class Meta(AuditableForm.Meta):
         model = Contract
         fields = get_auditable_fields() + ('type', 'secondary_client_group', 'start_date', 'end_date', 'referral_date',
-                                            'secondary_client_group_evidence', 'application_form')
+                                            'secondary_client_group_evidence', 'application_form', 'job_coach')
         AuditableForm.Meta.widgets['start_date'] = forms.DateInput(attrs={'class':'datepicker'})
         AuditableForm.Meta.widgets['end_date'] = forms.DateInput(attrs={'class':'datepicker'})
         AuditableForm.Meta.widgets['referral_date'] = forms.DateInput(attrs={'class':'datepicker'})

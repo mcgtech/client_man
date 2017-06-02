@@ -15,7 +15,7 @@ def show_report(request, entity_ids, report_id):
         return show_latest_contract_report(request, entity_ids)
 
 @login_required
-@user_passes_test(admin_user, 'job_coach_user')
+@user_passes_test(access_client_details, 'client_man_login')
 def show_client_report(request, entity_ids):
     temp = ReportTemplate.objects.get(template_identifier=ReportTemplate.CLIENT_MAIN)
     if temp is not None:
@@ -37,7 +37,7 @@ def show_client_report(request, entity_ids):
 
 
 @login_required
-@user_passes_test(admin_user, 'client_man_login')
+@user_passes_test(access_client_details, 'client_man_login')
 def show_latest_contract_report(request, entity_ids):
     clients_con_markup = ''
     clients = Client.objects.filter(pk__in=entity_ids)

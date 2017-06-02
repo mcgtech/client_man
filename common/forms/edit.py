@@ -16,13 +16,13 @@ class EditForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = False
-        self.helper.add_input(Submit("save record", "Save", css_class='save_butt'))
+        self.helper.add_input(Submit("save record", "Save", css_class='save_butt main-butt'))
         if is_edit_form:
-            self.helper.add_input(Submit("delete record", "Delete", css_class='btn btn-danger delete-btn'))
+            self.helper.add_input(Submit("delete record", "Delete", css_class='btn btn-danger delete-btn  main-butt'))
         else:
             if cancel_url is not None:
                 cancel_onclick = "javascript:location.href = '" + cancel_url + "';"
-                self.helper.add_input(Button("cancel add", "Cancel", css_class='btn btn-default cancel-btn', onclick=cancel_onclick))
+                self.helper.add_input(Button("cancel add", "Cancel", css_class='btn btn-default cancel-btn main-butt', onclick=cancel_onclick))
         # the following is to allow control of field required validation at page and field level
         self.form_errors = []        # Note: if I use 'disabled' then the post returns nothing for the fields
 

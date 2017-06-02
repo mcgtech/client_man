@@ -26,7 +26,7 @@ from reporting.forms import ReportTemplateForm
 # https://django-filter.readthedocs.io/en/develop/guide/usage.html#the-template
 # restrict access: # https://github.com/brack3t/django-braces & http://django-braces.readthedocs.io/en/v1.4.0/access.html#loginrequiredmixin
 class ReportTempSearch(GroupRequiredMixin, FilterView, SingleTableView):
-    group_required = u"job coach"
+    group_required = [settings.JOB_COACH]
     model = ReportTemplate
     table_class = ReportTempTable # /Users/stephenmcgonigal/django_projs/client/tables.py
     filterset_class = ReportTempFilter # see /Users/stephenmcgonigal/django_projs/client/filters.py

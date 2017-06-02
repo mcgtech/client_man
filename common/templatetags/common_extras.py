@@ -17,6 +17,10 @@ def has_group(user, group_name):
     else:
         return None
 
+@register.filter(name='is_partner')
+def is_partner(user):
+    return has_group(user, settings.HI_COUNCIL_PART) or has_group(user, settings.RAG_TAG_PART)
+
 @register.filter(name='render_checkbox')
 def render_checkbox(checked):
     # icon = 'glyphicon-ok' if checked else 'glyphicon-remove'
