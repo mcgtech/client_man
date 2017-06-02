@@ -23,8 +23,9 @@ from common import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^login/$', login, {'template_name': 'login.html'}, name='client_man_login'),
-    url(r'^logout/$', logout, {'next_page': reverse_lazy('client_search')}, name='client_man_logout'),
+    url(r'^accounts/login/$', login, {'template_name': 'login.html'}, name='client_man_login'),
+    url(r'^accounts/logout/$', logout, {'next_page': reverse_lazy('client_search')}, name='client_man_logout'),
+    url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'', include('client.urls')),
     url(r'', include('common.urls')),
     url(r'', include('reporting.urls')),

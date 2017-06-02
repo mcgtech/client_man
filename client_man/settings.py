@@ -79,7 +79,7 @@ ROOT_URLCONF = 'client_man.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['./templates/registration',],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
