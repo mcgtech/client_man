@@ -14,6 +14,7 @@
 {% block js %}
     {% include 'partials/inject_js_data.html' %}
     {% include 'partials/form_edit_js_includes.html' %}
+    {% include 'partials/bootbox_js_includes.html' %}
     <script type="text/javascript" src="{% static 'js/email_template.js' %}"></script>
 {% endblock %}
 {% block content %}
@@ -22,14 +23,31 @@
         {% crispy form %}
     </form>
     <div id="client_reflections">
-    <div class="alert alert-success alert-dismissible" role="alert">
-        The following tokens can be used in your email. They will get replaced with real values when the email is generated.<br>
-        When you encounter |yesno:"Yes,No", you can replace the two words inside the quotes with any words that you wish.
-    </div>
+        <div class="alert alert-success alert-dismissible" role="alert">
+            The following Django tags can be used in your email template. They will get replaced with real values when the email is generated.<br>
+            When you encounter |yesno:"Yes,No", you can replace the two words inside the quotes with any words that you wish.
+        </div>
         <ul>
         {% for r in client_reflections %}
             <li>{{ r }}</li>
         {% endfor %}
         </ul>
+    </div>
+    <div id="test_email_temp">
+        <div class="alert alert-success alert-dismissible" role="alert">
+            To test your template enter a client id into the input box and a target email into the email box and then click test.<br>
+            Note: Save any changes first.
+            <div class="row">
+                <div class="col-sm-4">
+                    <input type="text" id="client_id" maxlength="100" class="textinput textInput form-control" placeholder="client id">
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" id="email_to" class="textinput textInput form-control" placeholder="email address">
+                </div>
+                <div class="col-sm-4">
+                    <button type="button" id="test_email" class="btn btn-success">Test</button>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

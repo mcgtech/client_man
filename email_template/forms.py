@@ -16,7 +16,10 @@ class EmailTemplateForm(AuditableForm):
                     Div(Div('cc_addresses', css_class="col-sm-6"), Div('bcc_addresses', css_class="col-sm-6"), css_class='row'),
                     'plain_body', 'html_body'),
                 Tab(
-                    'Tokens',
+                    'Tags',
+                ),
+                Tab(
+                    'Test',
                 ),
                 Tab(
                     'Log',
