@@ -94,8 +94,9 @@
             <tr>
                 <td>{{ note.note }}</td>
                 <td>{{ note.modified_by }}</td>
-                <td>{{ note.modified_date }}</td>
+                <td>{{ note.modified_on }}</td>
             </tr>
         {% endfor %}
     </table>
 </fieldset>
+{% include 'reports_footer.html' %}

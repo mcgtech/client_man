@@ -10,7 +10,7 @@ from django.conf import settings
 
 # had to use helper as shown in https://blog.bixly.com/awesome-forms-django-crispy-forms
 # otherwise tabs doesn't work
-class ContractForm(AuditableForm, EditForm):
+class ContractForm(EditForm, AuditableForm):
     def __init__(self, *args, **kwargs):
         add_contract = kwargs.pop('add_contract')
         super().__init__(*args, **kwargs)

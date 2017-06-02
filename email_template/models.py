@@ -6,12 +6,14 @@ class EmailTemplate(Auditable):
     CON_REVOKE = 1
     CON_APPROVE = 2
     CON_REJECT = 3
+    CON_UNDO = 4
     TEMPLATE_NAMES = (
         (None, 'Please select'),
         (CON_ACCEPT, 'Contract accept'),
         (CON_REVOKE, 'Contract revoke'),
         (CON_APPROVE, 'Contract approve'),
         (CON_REJECT, 'Contract reject'),
+        (CON_UNDO, 'Contract undo'),
     )
     template_identifier = models.IntegerField(choices=TEMPLATE_NAMES, default=None, unique=True)
     subject = models.CharField(max_length=100)

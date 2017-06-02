@@ -3,12 +3,9 @@
     <div class="col-sm-6">
         <select name="action" class="form-control" id="id_actions">
             <option value="0">Select an action</option>
+            <option value="1">print client</option>
             {% if request.user|has_group:settings.JOB_COACH_MAN %}
-                <option value="1">delete client</option>
-            {% endif %}
-            <option value="2">print client</option>
-            {% if request.user|has_group:settings.JOB_COACH_MAN %}
-                <option value="3">print latest client contract</option>
+                <option value="2">print latest client contract</option>
             {% endif %}
         </select>
     </div>

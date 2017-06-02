@@ -45,6 +45,10 @@
             <button type="submit" value="Reject" name="reject-contract" class="save_butt btn btn-warning">
                 <span class="glyphicon glyphicon-remove"></span>Reject</button>
         {% endif %}
+        {% if display_undo in state_buttons %}
+            <button type="submit" value="Undo" name="undo-contract" class="save_butt btn btn-warning">
+                <span class="glyphicon glyphicon-remove"></span>Undo</button>
+        {% endif %}
     </form>
 
 {% endblock %}

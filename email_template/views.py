@@ -118,10 +118,14 @@ def send_email_using_template(context, template_id, request, test_to_addresses =
             plain_content = apply_context_to_string(temp.plain_body, context)
             subject = apply_context_to_string(temp.subject, context)
             from_email = apply_context_to_string(temp.from_address, context)
-            to_addresses = test_to_addresses if not None else temp.to_addresses
-            to_addresses = apply_context_to_string(to_addresses, context, True)
-            cc_addresses = apply_context_to_string(temp.cc_addresses, context, True)
-            bcc_addresses = apply_context_to_string(temp.bcc_addresses, context, True)
+            if test_to_addresses is None:
+                to_addresses = temp.to_addresses
+            else:
+                to_addresses = test_to_addresses
+            real_addresses = apply_context_to_string(to_addresses, context)
+            to_addresses = get_safe_target_email(real_addresses, True)
+            cc_addresses = get_safe_target_email(apply_context_to_string(temp.cc_addresses, context), True)
+            bcc_addresses = get_safe_target_email(apply_context_to_string(temp.bcc_addresses, context), True)
             # https://docs.djangoproject.com/en/1.11/topics/email/
             try:
                 email = EmailMultiAlternatives(
@@ -134,13 +138,23 @@ def send_email_using_template(context, template_id, request, test_to_addresses =
                 )
                 email.attach_alternative(html_content, "text/html")
                 email.send(False)
-                msg_once_only(request, 'Email sent to ' + str(to_addresses), settings.SUCC_MSG_TYPE)
+                if config.TEST_MODE:
+                    msg_once_only(request, 'Emailing in test mode - actual email address used: ' + config.TEST_EMAIL_ADDRESS, settings.WARN_MSG_TYPE)
+                msg_once_only(request, 'Email sent to ' + real_addresses, settings.SUCC_MSG_TYPE)
             except Exception as e:
-                msg_once_only(request, 'Failed to email ' + str(to_addresses) + ' as an exception occurred: ' + str(e), settings.ERR_MSG_TYPE)
+                msg_once_only(request, 'Failed to email ' + real_addresses + ' as an exception occurred: ' + str(e), settings.ERR_MSG_TYPE)
         else:
             msg_once_only(request, 'Failed to email as no valid template id was found for id: ' + template_id, settings.ERR_MSG_TYPE)
     else:
         msg_once_only(request, 'Failed to email as no valid template id was provided', settings.ERR_MSG_TYPE)
+
+
+# if in test mode then test email address will be returned
+def get_safe_target_email(addresses, return_as_list = False):
+    if config.TEST_MODE:
+        addresses = config.TEST_EMAIL_ADDRESS
+    return addresses.split(",") if return_as_list else addresses
+
 
 def apply_agency_details_to_context(context):
     context['agency_name'] = config.AGENCY_NAME
@@ -150,5 +164,5 @@ def apply_agency_details_to_context(context):
 def apply_context_to_string(str, context, return_as_list = False):
     str_tpl = Template(str)
     str_with_context_applied = str_tpl.render(Context(context))
-    return str_with_context_applied.split(",") if return_as_list else str_with_context_applied
+    return str_with_context_applied
 

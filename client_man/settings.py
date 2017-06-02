@@ -54,12 +54,15 @@ CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
 CONSTANCE_CONFIG = {
     'GEN_FROM_EMAIL_ADDRESS': ('mcgonigalstephen@gmail.com', 'General from address'),
     'AGENCY_NAME': ('The Shirlie Project', 'Agency name'),
+    'TEST_MODE': (True, 'Test mode', bool),
+    'TEST_EMAIL_ADDRESS': ('mcgonigalstephen@gmail.com', 'In test mode, this email address(es) will be used in place of all target email addresses'),
     'GEN_CONTRACT_FROM_EMAIL_ADDRESS': ('mcgonigalstephen@gmail.com', 'General contract from address'),
 }
 
 CONSTANCE_CONFIG_FIELDSETS = {
     'General Options': ('AGENCY_NAME', 'GEN_FROM_EMAIL_ADDRESS',),
     'Contract Options': ('GEN_CONTRACT_FROM_EMAIL_ADDRESS',),
+    'Testing Options': ('TEST_MODE', 'TEST_EMAIL_ADDRESS'),
 }
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -191,6 +194,7 @@ DISPLAY_APPROVE = 0
 DISPLAY_REJECT = 1
 DISPLAY_REVOKE = 2
 DISPLAY_ACCEPT = 4
+DISPLAY_UNDO = 5
 
 BASE_URL = 'http://127.0.0.1:8000'
 

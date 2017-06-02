@@ -7,3 +7,4 @@
 . remove Original Client Id from client search table?
 . remove EMAIL_BACKEND from settings when ready to actually send emails
 . set BASE_URL in settings
+. switch TEST_MODE to false in settings

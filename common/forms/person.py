@@ -4,8 +4,8 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, HTML, Button, Div, Field
 from crispy_forms.bootstrap import TabHolder, Tab, FormActions, InlineField
 from common.forms import *
+from . import *
 from django.conf import settings
-
 # forms for editting
 
 
@@ -59,21 +59,26 @@ class PhoneFormSetHelper(FormHelper):
         self.template = 'bootstrap3/table_inline_formset.html'
 
 
-class NoteForm(forms.ModelForm):
-    helper = FormHelper()
-    helper.form_tag = False
+# class NoteForm(forms.ModelForm):
+class NoteForm(AuditableForm):
+    # helper = FormHelper()
+    # helper.form_tag = False
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['modified_by'].widget.attrs['disabled'] = True
-        self.fields['modified_date'].widget.attrs['disabled'] = True
-        # self.helper.form_tag = True
-    class Meta:
-        model = Note
-        fields = ('note', 'modified_by', 'modified_date', )
-        widgets = {
-            'modified_date': forms.DateInput(format=(settings.DISPLAY_DATE_TIME)),
-            'note': forms.Textarea(attrs={'rows': 3}),}
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self.fields['modified_by'].widget.attrs['disabled'] = True
+    #     self.fields['modified_date'].widget.attrs['disabled'] = True
+    #     # self.helper.form_tag = True
+    class Meta(AuditableForm.Meta):
+        AuditableForm.Meta.model = Note
+        fields = ('note', ) + get_auditable_fields()
+        AuditableForm.Meta.widgets['note'] = forms.Textarea(attrs={'rows': 3, 'cols': 100})
+    # class Meta:
+    #     model = Note
+    #     fields = ('note', 'modified_by', 'modified_date', )
+    #     widgets = {
+    #         'modified_date': forms.DateInput(format=(settings.DISPLAY_DATE_TIME)),
+    #         'note': forms.Textarea(attrs={'rows': 3}),}
 
 
 class NoteFormSetHelper(FormHelper):

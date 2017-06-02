@@ -54,6 +54,18 @@ reject_temp.created_on = datetime.now()
 reject_temp.modified_on = datetime.now()
 reject_temp.save()
 
+undo_temp = EmailTemplate(template_identifier=EmailTemplate.CON_UNDO)
+undo_temp.subject = '{{ agency_name }} - contract approval undone for client {{ client.id}}'
+undo_temp.from_address = '{{ gen_con_from_address }}'
+undo_temp.to_addresses = '{{ contract.created_by.email }}'
+undo_temp.html_body = '<p>The latest contract for {{client.get_absolute_url_markup}} has just had its approval undone</p>'
+undo_temp.plain_body = 'The latest contract for {{client.get_absolute_url_markup}} has just had its approval undone'
+undo_temp.created_by = admin
+undo_temp.modified_by = admin
+undo_temp.created_on = datetime.now()
+undo_temp.modified_on = datetime.now()
+undo_temp.save()
+
 # setup reporting templates
 client_dets_temp = ReportTemplate(template_identifier=ReportTemplate.CLIENT_MAIN)
 client_dets_temp.created_by = admin

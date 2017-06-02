@@ -4,7 +4,7 @@ from crispy_forms.bootstrap import TabHolder, Tab, FormActions, InlineField
 from .models import ReportTemplate
 from common.forms import *
 
-class ReportTemplateForm(AuditableForm, EditForm):
+class ReportTemplateForm(EditForm, AuditableForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper.layout = Layout(

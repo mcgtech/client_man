@@ -75,11 +75,12 @@ def get_client_reflections():
     client_reflections = get_reflections(Client._meta, 'client')
     phone_reflections = get_reflections(Telephone._meta, 'telephone')
     address_reflections = get_reflections(Address._meta, 'address')
+    note_reflections = get_reflections(Note._meta, 'note')
     contract_reflections = get_reflections(Contract._meta, 'client.get_latest_contract')
     status_reflections = get_reflections(Contract._meta, 'client.get_latest_contract.get_latest_status')
     user_reflections = get_reflections(User._meta, 'client.user')
 
-    return client_reflections + contract_reflections + status_reflections + phone_reflections + address_reflections + user_reflections
+    return client_reflections + contract_reflections + note_reflections + status_reflections + phone_reflections + address_reflections + user_reflections
 
 def get_reflections(meta, prefix):
     refs = []

@@ -152,8 +152,9 @@ def save_client_notes(notes_form_set, request):
                 # for some reason modified_by and modified_date always come back as changed
                 if 'note' in note_form.changed_data:
                     instance = note_form.save(commit=False)
-                    instance.modified_date = timezone.now()
-                    instance.modified_by = request.user
+                    apply_auditable_info(instance, request)
+                    # instance.modified_date = timezone.now()
+                    # instance.modified_by = request.user
                     instance.save()
 
 

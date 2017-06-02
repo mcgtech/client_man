@@ -77,6 +77,8 @@ def manage_contract(request, client_id, con_type, contract_id=None):
                 handle_contract_acceptance_revoked(request, client, contract)
             elif request.POST.get("reject-contract"):
                 handle_contract_rejection(request, client, contract)
+            elif request.POST.get("undo-contract"):
+                handle_contract_undo(request, client, contract)
             else:
                 msg_once_only(request, 'Saved contract for ' + client.get_full_name(), settings.SUCC_MSG_TYPE)
             return redirect(action)
@@ -98,6 +100,7 @@ def manage_contract(request, client_id, con_type, contract_id=None):
     status_list = contract.get_ordered_status() if status_list is None else status_list
 
     contract_form_errors = form_errors_as_array(contract_form)
+
     return render(request, 'client/contract/contract_edit.html', {'form': contract_form, 'client' : client,
                                                                   'status_list' : status_list,
                                                                   'the_action_text': the_action_text,
@@ -107,7 +110,8 @@ def manage_contract(request, client_id, con_type, contract_id=None):
                                                                   'display_accept' : settings.DISPLAY_ACCEPT,
                                                                   'display_approve' : settings.DISPLAY_APPROVE,
                                                                   'display_reject' : settings.DISPLAY_REJECT,
-                                                                  'display_revoke' : settings.DISPLAY_REVOKE})
+                                                                  'display_revoke' : settings.DISPLAY_REVOKE,
+                                                                  'display_undo' : settings.DISPLAY_UNDO})
 
 
 def handle_contract_accept(request, client, contract):
@@ -134,6 +138,12 @@ def handle_contract_rejection(request, client, contract):
     msg_once_only(request, 'Rejected contract for ' + client.get_full_name(), settings.SUCC_MSG_TYPE)
 
 
+def handle_contract_undo(request, client, contract):
+    new_state = add_new_contract_state(request, contract, ContractStatus.FUND_APP_MAN_UNDONE)
+    handle_state_change(request, client, contract, new_state)
+    msg_once_only(request, 'Undone approval for contract for ' + client.get_full_name(), settings.SUCC_MSG_TYPE)
+
+
 def handle_state_change(request, client, contract, new_state):
     # https://github.com/vintasoftware/django-templated-email
     template_id = None
@@ -146,8 +156,10 @@ def handle_state_change(request, client, contract, new_state):
         template_id = EmailTemplate.CON_APPROVE
     elif new_state.status == ContractStatus.REJ_FUND_MAN:
         template_id = EmailTemplate.CON_REJECT
+    elif new_state.status == ContractStatus.FUND_APP_MAN_UNDONE:
+        template_id = EmailTemplate.CON_UNDO
     if template_id is not None:
-        send_email_using_template(context, template_id, request)
+        send_email_using_template(context, template_id, request, None)
 
 
 def add_new_contract_state(request, contract, status):
@@ -171,11 +183,12 @@ def get_state_buttons_to_display(client, contract, is_edit_form, request):
                 if info_man_user(request.user):
                     buttons.append(settings.DISPLAY_REVOKE)
 
-            if contract.contract_has_a_partner():
+            if contract.contract_has_a_partner() and partner_user(request.user):
                 if contract_can_be_approved(status):
-                    if partner_user(request.user):
-                        buttons.append(settings.DISPLAY_APPROVE)
-                        buttons.append(settings.DISPLAY_REJECT)
+                    buttons.append(settings.DISPLAY_APPROVE)
+                    buttons.append(settings.DISPLAY_REJECT)
+                if contract_can_be_undone(status):
+                    buttons.append(settings.DISPLAY_UNDO)
 
     return buttons
 
@@ -185,12 +198,15 @@ def contract_can_be_accepted(status):
 
 
 def contract_can_be_revoked(status):
-    return status == ContractStatus.ACC_INFO_MAN or status == ContractStatus.AWAIT_FUND_APP_MAN
+    return status == ContractStatus.ACC_INFO_MAN or status == ContractStatus.AWAIT_FUND_APP_MAN or status == ContractStatus.FUND_APP_MAN_UNDONE
 
 
 def contract_can_be_approved(status):
-    return status == ContractStatus.ACC_INFO_MAN or status == ContractStatus.AWAIT_FUND_APP_MAN
+    return status == ContractStatus.ACC_INFO_MAN or status == ContractStatus.AWAIT_FUND_APP_MAN or status == ContractStatus.FUND_APP_MAN_UNDONE
 
+
+def contract_can_be_undone(status):
+    return status == ContractStatus.APP_FUND_MAN
 
 
 def get_contract_object(type, contract_id, base_contract):
