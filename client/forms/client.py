@@ -10,7 +10,7 @@ from django.conf import settings
 
 # had to use helper as shown in https://blog.bixly.com/awesome-forms-django-crispy-forms
 # otherwise tabs doesn't work
-class ClientForm(AuditableForm):
+class ClientForm(AuditableForm, EditForm):
     username = forms.CharField(required=False)
     password = forms.CharField(widget=forms.PasswordInput(), required=False)
 

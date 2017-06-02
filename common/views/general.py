@@ -2,6 +2,8 @@ from django.conf import settings
 from django.shortcuts import render
 from django.contrib.messages import get_messages
 from django.contrib.messages import info, success, warning, error, debug
+from client.models import *
+from common.models import *
 
 # http://stackoverflow.com/questions/753052/strip-html-from-strings-in-python
 def form_errors_as_array(form):
@@ -63,3 +65,37 @@ def msg_once_only(request, msg, type):
         elif (type == settings.DEBUG_MSG_TYPE):
             debug(request, msg)
     storage.used = False # to ensure we dont clear the messages we got in storage = get_messages(request)
+
+
+def get_client_reflections():
+    from django.contrib.auth.models import User
+    client_reflections = get_reflections(Client._meta, 'client')
+    phone_reflections = get_reflections(Telephone._meta, 'telephone')
+    address_reflections = get_reflections(Address._meta, 'address')
+    contract_reflections = get_reflections(Contract._meta, 'client.get_latest_contract')
+    status_reflections = get_reflections(Contract._meta, 'client.get_latest_contract.get_latest_status')
+    user_reflections = get_reflections(User._meta, 'client.user')
+
+    return client_reflections + contract_reflections + status_reflections + phone_reflections + address_reflections + user_reflections
+
+def get_reflections(meta, prefix):
+    refs = []
+    for f in meta.get_fields(include_parents=True, include_hidden=True):
+        name = prefix + '.' + f.name
+        suffix = None
+        open_brace = '{{ '
+        close_brace = ' }}'
+        if f.get_internal_type() == 'IntegerField' and f.choices is not None and len(f.choices) > 0:
+            name = prefix + '.' + 'get_' + f.name + '_display'
+        elif f.get_internal_type() == 'BooleanField':
+            name = name + '|yesno:"Yes,No"'
+        elif f.get_internal_type() == 'ForeignKey':
+            name = 'for x in ' + name + '.all'
+            suffix = '{{ x.abc }} {% endfor %} '
+            open_brace = '{% '
+            close_brace = ' %}'
+        tag = open_brace + name + close_brace
+        if suffix is not None:
+            tag = tag + suffix
+        refs.append(tag)
+    return refs

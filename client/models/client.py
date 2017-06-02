@@ -252,3 +252,4 @@ class Client(Person):
         url = settings.BASE_URL + self.get_absolute_url()
         return mark_safe('<a href="' + url + '">client ' + str(self.id) + '</a>')
 
+

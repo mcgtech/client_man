@@ -4,7 +4,7 @@ from crispy_forms.bootstrap import TabHolder, Tab, FormActions, InlineField
 from .models import EmailTemplate
 from common.forms import *
 
-class EmailTemplateForm(AuditableForm):
+class EmailTemplateForm(AuditableForm, EditForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper.layout = Layout(
