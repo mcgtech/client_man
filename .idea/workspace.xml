@@ -2,36 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="053a4aa4-3808-4504-ab0a-5f7dd90a79bc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/all_mig_steps/setup_templates.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/reporting/filters.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/reporting/forms.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/reporting/static/reporting/css/report_template.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/reporting/static/reporting/js/report_template.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/reporting/tables.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/reporting/templates/report_template.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/reporting/templates/report_template_search.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/reporting/views/reporting_crud.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/reporting/templates/client/client_details.html" afterPath="$PROJECT_DIR$/reporting/templates/client/old/client_details.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/reporting/templates/client/contract_main_details.html" afterPath="$PROJECT_DIR$/reporting/templates/client/old/contract_main_details.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/reporting/templates/client/contract_partner_head.html" afterPath="$PROJECT_DIR$/reporting/templates/client/old/contract_partner_head.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/reporting/templates/client/contract_tio_details.html" afterPath="$PROJECT_DIR$/reporting/templates/client/old/contract_tio_details.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/requirements.txt" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/client/all_mig_steps/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/client/docs/__init__.py" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/client/all_mig_steps/rebuild_steps.txt" afterPath="$PROJECT_DIR$/all_mig_steps/rebuild_steps.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/client/all_mig_steps/setup_templates.py" afterPath="$PROJECT_DIR$/all_mig_steps/setup_templates.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/client/all_mig_steps/setup_users_and_groups.py" afterPath="$PROJECT_DIR$/all_mig_steps/setup_users_and_groups.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/client/docs/db_commands.txt" afterPath="$PROJECT_DIR$/docs/db_commands.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/client/docs/general_practice.txt" afterPath="$PROJECT_DIR$/docs/general_practice.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/client/docs/git_commands.txt" afterPath="$PROJECT_DIR$/docs/git_commands.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/client/docs/migration.txt" afterPath="$PROJECT_DIR$/docs/migration.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/client/docs/notes.txt" afterPath="$PROJECT_DIR$/docs/notes.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/client/docs/project_setup.txt" afterPath="$PROJECT_DIR$/docs/project_setup.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/client/docs/questions.txt" afterPath="$PROJECT_DIR$/docs/questions.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/client/docs/reasons_to_rebuild.txt" afterPath="$PROJECT_DIR$/docs/reasons_to_rebuild.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/client/docs/reporting_and_printing.txt" afterPath="$PROJECT_DIR$/docs/reporting_and_printing.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/client/docs/time_so_far.txt" afterPath="$PROJECT_DIR$/docs/time_so_far.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/client/docs/understanding_old_contracts.txt" afterPath="$PROJECT_DIR$/docs/understanding_old_contracts.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/all_mig_steps/rebuild_steps.txt" afterPath="$PROJECT_DIR$/client/all_mig_steps/rebuild_steps.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/all_mig_steps/setup_users_and_groups.py" afterPath="$PROJECT_DIR$/client/all_mig_steps/setup_users_and_groups.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/docs/db_commands.txt" afterPath="$PROJECT_DIR$/client/docs/db_commands.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/templates/nav_bar.html" afterPath="$PROJECT_DIR$/common/templates/nav_bar.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/views/general.py" afterPath="$PROJECT_DIR$/common/views/general.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/email_template/static/js/email_template.js" afterPath="$PROJECT_DIR$/email_template/static/js/email_template.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/email_template/tables.py" afterPath="$PROJECT_DIR$/email_template/tables.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/email_template/templates/email_template_search.html" afterPath="$PROJECT_DIR$/email_template/templates/email_template_search.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/email_template/views.py" afterPath="$PROJECT_DIR$/email_template/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reporting/admin.py" afterPath="$PROJECT_DIR$/reporting/admin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reporting/models.py" afterPath="$PROJECT_DIR$/reporting/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reporting/templates/client/client_contract_report.html" afterPath="$PROJECT_DIR$/reporting/templates/client/client_contract_report.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reporting/templates/client/client_details_report.html" afterPath="$PROJECT_DIR$/reporting/templates/client/client_details_report.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reporting/urls.py" afterPath="$PROJECT_DIR$/reporting/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reporting/views/__init__.py" afterPath="$PROJECT_DIR$/reporting/views/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reporting/views/client.py" afterPath="$PROJECT_DIR$/reporting/views/client.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -50,7 +38,7 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="setup_templates.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/all_mig_steps/setup_templates.py">
+        <entry file="file://$PROJECT_DIR$/all_mig_steps/setup_templates.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="532">
               <caret line="76" column="25" lean-forward="false" selection-start-line="76" selection-start-column="25" selection-end-line="76" selection-end-column="25" />
@@ -61,34 +49,32 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="git_commands.txt" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/client/docs/git_commands.txt">
+      <file leaf-file-name="git_commands.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/git_commands.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="2" selection-end-column="16" />
+            <state relative-caret-position="45">
+              <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="25" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="rebuild_steps.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/all_mig_steps/rebuild_steps.txt">
+      <file leaf-file-name="rebuild_steps.txt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/all_mig_steps/rebuild_steps.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="647">
-              <caret line="71" column="61" lean-forward="false" selection-start-line="71" selection-start-column="61" selection-end-line="71" selection-end-column="61" />
+            <state relative-caret-position="0">
+              <caret line="0" column="69" lean-forward="false" selection-start-line="0" selection-start-column="69" selection-end-line="0" selection-end-column="69" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/reporting/models.py">
+      <file leaf-file-name="project_setup.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/project_setup.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="4" lean-forward="false" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
-              <folding>
-                <element signature="e#0#28#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="660">
+              <caret line="89" column="40" lean-forward="false" selection-start-line="75" selection-start-column="25" selection-end-line="89" selection-end-column="40" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -179,8 +165,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/common/templates/partials/messages.html" />
-        <option value="$PROJECT_DIR$/client/models/contract.py" />
         <option value="$PROJECT_DIR$/client/docs/project_setup.txt" />
         <option value="$PROJECT_DIR$/client/docs/migration.txt" />
         <option value="$PROJECT_DIR$/client_man/settings.py" />
@@ -230,6 +214,8 @@
         <option value="$PROJECT_DIR$/client/all_mig_steps/rebuild_steps.txt" />
         <option value="$PROJECT_DIR$/client/all_mig_steps/setup_users_and_groups.py" />
         <option value="$PROJECT_DIR$/client/all_mig_steps/setup_templates.py" />
+        <option value="$PROJECT_DIR$/client/all_mig_steps/requirement.txt" />
+        <option value="$PROJECT_DIR$/all_mig_steps/rebuild_steps.txt" />
       </list>
     </option>
   </component>
@@ -299,42 +285,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="django_projs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="django_projs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="docs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="django_projs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="django_projs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="all_mig_steps" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -348,11 +298,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/reporting/templates/client/old" />
       <recent name="$PROJECT_DIR$/email_template/templates" />
       <recent name="$PROJECT_DIR$/email_template" />
       <recent name="$PROJECT_DIR$/client/all_mig_steps" />
-      <recent name="$PROJECT_DIR$/client/docs" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/client/all_mig_steps" />
@@ -680,7 +630,7 @@
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/client/all_mig_steps/setup_users_and_groups.py</url>
+          <url>file://$PROJECT_DIR$/all_mig_steps/setup_users_and_groups.py</url>
           <line>1</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
@@ -703,44 +653,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/client/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="38" lean-forward="false" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/models/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="40" lean-forward="false" selection-start-line="4" selection-start-column="40" selection-end-line="4" selection-end-column="40" />
-          <folding>
-            <element signature="e#93#125#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/models/contract.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="115" column="34" lean-forward="false" selection-start-line="115" selection-start-column="34" selection-end-line="115" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/views/client/client_crud.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="99" column="39" lean-forward="false" selection-start-line="99" selection-start-column="39" selection-end-line="99" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/templates/client/client/client_contracts.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -999,7 +911,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/docs/db_commands.txt">
+    <entry file="file://$PROJECT_DIR$/docs/db_commands.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="34" lean-forward="true" selection-start-line="3" selection-start-column="31" selection-end-line="5" selection-end-column="34" />
@@ -1103,7 +1015,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/all_mig_steps/setup_users_and_groups.py">
+    <entry file="file://$PROJECT_DIR$/all_mig_steps/setup_users_and_groups.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="637">
           <caret line="196" column="0" lean-forward="true" selection-start-line="196" selection-start-column="0" selection-end-line="196" selection-end-column="0" />
@@ -1113,10 +1025,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/all_mig_steps/rebuild_steps.txt">
+    <entry file="file://$PROJECT_DIR$/all_mig_steps/setup_templates.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="647">
-          <caret line="71" column="61" lean-forward="false" selection-start-line="71" selection-start-column="61" selection-end-line="71" selection-end-column="61" />
+        <state relative-caret-position="532">
+          <caret line="76" column="25" lean-forward="false" selection-start-line="76" selection-start-column="25" selection-end-line="76" selection-end-column="25" />
+          <folding>
+            <element signature="e#1#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/project_setup.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="660">
+          <caret line="89" column="40" lean-forward="false" selection-start-line="75" selection-start-column="25" selection-end-line="89" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/all_mig_steps/requirement.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/all_mig_steps/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/git_commands.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="25" />
           <folding />
         </state>
       </provider>
@@ -1131,20 +1085,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/all_mig_steps/setup_templates.py">
+    <entry file="file://$PROJECT_DIR$/all_mig_steps/rebuild_steps.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="76" column="25" lean-forward="false" selection-start-line="76" selection-start-column="25" selection-end-line="76" selection-end-column="25" />
-          <folding>
-            <element signature="e#1#44#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/docs/git_commands.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="2" selection-end-column="16" />
+        <state relative-caret-position="0">
+          <caret line="0" column="69" lean-forward="false" selection-start-line="0" selection-start-column="69" selection-end-line="0" selection-end-column="69" />
           <folding />
         </state>
       </provider>

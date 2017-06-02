@@ -1,3 +1,5 @@
+# http://python-guide-pt-br.readthedocs.io/en/latest/dev/virtualenvs/
+
 to rebuild:
 delete migrations/*.py files but not _init__.py
 delete database client_management
