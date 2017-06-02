@@ -1,20 +1,101 @@
 {% load staticfiles %}
-<h1>Client details for {{ client.get_full_name }}</h1>
-<table class='main_details'>
-    <tr>
-        <td class="print_label">Date of Birth</td>
-        <td>{{ client.dob }}</td>
-    </tr>
-    <tr>
-        <td class="print_label">Address</td>
-        <td>{{ client.address }}</td>
-    </tr>
-    <tr>
-        <td class="print_label">Contracts</td>
-        <td>
-            {% for con in client.get_ordered_contracts_with_type_link %}
-                <div>{{ con }}</div>
-            {%  endfor %}
-        </td>
-    </tr>
-</table>
+{% load common_extras %}
+<h1>Client {{ client.get_full_name }}</h1>
+<fieldset style="margin-top:30px;">
+    <legend>Main Details</legend>
+    <table class='main_details'>
+        <tr>
+            <td class="print_label">Date of Birth</td>
+            <td>{{ client.dob }} ({{ client.age }})</td>
+        </tr>
+        <tr>
+            <td class="print_label">Address</td>
+            <td>{{ client.address }}</td>
+        </tr>
+        <tr>
+            <td class="print_label">Phone Numbers</td>
+            <td>{{ client.get_telephone_display }}</td>
+        </tr>
+        <tr>
+            <td class="print_label">Contracts</td>
+            <td>
+                {% for con in client.get_ordered_contracts_with_type_link %}
+                    <div>{{ con }}</div>
+                {%  endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td class="print_label">Marital Status</td>
+            <td>{{ client.get_marital_status_display }}</td>
+        </tr>
+        <tr>
+            <td class="print_label">Ethnicity</td>
+            <td>{{ client.get_ethnicity_display }}</td>
+        </tr>
+    </table>
+</fieldset>
+<fieldset>
+    <legend>Project Details</legend>
+    <table class='main_details'>
+        <tr>
+            <td class="print_label">Coach</td>
+            <td>{{ client.job_coach }}</td>
+        </tr>
+        <tr>
+            <td class="print_label">Status</td>
+            <td>{{ client.get_client_status_display }}</td>
+        </tr>
+        <tr>
+            <td class="print_label">Nat ins number</td>
+            <td>{{ client.nat_ins_number }}</td>
+        </tr>
+        <tr>
+            <td class="print_label">Education</td>
+            <td>{{ client.get_education_display }}</td>
+        </tr>
+        <tr>
+            <td class="print_label">JSA</td>
+            <td>{{ client.get_jsa_display }}</td>
+        </tr>
+        <tr>
+            <td class="print_label">Recommended by</td>
+            <td>{{ client.get_recommended_by_display }}</td>
+        </tr>
+        <tr>
+            <td class="print_label">Social work involved</td>
+            <td>{{ client.social_work_involved|yesno:"Yes,No" }}</td>
+        </tr>
+        <tr>
+            <td class="print_label">Client group</td>
+            <td>{{ client.get_client_group_display }}</td>
+        </tr>
+        <tr>
+            <td class="print_label">Employment status</td>
+            <td>{{ client.get_employment_status_display|format_model_choice }}</td>
+        </tr>
+        <tr>
+            <td class="print_label">Time unemployed</td>
+            <td>{{ client.get_time_unemployed_display|format_model_choice }}</td>
+        </tr>
+        <tr>
+            <td class="print_label">Stage</td>
+            <td>{{ client.get_stage_display|format_model_choice }}</td>
+        </tr>
+        <tr>
+            <td class="print_label">Reference received</td>
+            <td>{{ client.ref_received|yesno:"Yes,No" }}</td>
+        </tr>
+    </table>
+</fieldset>
+<fieldset>
+    <legend>Notes</legend>
+    <table class='main_details'>
+        {% for note in client.note.all %}
+            <tr>
+                <td>{{ note.note }}</td>
+                <td>{{ note.modified_by }}</td>
+                <td>{{ note.modified_date }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</fieldset>

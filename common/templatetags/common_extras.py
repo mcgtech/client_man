@@ -36,3 +36,8 @@ def get_partner_logo(user):
     if logo is not None:
         logo = mark_safe('<img src="/static/img/' + logo + '"/>')
     return logo
+
+
+@register.filter(name='format_model_choice')
+def format_model_choice(choice):
+    return 'Not selected' if choice == 'Please select' else choice

@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from datetime import date
 from .auditable import Auditable
+from django.contrib.auth.models import User
 
 # see https://simpleisbetterthancomplex.com/tutorial/2016/07/28/how-to-create-django-signals.html
 # to see how I attach associate person with address
@@ -70,6 +71,12 @@ class Person(Auditable):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name='person')
     address = models.OneToOneField(Address, on_delete=models.CASCADE, null=True, related_name="person")
 
+    def get_telephone_display(self):
+        telephones = []
+        for tele in self.telephone.all():
+            telephones.append(str(tele))
+        return ", ".join(telephones)
+
     def get_full_name(self):
         return self.get_title_display() + ' ' + self.forename + ' ' + self.surname
 
@@ -103,9 +110,18 @@ class Telephone(models.Model):
     number = models.CharField(max_length=100, blank=True)
     person = models.ForeignKey(Person, on_delete=models.CASCADE, null=True, related_name="telephone")
 
-    # def get_type_for_display(self):
-    #     return self.PHONE_TYPES[self.type]
+    def __str__(self):
+       return self.number + ' (' + self.get_type_display() + ')'
+
+class Note(models.Model):
+    note = models.TextField()
+    modified_date = models.DateTimeField(null=True, blank=True)
+    modified_by = models.ForeignKey(User, blank=True, null=True)
+    person = models.ForeignKey(Person, on_delete=models.CASCADE, null=True, related_name="note")
+
+    # def save(self, *args, **kwargs):
+    #     self.modified_date = timezone.now()
+    #     super(Note, self).save(*args, **kwargs)
 
     def __str__(self):
-       return self.number
-       # return self.number + ' (' + self.get_type_display(self) + ')'
+       return self.note
