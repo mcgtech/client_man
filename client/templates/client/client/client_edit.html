@@ -12,9 +12,11 @@
     {% include 'partials/datatable_css_includes.html' %}
     <link rel="stylesheet" href="{% static 'css/client_contract_select.css' %}">
     <link rel="stylesheet" href="{% static 'css/client_edit.css' %}">
+    {% include 'partials/ajax_loading_css_includes.html' %}
 {% endblock %}
 
 {% block js %}
+    {% include 'partials/ajax_loading_js_includes.html' %}
     {% include 'partials/inject_js_data.html' %}
     {% include 'partials/ideal_postcodes_js_includes.html' %}
     {% include 'partials/datatable_js_includes.html' %}
@@ -22,9 +24,11 @@
     {% include 'partials/formset_js_includes.html' %}
     {% include 'partials/datepicker_js_includes.html' %}
     <script type="text/javascript" src="{% static 'js/contract_helpers.js' %}"></script>
+    {% include 'partials/reporting_js_includes.html' %}
     <script type="text/javascript" src="{% static 'js/client_edit.js' %}"></script>
 {% endblock %}
 {% block content %}
+{% include 'partials/printing_block.html' %}
 {% load crispy_forms_tags %}
 
 {% include 'client/client/client_contract_select.html' %}
@@ -46,6 +50,10 @@
     </div>
     <div id="contracts_table" class="tab-pane">
         {% include 'client/client/client_contracts.html' %}
+    </div>
+    <div id="print_buttons" class="row">
+        <div class="col-sm-1"><input type="button" name="print-client" value="Print client details" class="btn btn btn-default print-btn" id="print-client"></div>
+        <div class="col-sm-1"><input type="button" name="print-con" value="Print latest contract details" class="btn btn btn-default print-btn" id="print-con"></div>
     </div>
 </form>
 

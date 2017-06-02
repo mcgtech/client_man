@@ -99,6 +99,7 @@ def manage_client(request, client_id=None):
     # https://docs.djangoproject.com/en/1.11/topics/db/queries/#limiting-querysets
     contracts = client.get_all_contracts_ordered()
     set_deletion_status_in_js_data(js_dict, request.user, job_coach_man_user)
+    js_dict['client_id'] = client_id
     js_data = json.dumps(js_dict)
 
     client_form_errors = form_errors_as_array(client_form)

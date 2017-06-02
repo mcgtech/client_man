@@ -5,7 +5,37 @@ $(function(){
     setup_client_contracts();
     setup_client_notes();
     setup_datepickers();
+    add_printing();
 });
+
+function add_printing()
+{
+    $('#print-client').click(function(){
+        print_report(1);
+    });
+    $('#print-con').click(function(){
+        print_report(2);
+    });
+}
+
+function print_report(report_id)
+{
+    var client_id = get_client_id();
+    if (client_id === null)
+    {
+        bootbox.alert('Press save first.');
+    }
+    else
+    {
+        populate_print_area([client_id], report_id);
+    }
+}
+
+
+function get_client_id()
+{
+    return typeof data_from_django.client_id != 'undefined' ? data_from_django.client_id : null;
+}
 
 function setup_client_form()
 {
