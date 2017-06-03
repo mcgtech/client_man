@@ -5,7 +5,9 @@ from django.utils.html import mark_safe
 from crequest.middleware import CrequestMiddleware
 import dateutil.parser
 import time
+from common.models import Person
 from django.conf import settings
+from common.views import get_query_by_key
 
 class ClientsTable(tables.Table):
     # selected = CheckBoxColumn(accessor="selected")
@@ -26,23 +28,28 @@ class ClientsTable(tables.Table):
     age = Column(order_by=('dob'), verbose_name='Current age')
     # client.latest_contract.partner = Column(verbose_name='Partner', orderable= False)
     partner = Column(empty_values=(), verbose_name='Partner', orderable= False)
-    age_at_time = Column(empty_values=(), verbose_name='Age during search period', orderable= False)
+    age_at_time = Column(empty_values=(), verbose_name='Age (period)', orderable= False)
 
     def render_age_at_time(self, record):
-        current_request = CrequestMiddleware.get_request()
-        contract_started = self.get_query_by_key('contract_started')
-        contract_ended = self.get_query_by_key('contract_ended')
-        # contract_started = dateutil.parser.parse(contract_started);
-        # print(str(contract_started))
-        if contract_started is not None and contract_ended is not None:
+        period_age = 'N/A'
+        contract_started = get_query_by_key(self.request,'contract_started')
+        contract_ended = get_query_by_key(self.request, 'contract_ended')
+        if contract_started is not None and contract_ended is not None and len(contract_started) > 0 and len(contract_ended) > 0:
+            # first we convert the uk date into time object and then create dateutil by converting the time
+            # obj into iso date
             contract_started = time.strptime(contract_started, settings.DISPLAY_DATE)
             contract_started = dateutil.parser.parse(time.strftime("%Y-%m-%d", contract_started));
             contract_ended = time.strptime(contract_ended, settings.DISPLAY_DATE)
             contract_ended = dateutil.parser.parse(time.strftime("%Y-%m-%d", contract_ended));
             diff = contract_ended - contract_started
-            print(diff)
-        # print(time.strftime("%d/%m/%Y",conv))
-        period_age = 12
+            diff = int(diff.days)
+            if diff <= 365:
+                start_period_age = Person.age_at_point_in_time(record.dob, contract_started)
+                end_period_age = Person.age_at_point_in_time(record.dob, contract_started)
+                if (start_period_age == end_period_age):
+                    period_age = start_period_age
+                else:
+                    period_age = str(start_period_age) + ' (' + str(end_period_age) + ')'
         return period_age
 
     def render_partner(self, record):
@@ -52,12 +59,6 @@ class ClientsTable(tables.Table):
         if record.contract.exists():
             con_links = [c.get_summary(True) for c in record.get_all_contracts()]
             return format_html("<br>".join(con_links), record)
-
-    def get_query_by_key(self, key):
-        value = None
-        if self.request.GET is not None and key in self.request.GET:
-            value = self.request.GET[key]
-        return value
 
     def __init__(self, *args, **kwargs):
         super(ClientsTable, self).__init__(*args, **kwargs)
@@ -69,4 +70,4 @@ class ClientsTable(tables.Table):
         # fields to display in table
         fields = ('title', 'forename', 'surname', 'sex', 'age', 'address.area', 'original_client_id')
         attrs = {"class": "paleblue table table-striped table-hover table-bordered"}
-        sequence = ('selection', 'client_id', 'title', 'forename', 'surname', 'sex', 'age', 'address.area', 'partner', 'contracts', 'original_client_id')
+        sequence = ('selection', 'client_id', 'title', 'forename', 'surname', 'sex', 'age', 'age_at_time', 'address.area', 'partner', 'contracts', 'original_client_id')

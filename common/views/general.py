@@ -103,3 +103,10 @@ def get_reflections(meta, prefix):
             tag = tag + suffix
         refs.append(tag)
     return refs
+
+
+def get_query_by_key(request, key):
+    value = None
+    if request.GET is not None and key in request.GET:
+        value = request.GET[key]
+    return value

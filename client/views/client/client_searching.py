@@ -1,6 +1,6 @@
 from client.models import Client
 from common.models import Person, Note, Address, Telephone
-from common.views import form_errors_as_array, job_coach_user, job_coach_man_user, admin_user, show_form_error
+from common.views import form_errors_as_array, job_coach_user, job_coach_man_user, admin_user, show_form_error, get_query_by_key
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -12,6 +12,7 @@ from django_filters.views import FilterView
 from braces.views import GroupRequiredMixin
 from client.tables import ClientsTable
 from django_tables2 import SingleTableView
+import csv
 
 # for code that does the filtering (using django-filter) see /Users/stephenmcgonigal/django_projs/client/filters.py
 # https://simpleisbetterthancomplex.com/tutorial/2016/11/28/how-to-filter-querysets-dynamically.html
@@ -20,7 +21,6 @@ from django_tables2 import SingleTableView
 # https://django-filter.readthedocs.io/en/develop/guide/usage.html#the-template
 # restrict access: # https://github.com/brack3t/django-braces & http://django-braces.readthedocs.io/en/v1.4.0/access.html#loginrequiredmixin
 class ClientViewFilter(GroupRequiredMixin, FilterView, SingleTableView):
-    # group_required = u"job coach"
     group_required = [settings.JOB_COACH, settings.HI_COUNCIL_PART, settings.RAG_TAG_PART]
     model = Client
     table_class = ClientsTable # /Users/stephenmcgonigal/django_projs/client/tables.py
@@ -38,13 +38,48 @@ class ClientViewFilter(GroupRequiredMixin, FilterView, SingleTableView):
         kwargs['user'] = request.user
         return kwargs
 
+    # https://www.imagescape.com/blog/2016/03/03/django-class-based-views-basics/
+    # def render_to_response(self, context, **reponse_kwargs):
+
+    # renders template response rendered with passed in context
     # so I need to access table stuff
-    # def get_context_data(self, **kwargs):
-    #     context = super(ClientViewFilter, self).get_context_data(**kwargs)
-    #     request = self.request
-    #     print(request.GET['area'])
-    #     context['request'] = request
-    #     return context
+    # https://www.imagescape.com/blog/2016/03/03/django-class-based-views-basics/
+    def get_context_data(self, **kwargs):
+        # the context is passed into the template
+        context = super(ClientViewFilter, self).get_context_data(**kwargs)
+
+        # TODO: only do this when they have selected download
+        # setup csv file for download
+        # https://simpleisbetterthancomplex.com/tutorial/2016/07/29/how-to-export-to-excel.html
+        filtered_queries = context['object_list'] # with no pagination
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="users.csv"'
+        writer = csv.writer(response)
+        writer.writerow(['Id', 'First name', 'Last name', 'Date of birth', 'Job Coach'])
+        # TODO: what is there is no contract - will job coach cause it to fail?
+        clients = filtered_queries.values_list('id', 'forename', 'surname', 'dob', 'latest_contract__job_coach')
+        for client in clients:
+            writer.writerow(client)
+        context['csv_response'] = response
+
+        return context
+
+    def get(self, request, *args, **kwargs):
+        # the line between ---> and <---- were taken from cmenv/lib/python3.5/site-packages/django_filters/views.py
+        # --->
+        filterset_class = self.get_filterset_class()
+        self.filterset = self.get_filterset(filterset_class)
+        self.object_list = self.filterset.qs
+        context = self.get_context_data(filter=self.filterset,
+                                        object_list=self.object_list)
+        # <----
+        csv_reqd = get_query_by_key(request, 'csv_reqd')
+        if csv_reqd is not None:
+            return context['csv_response']
+        else:
+            return self.render_to_response(context)
+
+
 
 # code in view which returns json data
 # http://www.lalicode.com/post/5/

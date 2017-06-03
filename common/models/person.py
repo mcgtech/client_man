@@ -86,12 +86,16 @@ class Person(Auditable):
     # decorator to make it look like a normal attribute.
     @property
     def age(self):
-        client_age = 0
-        if self.dob is not None:
-            today = date.today()
-            client_age =  today.year - self.dob.year - ((today.month, today.day) < (self.dob.month, self.dob.day))
+        return Person.age_at_point_in_time(self.dob, date.today())
 
-        return client_age
+    @staticmethod
+    def age_at_point_in_time(dob, point_in_time):
+        age = 0
+        if dob is not None:
+            age =  point_in_time.year - dob.year - ((point_in_time.month, point_in_time.day) < (dob.month, dob.day))
+
+        return int(age)
+
 
 
 class Telephone(models.Model):

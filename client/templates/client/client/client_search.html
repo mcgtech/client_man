@@ -13,6 +13,7 @@
 {% endblock %}
 {% block js %}
     {% include 'partials/ajax_loading_js_includes.html' %}
+    {% include 'partials/url_helpers_js_include.html' %}
     {% include 'partials/datepicker_js_includes.html' %}
     {% include 'partials/django_tables2_js_includes.html' %}
     {% include 'partials/reporting_js_includes.html' %}
@@ -29,6 +30,7 @@
     {% include 'client/client/client_search_filter_client.html' %}
     {% include 'client/client/client_search_filter_contract.html' %}
     {% include 'partials/filter_buttons.html' %}
+    {% include 'partials/download_csv_button.html' %}
       <button style="float:right;" type="button" onclick="javascript:window.location='{% url 'client_new' %}';" class="btn btn-success">
         <span class="glyphicon glyphicon-plus"></span> Client
       </button>
