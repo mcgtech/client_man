@@ -2,6 +2,7 @@
   <thead>
     <tr>
       <th>Type</th>
+      <th>Live</th>
       <th>Start date</th>
       <th>End date</th>
       <th>Referral date</th>
@@ -17,6 +18,7 @@
     {% for contract in contracts %}
       <tr>
         <td><a href="{{ contract.get_absolute_url }}" target="_blank">{{ contract.get_type_display }}</a></td>
+        <td>{{ contract.is_live }}</td>
         <td>{{ contract.start_date }}</td>
         <td>{{ contract.end_date }}</td>
         <td>{{ contract.referral_date }}</td>

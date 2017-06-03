@@ -8,14 +8,14 @@ create database client_management
 run following two pieces of sql and replace relevant sections in setup.py:
 
 # get users
-select concat(LOWER(REPLACE(u.name, ' ', '')), ' = ', "User.objects.create_user('", LOWER(REPLACE(u.name, ' ', '')), "', '", u.mail, "', '", LOWER(REPLACE(u.name, ' ', '')), "123');", LOWER(REPLACE(u.name, ' ', '')), ".is_staff=True;", LOWER(REPLACE(u.name, ' ', '')), ".save()")
+select concat(LOWER(REPLACE(u.name, ' ', '')), ' = ', "User.objects.create_user('", LOWER(REPLACE(u.name, ' ', '')), "', '", u.mail, "', '", LOWER(REPLACE(u.name, ' ', '')), "924", substring(LOWER(REPLACE(u.name, ' ', '')), 2, 2), "-*!');", LOWER(REPLACE(u.name, ' ', '')), ".is_staff=True;", LOWER(REPLACE(u.name, ' ', '')), ".save()")
 from users u, users_roles ur
 where u.uid = ur.uid
 and  ur.rid = 8
 union
 select "closed = User.objects.create_user('closed', 'closed@closed', 'closed123');"
 union
-select concat(LOWER(REPLACE(u.name, ' ', '')), ' = ', "User.objects.create_user('", LOWER(REPLACE(u.name, ' ', '')), "', '", u.mail, "', '", LOWER(REPLACE(u.name, ' ', '')), "123');", LOWER(REPLACE(u.name, ' ', '')), ".save()")
+select concat(LOWER(REPLACE(u.name, ' ', '')), ' = ', "User.objects.create_user('", LOWER(REPLACE(u.name, ' ', '')), "', '", u.mail, "', '", LOWER(REPLACE(u.name, ' ', '')), "924", substring(LOWER(REPLACE(u.name, ' ', '')), 2, 2), "-*!');", LOWER(REPLACE(u.name, ' ', '')), ".is_staff=True;", LOWER(REPLACE(u.name, ' ', '')), ".save()")
 from users u, users_roles ur
 where u.uid = ur.uid
 and  ur.rid in (14, 17)

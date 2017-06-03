@@ -130,6 +130,7 @@ class Contract(Auditable):
 
     def get_summary(self, type_as_link):
         url = self.get_absolute_url()
+        is_live_markup = '<span title="contract is live"class="glyphicon glyphicon-heart is_live"></span>' if self.is_live() else ''
         coach = self.job_coach.username
         the_type = '<a target="_blank" href="' + url + '">' + self.get_type_display() + '</a>' if type_as_link else self.get_type_display()
         start = self.start_date.strftime(settings.DISPLAY_DATE) if self.start_date is not None else ''
@@ -137,7 +138,7 @@ class Contract(Auditable):
         status = '' if latest_status is None else ' (' + latest_status.get_status_display() + ' )'
         end = (' to ' + self.end_date.strftime(settings.DISPLAY_DATE)) if self.end_date is not None else ''
 
-        return the_type + ':' + coach + ' ' + start + end + status
+        return the_type + ':' + coach + ' ' + start + end + status + is_live_markup
 
     def get_full_type(self):
         return Contract.FULL_TYPES[self.type]
@@ -164,6 +165,15 @@ class Contract(Auditable):
 
         return con
 
+    def is_latest(self):
+        return self == self.client.latest_contract
+
+    def is_live(self):
+        from datetime import date
+        today = date.today()
+
+        return self.is_latest() and (self.end_date is None or self.end_date >= today)
+
     def refresh_client_latest_contract(self):
         # make sure client is pointing to the latest contract
         # we maintain this relationship for performance gains
@@ -173,11 +183,11 @@ class Contract(Auditable):
 
     def save(self, *args, **kwargs):
         super(Contract, self).save(*args, **kwargs)
-        self.refresh_client_latest_contract(self)
+        self.refresh_client_latest_contract()
 
     def delete(self, *args, **kwargs):
         super(Contract, self).save(*args, **kwargs)
-        self.refresh_client_latest_contract(self)
+        self.refresh_client_latest_contract()
 
     def __str__(self):
        start_date = '' if self.start_date is None else self.start_date.strftime(settings.DISPLAY_DATE)

@@ -13,7 +13,7 @@
     {% include 'partials/datatable_css_includes.html' %}
     <link rel="stylesheet" href="{% static 'css/client_contract_select.css' %}">
     <link rel="stylesheet" href="{% static 'css/contract_edit.css' %}">
-    {% if request.user|has_group:settings.JOB_COACH or request.user|has_group:settings.JOB_COACH_MAN or request.user|is_partner %}
+    {% if request.user|is_partner:True %}
         <link rel="stylesheet" href="{% static 'css/client_con_edit_as_partner.css' %}">
     {% endif %}
 {% endblock %}

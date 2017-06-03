@@ -17,9 +17,22 @@ def has_group(user, group_name):
     else:
         return None
 
+@register.filter(name='has_strict_group')
+def has_strict_group(user, group_name):
+    if user is not None:
+        group = Group.objects.get(name=group_name)
+        all_groups = user.groups.all()
+        user_in_group = True if group in all_groups else False
+        return user_in_group
+    else:
+        return None
+
 @register.filter(name='is_partner')
-def is_partner(user):
-    return has_group(user, settings.HI_COUNCIL_PART) or has_group(user, settings.RAG_TAG_PART)
+def is_partner(user, strict):
+    if strict:
+        return has_strict_group(user, settings.HI_COUNCIL_PART) or has_strict_group(user, settings.RAG_TAG_PART)
+    else:
+        return has_group(user, settings.HI_COUNCIL_PART) or has_group(user, settings.RAG_TAG_PART)
 
 @register.filter(name='render_checkbox')
 def render_checkbox(checked):
