@@ -20,6 +20,11 @@ class ClientsTable(tables.Table):
     # age is a calculatewed field, if I try to sort it django-tables2 will fail
     # so we do the following (see: http://django-tables2.readthedocs.io/en/latest/pages/ordering.html):
     age = Column(order_by=('dob'))
+    # client.latest_contract.partner = Column(verbose_name='Partner', orderable= False)
+    partner = Column(empty_values=(), verbose_name='Partner', orderable= False)
+
+    def render_partner(self, record):
+        return record.latest_contract.partner
 
     def render_contracts(self, record):
         if record.contract.exists():
@@ -29,7 +34,7 @@ class ClientsTable(tables.Table):
 
     class Meta:
         model = Client
-        # fiels to display in table
+        # fields to display in table
         fields = ('title', 'forename', 'surname', 'sex', 'age', 'address.area', 'original_client_id')
         attrs = {"class": "paleblue table table-striped table-hover table-bordered"}
-        sequence = ('selection', 'client_id', '...')
+        sequence = ('selection', 'client_id', 'title', 'forename', 'surname', 'sex', 'age', 'address.area', 'partner', 'contracts', 'original_client_id')

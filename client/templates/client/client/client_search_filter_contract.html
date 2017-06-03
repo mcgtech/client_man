@@ -1,0 +1,38 @@
+{% load common_extras %}
+{% load widget_tweaks %}
+{% if request.user|has_group:settings.JOB_COACH or request.user|has_group:settings.JOB_COACH_MAN %}
+    <div class="well">
+        {% include 'client/client/collapsible_contract_filter_button.html' %}
+        <div id="contract_filters" class="collapse in">
+          <!--# if I change this then also change: /Users/stephenmcgonigal/django_projs/client/filters.py -->
+              <div class="row">
+                <div class="form-group col-sm-3">
+                  {{ filter.form.live.label_tag }}
+                  {% render_field filter.form.live class="form-control" %}
+                </div>
+                <div class="form-group col-sm-3">
+                  {{ filter.form.job_coach.label_tag }}
+                  {% render_field filter.form.job_coach class="form-control" %}
+                </div>
+                <div class="form-group col-sm-2">
+                  {{ filter.form.contract_type.label_tag }}
+                  {% render_field filter.form.contract_type class="form-control" %}
+                </div>
+                <div class="form-group col-sm-2">
+                  {{ filter.form.contract_type_hist.label_tag }}
+                  {% render_field filter.form.contract_type_hist class="form-control" %}
+                </div>
+                <div class="form-group col-sm-2">
+                  {{ filter.form.contract_status.label_tag }}
+                  {% render_field filter.form.contract_status class="form-control" %}
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-sm-3">
+                  {{ filter.form.contract_started.label_tag }}
+                  {% render_field filter.form.contract_started class="form-control datepicker" %}
+                </div>
+              </div>
+        </div>
+    </div>
+{% endif %}

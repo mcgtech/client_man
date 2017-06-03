@@ -1,6 +1,7 @@
 from client.models import Client, Contract, ContractStatus
 import django_filters
 from common.models import Address
+from common.filters import get_boolean_choices
 from client.queries import *
 from django.contrib.auth.models import User
 from django.db.models import Max
@@ -11,19 +12,20 @@ from django.conf import settings
 class ClientFilter(django_filters.FilterSet):
     forename = django_filters.CharFilter(lookup_expr='icontains')
     surname = django_filters.CharFilter(lookup_expr='icontains')
-    modified_on = django_filters.DateFilter(lookup_expr='gte')
     contract_type = django_filters.ChoiceFilter(choices=Contract.TYPES, method='filter_contract_type', name='contract_type', label='Latest contract type')
     contract_type_hist = django_filters.ChoiceFilter(choices=Contract.TYPES, method='filter_contract_type_hist', name='contract_type_hist', label='Contract type history')
     contract_status = django_filters.ChoiceFilter(choices=ContractStatus.STATUS, method='filter_contract_status', name='contract_status', label='Contract status history')
-    modified_on = django_filters.DateFilter(label='Modified on >=')
     contract_started = django_filters.DateFilter(method='filter_contract_started', name='contract_started', label='Contract started >=')
     area = django_filters.ChoiceFilter(choices=Address.AREA, method='filter_address_area', name='filter_address_area', label='Area')
     age = django_filters.NumberFilter(method='filter_client_age', name='age', label='Age >=')
+    live = django_filters.ChoiceFilter(choices=get_boolean_choices(), method='filter_on_live_contract', name='live', label='Live')
     all_coaches = User.objects.filter(groups__name=settings.JOB_COACH)
     coach_choices = []
     for coach in all_coaches:
         coach_choices.append((coach.id, coach.username))
     job_coach = django_filters.ChoiceFilter(choices=coach_choices, method='filter_job_coach_hist', label='Coach history')
+    # modified_on = django_filters.DateFilter(lookup_expr='gte')
+    # modified_on = django_filters.DateFilter(label='Modified on >=')
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user')
@@ -36,15 +38,27 @@ class ClientFilter(django_filters.FilterSet):
     class Meta:
         model = Client
         # if I change this then also change: /Users/stephenmcgonigal/django_projs/client/templates/client/client/client_search.html
-        fields = ['title', 'forename', 'surname', 'sex', 'modified_by', 'modified_on']
+        fields = ['title', 'forename', 'surname', 'sex', 'live']
+
+    def filter_on_live_contract(self, queryset, name, value):
+        from datetime import date
+        today = date.today()
+        client_ids = []
+        value = int(value)
+        for client in queryset:
+            latest_con = client.latest_contract
+            is_live = latest_con is not None and (latest_con.end_date is None or latest_con.end_date >= today)
+            if (is_live == True and value == 1) or (is_live == False and value == 0):
+                client_ids.append(client.id)
+        return queryset.filter(pk__in=client_ids)
 
     # https://stackoverflow.com/questions/42526670/django-filter-on-values-of-child-objects
     def filter_job_coach_hist(self, queryset, name, value):
-        return queryset.filter(**{'contract__job_coach': value})
+        return queryset.filter(**{'contract__job_coach': value}).distinct()
 
     # https://stackoverflow.com/questions/42526670/django-filter-on-values-of-child-objects
     def filter_contract_type_hist(self, queryset, name, value):
-        return queryset.filter(**{'contract__type': value})
+        return queryset.filter(**{'contract__type': value}).distinct()
 
     # https://stackoverflow.com/questions/42526670/django-filter-on-values-of-child-objects
     def filter_contract_status(self, queryset, name, value):
@@ -54,11 +68,12 @@ class ClientFilter(django_filters.FilterSet):
 
     # https://stackoverflow.com/questions/42526670/django-filter-on-values-of-child-objects
     def filter_contract_started(self, queryset, name, value):
-        return queryset.filter(**{'contract__start_date__gte': value})
+        return queryset.filter(**{'contract__start_date__gte': value}).distinct()
 
     # https://stackoverflow.com/questions/42526670/django-filter-on-values-of-child-objects
     def filter_address_area(self, queryset, name, value):
         return queryset.filter(**{'address__area': value})
+
 
     def filter_client_age(self, queryset, name, age):
         # https://stackoverflow.com/questions/23373151/filter-people-from-django-model-using-birth-date

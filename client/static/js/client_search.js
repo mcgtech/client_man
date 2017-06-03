@@ -1,7 +1,15 @@
 $(function(){
     setup_client_search();
     setup_list_action_handler_handler();
+    setup_collapsible_handlers();
 });
+
+function setup_collapsible_handlers()
+{
+    setup_collapsible($("#client_filters"), $("#collapse_client_butt"), 'client filters');
+    setup_collapsible($("#contract_filters"), $("#collapse_contract_butt"), 'contract filters');
+    set_collapsible_initial_state();
+}
 
 function setup_client_search()
 {

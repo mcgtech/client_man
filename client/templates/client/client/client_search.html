@@ -26,73 +26,12 @@
 {% block content %}
   {% include 'partials/printing_block.html' %}
   <form method="get">
-    <div id="search_filters" class="well collapse in">
-      <!--# if I change this then also change: /Users/stephenmcgonigal/django_projs/client/filters.py -->
-      <div class="row">
-        <div class="form-group col-sm-3">
-          {{ filter.form.forename.label_tag }}
-          {% render_field filter.form.forename class="form-control" %}
-        </div>
-        <div class="form-group col-sm-3">
-          {{ filter.form.surname.label_tag }}
-          {% render_field filter.form.surname class="form-control" %}
-        </div>
-        <div class="form-group col-sm-2">
-          {{ filter.form.sex.label_tag }}
-          {% render_field filter.form.sex class="form-control" %}
-        </div>
-        <div class="form-group col-sm-2">
-          {{ filter.form.age.label_tag }}
-          {% render_field filter.form.age class="form-control" %}
-        </div>
-        <div class="form-group col-sm-2">
-          {{ filter.form.area.label_tag }}
-          {% render_field filter.form.area class="form-control" %}
-        </div>
-      </div>
-      {% if request.user|has_group:settings.JOB_COACH or request.user|has_group:settings.JOB_COACH_MAN %}
-          <div class="row">
-            <div class="form-group col-sm-3">
-              {{ filter.form.job_coach.label_tag }}
-              {% render_field filter.form.job_coach class="form-control" %}
-            </div>
-            <div class="form-group col-sm-3">
-              {{ filter.form.contract_type.label_tag }}
-              {% render_field filter.form.contract_type class="form-control" %}
-            </div>
-            <div class="form-group col-sm-3">
-              {{ filter.form.contract_type_hist.label_tag }}
-              {% render_field filter.form.contract_type_hist class="form-control" %}
-            </div>
-            <div class="form-group col-sm-3">
-              {{ filter.form.contract_status.label_tag }}
-              {% render_field filter.form.contract_status class="form-control" %}
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-group col-sm-3">
-              {{ filter.form.modified_by.label_tag }}
-              {% render_field filter.form.modified_by class="form-control" %}
-            </div>
-            <div class="form-group col-sm-3">
-              {{ filter.form.modified_by.label_tag }}
-              {% render_field filter.form.modified_by class="form-control" %}
-            </div>
-            <div class="form-group col-sm-3">
-              {{ filter.form.modified_on.label_tag }}
-              {% render_field filter.form.modified_on class="form-control datepicker" %}
-            </div>
-            <div class="form-group col-sm-3">
-              {{ filter.form.contract_started.label_tag }}
-              {% render_field filter.form.contract_started class="form-control datepicker" %}
-            </div>
-          </div>
-          <button style="float:right;" type="button" onclick="javascript:window.location='{% url 'client_new' %}';" class="btn btn-success">
-            <span class="glyphicon glyphicon-plus"></span> Client
-          </button>
-       {% endif %}
-      {% include 'partials/filter_buttons.html' %}
-    </div>
+    {% include 'client/client/client_search_filter_client.html' %}
+    {% include 'client/client/client_search_filter_contract.html' %}
+    {% include 'partials/filter_buttons.html' %}
+      <button style="float:right;" type="button" onclick="javascript:window.location='{% url 'client_new' %}';" class="btn btn-success">
+        <span class="glyphicon glyphicon-plus"></span> Client
+      </button>
   </form>
   <div class="row">
      <div class="col-sm-6">

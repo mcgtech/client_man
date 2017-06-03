@@ -1,0 +1,30 @@
+{% load common_extras %}
+{% load widget_tweaks %}
+<div class="well">
+    {% include 'client/client/collapsible_client_filter_button.html' %}
+    <div id="client_filters" class="collapse in">
+      <!--# if I change this then also change: /Users/stephenmcgonigal/django_projs/client/filters.py -->
+      <div class="row">
+        <div class="form-group col-sm-3">
+          {{ filter.form.forename.label_tag }}
+          {% render_field filter.form.forename class="form-control" %}
+        </div>
+        <div class="form-group col-sm-3">
+          {{ filter.form.surname.label_tag }}
+          {% render_field filter.form.surname class="form-control" %}
+        </div>
+        <div class="form-group col-sm-2">
+          {{ filter.form.sex.label_tag }}
+          {% render_field filter.form.sex class="form-control" %}
+        </div>
+        <div class="form-group col-sm-2">
+          {{ filter.form.age.label_tag }}
+          {% render_field filter.form.age class="form-control" %}
+        </div>
+        <div class="form-group col-sm-2">
+          {{ filter.form.area.label_tag }}
+          {% render_field filter.form.area class="form-control" %}
+        </div>
+      </div>
+    </div>
+</div>
