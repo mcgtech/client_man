@@ -20,6 +20,10 @@ due to impossibility of the task I am only bring across the latest status for ea
 
 is closed_date date in tiocontract needed?
 
+the lates contract that has a ref stored in client is based on the start date - is that correct?
+
+what should is_live logic be inside contract model?
+
 ig ther is no tio node but I find versions of md that have tio then I still create tio record - okay?
 
 needs to pay for postcode lookup - once he does update key used

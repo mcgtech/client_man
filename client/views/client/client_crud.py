@@ -78,7 +78,7 @@ def manage_client(request, client_id=None):
 
         user = handle_client_user(request, client, client_form)
         if client_form.is_valid() and address_form.is_valid() and notes_form_set.is_valid() and phone_form_set.is_valid():
-            # TODO link changes to user made via admin into Person forename, surname... via listener
+            # TODO link changes to user made via admin into Person forename, surname... via listener: https://simpleisbetterthancomplex.com/tutorial/2016/07/28/how-to-create-django-signals.html
             created_client = save_client_details(client_form, user, request)
             save_client_address(address_form, created_client)
             save_client_notes(notes_form_set, request)

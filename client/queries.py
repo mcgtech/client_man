@@ -15,15 +15,16 @@ def get_client_search_default_queryset(user):
     if job_coach_man_user(user) == False:
         if job_coach_user(user):
             # qs = get_clients_where_user_is_current_coach(user, qs)
-            qs = qs.filter(contract__job_coach=user).distinct()
+            qs = qs.filter(latest_contract__job_coach=user).distinct()
         elif supply_chain_partner_user(user):
-            qs = qs.filter(contract__partner=user).distinct()
+            qs = qs.filter(latest_contract__partner=user).distinct()
         else:
             qs = Client.objects.none()
     return qs
 
 # this is quite slow and would need speeding up if I use it
-# see
+# see - I now store a link to latest contract in client
+# but I have left this code here for illustration purposes
 def get_clients_where_user_is_current_coach(user, qs):
     # only return clients where user is current job coach
     from client.models import Contract

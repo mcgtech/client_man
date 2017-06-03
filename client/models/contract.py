@@ -1,6 +1,6 @@
 from django.db import models
 from common.models import Auditable
-from .client import Client
+# from .client import Client
 from django.conf import settings
 
 class Contract(Auditable):
@@ -114,7 +114,7 @@ class Contract(Auditable):
     # partner = models.OneToOneField(settings.AUTH_USER_MODEL, null=True, related_name='tio_contract')
     # I moved this from TIO as other contracts like tio may need it but mainly because I need to query partner on the base class
     partner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='tio_contract', blank=True, null=True, limit_choices_to={'groups__name__in': [settings.HI_COUNCIL_PART, settings.RAG_TAG_PART]})
-    client = models.ForeignKey(Client, on_delete=models.CASCADE, null=True, related_name="contract")
+    client = models.ForeignKey('client.Client', on_delete=models.CASCADE, null=True, related_name="contract")
 
     def contract_has_a_partner(self):
         return self.type == Contract.TIO
@@ -163,6 +163,21 @@ class Contract(Auditable):
                 con = TIOContract.objects.get(pk=self.pk)
 
         return con
+
+    def refresh_client_latest_contract(self):
+        # make sure client is pointing to the latest contract
+        # we maintain this relationship for performance gains
+        latest_con = self.client.get_latest_contract_basic()
+        self.client.latest_contract = latest_con
+        self.client.save()
+
+    def save(self, *args, **kwargs):
+        super(Contract, self).save(*args, **kwargs)
+        self.refresh_client_latest_contract(self)
+
+    def delete(self, *args, **kwargs):
+        super(Contract, self).save(*args, **kwargs)
+        self.refresh_client_latest_contract(self)
 
     def __str__(self):
        start_date = '' if self.start_date is None else self.start_date.strftime(settings.DISPLAY_DATE)

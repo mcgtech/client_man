@@ -1,6 +1,8 @@
 from django.db import models
 from django.conf import settings
 from common.models import Person
+# from . import Contract
+from .contract import Contract
 from django.utils.safestring import mark_safe
 
 class Client(Person):
@@ -223,6 +225,10 @@ class Client(Person):
     nat_ins_number = models.CharField(max_length=100, blank=True)
     start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
+    # this is used for efficiency as when I search clients for ones wherre lates contract has a field equal to
+    # something then its slow
+    # wheneever a Contract is changed a check will take place to see if this field should be updated
+    latest_contract = models.OneToOneField(Contract, null=True, related_name='Client')
 
     def get_latest_contract_state(self):
         contract = self.get_latest_contract()
@@ -233,9 +239,15 @@ class Client(Person):
         return self.contract.all().order_by('-start_date')
 
     def get_latest_contract(self):
-        con = self.get_all_contracts_ordered().first()
+        con = self.latest_contract
+        # con = self.get_all_contracts_ordered().first()
         if con is not None:
             con = con.get_derived_contract()
+        return con
+
+    def get_latest_contract_basic(self):
+        con = self.get_all_contracts_ordered().first()
+
         return con
 
     def get_ordered_contracts_with_type_link(self):

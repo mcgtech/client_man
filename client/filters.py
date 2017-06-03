@@ -39,23 +39,6 @@ class ClientFilter(django_filters.FilterSet):
         fields = ['title', 'forename', 'surname', 'sex', 'modified_by', 'modified_on']
 
     # https://stackoverflow.com/questions/42526670/django-filter-on-values-of-child-objects
-    def filter_contract_type(self, queryset, name, value):
-        # see https://stackoverflow.com/questions/9838264/django-record-with-max-element
-        # get the latest contract for each client and filter on type
-        # my qn: https://stackoverflow.com/questions/44229775/django-filterset-one-to-many-query
-        # for each client get the contract with the latest start date
-        # if that contract has a type that matches the value parameter, then hold on to the pk of its parent
-        # finally strip out any clients that are not in this list, from the queryset django-filter passed in and then return it
-        client_ids = []
-        value = int(value)
-        for client in queryset:
-            con = Contract.objects.filter(client=client).order_by('start_date').last()
-            if con is not None and con.type == value:
-                client_ids.append(con.client.id)
-
-        return queryset.filter(pk__in=client_ids)
-
-    # https://stackoverflow.com/questions/42526670/django-filter-on-values-of-child-objects
     def filter_job_coach_hist(self, queryset, name, value):
         return queryset.filter(**{'contract__job_coach': value})
 
@@ -89,3 +72,22 @@ class ClientFilter(django_filters.FilterSet):
             max_date = max_date.replace(year=max_date.year - min_age, month=2, day=28)
 
         return queryset.filter(dob__lte=max_date)
+
+    # https://stackoverflow.com/questions/42526670/django-filter-on-values-of-child-objects
+    def filter_contract_type(self, queryset, name, value):
+        return queryset.filter(**{'latest_contract__type': value})
+        # I now store a link to latest contract in client
+        # but I have left this code here for illustration purposes
+        # see https://stackoverflow.com/questions/9838264/django-record-with-max-element
+        # get the latest contract for each client and filter on type
+        # my qn: https://stackoverflow.com/questions/44229775/django-filterset-one-to-many-query
+        # for each client get the contract with the latest start date
+        # if that contract has a type that matches the value parameter, then hold on to the pk of its parent
+        # finally strip out any clients that are not in this list, from the queryset django-filter passed in and then return it
+        # client_ids = []
+        # value = int(value)
+        # for client in queryset:
+        #     con = Contract.objects.filter(client=client).order_by('start_date').last()
+        #     if con is not None and con.type == value:
+        #         client_ids.append(con.client.id)
+        # return queryset.filter(pk__in=client_ids)
