@@ -38,6 +38,13 @@ class ClientViewFilter(GroupRequiredMixin, FilterView, SingleTableView):
         kwargs['user'] = request.user
         return kwargs
 
+    # so I need to access table stuff
+    # def get_context_data(self, **kwargs):
+    #     context = super(ClientViewFilter, self).get_context_data(**kwargs)
+    #     request = self.request
+    #     print(request.GET['area'])
+    #     context['request'] = request
+    #     return context
 
 # code in view which returns json data
 # http://www.lalicode.com/post/5/

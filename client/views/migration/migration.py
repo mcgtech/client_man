@@ -94,7 +94,7 @@ def load_contracts(request):
                 errors.append(es)
         # now set the latest contract on each client
         for client in all_clients:
-            latest_con = client.get_latest_contract()
+            latest_con = client.get_latest_contract_basic()
             if latest_con is not None:
                 client.latest_contract = latest_con
                 client.save()

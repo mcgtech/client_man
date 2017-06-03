@@ -115,6 +115,8 @@ class Contract(Auditable):
     # I moved this from TIO as other contracts like tio may need it but mainly because I need to query partner on the base class
     partner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='tio_contract', blank=True, null=True, limit_choices_to={'groups__name__in': [settings.HI_COUNCIL_PART, settings.RAG_TAG_PART]})
     client = models.ForeignKey('client.Client', on_delete=models.CASCADE, null=True, related_name="contract")
+    class Meta:
+        ordering = ('-start_date', 'created_on', )
 
     def contract_has_a_partner(self):
         return self.type == Contract.TIO

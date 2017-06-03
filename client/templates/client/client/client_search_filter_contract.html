@@ -6,21 +6,21 @@
         <div id="contract_filters" class="collapse in">
           <!--# if I change this then also change: /Users/stephenmcgonigal/django_projs/client/filters.py -->
               <div class="row">
-                <div class="form-group col-sm-3">
-                  {{ filter.form.live.label_tag }}
-                  {% render_field filter.form.live class="form-control" %}
-                </div>
-                <div class="form-group col-sm-3">
-                  {{ filter.form.job_coach.label_tag }}
-                  {% render_field filter.form.job_coach class="form-control" %}
+                <div class="form-group col-sm-2">
+                  {{ filter.form.contract_search_targets.label_tag }}
+                  {% render_field filter.form.contract_search_targets class="form-control" %}
                 </div>
                 <div class="form-group col-sm-2">
                   {{ filter.form.contract_type.label_tag }}
                   {% render_field filter.form.contract_type class="form-control" %}
                 </div>
                 <div class="form-group col-sm-2">
-                  {{ filter.form.contract_type_hist.label_tag }}
-                  {% render_field filter.form.contract_type_hist class="form-control" %}
+                  {{ filter.form.live.label_tag }}
+                  {% render_field filter.form.live class="form-control" %}
+                </div>
+                <div class="form-group col-sm-2">
+                  {{ filter.form.job_coach.label_tag }}
+                  {% render_field filter.form.job_coach class="form-control" %}
                 </div>
                 <div class="form-group col-sm-2">
                   {{ filter.form.contract_status.label_tag }}
@@ -28,9 +28,13 @@
                 </div>
               </div>
               <div class="row">
-                <div class="form-group col-sm-3">
+                <div class="form-group col-sm-2">
                   {{ filter.form.contract_started.label_tag }}
                   {% render_field filter.form.contract_started class="form-control datepicker" %}
+                </div>
+                <div class="form-group col-sm-2">
+                  {{ filter.form.contract_ended.label_tag }}
+                  {% render_field filter.form.contract_ended class="form-control datepicker" %}
                 </div>
               </div>
         </div>

@@ -88,6 +88,8 @@ pip install django-bootstrap-pagination
 pip install django-braces
 # https://django-constance.readthedocs.io/en/latest/
 pip install "django-constance[database]"
+# https://github.com/Alir3z4/django-crequest
+pip install django-crequest
 python manage.py migrate database
 # change email settings to write to console until I am on live server: https://stackoverflow.com/questions/4642011/test-sending-email-without-email-server
 if not checking out previous project:

@@ -235,23 +235,24 @@ class Client(Person):
 
         return None if contract is None else contract.get_latest_status()
 
-    def get_all_contracts_ordered(self):
-        return self.contract.all().order_by('-start_date')
+    def get_all_contracts(self):
+        # return self.contract.all().order_by('-start_date')
+        # default ordering now set in contract META section
+        return self.contract.all()
 
     def get_latest_contract(self):
         con = self.latest_contract
-        # con = self.get_all_contracts_ordered().first()
+        # con = self.get_all_contracts().first()
         if con is not None:
             con = con.get_derived_contract()
         return con
 
     def get_latest_contract_basic(self):
-        con = self.get_all_contracts_ordered().first()
-
+        con = self.get_all_contracts().first()
         return con
 
     def get_ordered_contracts_with_type_link(self):
-        return [c.get_summary(False) for c in self.get_all_contracts_ordered()]
+        return [c.get_summary(False) for c in self.get_all_contracts()]
 
     def get_absolute_url(self):
         from django.urls import reverse

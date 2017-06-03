@@ -12,18 +12,28 @@ from django.conf import settings
 class ClientFilter(django_filters.FilterSet):
     forename = django_filters.CharFilter(lookup_expr='icontains')
     surname = django_filters.CharFilter(lookup_expr='icontains')
-    contract_type = django_filters.ChoiceFilter(choices=Contract.TYPES, method='filter_contract_type', name='contract_type', label='Latest contract type')
-    contract_type_hist = django_filters.ChoiceFilter(choices=Contract.TYPES, method='filter_contract_type_hist', name='contract_type_hist', label='Contract type history')
-    contract_status = django_filters.ChoiceFilter(choices=ContractStatus.STATUS, method='filter_contract_status', name='contract_status', label='Contract status history')
-    contract_started = django_filters.DateFilter(method='filter_contract_started', name='contract_started', label='Contract started >=')
+    contract_type = django_filters.ChoiceFilter(choices=Contract.TYPES, method='filter_contract_type', name='contract_type', label='Type')
+    contract_status = django_filters.ChoiceFilter(choices=ContractStatus.STATUS, method='filter_contract_status', name='contract_status', label='Status')
+    contract_started = django_filters.DateFilter(method='filter_contract_started', name='contract_started', label='Start date >=')
+    contract_ended = django_filters.DateFilter(method='filter_contract_ended', name='contract_ended', label='End date <=')
     area = django_filters.ChoiceFilter(choices=Address.AREA, method='filter_address_area', name='filter_address_area', label='Area')
-    age = django_filters.NumberFilter(method='filter_client_age', name='age', label='Age >=')
+    # if I change the names of these then update the query names in tables.py
+    age_from = django_filters.NumberFilter(method='filter_client_age_from', name='age_from', label='Age >=')
+    age_to = django_filters.NumberFilter(method='filter_client_age_to', name='age_to', label='Age <=')
     live = django_filters.ChoiceFilter(choices=get_boolean_choices(), method='filter_on_live_contract', name='live', label='Live')
     all_coaches = User.objects.filter(groups__name=settings.JOB_COACH)
     coach_choices = []
     for coach in all_coaches:
         coach_choices.append((coach.id, coach.username))
-    job_coach = django_filters.ChoiceFilter(choices=coach_choices, method='filter_job_coach_hist', label='Coach history')
+    job_coach = django_filters.ChoiceFilter(choices=coach_choices, method='filter_job_coach', label='Job coach')
+
+    LATEST_CON = 0
+    ANY_CON = 1
+    con_search_types = (
+        (ANY_CON, 'Any contract'),
+        (LATEST_CON, 'Latest contract'),
+    )
+    contract_search_targets = django_filters.ChoiceFilter(choices=con_search_types, method='filter_on_contract_search_targets',  name='contract_search_targets', label='Target')
     # modified_on = django_filters.DateFilter(lookup_expr='gte')
     # modified_on = django_filters.DateFilter(label='Modified on >=')
 
@@ -34,6 +44,11 @@ class ClientFilter(django_filters.FilterSet):
         # model to Client in the meta data below - so this is the starting querset before filter are applied
         self.queryset = get_client_search_default_queryset(user)
         # self.queryset = Client.objects.select_related('user').all()
+
+    # this does nothing, its only here so I can add a drop down whose value can be
+    # ccessed in other filters as self.data['contract_search_targets']
+    def filter_on_contract_search_targets(self, queryset, name, value):
+        return queryset
 
     class Meta:
         model = Client
@@ -53,44 +68,83 @@ class ClientFilter(django_filters.FilterSet):
         return queryset.filter(pk__in=client_ids)
 
     # https://stackoverflow.com/questions/42526670/django-filter-on-values-of-child-objects
-    def filter_job_coach_hist(self, queryset, name, value):
-        return queryset.filter(**{'contract__job_coach': value}).distinct()
+    def filter_job_coach(self, queryset, name, value):
+        qs = queryset
+        con_search_type = self.get_selected_contract_type()
+        if con_search_type == self.LATEST_CON:
+            qs = queryset.filter(**{'latest_contract__job_coach_id': value}).distinct()
+        elif con_search_type == self.ANY_CON:
+            # search all associated contracts
+            qs = queryset.filter(**{'contract__job_coach_id': value}).distinct()
 
-    # https://stackoverflow.com/questions/42526670/django-filter-on-values-of-child-objects
-    def filter_contract_type_hist(self, queryset, name, value):
-        return queryset.filter(**{'contract__type': value}).distinct()
+        return qs
 
     # https://stackoverflow.com/questions/42526670/django-filter-on-values-of-child-objects
     def filter_contract_status(self, queryset, name, value):
-        # return entries where any contracts have a status of value
-        return queryset.filter(contract__contract_status__status=value).distinct()
-        # return queryset.contract_set.all().order_by('start_date').first().contract_status.all().order_by('-modified_on').first(status=1)
+        qs = queryset
+        con_search_type = self.get_selected_contract_type()
+        if con_search_type == self.LATEST_CON:
+            qs = queryset.filter(**{'latest_contract__contract_status__status': value}).distinct()
+        elif con_search_type == self.ANY_CON:
+            # search all associated contracts
+            qs = queryset.filter(**{'contract__contract_status__status': value}).distinct()
+
+        return qs
 
     # https://stackoverflow.com/questions/42526670/django-filter-on-values-of-child-objects
     def filter_contract_started(self, queryset, name, value):
-        return queryset.filter(**{'contract__start_date__gte': value}).distinct()
+        qs = queryset
+        con_search_type = self.get_selected_contract_type()
+        if con_search_type == self.LATEST_CON:
+            qs = queryset.filter(**{'latest_contract__start_date__gte': value}).distinct()
+        elif con_search_type == self.ANY_CON:
+            # search all associated contracts
+            qs = queryset.filter(**{'contract__start_date__gte': value}).distinct()
+
+        return qs
+
+    # https://stackoverflow.com/questions/42526670/django-filter-on-values-of-child-objects
+    def filter_contract_ended(self, queryset, name, value):
+        qs = queryset
+        con_search_type = self.get_selected_contract_type()
+        if con_search_type == self.LATEST_CON:
+            qs = queryset.filter(**{'latest_contract__end_date__gte': value}).distinct()
+        elif con_search_type == self.ANY_CON:
+            # search all associated contracts
+            qs = queryset.filter(**{'contract__end_date__gte': value}).distinct()
+
+        return qs
 
     # https://stackoverflow.com/questions/42526670/django-filter-on-values-of-child-objects
     def filter_address_area(self, queryset, name, value):
         return queryset.filter(**{'address__area': value})
 
-
-    def filter_client_age(self, queryset, name, age):
+    @staticmethod
+    def get_date_for_age_searching(age):
         # https://stackoverflow.com/questions/23373151/filter-people-from-django-model-using-birth-date
         from datetime import date
-        min_age = age
-        max_date = date.today()
+        target_date = date.today()
         try:
-            max_date = max_date.replace(year=max_date.year - min_age)
+            target_date = target_date.replace(year=target_date.year - age)
         except ValueError:  # 29th of february and not a leap year
-            assert max_date.month == 2 and max_date.day == 29
-            max_date = max_date.replace(year=max_date.year - min_age, month=2, day=28)
+            assert target_date.month == 2 and target_date.day == 29
+            target_date = target_date.replace(year=target_date.year - age, month=2, day=28)
+
+        return target_date
+
+    def filter_client_age_from(self, queryset, name, age):
+        max_date = self.get_date_for_age_searching(age)
 
         return queryset.filter(dob__lte=max_date)
 
+    def filter_client_age_to(self, queryset, name, age):
+        min_date = self.get_date_for_age_searching(age)
+
+        return queryset.filter(dob__gte=min_date)
+
+
     # https://stackoverflow.com/questions/42526670/django-filter-on-values-of-child-objects
     def filter_contract_type(self, queryset, name, value):
-        return queryset.filter(**{'latest_contract__type': value})
         # I now store a link to latest contract in client
         # but I have left this code here for illustration purposes
         # see https://stackoverflow.com/questions/9838264/django-record-with-max-element
@@ -106,3 +160,20 @@ class ClientFilter(django_filters.FilterSet):
         #     if con is not None and con.type == value:
         #         client_ids.append(con.client.id)
         # return queryset.filter(pk__in=client_ids)
+        qs = queryset
+        con_search_type = self.get_selected_contract_type()
+        if con_search_type == self.LATEST_CON:
+            qs = queryset.filter(**{'latest_contract__type': value}).distinct()
+        elif con_search_type == self.ANY_CON:
+            # search all associated contracts
+            qs = queryset.filter(**{'contract__type': value}).distinct()
+
+        return qs
+
+    def get_selected_contract_type(self):
+        try:
+            con_search_type = int(self.data['contract_search_targets'])
+        except:
+            con_search_type = self.ANY_CON
+
+        return con_search_type

@@ -30,7 +30,9 @@ def get_clients_where_user_is_current_coach(user, qs):
     from client.models import Contract
     client_ids = []
     for client in qs:
-        latest_con = Contract.objects.filter(client=client).order_by('start_date').last()
+        # default ordering now set in contract META section
+        # latest_con = Contract.objects.filter(client=client).order_by('start_date').last()
+        latest_con = Contract.objects.filter(client=client).last()
         if latest_con is not None and latest_con.job_coach == user:
             client_ids.append(latest_con.client.id)
 

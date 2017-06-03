@@ -97,7 +97,7 @@ def manage_client(request, client_id=None):
     phone_helper = PhoneFormSetHelper()
 
     # https://docs.djangoproject.com/en/1.11/topics/db/queries/#limiting-querysets
-    contracts = client.get_all_contracts_ordered()
+    contracts = client.get_all_contracts()
     set_deletion_status_in_js_data(js_dict, request.user, job_coach_man_user)
     set_page_read_only_status_in_js_data(js_dict, request.user)
     js_dict['client_id'] = client_id
