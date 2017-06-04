@@ -14,8 +14,8 @@ urlpatterns = [
     url(r'^contract/(?P<client_pk>\d+)/new/(?P<con_type>\d+)/$', views.contract_new, name='contract_new'),
     url(r'^contract/(?P<client_pk>\d+)/(?P<contract_id>\d+)/edit/$', views.contract_edit, name='contract_edit'),
     # interview crud
-    url(r'^interview/(?P<client_pk>\d+)/new/$', views.interview_new, name='interview_new'),
-    url(r'^interview/(?P<client_pk>\d+)/(?P<interview_id>\d+)/edit/$', views.interview_edit, name='interview_edit'),
+    url(r'^interview/(?P<contract_pk>\d+)/new/$', views.interview_new, name='interview_new'),
+    url(r'^interview/(?P<contract_pk>\d+)/(?P<interview_id>\d+)/edit/$', views.interview_edit, name='interview_edit'),
     # searching
     url(r'^client_search_old/$', views.client_search_old, name='client_search_old'),
     url(r'^client_search/$', ClientViewFilter.as_view(), name='client_search'),

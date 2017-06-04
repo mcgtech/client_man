@@ -37,6 +37,9 @@ class ContractForm(EditForm, AuditableForm):
                 Tab(
                     'Status',
                 ),
+                Tab(
+                    'Interview',
+                ),
                     Tab(
                         'Log',
                         'created_by',

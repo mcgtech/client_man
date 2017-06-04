@@ -9,6 +9,8 @@ from constance import config
 import json
 from email_template.models import EmailTemplate
 from email_template.views import send_email_using_template
+from client.views import get_form_edit_url
+
 
 @login_required
 @user_passes_test(job_coach_user, 'client_man_login')
@@ -94,6 +96,7 @@ def manage_contract(request, client_id, con_type, contract_id=None):
     add_contract_js_data(js_dict, client)
     set_page_read_only_status_in_js_data(js_dict, request.user)
     set_deletion_status_in_js_data(js_dict, request.user, job_coach_man_user)
+    js_dict['edit_contract'] = get_form_edit_url(contract.id, contract.interview.id, 'interview')
     js_data = json.dumps(js_dict)
 
     state_buttons = get_state_buttons_to_display(client, contract, is_edit_form, request)
@@ -103,6 +106,7 @@ def manage_contract(request, client_id, con_type, contract_id=None):
     contract_form_errors = form_errors_as_array(contract_form)
 
     return render(request, 'client/contract/contract_edit.html', {'form': contract_form, 'client' : client,
+                                                                  'contract' : contract,
                                                                   'status_list' : status_list,
                                                                   'the_action_text': the_action_text,
                                                                   'edit_form': is_edit_form, 'the_action': action,

@@ -10,3 +10,10 @@ fieldset.con_field legend {
     font-weight: bold;
     width: inherit !important;
 }
+#edit_int {
+    font-size: 1.2em;
+    position: relative;
+    top: -6px;
+    left: -5px;
+    cursor:pointer;
+}

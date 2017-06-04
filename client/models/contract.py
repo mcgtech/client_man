@@ -1,6 +1,5 @@
 from django.db import models
 from common.models import Auditable
-# from .client import Client
 from django.conf import settings
 
 class Contract(Auditable):
@@ -107,6 +106,7 @@ class Contract(Auditable):
     secondary_client_group = models.IntegerField(choices=SEC_CLIENT_GROUPS, default=None, null=True)
     secondary_client_group_evidence = models.FileField(upload_to='client/group_evid/', blank=True, null=True)
     application_form = models.FileField(upload_to='client/con_app_form/', blank=True, null=True)
+    interview = models.OneToOneField('client.Interview', null=True, related_name='contract')
     # https://www.webforefront.com/django/setuprelationshipsdjangomodels.html
     # a job coach can have many clients, but a client can have only one coach, so in django we add the ForeignKey to the many part of the relationship:
     job_coach = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='job_coach', blank=True, null=True, limit_choices_to={'groups__name': settings.JOB_COACH})
@@ -115,6 +115,7 @@ class Contract(Auditable):
     # I moved this from TIO as other contracts like tio may need it but mainly because I need to query partner on the base class
     partner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='tio_contract', blank=True, null=True, limit_choices_to={'groups__name__in': [settings.HI_COUNCIL_PART, settings.RAG_TAG_PART]})
     client = models.ForeignKey('client.Client', on_delete=models.CASCADE, null=True, related_name="contract")
+
     class Meta:
         ordering = ('-start_date', 'created_on', )
 

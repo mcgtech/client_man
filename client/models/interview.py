@@ -14,8 +14,9 @@ class Interview(Auditable):
     dev_issues = models.TextField(verbose_name='Highlight any support or development issues (bullet points):', blank=True)
     other_comments = models.TextField(verbose_name='Other comments/follow up', blank=True)
     scanned_copy = models.FileField(upload_to='client/init_int/', blank=True, null=True)
-    client = models.ForeignKey('client.Client', on_delete=models.CASCADE, null=True, related_name="interviews")
 
+    def __str__(self):
+        return str(self.interviewer)
 
 class Qualification(models.Model):
     title = models.CharField(max_length=300, blank=True)

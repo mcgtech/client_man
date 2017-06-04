@@ -1,0 +1,23 @@
+<span title="edit this interview" id="edit_int" class="glyphicon glyphicon-pencil"></span>
+<table class="table table-bordered" id="contract_interview">
+  <tr>
+    <td class="info_label">Interviewer</td>
+    <td>{{ contract.interview.interviewer }}</td>
+    <td class="info_label">Interview date</td>
+    <td>{{ contract.interview.interview_date }}</td>
+  </tr>
+</table>
+<table class="table table-bordered" id="contract_interview_details">
+  <thead>
+    <tr>
+      <th>Background Info</th>
+      <th>Preferred job direction (target outcome)</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td>{{ contract.interview.background_info }}</td>
+        <td>{{ contract.interview.pref_job_dir }}</td>
+      </tr>
+  </tbody>
+</table>

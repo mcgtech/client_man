@@ -234,9 +234,9 @@ def set_username_in_use_form_error(form):
 
 
 # the follwoing methods are used for views for entities that belong to a client - eg interview
-ClientEditConfig = namedtuple('ClientEditConfig', 'client primary_entity the_action_text is_edit_form action can_delete class_name cancel_url primary_id request')
-def get_client_form_get_edit_config(primary_id, client_id, primary_class, request):
-    client = get_object_or_404(Client, pk=client_id)
+EditConfig = namedtuple('ClientEditConfig', 'client primary_entity the_action_text is_edit_form action can_delete class_name cancel_url primary_id request')
+# primary_id is the id of the entity being editied
+def get_form_edit_config(primary_id, parent_id, primary_class, request, cancel_redirect_name, client):
     if primary_id is None:
         primary_entity = primary_class()
         the_action_text = 'Create'
@@ -250,17 +250,25 @@ def get_client_form_get_edit_config(primary_id, client_id, primary_class, reques
 
     class_name = primary_entity.__class__.__name__.lower()
     if primary_id is None:
-        action = get_client_form_add_url(client, class_name)
-        display_client_summary_message(client, request, 'Adding a new ' + class_name + ' for', settings.WARN_MSG_TYPE)
+        action = get_form_add_url(parent_id, class_name)
+        add_msg = 'Adding a new ' + class_name + ' for' + get_client_for_message(client, primary_entity)
+        msg_once_only(request, add_msg, settings.WARN_MSG_TYPE)
     else:
-        action = get_client_form_edit_url(client_id, primary_id, class_name)
+        action = get_form_edit_url(parent_id, primary_id, class_name)
 
     if request.method == "POST":
         cancel_url = None
     else:
-        cancel_url = redirect('client_edit', pk=client.id).url
+        cancel_url = redirect(cancel_redirect_name, pk=parent_id).url
 
-    return ClientEditConfig(client, primary_entity, the_action_text, is_edit_form, action, can_delete, class_name, cancel_url, primary_id, request)
+    return EditConfig(client, primary_entity, the_action_text, is_edit_form, action, can_delete, class_name, cancel_url, primary_id, request)
+
+def get_client_for_message(client, primary_entity):
+    msg = ' for ' + get_client_summary_link(client)
+    if primary_entity.id != client.id:
+        msg = msg + ' (' + str(primary_entity) + ')'
+
+    return msg
 
 
 def get_extras_for_formset(set):
@@ -275,18 +283,17 @@ def save_many_relationship(form_set):
             else:
                 form.save()
 
-def get_client_form_add_url(client, class_name):
-    return '/' + class_name + '/' + str(client.id) + '/new/'
+def get_form_add_url(parent_id, class_name):
+    return '/' + class_name + '/' + str(parent_id) + '/new/'
 
-def get_client_form_edit_url(client_id, primary_id, class_name):
-    return '/' + class_name + '/' + str(client_id) + '/' + str(primary_id) + '/edit/'
+def get_form_edit_url(parent_id, primary_id, class_name):
+    return '/' + class_name + '/' + str(parent_id) + '/' + str(primary_id) + '/edit/'
 
-def get_client_formset(config, parent_model, model, form, prefix):
+def get_client_formset(config, parent_model, model, form, prefix, set):
     # setup formsets
     if config.primary_id is None:
         FormSet = inlineformset_factory(parent_model, model, form=form, extra=1, can_delete=config.can_delete)
     else:
-        set = model.objects.filter(interview_id=config.primary_id)
         FormSet = inlineformset_factory(parent_model, model, form=form, extra=get_extras_for_formset(set), can_delete=config.can_delete)
 
     if config.request.method == "POST":
@@ -296,16 +303,8 @@ def get_client_formset(config, parent_model, model, form, prefix):
 
     return form_set
 
-def save_client_primary_entity(request, primary_entity_form, config):
-    created_primary_entity = primary_entity_form.save(commit=False)
-    apply_auditable_info(created_primary_entity, request)
-    created_primary_entity.client = config.client
-    created_primary_entity.save()
-
-    return created_primary_entity
-
 def get_client_js_data(config, request):
-    js_dict = {'add_url' : get_client_form_add_url(config.client, config.class_name)}
+    js_dict = {'add_url' : get_form_add_url(config.client.id, config.class_name)}
     set_deletion_status_in_js_data(js_dict, request.user, job_coach_man_user)
 
     return json.dumps(js_dict)

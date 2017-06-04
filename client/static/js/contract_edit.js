@@ -2,7 +2,17 @@ $(function(){
     setup_datepickers();
     setup_contract_tabs();
     handle_page_readonly_state();
+    setup_interview();
 });
+
+function setup_interview()
+{
+    $('#interview_block').appendTo('#interview');
+    $('#edit_int').click(function(){
+        var edit_url = data_from_django.edit_contract;
+        window.location.href = edit_url;
+    });
+}
 
 function handle_page_readonly_state()
 {

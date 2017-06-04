@@ -11,6 +11,7 @@
 
 {% block css %}
     {% include 'partials/datatable_css_includes.html' %}
+    {% include 'partials/tables_css_includes.html' %}
     <link rel="stylesheet" href="{% static 'css/client_contract_select.css' %}">
     <link rel="stylesheet" href="{% static 'css/contract_edit.css' %}">
     {% if request.user|is_partner:True %}
@@ -32,6 +33,9 @@
         {% crispy form %}
         <div id="contract_status_table" class="tab-pane">
             {% include 'client/contract/client_contract_status.html' %}
+        </div>
+        <div id="interview_block" class="tab-pane">
+            {% include 'client/contract/client_contract_interview.html' %}
         </div>
         <div id="work_flow_buttons">
             {% if display_accept in state_buttons %}
