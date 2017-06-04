@@ -3,6 +3,7 @@ is employment status related to contracts and hence should be dirived from live 
 ... add the questions I sent neil in email
 
 in int int I have assumed that in Has client been on any other programmes? Please list programme and provider details, that the programme is the same as the contract type  okay?
+in fact can we not get this from exisiting records?
 
 I have made assumption that coaches belowng to contract and so I have moved the job coach filed to contract
 

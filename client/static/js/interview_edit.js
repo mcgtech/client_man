@@ -1,5 +1,5 @@
 $(function(){
-    setup_interview_quals();
+    setup_interview_formsets();
     setup_int_datepickers();
     setup_inline_add_listener();
 });
@@ -12,12 +12,17 @@ function setup_inline_add_listener()
         {
             // add datepicker to new quals row date
             var options = get_basic_date_picker_options();
-            // I do it like this as otherwise it desnt work correctly
-            $('#qualifications .datepicker').datepicker('destroy');
-            $('#qualifications .datepicker').datepicker(options);
+            apply_datepicker_on_add_event('qualifications', options)
+        }
+        if (prefix == 'other_progs')
+        {
+            // add datepicker to new other progs row date
+            var options = get_basic_date_picker_options();
+            apply_datepicker_on_add_event('other_progs', options)
         }
     });
 }
+
 
 function setup_int_datepickers()
 {
@@ -26,26 +31,45 @@ function setup_int_datepickers()
     $("#id_interview-interview_date").datepicker(options);
     // qualifications
     $("#qualifications .datepicker").datepicker(options);
+    // other progs
+    $("#other_progs .datepicker").datepicker(options);
 }
 
-function setup_interview_quals()
+function setup_interview_formsets()
 {
-    // see #qualifications in interview_edit.html
+    // see #qualifications etc in interview_edit.html
     $('#qualifications').appendTo('#skillsqual');
+    $('#learning').appendTo('#skillsqual');
+    $('#plan_train').appendTo('#skillsqual');
+    $('#other_agencies').appendTo('#agencies');
+    $('#other_progs').appendTo('#agencies');
     // attach formset handler
-    setup_inline_quals();
+    setup_inline_formsets();
 }
 
 var INLINE_QUALS_SETUP = false;
-function setup_inline_quals()
+var INLINE_AGENCIES_SETUP = false;
+function setup_inline_formsets()
 {
     $('a[href="#skillsqual"]').parent().click(function(){
         if (!INLINE_QUALS_SETUP)
         {
              setTimeout(function(){
                 $('#qualifications tbody tr').formset({prefix: 'quals'});
+                $('#learning tbody tr').formset({prefix: 'learn'});
+                $('#plan_train tbody tr').formset({prefix: 'plan_train'});
             }, 10);
             INLINE_QUALS_SETUP = true;
+        }
+    });
+    $('a[href="#agencies"]').parent().click(function(){
+        if (!INLINE_AGENCIES_SETUP)
+        {
+             setTimeout(function(){
+                $('#other_agencies tbody tr').formset({prefix: 'other_agencies'});
+                $('#other_progs tbody tr').formset({prefix: 'other_progs'});
+            }, 10);
+            INLINE_AGENCIES_SETUP = true;
         }
     });
 }

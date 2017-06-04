@@ -232,6 +232,8 @@ def set_username_in_use_form_error(form):
     form.add_error('username', 'This username is already in use') # causes form to be invalid
 
 
+
+# the follwoing methods are used for views for entities that belong to a client - eg interview
 ClientEditConfig = namedtuple('ClientEditConfig', 'client primary_entity the_action_text is_edit_form action can_delete class_name cancel_url primary_id request')
 def get_client_form_get_edit_config(primary_id, client_id, primary_class, request):
     client = get_object_or_404(Client, pk=client_id)
@@ -279,11 +281,12 @@ def get_client_form_add_url(client, class_name):
 def get_client_form_edit_url(client_id, primary_id, class_name):
     return '/' + class_name + '/' + str(client_id) + '/' + str(primary_id) + '/edit/'
 
-def get_client_formset(config, parent_model, model, form, set, prefix):
+def get_client_formset(config, parent_model, model, form, prefix):
     # setup formsets
     if config.primary_id is None:
         FormSet = inlineformset_factory(parent_model, model, form=form, extra=1, can_delete=config.can_delete)
     else:
+        set = model.objects.filter(interview_id=config.primary_id)
         FormSet = inlineformset_factory(parent_model, model, form=form, extra=get_extras_for_formset(set), can_delete=config.can_delete)
 
     if config.request.method == "POST":

@@ -1,5 +1,5 @@
 from django import forms
-from client.models import Interview, Qualification
+from client.models import Interview, Qualification, PlannedTraining
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, HTML, Button, Div, Field
 from crispy_forms.bootstrap import TabHolder, Tab, FormActions, InlineField
@@ -23,6 +23,7 @@ class InterviewForm(EditForm, AuditableForm):
                         Div('skills'), css_class="skills"),
                     Tab('Issues',
                         Div('dev_issues')),
+                    Tab('Agencies',),
                     Tab(
                         'Log',
                         'created_by',
@@ -64,7 +65,54 @@ class LearningForm(forms.ModelForm):
 
 class LearningFormSetHelper(FormHelper):
     def __init__(self, *args, **kwargs):
-        super(QualificationFormSetHelper, self).__init__(*args, **kwargs)
+        super(LearningFormSetHelper, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.form_tag = False
+        self.template = 'bootstrap3/table_inline_formset.html'
+
+
+class PlannedTrainingForm(forms.ModelForm):
+    helper = FormHelper()
+    helper.form_tag = False
+    class Meta:
+        model = PlannedTraining
+        fields = ('training',)
+
+class PlannedTrainingFormSetHelper(FormHelper):
+    def __init__(self, *args, **kwargs):
+        super(PlannedTrainingFormSetHelper, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.form_tag = False
+        self.template = 'bootstrap3/table_inline_formset.html'
+
+
+class OtherAgenciesForm(forms.ModelForm):
+    helper = FormHelper()
+    helper.form_tag = False
+    class Meta:
+        model = OtherAgencies
+        fields = ('agency', 'contact_person', 'contact_details')
+
+class OtherAgenciesFormSetHelper(FormHelper):
+    def __init__(self, *args, **kwargs):
+        super(OtherAgenciesFormSetHelper, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.form_tag = False
+        self.template = 'bootstrap3/table_inline_formset.html'
+
+
+class OtherProgrammesForm(forms.ModelForm):
+    helper = FormHelper()
+    helper.form_tag = False
+    class Meta:
+        model = OtherProgrammes
+        fields = ('programme', 'provider', 'end_date')
+        widgets = {
+            'end_date': forms.DateInput(format=(settings.DISPLAY_DATE), attrs={'class':'datepicker'}),}
+
+class OtherProgrammesFormSetHelper(FormHelper):
+    def __init__(self, *args, **kwargs):
+        super(OtherProgrammesFormSetHelper, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.form_tag = False
         self.template = 'bootstrap3/table_inline_formset.html'

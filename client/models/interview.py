@@ -26,12 +26,12 @@ class Qualification(models.Model):
 
 
 class Learning(models.Model):
-    learning = models.TextField(verbose_name='Other relevant learning/experience/skills')
+    learning = models.CharField(max_length=300, verbose_name='Other relevant learning/experience/skills')
     interview = models.ForeignKey(Interview, on_delete=models.CASCADE, null=True, related_name="learnings")
 
 
 class PlannedTraining(models.Model):
-    training = models.TextField(verbose_name='Planned non-certified training (include any actions taken)')
+    training = models.CharField(max_length=300, verbose_name='Planned non-certified training (include any actions taken)')
     interview = models.ForeignKey(Interview, on_delete=models.CASCADE, null=True, related_name="planned_training")
 
 
@@ -56,13 +56,13 @@ class OtherAgencies(models.Model):
         (YDW, 'Youth Development work'),
     )
     agency = models.IntegerField(choices=AGENCIES, default=None)
-    contact_person = models.TextField()
-    contact_details = models.TextField()
+    contact_person = models.CharField(max_length=100, blank=True)
+    contact_details = models.CharField(max_length=300, blank=True)
     interview = models.ForeignKey(Interview, on_delete=models.CASCADE, null=True, related_name="other_agencies")
 
 
 class OtherProgrammes(models.Model):
     programme = models.IntegerField(choices=Contract.TYPES, default=None)
-    provider = models.TextField()
-    end_date = models.CharField(max_length=100, blank=True)
+    provider = models.CharField(max_length=100, blank=True)
+    end_date = models.DateField(null=True, blank=True)
     interview = models.ForeignKey(Interview, on_delete=models.CASCADE, null=True, related_name="other_programmes")

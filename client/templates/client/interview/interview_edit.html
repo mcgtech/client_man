@@ -28,6 +28,20 @@
             <label class="control-label">Qualifications</label>
             {% crispy qual_form_set qual_helper %}
         </div>
+        <div id="learning" class="tab-pane">
+            {% crispy learning_form_set learning_helper %}
+        </div>
+        <div id="plan_train" class="tab-pane">
+            {% crispy plan_train_form_set plan_train_helper %}
+        </div>
+        <div id="other_agencies" class="tab-pane">
+            <label class="control-label">List any other agencies involved with client, include contact details</label>
+            {% crispy other_agencies_form_set other_agencies_helper %}
+        </div>
+        <div id="other_progs" class="tab-pane">
+            <label class="control-label">Has client been on any other programmes? Please list programme and provider details</label>
+            {% crispy other_progs_form_set other_progs_helper %}
+        </div>
     </form>
 
 {% endblock %}
