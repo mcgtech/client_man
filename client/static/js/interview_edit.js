@@ -12,7 +12,9 @@ function setup_inline_add_listener()
         {
             // add datepicker to new quals row date
             var options = get_basic_date_picker_options();
-            $('input.datepicker', new_row).datepicker(options);
+            // I do it like this as otherwise it desnt work correctly
+            $('#qualifications .datepicker').datepicker('destroy');
+            $('#qualifications .datepicker').datepicker(options);
         }
     });
 }

@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% load common_extras %}
 {% block title %}
-    {% if edit_form %}
-        Edit interview for {{ client.get_full_name }}
+    {% if config.is_edit_form %}
+        Edit interview for {{ config.client.get_full_name }}
     {% else %}
-        Add new interview for {{ client.get_full_name }}
+        Add new interview for {{ config.client.get_full_name }}
     {% endif %}
 {% endblock %}
 {% load staticfiles %}
@@ -22,7 +22,7 @@
 {% endblock %}
 {% block content %}
     {% load crispy_forms_tags %}
-    <form action="{{ the_action }}" method="POST" id="interview_edit_form" class="interview_details">
+    <form action="{{ config.the_action }}" method="POST" id="interview_edit_form" class="interview_details">
         {% crispy form %}
         <div id="qualifications" class="tab-pane">
             <label class="control-label">Qualifications</label>

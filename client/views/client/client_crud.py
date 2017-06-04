@@ -7,6 +7,7 @@ from django.forms import inlineformset_factory
 from django.shortcuts import get_object_or_404
 from client.forms import *
 from common.views import *
+from collections import namedtuple
 
 
 @login_required
@@ -229,3 +230,79 @@ def set_email_in_use_form_error(form):
 
 def set_username_in_use_form_error(form):
     form.add_error('username', 'This username is already in use') # causes form to be invalid
+
+
+ClientEditConfig = namedtuple('ClientEditConfig', 'client primary_entity the_action_text is_edit_form action can_delete class_name cancel_url primary_id request')
+def get_client_form_get_edit_config(primary_id, client_id, primary_class, request):
+    client = get_object_or_404(Client, pk=client_id)
+    if primary_id is None:
+        primary_entity = primary_class()
+        the_action_text = 'Create'
+        is_edit_form = False
+        can_delete = False
+    else:
+        primary_entity = get_object_or_404(primary_class, pk=primary_id)
+        can_delete = True
+        the_action_text = 'Edit'
+        is_edit_form = True
+
+    class_name = primary_entity.__class__.__name__.lower()
+    if primary_id is None:
+        action = get_client_form_add_url(client, class_name)
+        display_client_summary_message(client, request, 'Adding a new ' + class_name + ' for', settings.WARN_MSG_TYPE)
+    else:
+        action = get_client_form_edit_url(client_id, primary_id, class_name)
+
+    if request.method == "POST":
+        cancel_url = None
+    else:
+        cancel_url = redirect('client_edit', pk=client.id).url
+
+    return ClientEditConfig(client, primary_entity, the_action_text, is_edit_form, action, can_delete, class_name, cancel_url, primary_id, request)
+
+
+def get_extras_for_formset(set):
+    return 1 if len(set) == 0 else 0
+
+
+def save_many_relationship(form_set):
+    for form in form_set.forms:
+        if form.has_changed():
+            if form in form_set.deleted_forms:
+                form.instance.delete()
+            else:
+                form.save()
+
+def get_client_form_add_url(client, class_name):
+    return '/' + class_name + '/' + str(client.id) + '/new/'
+
+def get_client_form_edit_url(client_id, primary_id, class_name):
+    return '/' + class_name + '/' + str(client_id) + '/' + str(primary_id) + '/edit/'
+
+def get_client_formset(config, parent_model, model, form, set, prefix):
+    # setup formsets
+    if config.primary_id is None:
+        FormSet = inlineformset_factory(parent_model, model, form=form, extra=1, can_delete=config.can_delete)
+    else:
+        FormSet = inlineformset_factory(parent_model, model, form=form, extra=get_extras_for_formset(set), can_delete=config.can_delete)
+
+    if config.request.method == "POST":
+        form_set = FormSet(config.request.POST, config.request.FILES, instance=config.primary_entity, prefix=prefix)
+    else:
+        form_set = FormSet(instance=config.primary_entity, prefix=prefix)
+
+    return form_set
+
+def save_client_primary_entity(request, primary_entity_form, config):
+    created_primary_entity = primary_entity_form.save(commit=False)
+    apply_auditable_info(created_primary_entity, request)
+    created_primary_entity.client = config.client
+    created_primary_entity.save()
+
+    return created_primary_entity
+
+def get_client_js_data(config, request):
+    js_dict = {'add_url' : get_client_form_add_url(config.client, config.class_name)}
+    set_deletion_status_in_js_data(js_dict, request.user, job_coach_man_user)
+
+    return json.dumps(js_dict)

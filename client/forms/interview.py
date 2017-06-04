@@ -53,3 +53,18 @@ class QualificationFormSetHelper(FormHelper):
         self.helper = FormHelper()
         self.form_tag = False
         self.template = 'bootstrap3/table_inline_formset.html'
+
+
+class LearningForm(forms.ModelForm):
+    helper = FormHelper()
+    helper.form_tag = False
+    class Meta:
+        model = Learning
+        fields = ('learning',)
+
+class LearningFormSetHelper(FormHelper):
+    def __init__(self, *args, **kwargs):
+        super(QualificationFormSetHelper, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.form_tag = False
+        self.template = 'bootstrap3/table_inline_formset.html'
