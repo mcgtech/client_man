@@ -42,7 +42,6 @@
                 return maxForms.length == 0 ||   // For Django versions pre 1.2
                     (maxForms.val() == '' || (maxForms.val() - totalForms.val() > 0));
             },
-
             insertDeleteLink = function(row) {
                 var delCssSelector = options.deleteCssClass.trim().replace(/\s+/g, '.'),
                     addCssSelector = options.addCssClass.trim().replace(/\s+/g, '.');
@@ -212,6 +211,8 @@
                 if (!showAddButton()) buttonRow.hide();
                 // If a post-add callback was supplied, call it with the added form:
                 if (options.added) options.added(row);
+                // added by SMcG
+                $( document ).trigger( "inline_add", [ options.prefix, row ] );
 
                 return false;
             });

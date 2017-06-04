@@ -2,7 +2,11 @@ is employment status related to contracts and hence should be dirived from live 
 
 ... add the questions I sent neil in email
 
+in int int I have assumed that in Has client been on any other programmes? Please list programme and provider details, that the programme is the same as the contract type  okay?
+
 I have made assumption that coaches belowng to contract and so I have moved the job coach filed to contract
+
+ti would be an idea to use download csv and then upload to 3rd party software for more advanved reports
 
 I am assuming person is on only one live contract at a time?
 

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load common_extras %}
+{% block title %}
+    {% if edit_form %}
+        Edit interview for {{ client.get_full_name }}
+    {% else %}
+        Add new interview for {{ client.get_full_name }}
+    {% endif %}
+{% endblock %}
+{% load staticfiles %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/interview_edit.css' %}">
+{% endblock %}
+
+{% block js %}
+    {% include 'partials/inject_js_data.html' %}
+    {% include 'partials/form_edit_js_includes.html' %}
+    {% include 'partials/datepicker_js_includes.html' %}
+    {% include 'partials/formset_js_includes.html' %}
+    <script type="text/javascript" src="{% static 'js/interview_edit.js' %}"></script>
+{% endblock %}
+{% block content %}
+    {% load crispy_forms_tags %}
+    <form action="{{ the_action }}" method="POST" id="interview_edit_form" class="interview_details">
+        {% crispy form %}
+        <div id="qualifications" class="tab-pane">
+            <label class="control-label">Qualifications</label>
+            {% crispy qual_form_set qual_helper %}
+        </div>
+    </form>
+
+{% endblock %}

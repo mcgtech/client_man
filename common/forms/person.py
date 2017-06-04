@@ -58,8 +58,6 @@ class PhoneFormSetHelper(FormHelper):
         self.form_tag = False
         self.template = 'bootstrap3/table_inline_formset.html'
 
-
-# class NoteForm(forms.ModelForm):
 class NoteForm(AuditableForm):
     # helper = FormHelper()
     # helper.form_tag = False

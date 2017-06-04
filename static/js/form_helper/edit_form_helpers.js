@@ -51,3 +51,8 @@ function make_page_read_only()
     $('textarea, input').prop('readonly', true);
     $('select, input[type="checkbox"]').prop('disabled', true);
 }
+
+function get_section_heading_label(text)
+{
+    return '<label class="control-label">' + text + '</label>';
+}

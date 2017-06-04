@@ -108,12 +108,18 @@ function setup_datepickers()
     setup_end_date_datepicker();
 }
 
+var INLINE_NOTES_SETUP = false;
 function setup_inline_client_notes()
 {
     $('#client_notes').click(function(){
-        setTimeout(function(){
-            $('#notes tbody tr').formset({prefix: 'nested'});
-        }, 10); });
+        if (!INLINE_NOTES_SETUP)
+        {
+            setTimeout(function(){
+                $('#notes tbody tr').formset({prefix: 'nested'});
+            }, 10);
+            INLINE_NOTES_SETUP = true;
+        }
+    });
 }
 
 function setup_inline_client_phones()
