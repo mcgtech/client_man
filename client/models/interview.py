@@ -14,9 +14,12 @@ class Interview(Auditable):
     dev_issues = models.TextField(verbose_name='Highlight any support or development issues (bullet points):', blank=True)
     other_comments = models.TextField(verbose_name='Other comments/follow up', blank=True)
     scanned_copy = models.FileField(upload_to='client/init_int/', blank=True, null=True)
+    # Since Interview links to Contract, it is the dependent model in the relationship.
+    # Therefore when you delete a contact, it deletes all dependent models.
+    contract = models.OneToOneField('client.Contract', null=True, related_name='interview')
 
     def __str__(self):
-        return str(self.interviewer)
+        return str(self.interviewer) + ' ' + str(self.contract) if self.contract is not None else ''
 
 class Qualification(models.Model):
     title = models.CharField(max_length=300, blank=True)

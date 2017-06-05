@@ -106,18 +106,19 @@ class Contract(Auditable):
     secondary_client_group = models.IntegerField(choices=SEC_CLIENT_GROUPS, default=None, null=True)
     secondary_client_group_evidence = models.FileField(upload_to='client/group_evid/', blank=True, null=True)
     application_form = models.FileField(upload_to='client/con_app_form/', blank=True, null=True)
-    interview = models.OneToOneField('client.Interview', null=True, related_name='contract')
     # https://www.webforefront.com/django/setuprelationshipsdjangomodels.html
     # a job coach can have many clients, but a client can have only one coach, so in django we add the ForeignKey to the many part of the relationship:
     job_coach = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='job_coach', blank=True, null=True, limit_choices_to={'groups__name': settings.JOB_COACH})
-    # if I make it OneToOneField then I get duplicate key error
-    # partner = models.OneToOneField(settings.AUTH_USER_MODEL, null=True, related_name='tio_contract')
     # I moved this from TIO as other contracts like tio may need it but mainly because I need to query partner on the base class
     partner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='tio_contract', blank=True, null=True, limit_choices_to={'groups__name__in': [settings.HI_COUNCIL_PART, settings.RAG_TAG_PART]})
     client = models.ForeignKey('client.Client', on_delete=models.CASCADE, null=True, related_name="contract")
 
     class Meta:
         ordering = ('-start_date', 'created_on', )
+
+    # https://stackoverflow.com/questions/27064206/django-check-if-a-related-object-exists-error-relatedobjectdoesnotexist
+    def has_interview_object(self):
+        return hasattr(self, 'interview') and self.interview is not None
 
     def contract_has_a_partner(self):
         return self.type == Contract.TIO
@@ -194,7 +195,8 @@ class Contract(Auditable):
 
     def __str__(self):
        start_date = '' if self.start_date is None else self.start_date.strftime(settings.DISPLAY_DATE)
-       return '' if self.client is None else self.client.get_full_name() + ', type: '+ self.get_type_display() + ', start date - ' + start_date
+       link = '<a href="' + self.get_absolute_url() + '">' + self.get_type_display() + '</a>'
+       return '' if self.client is None else self.client.get_full_name() + ', type: '+ link + ', start date - ' + start_date
 
 
 class TIOContract(Contract):

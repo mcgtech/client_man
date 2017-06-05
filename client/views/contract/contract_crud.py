@@ -9,7 +9,7 @@ from constance import config
 import json
 from email_template.models import EmailTemplate
 from email_template.views import send_email_using_template
-from client.views import get_form_edit_url
+from client.views import get_form_edit_url, get_form_add_url
 
 
 @login_required
@@ -95,8 +95,9 @@ def manage_contract(request, client_id, con_type, contract_id=None):
     js_dict = {}
     add_contract_js_data(js_dict, client)
     set_page_read_only_status_in_js_data(js_dict, request.user)
-    set_deletion_status_in_js_data(js_dict, request.user, job_coach_man_user)
-    js_dict['edit_contract'] = get_form_edit_url(contract.id, contract.interview.id, 'interview')
+    if contract.has_interview_object():
+        js_dict['edit_interview'] = get_form_edit_url(contract.id, contract.interview.id, 'interview')
+    js_dict['add_interview'] = get_form_add_url(contract.id, 'interview')
     js_data = json.dumps(js_dict)
 
     state_buttons = get_state_buttons_to_display(client, contract, is_edit_form, request)

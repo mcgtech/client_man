@@ -251,8 +251,6 @@ def get_form_edit_config(primary_id, parent_id, primary_class, request, cancel_r
     class_name = primary_entity.__class__.__name__.lower()
     if primary_id is None:
         action = get_form_add_url(parent_id, class_name)
-        add_msg = 'Adding a new ' + class_name + ' for' + get_client_for_message(client, primary_entity)
-        msg_once_only(request, add_msg, settings.WARN_MSG_TYPE)
     else:
         action = get_form_edit_url(parent_id, primary_id, class_name)
 
@@ -266,7 +264,9 @@ def get_form_edit_config(primary_id, parent_id, primary_class, request, cancel_r
 def get_client_for_message(client, primary_entity):
     msg = ' for ' + get_client_summary_link(client)
     if primary_entity.id != client.id:
-        msg = msg + ' (' + str(primary_entity) + ')'
+        primary_entity = str(primary_entity)
+        if len(primary_entity) > 0:
+            msg = msg + ' (' + str(primary_entity) + ')'
 
     return msg
 

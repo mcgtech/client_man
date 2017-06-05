@@ -47,13 +47,12 @@ def manage_interview(request, contract_id, interview_id=None):
     if del_request:
         return del_request
     elif request.method == "POST":
-        primary_entity_form = InterviewForm(request.POST, request.FILES, instance=config.primary_entity, prefix=config.class_name, is_edit_form=config.is_edit_form, cancel_url=config.cancel_url, add_interview=config.is_edit_form)
+        primary_entity_form = InterviewForm(request.POST, request.FILES, instance=config.primary_entity, prefix=config.class_name, is_edit_form=config.is_edit_form, cancel_url=config.cancel_url)
         if primary_entity_form.is_valid() and qual_form_set.is_valid() and learning_form_set.is_valid() and plan_train_form_set.is_valid() and other_agencies_form_set.is_valid() and other_progs_form_set.is_valid():
             created_primary_entity = primary_entity_form.save(commit=False)
             apply_auditable_info(created_primary_entity, request)
+            created_primary_entity.contract = contract
             created_primary_entity.save()
-            contract.interview = created_primary_entity
-            contract.save()
             save_many_relationship(qual_form_set)
             save_many_relationship(learning_form_set)
             save_many_relationship(plan_train_form_set)
@@ -64,8 +63,11 @@ def manage_interview(request, contract_id, interview_id=None):
             return redirect(action)
     else:
         msg_once_only(request, config.class_name.capitalize() + ' ' + get_client_for_message(config.client, contract), settings.SUCC_MSG_TYPE)
-        primary_entity_form = InterviewForm(instance=config.primary_entity, prefix=config.class_name, is_edit_form=config.is_edit_form, cancel_url=config.cancel_url, add_interview=config.is_edit_form)
+        primary_entity_form = InterviewForm(instance=config.primary_entity, prefix=config.class_name, is_edit_form=config.is_edit_form, cancel_url=config.cancel_url)
 
+    if interview_id is None:
+        add_msg = 'Adding a new ' + config.class_name + ' for' + get_client_for_message(config.client, config.primary_entity)
+        msg_once_only(request, add_msg, settings.WARN_MSG_TYPE)
     interview_form_errors = form_errors_as_array(primary_entity_form)
     return render(request, 'client/interview/interview_edit.html', {'form': primary_entity_form,
                                                                     'qual_form_set': qual_form_set, 'qual_helper': qual_helper,

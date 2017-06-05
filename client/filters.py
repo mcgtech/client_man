@@ -23,9 +23,13 @@ class ClientFilter(django_filters.FilterSet):
     live = django_filters.ChoiceFilter(choices=get_boolean_choices(), method='filter_on_live_contract', name='live', label='Live')
     all_coaches = User.objects.filter(groups__name=settings.JOB_COACH)
     coach_choices = []
-    for coach in all_coaches:
-        coach_choices.append((coach.id, coach.username))
-    job_coach = django_filters.ChoiceFilter(choices=coach_choices, method='filter_job_coach', label='Job coach')
+    try:
+        for coach in all_coaches:
+            coach_choices.append((coach.id, coach.username))
+        job_coach = django_filters.ChoiceFilter(choices=coach_choices, method='filter_job_coach', label='Job coach')
+    except:
+        # this should only happen when first deploy
+        print('Failed to load coaches')
 
     LATEST_CON = 0
     ANY_CON = 1

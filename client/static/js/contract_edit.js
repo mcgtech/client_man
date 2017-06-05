@@ -9,8 +9,12 @@ function setup_interview()
 {
     $('#interview_block').appendTo('#interview');
     $('#edit_int').click(function(){
-        var edit_url = data_from_django.edit_contract;
+        var edit_url = data_from_django.edit_interview;
         window.location.href = edit_url;
+    });
+    $('#add_int_butt').click(function(){
+        var add_url = data_from_django.add_interview;
+        window.location.href = add_url;
     });
 }
 

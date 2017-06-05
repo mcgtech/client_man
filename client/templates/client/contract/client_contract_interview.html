@@ -1,23 +1,32 @@
-<span title="edit this interview" id="edit_int" class="glyphicon glyphicon-pencil"></span>
-<table class="table table-bordered" id="contract_interview">
-  <tr>
-    <td class="info_label">Interviewer</td>
-    <td>{{ contract.interview.interviewer }}</td>
-    <td class="info_label">Interview date</td>
-    <td>{{ contract.interview.interview_date }}</td>
-  </tr>
-</table>
-<table class="table table-bordered" id="contract_interview_details">
-  <thead>
-    <tr>
-      <th>Background Info</th>
-      <th>Preferred job direction (target outcome)</th>
-    </tr>
-  </thead>
-  <tbody>
+{% if contract.has_interview_object %}
+    <span title="edit this interview" id="edit_int" class="glyphicon glyphicon-pencil"></span>
+    <table class="table table-bordered" id="contract_interview">
       <tr>
-        <td>{{ contract.interview.background_info }}</td>
-        <td>{{ contract.interview.pref_job_dir }}</td>
+        <td class="info_label">Interviewer</td>
+        <td>{{ contract.interview.interviewer }}</td>
+        <td class="info_label">Interview date</td>
+        <td>{{ contract.interview.interview_date }}</td>
       </tr>
-  </tbody>
-</table>
+    </table>
+    <table class="table table-bordered" id="contract_interview_details">
+      <thead>
+        <tr>
+          <th>Background Info</th>
+          <th>Preferred job direction (target outcome)</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+            <td>{{ contract.interview.background_info }}</td>
+            <td>{{ contract.interview.pref_job_dir }}</td>
+          </tr>
+      </tbody>
+    </table>
+{% else %}
+    <table class="table table-bordered" id="contract_interview">
+      <tr>
+        <td>No interview</td>
+      </tr>
+    </table>
+    <input type="button" value="Add New Interview" class="btn btn btn-default" id="add_int_butt">
+{% endif %}

@@ -227,7 +227,9 @@ class Client(Person):
     end_date = models.DateField(null=True, blank=True)
     # this is used for efficiency as when I search clients for ones wherre lates contract has a field equal to
     # something then its slow
-    # wheneever a Contract is changed a check will take place to see if this field should be updated
+    # whenever a Contract is changed a check will take place to see if this field should be updated
+    # Since Interview links to Contract, it is the dependent model in the relationship.
+    # Therefore when you delete a contact, it deletes all dependent models.
     latest_contract = models.OneToOneField(Contract, null=True, related_name='Client')
 
     def get_latest_contract_state(self):

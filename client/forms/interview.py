@@ -10,10 +10,7 @@ from common.forms import *
 # otherwise tabs doesn't work
 class InterviewForm(EditForm, AuditableForm):
     def __init__(self, *args, **kwargs):
-        add_int = kwargs.pop('add_interview')
         super().__init__(*args, **kwargs)
-        if add_int:
-            self.helper.add_input(Button("add interview", "Add New Interview", css_class='btn btn-success add-contract-btn', data_toggle="modal", data_target="#interview_select_modal"))
         self.helper.layout = Layout(
                 TabHolder(
                     Tab('Main',

@@ -1,9 +1,6 @@
 # http://python-guide-pt-br.readthedocs.io/en/latest/dev/virtualenvs/
 
 to rebuild:
-delete migrations/*.py files but not _init__.py
-delete database client_management
-create database client_management
 
 run following two pieces of sql and replace relevant sections in setup.py:
 
@@ -59,8 +56,13 @@ from users u, users_roles ur
 where u.uid = ur.uid
 and  ur.rid = 17
 
+delete migrations/*.py files but not _init__.py
+delete database client_management
+create database client_management
 
-from env:
+cd /Users/stephenmcgonigal/django_projs
+source cmenv/bin/activate
+
 python manage.py migrate
 python manage.py makemigrations client
 python manage.py migrate client
@@ -73,3 +75,5 @@ python manage.py migrate email_template
 python manage.py shell < all_mig_steps/setup_users_and_groups.py
 python manage.py shell < all_mig_steps/setup_templates.py
 login as admin and from admin menu: run migration scripts from menu to generate json files, then load clients etc from json files
+
+python manage.py runserver
